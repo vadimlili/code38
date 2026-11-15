@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Чому «гроші що згорають» — це економічне самогубство</title>
+  <meta name="description" content="Розбираємо популярну теорію змови про CBDC з позиції фундаментальної економіки — просто, з прикладами, без паніки." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d0f12;
+      --surface:   #13161b;
+      --border:    #1f2329;
+      --muted:     #2a2f38;
+      --text:      #d4d8e0;
+      --text-dim:  #6b7280;
+      --accent:    #c8a96e;
+      --accent-lt: #e8c98e;
+      --danger:    #e05c5c;
+      --safe:      #5cb87a;
+      --heading:   #f0f2f5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(13,15,18,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .eyebrow span { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 72px 24px 56px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.1rem);
+      font-weight: 900;
+      color: var(--heading);
+      line-height: 1.15;
+      margin-bottom: 22px;
+    }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-dim);
+      font-weight: 300;
+      max-width: 600px;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+    }
+    .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 56px 24px 96px;
+    }
+
+    /* sections */
+    .section { margin-bottom: 72px; }
+
+    /* part label */
+    .part-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      font-weight: 700;
+      color: var(--heading);
+      line-height: 1.25;
+      margin-bottom: 28px;
+    }
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 36px 0 12px;
+    }
+
+    p { margin-bottom: 20px; color: var(--text); }
+    p:last-child { margin-bottom: 0; }
+
+    strong { color: var(--heading); font-weight: 600; }
+    em { color: var(--accent-lt); font-style: italic; }
+
+    /* divider */
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: var(--accent);
+      margin: 56px 0;
+      opacity: 0.5;
+    }
+
+    /* blockquote */
+    blockquote {
+      border-left: 3px solid var(--accent);
+      margin: 32px 0;
+      padding: 20px 28px;
+      background: var(--surface);
+      border-radius: 0 6px 6px 0;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* callout boxes */
+    .callout {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin: 32px 0;
+      background: var(--surface);
+      position: relative;
+    }
+    .callout::before {
+      content: attr(data-label);
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .callout p { margin-bottom: 0; font-size: 15px; }
+    .callout.warning { border-color: rgba(224,92,92,0.3); }
+    .callout.warning::before { color: var(--danger); }
+
+    /* analogy block */
+    .analogy {
+      background: linear-gradient(135deg, rgba(200,169,110,0.06) 0%, rgba(200,169,110,0.02) 100%);
+      border: 1px solid rgba(200,169,110,0.2);
+      border-radius: 10px;
+      padding: 28px 32px;
+      margin: 32px 0;
+    }
+    .analogy-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .analogy p { font-size: 15.5px; margin-bottom: 10px; }
+
+    /* chain */
+    .chain {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-dim);
+      background: var(--muted);
+      padding: 16px 20px;
+      border-radius: 6px;
+      margin: 20px 0;
+      line-height: 2;
+    }
+    .chain span { color: var(--accent); }
+
+    /* table */
+    .table-wrap { overflow-x: auto; margin: 32px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    td:first-child { color: var(--heading); font-weight: 500; }
+    .tag-bad  { color: var(--danger); font-size: 13px; }
+    .tag-good { color: var(--safe);   font-size: 13px; }
+
+    /* list */
+    ul, ol {
+      padding-left: 22px;
+      margin-bottom: 20px;
+    }
+    li { margin-bottom: 8px; color: var(--text); }
+    li strong { color: var(--heading); }
+
+    /* sources */
+    .sources { margin-top: 72px; border-top: 1px solid var(--border); padding-top: 48px; }
+    .sources h2 { font-size: 1.3rem; margin-bottom: 28px; }
+    .source-item { margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+    .source-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .source-org {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .source-title { font-size: 15px; font-weight: 600; color: var(--heading); margin-bottom: 6px; }
+    .source-desc { font-size: 13.5px; color: var(--text-dim); margin-bottom: 8px; }
+    .source-link a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .source-link a:hover { color: var(--accent-lt); text-decoration: underline; }
+
+    /* footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 48px 20px 40px; }
+      .content { padding: 40px 20px 72px; }
+      h1 { font-size: 1.8rem; }
+      blockquote { padding: 16px 20px; }
+      .callout, .analogy { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <p class="eyebrow">Економічна аналітика · <span>CBDC</span> · 2025</p>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <span class="hero-tag">Теорія змови vs Реальність</span>
+    <h1>Чому «гроші&nbsp;що&nbsp;згорають» — це економічне самогубство</h1>
+    <p class="hero-sub">Розбираємо найпопулярніший страх навколо цифрових валют центральних банків з позиції фундаментальної економіки — просто, з прикладами, без паніки.</p>
+    <div class="hero-meta">
+      <span>≈ 10 хвилин читання</span>
+      <span>Аналітичний матеріал</span>
+      <span>Макроекономіка</span>
+      <span>Автор: vadim.li · <a href="mailto:vadim.li@gmail.com" style="color:var(--accent);text-decoration:none;">vadim.li@gmail.com</a></span>
+    </div>
+    <p style="margin-top:14px;font-size:12px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;">Використання тексту — лише з дозволу автора. Для запитів: <a href="mailto:vadim.li@gmail.com" style="color:var(--accent);text-decoration:none;">vadim.li@gmail.com</a></p>
+  </section>
+
+  <div class="content">
+
+    <!-- INTRO -->
+    <div class="section">
+      <p>CBDC (Central Bank Digital Currency — цифрова валюта центрального банку) — це електронний аналог звичайних готівкових грошей, що зберігається безпосередньо в Центральному банку, без посередника у вигляді комерційного банку. Цифрова гривня, цифровий євро, цифровий юань — усе це CBDC.</p>
+      <p>Навколо цієї теми виросла ціла хмара страхів. Найпопулярніший звучить так:</p>
+      <blockquote>«Нам платитимуть зарплату цифровими грошима з «терміном придатності». Не витратив до кінця місяця — гроші зникли з твого рахунку. Це спосіб перетворити нас на рабів держави.»</blockquote>
+      <p>Давайте розберемо цей аргумент не з точки зору моралі, а з точки зору холодної економічної логіки. І з'ясуємо, чому подібна система була б катастрофою насамперед для самої держави.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PART 1 -->
+    <div class="section">
+      <p class="part-label">Частина 01</p>
+      <h2>Три функції грошей — і чому не можна прибрати жодну</h2>
+
+      <p>Будь-який підручник з економіки — від Адама Сміта до сучасних нобелівських лауреатів — каже: гроші працюють тільки тоді, коли виконують три функції одночасно.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Функція</th>
+              <th>Що означає</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Засіб обміну</td><td>Ними розплачуються за товари та послуги</td></tr>
+            <tr><td>2</td><td>Міра вартості</td><td>Ними вимірюють, скільки коштує річ</td></tr>
+            <tr><td>3</td><td><strong>Засіб заощадження</strong></td><td>Їх можна відкласти на майбутнє без втрати цінності</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="analogy">
+        <p class="analogy-label">Аналогія</p>
+        <p>Уявіть, що гроші — це <strong>акумулятор</strong>. Ви попрацювали, «зарядили» його своєю працею і хочете використати через рік — на машину, навчання дитини, квартиру.</p>
+        <p>Тепер уявіть, що цей акумулятор розряджається сам по собі, якщо ви ним не користуєтеся прямо зараз. Що ви зробите? Правильно — викинете його і знайдете інший. Саме це і відбувається з валютою, яка втрачає третю функцію.</p>
+      </div>
+
+      <div class="callout" data-label="Історичний приклад">
+        <p>У <strong>Веймарській Німеччині (1921–1923)</strong> гіперінфляція знищила накопичувальну функцію марки. Люди отримували зарплату двічі на день і бігли витрачати її негайно — не тому що хотіли, а тому що через кілька годин купівельна спроможність падала. Підсумок: економіка впала, прийшов політичний хаос. Держава, яка це допустила, втратила все.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PART 2 -->
+    <div class="section">
+      <p class="part-label">Частина 02</p>
+      <h2>Банки, кредити та смерть інвестицій</h2>
+
+      <p>Капіталізм тримається на простому циклі: <strong>одні люди заощаджують — інші інвестують</strong>. Ви кладете гроші на депозит. Банк видає кредит підприємцю, який хоче відкрити пекарню. Пекарня наймає людей, платить податки, виробляє товар. Це класична макроекономічна формула: <strong>Заощадження = Інвестиції (S = I)</strong>.</p>
+
+      <h3>Що відбувається, якщо гроші «згорають»</h3>
+      <ul>
+        <li>Ніхто не відкриває депозит, бо гроші треба витратити до кінця місяця</li>
+        <li>У банків немає ресурсів для довгострокового кредитування</li>
+        <li>Підприємець не може взяти кредит на відкриття пекарні, заводу або IT-стартапу</li>
+        <li>Нові робочі місця не створюються — економіка перетворюється на виживання від зарплати до зарплати</li>
+      </ul>
+
+      <p>Візьмемо <strong>будівельну галузь</strong> — один із головних локомотивів економіки будь-якої країни. Щоб збудувати один житловий будинок, потрібні сталь, цемент, електрика, техніка, архітектори, будівельники, виробники меблів і сантехніки. Усі вони отримують зарплату з грошей, які покупець взяв в іпотеку або роками збирав.</p>
+
+      <div class="chain">
+        Немає заощаджень <span>→</span> немає іпотеки <span>→</span> немає покупців <span>→</span> будівельна галузь вмирає <span>→</span> металургія, будматеріали, ринок меблів <span>→</span> армія безробітних <span>→</span> соціальна нестабільність
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PART 3 -->
+    <div class="section">
+      <p class="part-label">Частина 03</p>
+      <h2>Ефект «29-го числа» — як примусове споживання викликає інфляцію</h2>
+
+      <p>Теоретично ідея «грошей що згорають» мала б стимулювати споживання. На практиці вона створює <strong>штучний пік попиту</strong>.</p>
+
+      <div class="analogy">
+        <p class="analogy-label">Уявіть</p>
+        <p>У кожного жителя країни гроші згорають 30-го числа кожного місяця. Що відбувається 29-го? Усі одночасно біжать до магазинів. Полиці миттєво порожніють. Продавці, бачачи ажіотажний попит, піднімають ціни — спочатку вдвічі, потім у п'ять разів.</p>
+        <p>Це класичний <strong>інфляційний шок</strong>: грошей в економіці багато, а товарів не побільшало.</p>
+      </div>
+
+      <p>Більше того, люди почнуть купувати <strong>непотрібні речі</strong> — лише щоб «врятувати» номінальну вартість своїх коштів. Це нераціональний розподіл ресурсів: економіка виробляє те, що нікому не потрібно, бо система змушує людей до безглуздих покупок. Результат — не зростання економіки, а її деформація.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PART 4 -->
+    <div class="section">
+      <p class="part-label">Частина 04</p>
+      <h2>Чому державі це невигідно: аргумент холодного прагматизму</h2>
+
+      <p>Тут часто заперечують: <em>«Державі не потрібні вільні споживачі — їй потрібні покірні раби»</em>. Давайте перевіримо цей тезис не з позиції моралі, а з позиції вигоди.</p>
+
+      <h3>Раб — найнеефективніший «співробітник» в історії</h3>
+      <p>Раб працює рівно стільки, щоб його не покарали. Він не буде створювати новий процесор, розробляти ефективну енергетику або писати складний код. Для інновацій потрібна вільна, мотивована людина, якій є що втрачати і до чого прагнути.</p>
+      <div class="callout" data-label="Приклад з історії">
+        <p><strong>Радянський Союз</strong> — найбільший історичний експеримент з побудови економіки без ринкових стимулів — програв технологічну гонку країнам з ринковою економікою. Не тому що люди були менш розумними, а тому що система не давала їм стимулів створювати краще.</p>
+      </div>
+
+      <h3>Математика влади не сходиться</h3>
+      <p>Щоб контролювати населення, якому нічого втрачати, державі потрібен величезний апарат придушення: охоронці, цензори, силові структури. Усе це коштує грошей. Але грошей немає, бо економіка стиснулася, бізнес закрився, податкова база зникла.</p>
+      <div class="callout warning" data-label="Математичний глухий кут">
+        <p>Держава витрачає на контроль більше, ніж отримує від зруйнованої економіки. Система самознищується.</p>
+      </div>
+
+      <h3>Людина з іпотекою — ідеальний громадянин</h3>
+      <p>Людина з іпотекою на 20 років, хорошою роботою і планами на відпустку — найстабільніший громадянин. Їй є що втрачати, тому вона не схильна до радикальних дій. Людина, у якої «гроші згорають» і немає жодної власності — нестабільний елемент. Будь-яка держава інстинктивно боїться цієї ситуації.</p>
+
+      <h3>Геополітичне самогубство</h3>
+      <p>Якщо країна А введе «рабські гроші», а країна Б залишить ринкову економіку — через 10 років країна Б матиме сучасні технології, сильну армію і вплив, а країна А — деградуюче населення і застарілу інфраструктуру. Конкурентоспроможність держави безпосередньо залежить від економічної свободи її громадян.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PART 5 -->
+    <div class="section">
+      <p class="part-label">Частина 05</p>
+      <h2>Конкуренція валют — останній аргумент</h2>
+
+      <p>Навіть якщо одна держава вирішиться на такий експеримент, у людей завжди є альтернативи:</p>
+      <ul>
+        <li>Іноземна готівкова валюта</li>
+        <li>Золото та дорогоцінні метали</li>
+        <li>Нерухомість</li>
+        <li>Криптовалюти</li>
+        <li>У крайньому випадку — бартер (сигарети або патрони вже ставали валютою в кризові часи)</li>
+      </ul>
+      <p>Люди миттєво адаптуються, обираючи для розрахунків будь-які активи, що не втрачають вартість. Держава, запровадивши «гроші що згорають», не отримає контролю — вона <strong>втратить контроль</strong> над фінансовими потоками взагалі, загнавши економіку в тінь.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- WHAT IS CBDC -->
+    <div class="section">
+      <p class="part-label">Реальність</p>
+      <h2>Що таке CBDC насправді</h2>
+
+      <p>Центральні банки розробляють CBDC для конкретних практичних цілей:</p>
+      <ul>
+        <li><strong>Прискорення розрахунків</strong> — транзакції без затримок і посередників</li>
+        <li><strong>Зниження витрат</strong> — виробництво та обслуговування готівки коштує дорого</li>
+        <li><strong>Боротьба з тіньовою економікою</strong> — прозорість транзакцій ускладнює відмивання грошей</li>
+        <li><strong>Фінансова доступність</strong> — у країнах, що розвиваються, мільйони людей не мають банківських рахунків</li>
+      </ul>
+      <p>Реальні проекти CBDC — цифровий юань (Китай), цифровий євро (ЄС), e-Naira (Нігерія) — <strong>ніде не передбачають механізму «згорання»</strong>. Навпаки, офіційні документи центральних банків прямо говорять про збереження всіх функцій грошей, включно з накопичувальною.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SUMMARY TABLE -->
+    <div class="section">
+      <p class="part-label">Підсумок</p>
+      <h2>Теорія проти реальності</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Що обіцяє теорія</th>
+              <th>Що відбувається насправді</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Держава отримає контроль над витратами</td>
+              <td><span class="tag-bad">✕</span> Держава втрачає податкову базу</td>
+            </tr>
+            <tr>
+              <td>Споживання зросте</td>
+              <td><span class="tag-bad">✕</span> Виникає інфляційний шок</td>
+            </tr>
+            <tr>
+              <td>Громадяни стануть покірними</td>
+              <td><span class="tag-bad">✕</span> Громадяни йдуть у тіньову економіку</td>
+            </tr>
+            <tr>
+              <td>Економіка прискориться</td>
+              <td><span class="tag-bad">✕</span> Зникають інвестиції та робочі місця</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout" data-label="Висновок">
+        <p>Без накопичення капіталу немає інвестицій. Без інвестицій немає зростання. Без зростання немає держави. Це не теорія — це математика.</p>
+      </div>
+
+      <p>CBDC — це не купони епохи карткового розподілу. Це цифрові гроші, в надійності яких держава кровно зацікавлена — так само, як і в надійності звичайної готівки. Інакше люди просто перестануть ними користуватися.</p>
+    </div>
+
+    <!-- SOURCES -->
+    <div class="sources">
+      <h2>Джерела для самостійної перевірки</h2>
+
+      <div class="source-item">
+        <p class="source-org">BIS · 2024</p>
+        <p class="source-title">Advancing in tandem: results of the 2024 BIS survey on CBDCs</p>
+        <p class="source-desc">Щорічне дослідження, яке охоплює 93 центральні банки. Показує реальні цілі впровадження CBDC — жодного слова про механізм «згорання».</p>
+        <p class="source-link"><a href="https://www.bis.org/publ/bppdf/bispap159.htm" target="_blank" rel="noopener">bis.org/publ/bppdf/bispap159.htm</a></p>
+      </div>
+
+      <div class="source-item">
+        <p class="source-org">IMF · CBDC Virtual Handbook</p>
+        <p class="source-title">Віртуальний довідник з CBDC</p>
+        <p class="source-desc">Офіційний посібник МВФ для центральних банків та міністерств фінансів. Охоплює фінансову стабільність, монетарну політику та фінансову доступність.</p>
+        <p class="source-link"><a href="https://www.imf.org/en/topics/digital-payments-and-finance/central-bank-digital-currency/virtual-handbook" target="_blank" rel="noopener">imf.org — CBDC Virtual Handbook</a></p>
+      </div>
+
+      <div class="source-item">
+        <p class="source-org">IMF · 2024</p>
+        <p class="source-title">Positioning Central Bank Digital Currency in the Payments Landscape</p>
+        <p class="source-desc">Дослідження МВФ про те, як CBDC співіснує з іншими платіжними системами і навіщо воно потрібне.</p>
+        <p class="source-link"><a href="https://www.imf.org/en/publications/fintech-notes/issues/2024/10/02/positioning-central-bank-digital-currency-in-the-payments-landscape-555743" target="_blank" rel="noopener">imf.org — Positioning CBDC in the Payments Landscape</a></p>
+      </div>
+
+      <div class="source-item">
+        <p class="source-org">ECB · Digital Euro</p>
+        <p class="source-title">Офіційна сторінка проєкту цифрового євро</p>
+        <p class="source-desc">Дизайн, конфіденційність, прогрес законодавства та відповіді на поширені запитання.</p>
+        <p class="source-link"><a href="https://www.ecb.europa.eu/euro/digital_euro/faqs/html/ecb.faq_digital_euro.en.html" target="_blank" rel="noopener">ecb.europa.eu — FAQs on the digital euro</a></p>
+      </div>
+
+      <div class="source-item">
+        <p class="source-org">ECB · 2024</p>
+        <p class="source-title">First progress report on digital euro preparation phase</p>
+        <p class="source-desc">Технічний документ із конкретними рішеннями щодо дизайну: ліміти зберігання, офлайн-функція, захист даних.</p>
+        <p class="source-link"><a href="https://www.ecb.europa.eu/press/pr/date/2024/html/ecb.pr240624~7b3d7581e6.en.html" target="_blank" rel="noopener">ecb.europa.eu — First progress report</a></p>
+      </div>
+
+      <div class="source-item">
+        <p class="source-org">Книга</p>
+        <p class="source-title">Дарон Аджемоглу — «Чому одні країни багаті, а інші бідні»</p>
+        <p class="source-desc">Фундаментальна праця про роль інститутів в економічному розвитку. Доступна у більшості книжкових магазинів та бібліотек.</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>Аналітичний матеріал підготовлено на основі відкритих даних · Некомерційне поширення з посиланням — вітається</p>
+</footer>
+
+<script src="../../assets/articles.js"></script>
+<script src="../../assets/site-nav.js"></script>
+</body>
+</html>
