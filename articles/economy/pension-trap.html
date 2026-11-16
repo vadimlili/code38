@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Пенсійна пастка: чому 30–40-річним українцям слід розраховувати виключно на власні інвестиції</title>
+  <meta name="description" content="Демографічний колапс, банкрутство солідарної системи та стратегія особистих інвестицій для покоління 30–40-річних українців." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d0f12;
+      --surface:   #13161b;
+      --border:    #1f2329;
+      --muted:     #2a2f38;
+      --text:      #d4d8e0;
+      --text-dim:  #6b7280;
+      --accent:    #c8a96e;
+      --accent-lt: #e8c98e;
+      --danger:    #e05c5c;
+      --safe:      #5cb87a;
+      --heading:   #f0f2f5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(13,15,18,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .eyebrow span { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 72px 24px 56px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.1rem);
+      font-weight: 900;
+      color: var(--heading);
+      line-height: 1.15;
+      margin-bottom: 22px;
+    }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-dim);
+      font-weight: 300;
+      max-width: 600px;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+    }
+    .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 56px 24px 96px;
+    }
+
+    /* sections */
+    .section { margin-bottom: 72px; }
+
+    /* part label */
+    .part-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      font-weight: 700;
+      color: var(--heading);
+      line-height: 1.25;
+      margin-bottom: 28px;
+    }
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 36px 0 12px;
+    }
+
+    p { margin-bottom: 20px; color: var(--text); }
+    p:last-child { margin-bottom: 0; }
+
+    strong { color: var(--heading); font-weight: 600; }
+    em { color: var(--accent-lt); font-style: italic; }
+
+    /* divider */
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: var(--accent);
+      margin: 56px 0;
+      opacity: 0.5;
+    }
+
+    /* blockquote */
+    blockquote {
+      border-left: 3px solid var(--accent);
+      margin: 32px 0;
+      padding: 20px 28px;
+      background: var(--surface);
+      border-radius: 0 6px 6px 0;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* callout boxes */
+    .callout {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin: 32px 0;
+      background: var(--surface);
+      position: relative;
+    }
+    .callout::before {
+      content: attr(data-label);
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .callout p { margin-bottom: 0; font-size: 15px; }
+    .callout.warning { border-color: rgba(224,92,92,0.3); }
+    .callout.warning::before { color: var(--danger); }
+
+    /* analogy block */
+    .analogy {
+      background: linear-gradient(135deg, rgba(200,169,110,0.06) 0%, rgba(200,169,110,0.02) 100%);
+      border: 1px solid rgba(200,169,110,0.2);
+      border-radius: 10px;
+      padding: 28px 32px;
+      margin: 32px 0;
+    }
+    .analogy-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .analogy p { font-size: 15.5px; margin-bottom: 10px; }
+
+    /* chain */
+    .chain {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-dim);
+      background: var(--muted);
+      padding: 16px 20px;
+      border-radius: 6px;
+      margin: 20px 0;
+      line-height: 2;
+    }
+    .chain span { color: var(--accent); }
+
+    /* table */
+    .table-wrap { overflow-x: auto; margin: 32px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    td:first-child { color: var(--heading); font-weight: 500; }
+    .tag-bad  { color: var(--danger); font-size: 13px; }
+    .tag-good { color: var(--safe);   font-size: 13px; }
+
+    /* list */
+    ul, ol {
+      padding-left: 22px;
+      margin-bottom: 20px;
+    }
+    li { margin-bottom: 8px; color: var(--text); }
+    li strong { color: var(--heading); }
+
+    /* sources */
+    .sources { margin-top: 72px; border-top: 1px solid var(--border); padding-top: 48px; }
+    .sources h2 { font-size: 1.3rem; margin-bottom: 28px; }
+    .sources-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
+    .source-item { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .source-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .source-org {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .source-title { font-size: 14px; font-weight: 600; color: var(--heading); margin-bottom: 6px; }
+    .source-link a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--accent);
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .source-link a:hover { color: var(--accent-lt); text-decoration: underline; }
+
+    /* footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 48px 20px 40px; }
+      .content { padding: 40px 20px 72px; }
+      h1 { font-size: 1.8rem; }
+      blockquote { padding: 16px 20px; }
+      .callout, .analogy { padding: 20px; }
+      .sources-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <p class="eyebrow">Економічна аналітика · <span>Пенсії та інвестиції</span> · 2026</p>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <span class="hero-tag">Демографія проти держави</span>
+    <h1>Пенсійна пастка в Україні: чому 30–40-річним слід розраховувати виключно на власні інвестиції</h1>
+    <p class="hero-sub">Демографічний колапс, банкрутство солідарної системи та практична стратегія особистих накопичень для покоління, якому державна пенсія вже нічого не гарантує.</p>
+    <div class="hero-meta">
+      <span>≈ 14 хвилин читання</span>
+      <span>Аналітичний матеріал</span>
+      <span>Пенсійна система · Інвестиції</span>
+      <span>Автор: vadim.li · <a href="mailto:vadim.li@gmail.com" style="color:var(--accent);text-decoration:none;">vadim.li@gmail.com</a></span>
+    </div>
+    <p style="margin-top:14px;font-size:12px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;">Використання тексту — лише з дозволу автора. Для запитів та посилань на статтю: <a href="mailto:vadim.li@gmail.com" style="color:var(--accent);text-decoration:none;">vadim.li@gmail.com</a></p>
+  </section>
+
+  <div class="content">
+
+    <!-- INTRO -->
+    <div class="section">
+      <p>Макроекономічна стабільність солідарної пенсійної системи фундаментально спирається на демографічну піраміду, у якій чисельність працездатного населення суттєво перевищує кількість осіб пенсійного віку. В Україні ця пропорція зазнала незворотного руйнування внаслідок поєднання довгострокових демографічних трендів та повномасштабного військового конфлікту.</p>
+      <p>Держава вже фактично визнала межу своїх можливостей. Питання більше не в тому, чи вистачить коштів на гідну пенсію — а в тому, що робити людині 30–40 років, якій розраховувати на солідарну систему більше не варто.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PART 1 -->
+    <div class="section">
+      <p class="part-label">Частина 01</p>
+      <h2>Демографічний колапс як фундаментальне обмеження економіки</h2>
+
+      <p>За оцінками Інституту демографії та проблем якості життя імені М. В. Птухи НАН України, сукупні демографічні втрати країни досягли позначки у <strong>10 мільйонів осіб</strong>. Цей показник акумулює не лише безповоротні втрати та окупацію територій, а й масову зовнішню міграцію, перевищення смертності над народжуваністю та біологічне невикористання демографічного потенціалу. На підконтрольній українській владі території наразі проживає орієнтовно 31,5 мільйона осіб.</p>
+
+      <p>Ключовим фактором дестабілізації трудового потенціалу стала вимушена еміграція. За даними Євростату та міжнародних організацій, за кордоном перебуває близько 5 мільйонів українських біженців, з яких 4,3 мільйона зареєстровані в країнах ЄС, а ще 700 тисяч — у США, Великій Британії, Канаді та інших державах. Демографічна структура еміграції створює довгостроковий ризик: близько <strong>33% мігрантів</strong> — це діти та підлітки до 18 років, тоді як частка осіб віком від 65 років не перевищує 6%. Оскільки європейські держави та приватний бізнес системно зацікавлені в асиміляції освіченої й адаптивної української робочої сили, значна частина молоді вже не повернеться. Після скасування воєнного стану прогнозується друга хвиля міграції — чоловіча, метою якої буде возз'єднання родин за кордоном.</p>
+
+      <p>Паралельно триває обвал народжуваності. Якщо у 2021 році коефіцієнт становив близько 1,2 дитини на одну жінку, то станом на 2025 рік він впав до екстремального рівня — близько <strong>0,7</strong>. Для простого відтворення поколінь потрібен коефіцієнт 2,15. Навіть за оптимістичним повоєнним сценарієм показник відновиться лише до 1,6.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Показник</th>
+              <th>До 2022 р.</th>
+              <th>2025–2026 рр.</th>
+              <th>Прогноз 2040–2050</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Населення (підконтр. території)</td><td>~37,0–41,0 млн</td><td>~31,5 млн</td><td>~25,0–32,0 млн</td></tr>
+            <tr><td>Зовнішні біженці</td><td>&lt; 1,0 млн</td><td>~5,0 млн</td><td>асиміляція &gt; 60%</td></tr>
+            <tr><td>Коефіцієнт народжуваності</td><td>1,2</td><td>0,7</td><td>1,6 (максимум)</td></tr>
+            <tr><td>Частка дітей у міграції</td><td>—</td><td>33%</td><td>незворотна втрата платників ЄСВ</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warning" data-label="Довгостроковий прогноз">
+        <p>ООН та вітчизняні демографи прогнозують скорочення населення України до 25 мільйонів осіб протягом найближчих 30 років, з можливим подальшим падінням до 15,3 мільйона до 2100 року. У країні формується перевернута вікова піраміда, де нечисленне молоде покоління буде неспроможне забезпечити податкові надходження, достатні для виплати навіть базових соціальних зобов'язань.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PART 2 -->
+    <div class="section">
+      <p class="part-label">Частина 02</p>
+      <h2>Банкрутство солідарної системи: держава гарантує лише мінімум</h2>
+
+      <p>Солідарна пенсійна система функціонує за принципом негайного розподілу: кошти, сплачені працюючим населенням у вигляді Єдиного соціального внеску (ЄСВ), відразу спрямовуються на виплату пенсій поточним пенсіонерам. В умовах катастрофічної демографічної диспропорції ця модель втрачає фінансову життєздатність.</p>
+
+      <div class="chain">
+        Падіння народжуваності <span>→</span> менше майбутніх платників ЄСВ <span>→</span> зростання навантаження на одного працюючого <span>→</span> дефіцит Пенсійного фонду <span>→</span> пенсії не встигають за інфляцією
+      </div>
+
+      <p>За даними Пенсійного фонду України, чисельність пенсіонерів становить близько <strong>10,2 мільйона осіб</strong>. Якщо на кінець 2021 року на 15,5 мільйона працюючих припадало 10 мільйонів пенсіонерів (співвідношення 1,55 до 1), то наразі це співвідношення наблизилося до критичної позначки 1:1. Видатки Пенсійного фонду у 2025 році склали <strong>799 млрд грн</strong>, вимагаючи постійних дотацій із держбюджету. При цьому середня пенсія в Україні становить лише 6 437 гривень.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Розмір пенсії</th>
+              <th>Частка, 2025</th>
+              <th>Частка, 2026</th>
+              <th>Характеристика</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>До 3 000 грн</td><td>3,71%</td><td>3,37%</td><td>абсолютна бідність</td></tr>
+            <tr><td>3 001–4 000 грн</td><td>31,95%</td><td>24,04%</td><td>граничний рівень виживання</td></tr>
+            <tr><td>4 001–5 000 грн</td><td>20,48%</td><td>17,23%</td><td>нижче прожиткового мінімуму</td></tr>
+            <tr><td>5 001–10 000 грн</td><td>29,05%</td><td>36,52%</td><td>середній стаж і зарплата</td></tr>
+            <tr><td>Понад 10 000 грн</td><td>14,81%</td><td>18,84%</td><td>спеціальні пенсії / високий дохід</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <blockquote>«Солідарна пенсія в майбутньому зможе гарантувати лише мінімально необхідний соціальний рівень для захисту від бідності» — Дарія Марчак, перша заступниця міністра соціальної політики України.</blockquote>
+
+      <p>Урядовий проєкт реформи передбачає перехід на бальну систему за моделлю Німеччини та Австрії: внески конвертуватимуться в уніфіковані бали, вартість яких визначатиметься фінансовим станом ПФУ. Реформа скасує понад 160 типів державних надбавок, але не розв'язує проблему дефіциту ресурсів. Паралельно зростають вимоги до страхового стажу: у 2025 році для виходу на пенсію у 60 років потрібно 32 роки стажу, у 2026-му — 33, а до 2028 року поріг зросте до 35 років.</p>
+
+      <div class="callout" data-label="Що це означає практично">
+        <p>Для громадян 30–40 років це означає жорстку реальність: навіть за наявності 35 років офіційного стажу та сумлінної сплати всіх податків, державна пенсія у 2045–2055 роках покриватиме не більше <strong>20–25%</strong> від звичного робочого доходу.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PART 3 -->
+    <div class="section">
+      <p class="part-label">Частина 03</p>
+      <h2>Недержавні пенсійні фонди (НПФ): вітчизняний інструмент накопичення</h2>
+
+      <p>Добровільне недержавне пенсійне забезпечення (третій рівень) функціонує в Україні понад 20 років і є першим доступним альтернативним інструментом формування власного капіталу. За даними профільних асоціацій, в країні працюють <strong>50 недержавних пенсійних фондів</strong>, учасниками яких є близько 900 тисяч громадян. За весь час залучено майже 3,5 млрд грн внесків, виплачено понад 2 млрд грн пенсій, а сукупний інвестиційний дохід сягнув 5,5 млрд грн.</p>
+
+      <p>Найуспішніші приватні фонди (НПФ «Династія», «ОТП Пенсія», «ПриватФонд», «Енеріт-Україна») демонструють середньорічну дохідність <strong>13,9%–18,7% у гривні</strong>, що перевищує інфляцію, девальвацію та ставки за банківськими депозитами. Структура вкладників змінилася: якщо на старті 97% внесків робили роботодавці, то тепер обсяг приватних добровільних внесків фізичних осіб перевищує корпоративні платежі.</p>
+
+      <div class="analogy">
+        <p class="analogy-label">Податкові переваги</p>
+        <p>Офіційно працевлаштовані особи, які сплачують ПДФО, мають право щороку повертати <strong>18% від суми внесків</strong> до НПФ через податкову знижку. На відміну від депозитів, де прибуток оподатковується щороку, інвестиційний дохід у НПФ реінвестується без проміжного оподаткування.</p>
+        <p>При виплатах ПДФО (18%) та військовий збір утримуються лише з 60% суми кожної виплати. Після 70 років виплати повністю звільняються від оподаткування.</p>
+      </div>
+
+      <p>Розрахунки доводять критичну залежність обсягу заощаджень від віку початку інвестування. Для пасивного доходу у розмірі 20 000 грн на місяць (з урахуванням інфляції) на період з 60 до 80 років потрібні такі щомісячні внески:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Вік початку</th>
+              <th>Внесок, грн/міс</th>
+              <th>Навантаження</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>20 років</td><td>~1 900 грн</td><td>базове (ефект складного відсотка за 40 років)</td></tr>
+            <tr><td>30 років</td><td>~3 000 грн</td><td>помірне (~1,6× від базового)</td></tr>
+            <tr><td>40 років</td><td>~5 200 грн</td><td>високе (~2,7× від базового)</td></tr>
+            <tr><td>50 років</td><td>~12 100 грн</td><td>екстремальне (~6,3× від базового)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Зволікання з початком накопичень між 30 та 40 роками вимагає майже дворазового збільшення щомісячного внеску для досягнення ідентичного фінального капіталу.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PART 4 -->
+    <div class="section">
+      <p class="part-label">Частина 04</p>
+      <h2>Глобальні фондові ринки: інвестування через іноземних брокерів</h2>
+
+      <p>Накопичення капіталу виключно в національній валюті створює високі суверенні та інфляційно-девальваційні ризики. Для громадян 30–40 років стратегічно необхідна валютна диверсифікація через глобальні фондові ринки у твердій валюті (USD/EUR).</p>
+
+      <p>Основним міжнародним брокером, який продовжує відкривати рахунки та обслуговувати громадян України з українським резидентством, є <strong>Interactive Brokers (IBKR)</strong> — американська публічна компанія, що регулюється SEC, CFTC (США), FCA (Велика Британія) та іншими світовими регуляторами.</p>
+
+      <h3>Валютні обмеження НБУ та маршрутизація коштів</h3>
+      <ul>
+        <li>Діє пряма заборона на поповнення брокерських рахунків безпосередньо з карток українських банків</li>
+        <li>Ліміт на поповнення рахунків за кордоном — не більше 100 000 гривень на місяць</li>
+        <li>Інвестори використовують міжнародні платіжні системи та європейські необанки (Wise, Revolut, ZEN): гривня → необанк у межах ліміту НБУ → SEPA-переказ (у євро) на реквізити IBKR. Комісія за SEPA — від 0,1 євро, що суттєво вигідніше класичного SWIFT</li>
+      </ul>
+
+      <h3>Торгові умови Interactive Brokers</h3>
+      <ul>
+        <li><strong>Мінімальний депозит:</strong> від 0 доларів США</li>
+        <li><strong>Торгова комісія:</strong> 0,005 $ за акцію США (мінімум $1, максимум 1% від суми угоди)</li>
+        <li><strong>Виведення коштів:</strong> перша транзакція на місяць безкоштовна, кожна наступна — $10</li>
+        <li><strong>Базові інструменти:</strong> диверсифіковані ETF — Vanguard S&P 500 (VOO), iShares Core S&P 500 (IVV), Vanguard Total World Stock (VT), iShares Core MSCI World (URTH)</li>
+      </ul>
+
+      <h3>Оподаткування доходів від іноземних інвестицій</h3>
+      <p>Українське законодавство зобов'язує резидентів самостійно декларувати доходи від закордонних брокерів — IBKR не є податковим агентом України. Декларація про майновий стан і доходи подається щорічно до 1 травня.</p>
+
+      <div class="callout" data-label="Дві бази оподаткування">
+        <p><strong>Інвестиційний прибуток:</strong> різниця між ціною продажу та купівлі, ставка 18% ПДФО + 5% військового збору (разом 23%). <strong>Дивіденди:</strong> 9% ПДФО + 5% ВЗ (разом 14%). За угодою W-8BEN утримані в США 15% податку на дивіденди зараховуються в рахунок ПДФО в Україні — доплата ПДФО не потрібна, але військовий збір (5%) сплачується обов'язково.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PART 5 -->
+    <div class="section">
+      <p class="part-label">Частина 05</p>
+      <h2>Порівняльний аналіз стратегій і математика складного відсотка</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Параметр</th>
+              <th>Солідарна (ПФУ)</th>
+              <th>НПФ</th>
+              <th>IBKR</th>
+              <th>Нерухомість / депозити</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Дохідність</td><td>від'ємна (нижче інфляції)</td><td>13,9–18,7% грн</td><td>7–10% USD (історично S&P 500)</td><td>3–6% USD / 10–14% грн</td></tr>
+            <tr><td>Валютний ризик</td><td>100% девальвація грн</td><td>100% грн (захист ОВДП)</td><td>глобальна диверсифікація</td><td>високий воєнний / локальний</td></tr>
+            <tr><td>Податковий режим</td><td>ЄСВ 22%, безповоротно</td><td>знижка 18%; податок з 60% суми</td><td>18/9% ПДФО + 5% ВЗ; W-8BEN</td><td>18% ПДФО + 1,5–5% ВЗ</td></tr>
+            <tr><td>Право власності</td><td>відсутнє</td><td>повне, спадкується</td><td>повне, спадкується</td><td>повне, фізичний актив</td></tr>
+            <tr><td>Системні ризики</td><td>критичні (демографія)</td><td>локальний регуляторний</td><td>захист регуляторами США/ЄС</td><td>воєнний / локальна криза</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Ефект складного відсотка</h3>
+      <p>Динаміка зростання капіталу описується формулою капіталізації регулярних внесків: кінцевий капітал залежить від розміру щомісячного внеску, місячної ставки дохідності та кількості місяців інвестування.</p>
+
+      <div class="analogy">
+        <p class="analogy-label">Приклад розрахунку</p>
+        <p>При щомісячному внеску $300 під 8% річних у доларах: інвестор, який стартує у <strong>30 років</strong> (горизонт 30 років, до 60 років), акумулює <strong>~$447 000</strong> — власні внески складуть $108 000, решта $339 000 (75,8%) буде згенерована складним відсотком.</p>
+        <p>Інвестор, який стартує у <strong>40 років</strong> (горизонт 20 років), акумулює лише <strong>~$177 000</strong> — внески $72 000, інвестиційний прибуток $105 000 (59,3%).</p>
+      </div>
+
+      <div class="callout warning" data-label="Ціна зволікання">
+        <p>Затримка початку інвестування на 10 років у діапазоні від 30 до 40 років зменшує підсумковий капітал у <strong>2,5 раза</strong> — при абсолютній різниці у власних внесках лише на 33%.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PART 6 -->
+    <div class="section">
+      <p class="part-label">Частина 06</p>
+      <h2>Висновки та стратегічний алгоритм дій</h2>
+
+      <p>Демографічна криза, втрата 10 мільйонів громадян внаслідок війни та еміграції, падіння народжуваності до 0,7 та хронічний дефіцит Пенсійного фонду доводять незворотність краху солідарної пенсійної системи в Україні. Держава зможе забезпечити нинішнім 30–40-річним громадянам лише базову соціальну допомогу на рівні прожиткового мінімуму. Для збереження звичного рівня життя після завершення активної трудової діяльності громадянам необхідно сформувати автономну інвестиційну стратегію.</p>
+
+      <h3>Практичний алгоритм дій</h3>
+      <ul>
+        <li><strong>Диверсифікований портфель:</strong> 70% вільних заощаджень — у глобальні індексні ETF через іноземного брокера (IBKR) у твердій валюті, каналами переказів через необанки в межах лімітів НБУ. Решта 30% — у локальні інструменти (НПФ для податкової знижки та валютні ОВДП)</li>
+        <li><strong>Системність накопичень:</strong> правило вилучення щонайменше 15–20% щомісячного доходу на інвестиційні цілі до поточних споживчих витрат</li>
+        <li><strong>Податкова дисципліна:</strong> щорічна декларація про майновий стан і доходи, коректний облік витрат на придбання цінних паперів, використання пільг за формою W-8BEN</li>
+      </ul>
+
+      <p>Час — головний ресурс інвестора: початок самостійного накопичення капіталу у 30–40 років є єдиною можливістю забезпечити фінансову незалежність у зрілому віці.</p>
+    </div>
+
+    <!-- SOURCES -->
+    <div class="sources">
+      <h2>Джерела для самостійної перевірки</h2>
+      <div class="sources-grid">
+
+        <div class="source-item">
+          <p class="source-org">Економіка та суспільство</p>
+          <p class="source-title">Аналіз сучасного стану пенсійної системи України та пошук шляхів її реформування</p>
+          <p class="source-link"><a href="https://economyandsociety.in.ua/index.php/journal/article/download/2496/2415/" target="_blank" rel="noopener">economyandsociety.in.ua</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">Економіка та суспільство</p>
+          <p class="source-title">Демографічна ситуація в Україні: перспективи виходу з кризи</p>
+          <p class="source-link"><a href="https://economyandsociety.in.ua/index.php/journal/article/download/6338/6281/" target="_blank" rel="noopener">economyandsociety.in.ua</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">УНІАН</p>
+          <p class="source-title">Демографиня оцінила втрати України через війну</p>
+          <p class="source-link"><a href="https://www.unian.ua/society/demografichna-kriza-libanova-ocinila-vtrati-ukrajini-cherez-viynu-13215282.html" target="_blank" rel="noopener">unian.ua</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">IDSS</p>
+          <p class="source-title">Інститут демографії та соціальних досліджень</p>
+          <p class="source-link"><a href="https://idss.org.ua/" target="_blank" rel="noopener">idss.org.ua</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">Frontliner</p>
+          <p class="source-title">МВФ прогнозує 34 мільйони населення України до 2030 року</p>
+          <p class="source-link"><a href="https://frontliner.ua/ukraina-skorochuietsia-i-starishaie/" target="_blank" rel="noopener">frontliner.ua</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">Суспільне</p>
+          <p class="source-title">Кабмін погодив Стратегію демографічного розвитку України до 2040 року</p>
+          <p class="source-link"><a href="https://suspilne.media/849373-kabmin-pogodiv-strategiu-demograficnogo-rozvitku-ukraini-do-2040-roku-aki-prognozi/" target="_blank" rel="noopener">suspilne.media</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">Радіо Свобода</p>
+          <p class="source-title">Дарія Марчак про виплати матерям, пенсії та рівень бідності</p>
+          <p class="source-link"><a href="https://www.radiosvoboda.org/a/vyplaty-materyam-pensiyi-riven-bidnosti-vpo-dariya-marchak/33467280.html" target="_blank" rel="noopener">radiosvoboda.org</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">Суспільне</p>
+          <p class="source-title">У Мінсоцполітики розповіли про реформу солідарного пенсійного забезпечення</p>
+          <p class="source-link"><a href="https://suspilne.media/839361-u-minsocpolitiki-rozpovili-pro-reformu-solidarnogo-pensijnogo-zabezpecenna/" target="_blank" rel="noopener">suspilne.media</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">РБК-Україна</p>
+          <p class="source-title">Кількість пенсіонерів в Україні скорочується</p>
+          <p class="source-link"><a href="https://www.rbc.ua/rus/news/kilkist-pensioneriv-ukrayini-skorochuetsya-1755680616.html" target="_blank" rel="noopener">rbc.ua</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">РБК-Україна</p>
+          <p class="source-title">Кількість пенсіонерів в Україні скоротилася: у яких областях їх найбільше</p>
+          <p class="source-link"><a href="https://www.rbc.ua/rus/news/kilkist-pensioneriv-ukrayini-skorotilasya-1761199345.html" target="_blank" rel="noopener">rbc.ua</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">24 Канал</p>
+          <p class="source-title">Пенсія 2025: чому в Україні скорочується кількість пенсіонерів</p>
+          <p class="source-link"><a href="https://24tv.ua/economy/pensiya-2025-chomu-ukrayini-skorochuyetsya-kilkist-pensioneriv_n2975535" target="_blank" rel="noopener">24tv.ua</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">Скільки-скільки</p>
+          <p class="source-title">Пенсія в 3 тисячі: частка таких пенсіонерів скоротилася з 26% до 4%</p>
+          <p class="source-link"><a href="https://skilky-skilky.info/pensiia-v-3-tysiachi-chastka-takykh-pensioneriv-skorotylasia-z-26-do-4/" target="_blank" rel="noopener">skilky-skilky.info</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">7 днів</p>
+          <p class="source-title">Пенсії в Україні 2026: скільки отримують пенсіонери</p>
+          <p class="source-link"><a href="https://7dniv.rv.ua/news/pensii-v-ukraini-2026-skilky-otrymuiut-pensionery/" target="_blank" rel="noopener">7dniv.rv.ua</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">24 Канал</p>
+          <p class="source-title">Працювати чи не працювати на пенсії: ПФУ порівняв розмір виплат</p>
+          <p class="source-link"><a href="https://24tv.ua/economy/riznitsya-pensiyi-mizh-pratsyuyuchim-ne-pratsyuyuchim-pensionerom_n2684255" target="_blank" rel="noopener">24tv.ua</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">33 Канал</p>
+          <p class="source-title">Українці можуть не розраховувати на солідарну пенсію</p>
+          <p class="source-link"><a href="https://33kanal.com/news/258471.html" target="_blank" rel="noopener">33kanal.com</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">24 Канал</p>
+          <p class="source-title">Нова пенсійна система: відома дата, коли виплати нараховуватимуть по-новому</p>
+          <p class="source-link"><a href="https://24tv.ua/economy/nova-pensiyna-sistema-koli-viplati-rahuvatimut-po-novomu_n2650953" target="_blank" rel="noopener">24tv.ua</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">Економічна правда</p>
+          <p class="source-title">В Україні працюють 50 недержавних пенсійних фондів</p>
+          <p class="source-link"><a href="https://epravda.com.ua/finances/naskilki-uspishno-v-ukrajini-pracyuyut-nederzhavni-pensiyni-fondii-811222/" target="_blank" rel="noopener">epravda.com.ua</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">NV Business</p>
+          <p class="source-title">З доходністю вищою за інфляцію: скільки НПФ працюють в Україні</p>
+          <p class="source-link"><a href="https://biz.nv.ua/ukr/finance/nederzhavni-pensiyni-fondi-ukrajini-yaku-dohodnist-voni-proponuyut-50542362.html" target="_blank" rel="noopener">biz.nv.ua</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">Сімейний Бюджет</p>
+          <p class="source-title">Недержавні пенсійні фонди НПФ</p>
+          <p class="source-link"><a href="https://simeinyi-budzhet.ua/nederzhavni-pensiini-fondy/" target="_blank" rel="noopener">simeinyi-budzhet.ua</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">Мінфін</p>
+          <p class="source-title">Недержавний пенсійний фонд (НПФ) в Україні</p>
+          <p class="source-link"><a href="https://minfin.com.ua/ua/invest/npf/" target="_blank" rel="noopener">minfin.com.ua</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">Finance.ua</p>
+          <p class="source-title">Як почати інвестувати в американські акції, якщо ви в Україні</p>
+          <p class="source-link"><a href="https://finance.ua/ua/saving/yak-investuvaty-v-amerykanski-aktsii-v-ukraini" target="_blank" rel="noopener">finance.ua</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">AIN</p>
+          <p class="source-title">Interactive Brokers для українців: як відкрити рахунок і почати інвестувати</p>
+          <p class="source-link"><a href="https://ain.ua/2026/04/30/interactive-brokers/" target="_blank" rel="noopener">ain.ua</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">e-zubkovskiy</p>
+          <p class="source-title">Які податки платить інвестор із прибутку</p>
+          <p class="source-link"><a href="https://e-zubkovskiy.com/blog/shcho-potribno-znati-pro-podatki-pered-pochatkom-investuvannya" target="_blank" rel="noopener">e-zubkovskiy.com</a></p>
+        </div>
+
+        <div class="source-item">
+          <p class="source-org">Taxer.ua</p>
+          <p class="source-title">Оподаткування інвестиційного прибутку та дивідендів</p>
+          <p class="source-link"><a href="https://taxer.ua/uk/kb/id1031" target="_blank" rel="noopener">taxer.ua</a></p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>Аналітичний матеріал підготовлено на основі відкритих даних · Некомерційне поширення з посиланням — вітається</p>
+</footer>
+
+<script src="../../assets/articles.js"></script>
+<script src="../../assets/site-nav.js"></script>
+</body>
+</html>

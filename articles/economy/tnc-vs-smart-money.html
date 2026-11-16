@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Економіка касирів чи нація творців?</title>
+  <meta name="description" content="Гірка правда про глобальні бренди та що таке справжні інвестиції: чому експансія ТНК і Smart Money — це дві різні речі.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d0f12;
+      --surface:   #13161b;
+      --border:    #1f2329;
+      --muted:     #2a2f38;
+      --text:      #d4d8e0;
+      --text-dim:  #6b7280;
+      --accent:    #c8a96e;
+      --accent-lt: #e8c98e;
+      --danger:    #e05c5c;
+      --safe:      #5cb87a;
+      --heading:   #f0f2f5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(13,15,18,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .eyebrow span { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 72px 24px 56px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.1rem);
+      font-weight: 900;
+      color: var(--heading);
+      line-height: 1.15;
+      margin-bottom: 22px;
+    }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-dim);
+      font-weight: 300;
+      max-width: 600px;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+    }
+    .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 56px 24px 96px;
+    }
+
+    .section { margin-bottom: 72px; }
+
+    .part-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      font-weight: 700;
+      color: var(--heading);
+      line-height: 1.25;
+      margin-bottom: 28px;
+    }
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 36px 0 12px;
+    }
+
+    p { margin-bottom: 20px; color: var(--text); }
+    p:last-child { margin-bottom: 0; }
+
+    strong { color: var(--heading); font-weight: 600; }
+    em { color: var(--accent-lt); font-style: italic; }
+
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: var(--accent);
+      margin: 56px 0;
+      opacity: 0.5;
+    }
+
+    blockquote {
+      border-left: 3px solid var(--accent);
+      margin: 32px 0;
+      padding: 20px 28px;
+      background: var(--surface);
+      border-radius: 0 6px 6px 0;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .callout {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin: 32px 0;
+      background: var(--surface);
+      position: relative;
+    }
+    .callout::before {
+      content: attr(data-label);
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .callout p { margin-bottom: 0; font-size: 15px; }
+    .callout.warning { border-color: rgba(224,92,92,0.3); }
+    .callout.warning::before { color: var(--danger); }
+    .callout.good { border-color: rgba(92,184,122,0.3); }
+    .callout.good::before { color: var(--safe); }
+
+    .analogy {
+      background: linear-gradient(135deg, rgba(200,169,110,0.06) 0%, rgba(200,169,110,0.02) 100%);
+      border: 1px solid rgba(200,169,110,0.2);
+      border-radius: 10px;
+      padding: 28px 32px;
+      margin: 32px 0;
+    }
+    .analogy-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .analogy p { font-size: 15.5px; margin-bottom: 10px; }
+
+    .chain {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-dim);
+      background: var(--muted);
+      padding: 16px 20px;
+      border-radius: 6px;
+      margin: 20px 0;
+      line-height: 2;
+    }
+    .chain span { color: var(--accent); }
+    .chain-title {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .chain.bad .chain-title { color: var(--danger); }
+    .chain.good .chain-title { color: var(--safe); }
+
+    .table-wrap { overflow-x: auto; margin: 32px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    td:first-child { color: var(--heading); font-weight: 500; }
+    .tag-bad  { color: var(--danger); font-size: 13px; }
+    .tag-good { color: var(--safe);   font-size: 13px; }
+
+    ul, ol {
+      padding-left: 22px;
+      margin-bottom: 20px;
+    }
+    li { margin-bottom: 8px; color: var(--text); }
+    li strong { color: var(--heading); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 48px 20px 40px; }
+      .content { padding: 40px 20px 72px; }
+      h1 { font-size: 1.8rem; }
+      blockquote { padding: 16px 20px; }
+      .callout, .analogy { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <p class="eyebrow">Економічна аналітика · <span>ТНК vs Smart Money</span> · 2026</p>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <span class="hero-tag">Чужі вивіски vs власний капітал</span>
+    <h1>Економіка касирів чи нація творців?</h1>
+    <p class="hero-sub">Гірка правда про глобальні бренди та що таке справжні інвестиції.</p>
+    <div class="hero-meta">
+      <span>≈ 6 хвилин читання</span>
+      <span>Аналітичний матеріал</span>
+      <span>Макроекономіка</span>
+      <span>Автор: vadim.li · <a href="mailto:vadim.li@gmail.com" style="color:var(--accent);text-decoration:none;">vadim.li@gmail.com</a></span>
+    </div>
+    <p style="margin-top:14px;font-size:12px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;">Використання тексту — лише з дозволу автора. Для запитів: <a href="mailto:vadim.li@gmail.com" style="color:var(--accent);text-decoration:none;">vadim.li@gmail.com</a></p>
+  </section>
+
+  <div class="content">
+
+    <!-- INTRO -->
+    <div class="section">
+      <p>Давайте говорити відверто. Кожного разу, коли на наш ринок заходить чергова транснаціональна мережа — хай то будуть модні кав'ярні, шведський мас-маркет одягу чи американський фастфуд, — у суспільстві починається справжня ейфорія. Стрічка новин рясніє щасливими селфі, чиновники радісно перерізають стрічки і звітують про <em>«грандіозний успіх та покращення інвестиційного клімату»</em>.</p>
+      <p>Емоційно це можна зрозуміти. Для багатьох це маркер приналежності до цивілізації. Але якщо відкинути емоції і подивитися на рух капіталу, доводиться визнати непопулярну річ: часто ми радіємо тому, що нам на шию вішають <strong>економічний пилосос</strong>.</p>
+      <p>Час навчитися жорстко розділяти дві абсолютно різні речі:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Експансія ТНК</th>
+              <th>Інвестиції в локальний бізнес</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Що відбувається</td><td>Глобальний гігант відкриває тут свої філії</td><td>Іноземні фонди й банки вкладають у наші компанії</td></tr>
+            <tr><td>Куди йде прибуток</td><td><span class="tag-bad">↗</span> У штаб-квартиру за кордоном</td><td><span class="tag-good">↺</span> Реінвестується в країні</td></tr>
+            <tr><td>Центр рішень</td><td>У країні походження бренду</td><td>Вдома</td></tr>
+            <tr><td>Підсумок</td><td><span class="tag-bad">✕</span> Часто викачує з нас гроші</td><td><span class="tag-good">✓</span> Робить нас багатими</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Давайте розкладемо це на полички.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PART 1 -->
+    <div class="section">
+      <p class="part-label">Частина 01</p>
+      <h2>Чому прихід корпорацій — це не завжди свято</h2>
+
+      <p>Коли глобальний гігант відкриває тут свої філії, він не розбудовує нашу економіку. <strong>Він масштабує свою.</strong> І для місцевого ринку це несе чотири фундаментальні ризики.</p>
+
+      <h3>01 · Кредитний демпінг і «випалена земля»</h3>
+      <p>Уявіть місцевого підприємця. Він бере кредити під високі відсотки, платить оренду, б'ється за кожного клієнта. І тут поруч відкривається філія світової корпорації.</p>
+      <p>У корпорації доступ до мільярдних ресурсів у себе вдома під мінімальні відсотки. Вона може дозволити собі працювати у жорсткий мінус два, три, п'ять років поспіль, просто демпінгуючи ціни.</p>
+      <div class="chain bad">
+        <span class="chain-title">Сценарій</span>
+        Дешеві гроші вдома <span>→</span> демпінг роками <span>→</span> місцевий бізнес банкрутує <span>→</span> корпорація стає монополістом <span>→</span> ціни йдуть вгору
+      </div>
+      <div class="callout" data-label="Історичний приклад">
+        <p>Саме так західні мережі в <strong>90-х роках</strong> випалили дрібний ритейл у Східній Європі.</p>
+      </div>
+
+      <h3>02 · Гроші купують квиток в один кінець</h3>
+      <p>Що відбувається, коли ви купуєте каву у локальній кав'ярні? Маржа залишається в країні. Власник іде і витрачає ці гроші тут: наймає наших підрядників, купує фермерське молоко, платить за навчання дітей. Гроші працюють в економіці.</p>
+      <p>А коли ви несете ці ж гроші у глобальну мережу? Основна маржа (чистий прибуток та роялті) конвертується у валюту і щокварталу виводиться на рахунки штаб-квартири десь у Сіетлі чи Парижі. Це класичний <strong>відтік капіталу</strong>.</p>
+      <div class="analogy">
+        <p class="analogy-label">Одна чашка кави — два маршрути</p>
+        <p><strong>Локальна кав'ярня:</strong> ваші гроші → власник → підрядники, фермер, школа → знову в економіку країни.</p>
+        <p><strong>Глобальна мережа:</strong> ваші гроші → прибуток і роялті → конвертація у валюту → рахунок штаб-квартири за кордоном.</p>
+      </div>
+
+      <h3>03 · Перетворення на націю касирів</h3>
+      <blockquote>«Але ж вони створюють робочі місця!»</blockquote>
+      <p>Це найпопулярніший аргумент. Створюють. Але які? Стратегія, маркетинг, розробка продуктів (R&amp;D) та топ-менеджмент із мільйонними бонусами назавжди залишаються в країні походження бренду. Нам же дістаються вакансії касирів, комірників та кур'єрів.</p>
+      <div class="callout warning" data-label="Історичний приклад · Мексика">
+        <p>Мексика з 1960-х років раділа американським заводам-«макіладорам». У підсумку мексиканці десятиліттями збирали електроніку з чужих деталей, але так і не народили власного Apple чи Samsung. Бо не можна стати винахідником, якщо тебе найняли крутити гайки по чужій інструкції.</p>
+      </div>
+
+      <h3>04 · Викручування рук уряду</h3>
+      <p>Коли транснаціональна компанія стає занадто великою і тримає в штаті тисячі людей, вона починає диктувати умови державі:</p>
+      <blockquote>«Дайте нам ексклюзивні податкові пільги, інакше ми закриємо заводи, і у вас буде соціальний вибух».</blockquote>
+      <p>Наш середній бізнес такої розкоші і такого впливу не має ніколи, опиняючись у нерівних умовах.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PART 2 -->
+    <div class="section">
+      <p class="part-label">Частина 02</p>
+      <h2>То що нам потрібно? Нам потрібні «Smart Money»</h2>
+
+      <p>Зрозумійте правильно: це не заклик до закриття кордонів. <strong>Ізоляціонізм — це прямий шлях у бідність.</strong> Країні життєво необхідний іноземний капітал. Але заходити він має інакше.</p>
+      <p>Справжній драйвер росту — це коли іноземні інвестори, фонди чи банки вкладають гроші у <strong>наші, локальні компанії</strong>.</p>
+
+      <h3>Що змінюється, коли капітал заходить у вітчизняну компанію</h3>
+      <ul>
+        <li>Компанія залишається <strong>нашою</strong></li>
+        <li>Прибутки <strong>реінвестуються тут</strong></li>
+        <li>Податки з високої маржі <strong>осідають у нашому бюджеті</strong></li>
+        <li>Фаундери отримують не лише гроші, а й світову експертизу, <strong>залишаючи центр прийняття рішень вдома</strong></li>
+      </ul>
+
+      <div class="callout good" data-label="Приклад · Південна Корея">
+        <p>Після війни вони не пустили до себе американські корпорації. Вони брали іноземні кредити і віддавали їх своїм підприємцям — чеболям (<strong>Samsung, Hyundai</strong>). Ті купували західні патенти, наймали кращих інженерів, але залишалися на 100% корейськими компаніями. Сьогодні весь світ несе гроші в Сеул.</p>
+      </div>
+
+      <div class="callout good" data-label="Приклад · Естонія">
+        <p>Коли іноземці інвестували в їхній локальний стартап <strong>Skype</strong>, а потім викупили його за мільярди, естонські розробники не поїхали пити коктейлі на острови. Вони стали ангельськими інвесторами для своїх же земляків. На ці гроші згодом виросли <strong>Bolt, Wise</strong> та десятки інших глобальних компаній.</p>
+      </div>
+
+      <div class="chain good">
+        <span class="chain-title">Ефект маховика</span>
+        Іноземний капітал у локальний стартап <span>→</span> успішний екзит <span>→</span> засновники та розробники стають ангелами <span>→</span> нові стартапи вдома <span>→</span> національна бізнес-еліта
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- CONCLUSION -->
+    <div class="section">
+      <p class="part-label">Висновок</p>
+      <h2>Час дорослішати</h2>
+
+      <p>Нам час припинити плескати в долоні чужим вивіскам.</p>
+      <p>Завдання держави — не стелити червоні доріжки перед транснаціональними гігантами заради піар-фотографій. Справжня мета полягає у створенні таких <strong>залізобетонних правил гри</strong> та такого <strong>захисту приватної власності</strong>, щоб мільярди доларів інвестиційних фондів хотіли вливатися у наші заводи, наші технологічні компанії та наші бренди.</p>
+
+      <div class="callout" data-label="Головне">
+        <p>Тільки тоді економіка перестане бути дешевим сервісним хабом і почне генерувати справжнє багатство для своїх громадян.</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>Аналітичний матеріал · vadim.li · Некомерційне поширення з посиланням — вітається</p>
+</footer>
+
+<script src="../../assets/articles.js"></script>
+<script src="../../assets/site-nav.js"></script>
+</body>
+</html>

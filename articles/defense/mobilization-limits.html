@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Чому концепція «воювати будуть усі» математично саморуйнівна для оборонноздатності України — розбір бюджетної механіки війни, кадрового виснаження, історичних прецедентів тотальної мобілізації та сценарію осінньої хвилі мобілізації РФ.">
+<title>Економічні межі тотальної мобілізації — vadim.li</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  :root{
+    --bg: #0d0f12;
+    --bg-raised: #13161b;
+    --bg-card: #13161b;
+    --line: #1f2329;
+    --line-soft: #181b20;
+    --ink: #f0f2f5;
+    --ink-dim: #d4d8e0;
+    --ink-mute: #8a909b;
+    --brass: #c8a96e;
+    --brass-dim: #7a6640;
+    --alert: #e05c5c;
+    --alert-dim: #8a3a3a;
+    --ok: #5cb87a;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before{
+    content:"";
+    position: fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px);
+    background-size: 100% 44px;
+    opacity: 0;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{
+    position: relative; z-index:1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ---------- Header ---------- */
+  header.hero{
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow-row{
+    display:flex; align-items:center; gap:10px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .tag{
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brass);
+    border: 1px solid var(--brass-dim);
+    padding: 5px 10px;
+    border-radius: 3px;
+    background: rgba(200,169,110,0.06);
+  }
+  .tag.alert{ color: var(--alert); border-color: var(--alert-dim); background: rgba(224,92,92,0.08); }
+  .kicker{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+
+  h1{
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    line-height: 1.15;
+    margin: 0 0 18px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  h1 em{
+    font-style: italic;
+    color: var(--brass);
+  }
+
+  .subtitle{
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--ink-dim);
+    max-width: 60ch;
+    margin: 0 0 28px;
+  }
+
+  .meta-line{
+    display:flex; flex-wrap: wrap; gap: 6px 14px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink-mute);
+  }
+  .meta-line .dot::before{ content:"·"; margin-right: 14px; color: var(--line); }
+  .meta-line a{ color: var(--brass); text-decoration: none; border-bottom: 1px solid var(--brass-dim); }
+  .meta-line a:hover{ color: var(--ink); }
+
+  .license-note{
+    margin-top: 18px;
+    font-size: 12px;
+    color: var(--ink-mute);
+    font-family: var(--mono);
+    padding: 10px 14px;
+    border-left: 2px solid var(--brass-dim);
+    background: var(--bg-raised);
+  }
+  .license-note a{ color: var(--brass); }
+
+  /* ---------- Body typography ---------- */
+  .lede{
+    font-size: 18px;
+    color: var(--ink-dim);
+    margin: 36px 0;
+  }
+  p{ margin: 0 0 20px; font-size: 17px; line-height: 1.75; color: var(--ink-dim); }
+  strong{ color: var(--ink); font-weight: 600; }
+
+  section.part{ margin-top: 64px; }
+
+  .part-label{
+    display:flex; align-items: baseline; gap: 14px;
+    margin-bottom: 18px;
+  }
+  .part-num{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--brass);
+    letter-spacing: 0.08em;
+  }
+  .part-num::before{ content:""; display:inline-block; width:22px; height:1px; background: var(--brass-dim); margin-right:10px; vertical-align: middle; }
+
+  h2{
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    color: var(--ink);
+    margin: 4px 0 0;
+    line-height: 1.3;
+  }
+  h3{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--ink);
+    margin: 32px 0 14px;
+  }
+
+  ul, ol{ margin: 0 0 20px; padding-left: 22px; color: var(--ink-dim); }
+  li{ margin-bottom: 10px; font-size: 16px; }
+  li::marker{ color: var(--brass-dim); }
+
+  /* ---------- Ledger / budget visual ---------- */
+  .ledger{
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    margin: 28px 0 32px;
+    overflow: hidden;
+  }
+  .ledger-head{
+    display:flex; justify-content: space-between; align-items:baseline;
+    padding: 16px 20px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .ledger-head .t{ font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-mute); }
+  .ledger-head .v{ font-family: var(--serif); font-size: 24px; color: var(--brass); font-weight: 600; }
+  .ledger-bar{ display:flex; height: 34px; }
+  .ledger-bar span{ display:flex; align-items:center; justify-content:center; font-family: var(--mono); font-size: 11px; color: var(--bg); font-weight:600; }
+  .seg-a{ background: var(--ink-mute); flex: 0 0 4%; }
+  .seg-b{ background: var(--ok); flex: 0 0 3%; }
+  .seg-c{ background: var(--brass); flex: 1; }
+  .ledger-rows{ padding: 14px 20px 18px; display:grid; gap: 10px; }
+  .ledger-row{ display:flex; justify-content: space-between; gap: 16px; font-size: 14.5px; }
+  .ledger-row .label{ color: var(--ink-dim); }
+  .ledger-row .val{ font-family: var(--mono); color: var(--ink); white-space:nowrap; }
+  .swatch{ display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:8px; vertical-align:1px; }
+
+  /* ---------- Stat strip ---------- */
+  .stat-strip{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin: 28px 0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .stat{
+    background: var(--bg-card);
+    padding: 18px 16px;
+  }
+  .stat .num{ font-family: var(--serif); font-size: 28px; color: var(--brass); font-weight: 600; line-height:1; }
+  .stat .num.alert{ color: var(--alert); }
+  .stat .lbl{ font-size: 12px; color: var(--ink-mute); margin-top: 8px; line-height:1.4; }
+
+  /* ---------- Callout / example box ---------- */
+  .callout{
+    margin: 28px 0;
+    padding: 20px 22px;
+    background: var(--bg-raised);
+    border-left: 3px solid var(--brass);
+    border-radius: 0 4px 4px 0;
+  }
+  .callout.alert{ border-left-color: var(--alert); }
+  .callout .cal-title{
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--brass);
+    margin-bottom: 10px;
+  }
+  .callout.alert .cal-title{ color: var(--alert); }
+  .callout p:last-child{ margin-bottom:0; }
+
+  blockquote{
+    margin: 28px 0;
+    padding: 4px 0 4px 22px;
+    border-left: 2px solid var(--brass-dim);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-dim);
+  }
+
+  /* ---------- Tables ---------- */
+  table{ width:100%; border-collapse: collapse; margin: 24px 0; font-size: 14.5px; }
+  th, td{ padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); }
+  th{ font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-mute); font-weight:500; }
+  td{ color: var(--ink-dim); }
+  td.yes{ color: var(--ok); }
+  td.no{ color: var(--alert); }
+
+  /* ---------- Country cards ---------- */
+  .cases{ display:grid; gap: 14px; margin: 28px 0; }
+  .case{
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 20px 22px;
+  }
+  .case-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 10px; gap: 10px; flex-wrap:wrap; }
+  .case-head .name{ font-family: var(--serif); font-weight:600; font-size: 18px; color: var(--ink); }
+  .case-head .years{ font-family: var(--mono); font-size: 12px; color: var(--brass); }
+  .case p{ font-size: 15px; margin-bottom: 0; color: var(--ink-dim); }
+
+  /* ---------- Conclusion ---------- */
+  .conclusion{
+    margin-top: 64px;
+    padding: 30px 26px;
+    background: var(--bg-card);
+    border: 1px solid var(--brass-dim);
+    border-radius: 6px;
+  }
+  .conclusion h2{ margin-top:0; }
+
+  /* ---------- Sources ---------- */
+  .sources{ margin-top: 64px; }
+  .src-list{ display:grid; gap: 8px; margin-top: 20px; }
+  .src{
+    display:flex; gap: 12px; align-items:baseline;
+    padding: 10px 14px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line-soft);
+    border-radius: 3px;
+    font-size: 13px;
+  }
+  .src .n{ font-family: var(--mono); color: var(--ink-mute); flex: 0 0 22px; }
+  .src a{ color: var(--ink-dim); text-decoration: none; }
+  .src a:hover{ color: var(--brass); }
+  .src .domain{ font-family: var(--mono); font-size: 11px; color: var(--brass-dim); margin-left: auto; white-space: nowrap; padding-left: 10px; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    margin-top: 72px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-mute);
+    text-align:center;
+    line-height: 1.9;
+  }
+  footer a{ color: var(--brass); text-decoration:none; border-bottom: 1px solid var(--brass-dim); }
+  footer a:hover{ color: var(--ink); }
+
+  @media (max-width: 560px){
+    .wrap{ padding: 0 16px 60px; }
+    header.hero{ padding: 40px 0 32px; }
+    .ledger-head{ flex-direction:column; align-items:flex-start; gap:6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow-row">
+      <span class="tag">Воєнна економіка</span>
+      <span class="tag alert">Мобілізація</span>
+      <span class="kicker">2026</span>
+    </div>
+
+    <h1>Економічні межі тотальної мобілізації: чому концепція <em>«воювати будуть усі»</em> є згубною для обороноздатності України</h1>
+
+    <p class="subtitle">Чому цифри в бюджеті не сходяться з популярним гаслом — і до чого тут ще й осіння мобілізація в Росії.</p>
+
+    <div class="meta-line">
+      <span>≈ 15 хвилин читання</span>
+      <span class="dot">Аналітичний матеріал</span>
+      <span class="dot">Макроекономіка · Оборона</span>
+      <span class="dot">Автор: vadim.li · <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a></span>
+    </div>
+
+    <div class="license-note">
+      Використання тексту — лише з дозволу автора. Для передруку, посилань або співпраці пишіть на <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a>.
+    </div>
+  </header>
+
+  <p class="lede">В суспільстві й серед військових дедалі частіше звучить теза: рано чи пізно доведеться перейти до принципу «воювати будуть усі». Зрозуміло, звідки це береться — затяжна війна, брак ротації, втома фронту. Але якщо подивитись на це не емоційно, а через призму бюджету, логістики й елементарної арифметики держуправління, картина інша: тотальний призов усього працездатного населення не просто нездійсненний — він сам себе руйнує швидше, ніж встигає дати результат.</p>
+
+  <p>Армія не існує сама по собі. Вона їсть те, що виростив аграрний сектор, їздить на паливі, яке хтось видобув і переробив, і отримує зарплату з податків, які хтось заплатив. Заберіть із тилу критичну масу людей — і держава миттєво втрачає доходи, рве ланцюги постачання й врешті не має чим годувати й озброювати навіть тих, кого вже мобілізувала.</p>
+
+  <!-- ЧАСТИНА 01 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 01</span></div>
+    <h2>Фінансово-бюджетна механіка війни: вартість утримання армії та роль тилу</h2>
+
+    <p>Щоб зрозуміти, де проходить реальна межа мобілізації, варто спочатку порахувати, у що обходиться утримання одного бійця. За офіційними даними Міноборони, це приблизно <strong>1,2 мільйона гривень на рік</strong> — близько 30 тисяч доларів. І це лише база: без важкого озброєння, техніки, боєприпасів і палива.</p>
+
+    <div class="ledger">
+      <div class="ledger-head">
+        <span class="t">Річна вартість утримання одного бійця</span>
+        <span class="v">~1,2 млн грн</span>
+      </div>
+      <div class="ledger-bar">
+        <span class="seg-a"></span><span class="seg-b"></span><span class="seg-c">грошове забезпечення, виплати, медицина, підготовка</span>
+      </div>
+      <div class="ledger-rows">
+        <div class="ledger-row"><span class="label"><span class="swatch" style="background:var(--ink-mute)"></span>Речове забезпечення та засоби захисту</span><span class="val">&gt; 50 000 грн/рік</span></div>
+        <div class="ledger-row"><span class="label"><span class="swatch" style="background:var(--ok)"></span>Продовольче забезпечення</span><span class="val">~ 55 000–65 000 грн/рік</span></div>
+        <div class="ledger-row"><span class="label"><span class="swatch" style="background:var(--brass)"></span>Грошове забезпечення, бойові виплати, медицина, підготовка</span><span class="val">~ 1 085 000–1 095 000 грн/рік</span></div>
+      </div>
+    </div>
+    <p style="font-size:12.5px;color:var(--ink-mute);font-family:var(--mono);margin-top:-14px;">* Вартість добового раціону за контрактами Державного оператора тилу на 2025–2026 роки — 128 грн (законтрактована ціна) при граничному рівні 171,5 грн/добу, тобто ~47 000–63 000 грн на рік.</p>
+
+    <p>Найбільша стаття тут — грошове забезпечення: оклад, надбавка за звання, вислуга років і, звісно, доплати за бойові завдання — 30, 70 або 100 тисяч грн на місяць залежно від того, де саме людина воює. Решта йде на підготовку в навчальних центрах, транспорт, лікування й страхування.</p>
+
+    <h3>Залізне правило фінансування держбюджету під час війни</h3>
+    <p>Тут є момент, який часто випускають з уваги. Уся міжнародна допомога — гранти, пільгові кредити від США, ЄС, МВФ — за законом може йти лише на цивільні й соціальні статті: пенсії, зарплати вчителів і лікарів, соцвиплати. На армію ці гроші витрачати не можна.</p>
+    <p>Тобто весь сектор безпеки й оборони тримається виключно на внутрішніх доходах — податках, митних зборах і облігаціях внутрішньої держпозики. За перше півріччя на це пішло 1,4 трильйона гривень, тобто 63% усіх видатків загального фонду бюджету, а лише в червні армія «з'їла» 263,5 мільярда. Окремо військовий збір приносить понад 163,6 мільярда на рік.</p>
+
+    <div class="stat-strip">
+      <div class="stat"><div class="num">63%</div><div class="lbl">видатків загального фонду бюджету йде на безпеку й оборону за перше півріччя</div></div>
+      <div class="stat"><div class="num">1,4 трлн ₴</div><div class="lbl">видатки на безпеку й оборону за перше півріччя</div></div>
+      <div class="stat"><div class="num">163,6 млрд ₴</div><div class="lbl">надходження від військового збору на рік</div></div>
+    </div>
+
+    <p>А тепер уявіть, скільки з цього платить один найманий працівник: 18% ПДФО плюс 5% військового збору плюс 22% ЄСВ. У ФОП простіше, але теж є свій рахунок — від 10% мінімалки (864,7 грн/міс) до 1–5% з доходу чи обороту. Кожна людина, яку забирають із цього ланцюжка, — це діра в доходній частині бюджету саме тоді, коли гроші потрібні найбільше.</p>
+  </section>
+
+  <!-- ЧАСТИНА 02 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 02</span></div>
+    <h2>Математика мобілізації: 1 до 6–8 та приклад 500 тисяч</h2>
+
+    <p>Оскільки армію фінансують виключно внутрішні податки, у Кабміні й Офісі Президента називають ту саму пропорцію: щоб утримати одного бійця на фронті, потрібно від <strong>6 до 8</strong> людей у тилу, які працюють офіційно і платять податки.</p>
+
+    <blockquote>«Ми повинні розуміти: один воїн — це 6 людей у цивільному житті, які сплачують податки» — з публічних заяв про «математику» мобілізації.</blockquote>
+
+    <div class="callout">
+      <div class="cal-title">Приклад розрахунку: мобілізація додаткових 500 000 осіб</div>
+      <p><strong>Пряма вартість утримання:</strong> додаткові 600 млрд грн, і всі — з внутрішніх джерел.</p>
+      <p><strong>Потреба у тиловому забезпеченні:</strong> щоб прогодувати й спорядити 500 тисяч новопризваних, у цивільному секторі має з'явитися ще 3–4 мільйони офіційних платників податків. Звідки — питання риторичне.</p>
+    </div>
+
+    <p>І тут вилазить неприємний нюанс — назвемо його «подвійним ударом». Призивають же не безробітних, а саме тих, хто працює. Забираєте зі штату одного середньостатистичного платника податків — і бюджет одразу втрачає його щомісячний ПДФО, ЄСВ, ВЗ і навіть ПДВ, який він генерував, купуючи щось у магазині. А натомість бере на себе зобов'язання платити цій самій людині 100 000 грн на місяць. Виходить не «плюс боєць», а «мінус платник податків і плюс стаття видатків» одночасно.</p>
+
+    <p>Уряд це, звісно, розуміє, тому й розробляє інструменти економічного бронювання — критерії легальної зарплати чи фіксований військовий збір (наприклад, 20 000 грн на місяць за працівника). Ідея проста: дати бізнесу зберегти ключових людей, а бюджету — отримати ще 68–307 млрд грн на рік напряму на потреби ЗСУ, не чіпаючи виробництво.</p>
+  </section>
+
+  <!-- ЧАСТИНА 03 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 03</span></div>
+    <h2>Кадрове виснаження критичних галузей і ризик системного колапсу</h2>
+
+    <p>Ринок праці вже тріщить. Гострий кадровий дефіцит зараз відчувають 78% українських підприємств — рік тому було 60%. Причому 69% роботодавців прямо називають головною причиною мобілізацію, а 61% — виїзд людей за кордон.</p>
+
+    <div class="stat-strip">
+      <div class="stat"><div class="num alert">78%</div><div class="lbl">підприємств зіштовхуються з гострим кадровим дефіцитом</div></div>
+      <div class="stat"><div class="num">69%</div><div class="lbl">роботодавців називають причиною мобілізацію</div></div>
+      <div class="stat"><div class="num">39%</div><div class="lbl">аграрних підприємств заявляють про дефіцит кадрів</div></div>
+    </div>
+
+    <p>Проблема не в цифрах самих по собі, а в тому, кого саме забирають. Не кожного можна замінити людиною з вулиці — і ось де це болить найбільше:</p>
+    <ul>
+      <li><strong>Сільське господарство</strong> тримається на трактористах, комбайнерах, механізаторах, агрономах — 39% аграрних підприємств уже кричать про нестачу кадрів. Немає людини за штурвалом дорогої техніки — менше засіяних гектарів і менше валюти від агроекспорту.</li>
+      <li><strong>Енергетика й комуналка</strong> тримаються на ремонтних бригадах, які цілодобово латають наслідки обстрілів. Заберіть звідти інженерів — і замість фронту та тилу отримаєте техногенні аварії, які паралізують обох.</li>
+      <li><strong>Логістика й транспорт</strong> возять військові вантажі, паливо, гуманітарку. Водіїв і залізничних ремонтників уже не вистачає — і це відчутно вже зараз, не в теорії.</li>
+    </ul>
+  </section>
+
+  <!-- ЧАСТИНА 04 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 04</span></div>
+    <h2>Анатомія «переведення економіки на військові рейки»</h2>
+
+    <p>Коли хтось каже «перевести економіку на військові рейки», зазвичай мається на увазі просто «виробляти більше зброї». Насправді ж у теорії державного управління й у практиці ХХ століття це означає щось набагато радикальніше: скасування ринкової економіки, суттєве обмеження прав людей і повну перебудову того, як влаштоване суспільство. Ось із чого це реально складається:</p>
+
+    <ul>
+      <li><strong>Примусова трудова повинність.</strong> Людину, яку не призвали до армії, теж позбавляють права вибирати роботу — її прикріплюють до конкретного заводу, шахти чи колгоспу, і крапка.</li>
+      <li><strong>Картки замість вільної торгівлі.</strong> Держава розподіляє їжу й ліки за нормами: робітники оборонки отримують більше, всі інші — мінімум для виживання.</li>
+      <li><strong>Реквізиція й націоналізація.</strong> Приватний бізнес або закривають, або перетворюють на виконавця держзамовлень без жодної думки про прибутковість. Транспорт, склади, потужності — вилучають. Вклади в банках — заморожують.</li>
+      <li><strong>Кримінальна відповідальність за все, що заважає системі.</strong> Не вийшов на зміну, не виконав план, спробував звільнитися — тепер це «трудове дезертирство», і за нього дають реальні терміни.</li>
+    </ul>
+
+    <p>Такий сценарій можливий тільки в державі з абсолютним внутрішнім контролем — по суті, в диктатурі. У відкритій ринковій економіці спроба ввести щось подібне закінчиться передбачувано: бізнес піде в тінь, інвестиції зупиняться, а керованість держави посипеться.</p>
+  </section>
+
+  <!-- ЧАСТИНА 05 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 05</span></div>
+    <h2>Міжнародний та історичний досвід: наслідки ігнорування макроекономічних меж</h2>
+
+    <p>Історія тут доволі однозначна: щоразу, коли держава ігнорувала ці межі й тиснула на мобілізацію понад те, що витримує тил, закінчувалося виснаженням і поразкою — незалежно від епохи.</p>
+
+    <div class="cases">
+      <div class="case">
+        <div class="case-head"><span class="name">СРСР у Другій світовій війні</span><span class="years">1941–1945</span></div>
+        <p>Класика тотальної централізації. Мобілізаційний план від 30 червня 1941-го перевів країну на директивне управління, у липні ввели картки, які проіснували аж до грудня 1947-го: робітники оборонних заводів отримували 800 г хліба на день, усі інші — 400 г. Робочий день — 8 годин плюс обов'язкові 3 години понаднормово, а самовільний відхід із заводу карався 5–8 роками тюрми як дезертирство. І навіть за такого пресу СРСР витримав — але тільки завдяки тоталітарному апарату примусу, величезним сировинним запасам і ленд-лізу від союзників. Без цих трьох факторів модель просто не працює.</p>
+      </div>
+      <div class="case">
+        <div class="case-head"><span class="name">Німецька імперія у Першій світовій війні</span><span class="years">1914–1918</span></div>
+        <p>Бліцкриг не вдався, почалась морська блокада — і в 1916-му прийняли «Програму Гінденбурга» з обов'язковою працею для чоловіків 16–60 років. Призов аграрних робітників обвалив сільгоспвиробництво, почався голод — «брюквяна зима» 1916/1917-го, коли картки покривали не більше половини потреби в калоріях. Армія при цьому фронт тримала. Але тил, а не фронт, зламався першим — і саме це, а не поразка на полі бою, привело до революції й капітуляції у 1918-му.</p>
+      </div>
+      <div class="case">
+        <div class="case-head"><span class="name">Сирія</span><span class="years">2011–2024</span></div>
+        <p>Тут показовий сам масштаб руйнування. Зовнішньоторговельний оборот упав із 29 млрд доларів у 2010-му до 4 млрд у 2023-му, експорт скоротився до 650 млн. Безробіття — 57%, фунт знецінився у 270 разів, інфляція перевалила за 141%. Загальні втрати економіки — понад 260 млрд доларів.</p>
+      </div>
+      <div class="case">
+        <div class="case-head"><span class="name">Ізраїль</span><span class="years">2023–2026</span></div>
+        <p>А ось приклад, коли розвинута економіка вчасно зупинилась. Після ескалації в жовтні 2023-го Ізраїль призвав понад 300 000 резервістів — і вже за кілька місяців почав їх поетапно демобілізовувати, бо збитки виявилися надто великими. Один резервіст обходився приблизно в 48 000 шекелів (~13 000 доларів) на місяць, прямі витрати сягали 5 млрд шекелів (1,3 млрд доларів) на місяць, а втрати від того, що люди не виходили на роботу, — ще 1,6 млрд шекелів (427 млн доларів). Щоб не звалитися в рецесію, Ізраїль скоротив призов і зробив ставку на захист хай-теку — галузі, яка дає понад половину експорту країни.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЧАСТИНА 06 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 06</span></div>
+    <h2>Сценарій: осіння мобілізація РФ на 500 тисяч і що з цим робити Україні</h2>
+
+    <p>У липні 2026-го голова Центру протидії дезінформації при РНБО Андрій Коваленко сказав прямо: Кремль готує мобілізацію щонайменше 500 тисяч осіб цієї осені. Частину кинуть у бій за два тижні — затикати дірки на сході, решту місяць готуватимуть, схоже, під новий напрямок фронту. І тут напрошується питання: якщо Росія продовжуватиме нарощувати такі хвилі, чи повинна Україна відповідати тим самим — своєю мобілізацією у відповідь? Ось саме тут і варто застосувати ту ж арифметику, тільки до противника.</p>
+
+    <h3>У що це обійдеться самому Кремлю</h3>
+    <p>За російським законом мобілізовані не можуть отримувати менше, ніж контрактники на аналогічних посадах, — а суми там уже давно не символічні. Одна лише разова виплата за контракт складається з федеральних 400 000 руб. плюс регіональна частина, яка в середньому по країні близько 2,1 млн руб., а в Петербурзі чи Краснодарському краї доходить до 3,4–4,5 млн. У сумі виходить приблизно <strong>2,5 млн рублів на людину</strong> — і це ще до першої зарплати.</p>
+
+    <div class="callout alert">
+      <div class="cal-title">Проста арифметика однієї хвилі</div>
+      <p>500 000 × ~2,5 млн руб. — це <strong>1,2–1,3 трильйона рублів</strong> лише на «підйомні», без щомісячного забезпечення, спорядження й бойових виплат. Для порівняння: це майже десята частина всього річного оборонного бюджету Росії (12,93 трлн руб. на 2026 рік).</p>
+    </div>
+
+    <p>А накладається це на бюджет, який і без того тріщить по швах. На кінець червня 2026-го сукупний дефіцит федерального бюджету РФ сягнув 5,7 трлн руб. — 2,5% ВВП, суттєво вище запланованого на весь рік показника в 1,6%. Ліквідна частина Фонду національного добробуту, звідки Кремль латає дірки, за перші місяці 2026-го схудла з приблизно 4,2 трлн руб. (~$55 млрд) до 3,6 трлн. Оборонні видатки взагалі планували скоротити десь на 11% цього року — але з такими темпами ескалації це виглядає дедалі менш реалістично.</p>
+
+    <div class="stat-strip">
+      <div class="stat"><div class="num alert">5,7 трлн ₽</div><div class="lbl">дефіцит бюджету РФ станом на червень 2026 (2,5% ВВП)</div></div>
+      <div class="stat"><div class="num">29,3%</div><div class="lbl">частка видатків на оборону в бюджеті РФ на 2026 рік</div></div>
+      <div class="stat"><div class="num alert">14,5%</div><div class="lbl">ключова ставка ЦБ РФ — наслідок стійкого дефіциту робочої сили</div></div>
+    </div>
+
+    <p>Цікаво, що навіть Центробанк Росії у своїх матеріалах фактично визнає ту саму проблему: обмежені трудові ресурси плюс держпопит (в тому числі оборонний) — це не зростання виробництва, а інфляція, бо зарплати ростуть швидше за продуктивність. По суті, той самий «подвійний удар», який ми розбирали стосовно України у Частині 02, працює й у Росії. Просто з іншим запасом ходу.</p>
+
+    <h3>Чому цей запас ходу в Росії довший — але не безмежний</h3>
+    <p>У Росії населення приблизно в чотири рази більше за українське (146 млн проти 38 млн), є доступ до трудових мігрантів із Центральної Азії, є в'язні, і головне — є авторитарний апарат примусу, здатний придушити будь-яке трудове чи соціальне невдоволення. Це саме той інструментарій «переведення економіки на військові рейки» з Частини 04. Тому Кремль може відсувати свою макроекономічну межу мобілізації набагато далі, ніж дозволила б собі відкрита ринкова економіка. Але межа нікуди не зникає, вона просто далі. Виснажений ринок праці, танучий ФНБ, стійка інфляція й ризик нових санкцій роблять свою справу — просто повільніше, ніж в України.</p>
+
+    <h3>Що з цим робити Україні — не дзеркалити, а грати на своєму полі</h3>
+    <p>Якщо тотальна мобілізація шкідлива для української економіки навіть заради власних потреб фронту, то тим більше вона не має сенсу як відповідь «число на число» на хвилю, яку Росія може собі дозволити довше. У гонці людських ресурсів супротивник має структурну перевагу — і вигравати в ній нема сенсу. Раціональніше діяти в іншій площині:</p>
+
+    <ul>
+      <li><strong>Робити кожного мобілізованого росіянина дорожчим для Кремля.</strong> Удари по НПЗ, хімзаводах, виробництвах дронів і логістичних вузлах — те, що вже відбувається у 2026-му, — б'ють по тій самій бюджетній механіці, тільки з боку витрат противника.</li>
+      <li><strong>Заміщати живу силу технікою.</strong> Дрони-перехоплювачі, наземна робототехніка, автономні платформи дозволяють утримувати ділянки фронту меншою кількістю людей — це спосіб знизити коефіцієнт «1 боєць = 6–8 платників податків», а не гнатися за чисельником.</li>
+      <li><strong>Робити ставку на контракт, а не на валову мобілізацію.</strong> Ринкові контрактні виплати, профінансовані переважно зовнішньою допомогою й замороженими активами, а не внутрішньою податковою базою, дають приріст чисельності без того самого «подвійного удару» по бюджету.</li>
+      <li><strong>Тримати бронювання критичних галузей.</strong> Енергетика, аграрний сектор, логістика, оборонка — саме вони визначають, чи витримає тил довшу війну на виснаження, і саме їх найлегше втратити першими.</li>
+      <li><strong>Вкладатися у фортифікації.</strong> Менше втрат на передовій — менше людей потрібно на заміну — менше тиску на економіку тилу. Тут все пов'язано напряму.</li>
+    </ul>
+
+    <div class="callout">
+      <div class="cal-title">Підсумок сценарію</div>
+      <p>Осіння хвиля в 500 тисяч і, ймовірно, наступні за нею — не привід повторити ту саму помилку, від якої застерігає вся ця стаття. Час і макроекономіка радше на боці того, хто береже продуктивну базу тилу: дефіцит бюджету РФ, виснажений ринок праці й танучий ФНБ означають, що чисельна перевага Кремля теж має стелю — просто далі, ніж в України. Завдання не в тому, щоб наздогнати цю стелю власною мобілізацією, а в тому, щоб зробити її досягнення для Росії якомога дорожчим і швидшим.</p>
+    </div>
+  </section>
+
+  <div class="conclusion">
+    <h2>Висновки</h2>
+    <p>Якщо звести все до однієї думки: «воювати будуть усі» — це гарна фраза для мітингу, але вона не витримує зустрічі з бюджетом. Міжнародна допомога юридично не може йти на фінансування армії, тож ЗСУ живуть виключно на податки з цивільних підприємств і працюючих людей. Прибрати з економіки весь трудовий ресурс — означає прибрати й джерело, з якого ця сама армія годується.</p>
+    <p>Спроба забрати з економіки увесь працездатний ресурс закінчиться обвалом податкових надходжень, паралічем критичної інфраструктури й тим, що держава просто не зможе годувати, вдягати й платити тим, кого вже мобілізувала. Стійкість у війні на виснаження — це не про те, скільки людей можна поставити під рушницю, а про те, чи вдається втримати баланс між потребами фронту й тим, що здатен виробити тил.</p>
+  </div>
+
+  <table style="margin-top:40px;">
+    <thead>
+      <tr><th>Концепція «воювати будуть усі»</th><th>Що відбувається насправді</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Фронт отримає необмежене поповнення</td><td class="no">✕ Бюджет втрачає податкову базу швидше, ніж встигає озброїти нових бійців</td></tr>
+      <tr><td>Держава контролює трудовий ресурс</td><td class="no">✕ Критичні галузі (енергетика, аграрний сектор, логістика) колапсують</td></tr>
+      <tr><td>Тил витримає будь-яке навантаження</td><td class="no">✕ Історія (СРСР, Німеччина, Сирія) показує зворотне без тоталітарного апарату примусу</td></tr>
+      <tr><td>Мобілізація — суто військове рішення</td><td class="yes">✓ Це передусім бюджетне рівняння: 1 боєць = 6–8 платників податків у тилу</td></tr>
+    </tbody>
+  </table>
+
+  <section class="sources">
+    <h3 style="margin-top:0;">Джерела</h3>
+    <div class="src-list">
+      <div class="src"><span class="n">01</span><a href="https://www.ukr.net/ru/news/details/economics/104295889.html" target="_blank" rel="noopener">Скільки коштує утримання одного військового — Мінборони назвали суму</a><span class="domain">ukr.net</span></div>
+      <div class="src"><span class="n">02</span><a href="https://www.rbc.ua/ukr/news/minoboroni-ukrayini-nazvali-sumu-vitrat-utrimannya-1715776575.html" target="_blank" rel="noopener">Мінборони України назвали суму видатків на військового на рік</a><span class="domain">rbc.ua</span></div>
+      <div class="src"><span class="n">03</span><a href="https://armyinform.com.ua/2024/05/04/u-minoborony-rozpovily-skilky-koshtuye-utrymannya-odnogo-vijskovosluzhbovczya/" target="_blank" rel="noopener">У Міноборони розповіли, скільки коштує утримання одного військовослужбовця</a><span class="domain">armyinform.com.ua</span></div>
+      <div class="src"><span class="n">04</span><a href="https://www.ukrinform.ua/rubric-society/3864044-utrimanna-odnogo-vijskovogo-obhoditsa-ukraini-orientovno-v-12-miljona-na-rik-minoboroni.html" target="_blank" rel="noopener">Утримання одного військового обходиться Україні орієнтовно в ₴1,2 млн на рік</a><span class="domain">ukrinform.ua</span></div>
+      <div class="src"><span class="n">05</span><a href="https://mobilizatsiya.novyny.live/skilki-groshei-vitrachaiut-na-yizhu-formu-ta-meditsinu-dlia-viiskovikh-vidpovid-mou-173083.html" target="_blank" rel="noopener">Скільки грошей витрачають на їжу, форму та медицину для військових</a><span class="domain">novyny.live</span></div>
+      <div class="src"><span class="n">06</span><a href="https://bip.net.ua/ru/articles/vijskovij-zbir/" target="_blank" rel="noopener">Військовий збір: ставки, правила, зміни</a><span class="domain">bip.net.ua</span></div>
+      <div class="src"><span class="n">07</span><a href="https://epravda.com.ua/rus/finances/rashody-gosbyudzheta-na-armiyu-potratili-63-procenta-za-polgoda-823753/" target="_blank" rel="noopener">Мінфін показав, скільки грошей і на що витратили із загального фонду бюджету за півроку</a><span class="domain">epravda.com.ua</span></div>
+      <div class="src"><span class="n">08</span><a href="https://minfin.com.ua/2026/07/21/178166134/" target="_blank" rel="noopener">Мінфін залучив від розміщення ОВДП понад 6 млрд грн</a><span class="domain">minfin.com.ua</span></div>
+      <div class="src"><span class="n">09</span><a href="https://www.pravda.com.ua/rus/news/2023/12/19/7433760/" target="_blank" rel="noopener">Зеленський заступився за цивільних: за 1 військовим стоять 6 платників податків</a><span class="domain">pravda.com.ua</span></div>
+      <div class="src"><span class="n">10</span><a href="https://mof.gov.ua/uk/news/z_1_lipnia_viiskovii_zbir_spriamovuietsia_do_spetsfondu_derzhbiudzhetu_na_groshove_zabezpechennia_viiskovosluzhbovtsiv-5809" target="_blank" rel="noopener">З 1 липня військовий збір спрямовується на грошове забезпечення військовослужбовців</a><span class="domain">mof.gov.ua</span></div>
+      <div class="src"><span class="n">11</span><a href="https://taxer.ua/uk/kb/vijskovij-zbir" target="_blank" rel="noopener">База знань — Військовий збір</a><span class="domain">taxer.ua</span></div>
+      <div class="src"><span class="n">12</span><a href="https://sud.ua/ru/news/publication/288571-my-dolzhny-ponimat-odin-voin-eto-6-chelovek-v-grazhdanskoy-zhizni-uplachivayuschikh-nalogi-vladimir-zelenskiy-o-matematike-mobilizatsii" target="_blank" rel="noopener">«Один воїн — це 6 людей у цивільному житті» — про «математику» мобілізації</a><span class="domain">sud.ua</span></div>
+      <div class="src"><span class="n">13</span><a href="https://hromadske.ua/ru/posts/shmygal-o-bronirovanii-na-odnogo-voennogo-dolzhno-prihoditsya-vosem-teh-kto-ego-obespechivaet-v-tylu" target="_blank" rel="noopener">Шмигаль про бронювання: на одного військового має припадати вісім тих, хто його забезпечує в тилу</a><span class="domain">hromadske.ua</span></div>
+      <div class="src"><span class="n">14</span><a href="https://forbes.ua/ru/news/zarplata-podatki-vpliv-na-ekonomiku-uryad-gotue-novi-pidkhodi-do-bronyuvannya-viyskovozobovyazanikh-04032024-19642" target="_blank" rel="noopener">Шмигаль анонсував нові підходи до бронювання військовозобов'язаних</a><span class="domain">forbes.ua</span></div>
+      <div class="src"><span class="n">15</span><a href="https://24tv.ua/business/ru/rabota-v-ukraine-kompanii-zhalujutsja-na-nehvatku-kadrov-iz-za-mobilizacii_n3107055" target="_blank" rel="noopener">78% компаній б'ють на сполох через нестачу кадрів</a><span class="domain">24tv.ua</span></div>
+      <div class="src"><span class="n">16</span><a href="https://ua.news/ru/ukraine/biznes-v-ukrayini-bie-na-spolokh-cherez-nestachu-pratsivnikiv" target="_blank" rel="noopener">Бізнес в Україні б'є на сполох через нестачу працівників</a><span class="domain">ua.news</span></div>
+      <div class="src"><span class="n">17</span><a href="https://biz.liga.net/all/news/okolo-39-agrokompanii-ukrainy-zhaluyutsya-na-defitsit-kadrov-prichina-v-mobilizatsii" target="_blank" rel="noopener">Близько 39% агрокомпаній України скаржаться на дефіцит кадрів</a><span class="domain">liga.net</span></div>
+      <div class="src"><span class="n">18</span><a href="https://bppk.info:446/media/attachments/6adf97f83acf6453d4a6a4b1070f3754_ACcKpfa.pdf" target="_blank" rel="noopener">Радянський тил у роки Великої Вітчизняної війни</a><span class="domain">bppk.info</span></div>
+      <div class="src"><span class="n">19</span><a href="https://novayagazeta.ru/articles/2022/10/24/ravnenie-na-lopatu-media" target="_blank" rel="noopener">Як були влаштовані трудові армії СРСР</a><span class="domain">novayagazeta.ru</span></div>
+      <div class="src"><span class="n">20</span><a href="https://opteey.livejournal.com/61376.html" target="_blank" rel="noopener">Мобілізація населення СРСР і трудова повинність у роки війни</a><span class="domain">opteey.livejournal.com</span></div>
+      <div class="src"><span class="n">21</span><a href="https://dengi.ua/budget/6019912-produktovye-kartochki-v-sssr-kakoj-byla-zhizn-pri-talonakh" target="_blank" rel="noopener">Продуктові картки в СРСР: яким було життя при талонах</a><span class="domain">dengi.ua</span></div>
+      <div class="src"><span class="n">22</span><a href="https://www.partner-inform.de/partner/detail/2023/3/235/11173/kartochnaja-sistema-v-rossii-i-germanii?lang=ru" target="_blank" rel="noopener">Карткова система в Росії та Німеччині</a><span class="domain">partner-inform.de</span></div>
+      <div class="src"><span class="n">23</span><a href="https://topwar.ru/217992-mobilizacija-jekonomiki-germanskoj-imperii-v-period-pervoj-mirovoj-vojny.html" target="_blank" rel="noopener">Мобілізація економіки Німецької імперії в роки Першої світової</a><span class="domain">topwar.ru</span></div>
+      <div class="src"><span class="n">24</span><a href="https://kp.ua/life/a697485-ekonomicheskie-bronirovanie-i-mobilizatsija-kak-eto-bylo-v-hody-pervoj-mirovoj-vojny" target="_blank" rel="noopener">Економічне бронювання й мобілізація в роки Першої світової</a><span class="domain">kp.ua</span></div>
+      <div class="src"><span class="n">25</span><a href="https://postnauka.org/longreads/29279" target="_blank" rel="noopener">Перша світова війна: причини й наслідки</a><span class="domain">postnauka.org</span></div>
+      <div class="src"><span class="n">26</span><a href="https://inshe.tv/suspilstvo/2016-11-12/179330/" target="_blank" rel="noopener">Сирії війна вже обійшлася у $260 млрд економічних втрат — ООН</a><span class="domain">inshe.tv</span></div>
+      <div class="src"><span class="n">27</span><a href="https://www.aa.com.tr/ru/%D0%BC%D0%B8%D1%80/%D0%BF%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0-%D1%80%D0%B5%D0%B6%D0%B8%D0%BC%D0%B0-%D0%B0%D1%81%D0%B0%D0%B4%D0%B0-%D1%80%D0%B0%D0%B7%D1%80%D1%83%D1%88%D0%B8%D0%BB%D0%B0-%D1%81%D0%B8%D1%80%D0%B8%D1%8E-%D0%B8-%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D0%BB%D0%B0-%D0%BA-%D0%BA%D1%80%D0%B0%D1%85%D1%83-%D0%B5%D0%B5-%D1%8D%D0%BA%D0%BE%D0%BD%D0%BE%D0%BC%D0%B8%D0%BA%D0%B8/3427810" target="_blank" rel="noopener">Політика режиму Асада зруйнувала Сирію і призвела до краху її економіки</a><span class="domain">aa.com.tr</span></div>
+      <div class="src"><span class="n">28</span><a href="https://www.aa.com.tr/en/middle-east/israel-considers-reducing-reserve-forces-due-to-high-economic-costs/3056759" target="_blank" rel="noopener">Israel considers reducing reserve forces due to high economic costs</a><span class="domain">aa.com.tr</span></div>
+      <div class="src"><span class="n">29</span><a href="https://www.inss.org.il/publication/economy-danger/" target="_blank" rel="noopener">Three Events, One Concern: A Threat to Israel's Economy</a><span class="domain">inss.org.il</span></div>
+      <div class="src"><span class="n">30</span><a href="https://www.eurasiareview.com/22052026-israeli-economic-and-financial-resilience-amid-wartime-shocks-analysis/" target="_blank" rel="noopener">Israeli Economic And Financial Resilience Amid Wartime Shocks</a><span class="domain">eurasiareview.com</span></div>
+      <div class="src"><span class="n">31</span><a href="https://nashigroshi.org/2025/12/15/dot-zakontraktuvav-kharchiv-na-15-mlrd-za-katalohom-zaraz-prykuriuiut-na-neiakisniy-kovbasi-syri-i-konservakh/" target="_blank" rel="noopener">ДОТ законтрактував харчів на 15 млрд: гранична вартість добового раціону — 171,5 грн, законтрактована — 128 грн</a><span class="domain">nashigroshi.org</span></div>
+      <div class="src"><span class="n">32</span><a href="https://nbnews.com.ua/suspilstvo/2026/07/18/rosiya-gotuyetsya-mobilizuvaty-shhonajmenshe-500-tysyach-lyudej-voseny-glava-czpd-kovalenko/" target="_blank" rel="noopener">Росія готує масштабну мобілізацію на осінь 2026 — глава ЦПД Коваленко</a><span class="domain">nbnews.com.ua</span></div>
+      <div class="src"><span class="n">33</span><a href="https://forbes.ua/ru/news/rosiya-vpershe-tsogorich-zavershila-misyats-iz-profitsitom-byudzhetu-ale-vitrati-na-viynu-zrostayut-bloomberg-09072026-40282" target="_blank" rel="noopener">Дефіцит бюджету РФ та витрати ФНБ у 2026 році — Forbes.ua / Bloomberg</a><span class="domain">forbes.ua</span></div>
+      <div class="src"><span class="n">34</span><a href="https://www.vedomosti.ru/economics/articles/2025/10/22/1144107-osnovnie-parametri-byudzheta" target="_blank" rel="noopener">Основні параметри бюджету РФ на 2026 рік</a><span class="domain">vedomosti.ru</span></div>
+      <div class="src"><span class="n">35</span><a href="https://www.rnk.ru/article/218768-vyplaty-i-lgoty-uchastnikam-svo" target="_blank" rel="noopener">Виплати та пільги учасникам СВО у 2026 році — розмір одноразових виплат</a><span class="domain">rnk.ru</span></div>
+      <div class="src"><span class="n">36</span><a href="https://gogov.ru/contract-payroll/msk" target="_blank" rel="noopener">Виплати контрактникам у Москві та регіонах РФ у 2026 році</a><span class="domain">gogov.ru</span></div>
+      <div class="src"><span class="n">37</span><a href="https://cbr.ru/dkp/mp_dec/decision_key_rate/summary_key_rate_01072026/" target="_blank" rel="noopener">Резюме обговорення ключової ставки — дефіцит робочої сили та інфляційний тиск</a><span class="domain">cbr.ru</span></div>
+    </div>
+  </section>
+
+  <footer>
+    Аналітичний матеріал підготовлено на основі відкритих джерел та офіційних даних.<br>
+    © 2026 vadim.li · Некомерційне поширення з посиланням на автора — вітається.<br>
+    Питання, співпраця, передрук: <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a>
+  </footer>
+
+</div>
+<script src="../../assets/articles.js"></script>
+<script src="../../assets/site-nav.js"></script>
+</body>
+</html>

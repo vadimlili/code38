@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Аналіз систем протиракетної оборони: технічні характеристики, стратегії застосування, рекомендації для України. Patriot, SAMP/T, THAAD, Arrow, Freyja.">
+<title>Протибалістичні системи: технологія, стратегія, Україна</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f12;
+    --bg2: #101318;
+    --bg3: #13161b;
+    --border: #1f2329;
+    --border2: #2a2f38;
+    --accent: #c8a96e;
+    --accent2: #7a6640;
+    --accent-bright: #c8a96e;
+    --text: #d4d8e0;
+    --text-dim: #8a909b;
+    --text-bright: #f0f2f5;
+    --green: #5cb87a;
+    --yellow: #d6a548;
+    --red: #e05c5c;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --display: 'Playfair Display', Georgia, serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.75;
+  }
+
+  /* Layout */
+  .wrap { max-width: 860px; margin: 0 auto; padding: 60px 24px 80px; }
+
+  /* Header */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    font-weight: 900;
+    line-height: 1.15;
+    color: var(--text-bright);
+    margin-bottom: 20px;
+  }
+
+  .lead {
+    font-size: 1.05rem;
+    color: var(--text-dim);
+    margin-bottom: 28px;
+    line-height: 1.8;
+    border-left: 3px solid var(--accent2);
+    padding-left: 16px;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 48px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    font-family: var(--mono);
+  }
+
+  .meta-row .tag {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    padding: 3px 10px;
+    border-radius: 3px;
+    color: var(--text-dim);
+  }
+
+  .meta-sep { color: var(--border2); }
+
+  /* Section headers */
+  h2 {
+    font-family: var(--display);
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    font-weight: 700;
+    color: var(--text-bright);
+    margin: 52px 0 18px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+
+  h2 .sec-num {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent-bright);
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 32px 0 12px;
+  }
+
+  p { margin: 14px 0; }
+
+  /* Tables */
+  .tbl-wrap { overflow-x: auto; margin: 24px 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    min-width: 540px;
+  }
+
+  thead tr { background: var(--bg3); }
+
+  th {
+    padding: 11px 14px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-bright);
+    border-bottom: 2px solid var(--border2);
+    font-size: 0.82rem;
+    letter-spacing: 0.3px;
+  }
+
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+
+  tbody tr:nth-child(odd) { background: rgba(255,255,255,0.015); }
+  tbody tr:hover { background: rgba(200,169,110,0.05); }
+
+  td:first-child { font-weight: 600; color: var(--text-bright); white-space: nowrap; }
+
+  /* Infographic blocks */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .stat-box {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    padding: 16px 18px;
+    border-radius: 2px;
+  }
+
+  .stat-box .val {
+    font-family: var(--display);
+    color: var(--accent) !important;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+
+  .stat-box .lbl {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .stat-box .note {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* Comparison two-col */
+  .cmp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .cmp-box {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 18px 20px;
+    border-radius: 2px;
+  }
+
+  .cmp-box h4 {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border2);
+  }
+
+  .cmp-box p { font-size: 0.9rem; margin: 6px 0; }
+  .cmp-box .k { color: var(--text-dim); font-size: 0.8rem; }
+
+  /* Steps */
+  .steps { margin: 20px 0; }
+
+  .step {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .step-n {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    background: var(--accent);
+    color: #111;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  .step-body h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 5px;
+  }
+
+  .step-body p { font-size: 0.9rem; margin: 0; }
+
+  /* Callout / blockquote */
+  .callout {
+    background: #13161b;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .callout strong { color: var(--text-bright); }
+
+  /* Ukraine block */
+  .ua-block {
+    background: rgba(200,169,110,0.05);
+    border: 1px solid var(--border2);
+    border-top: 3px solid var(--accent-bright);
+    padding: 24px 26px;
+    margin: 28px 0;
+    border-radius: 2px;
+  }
+
+  .ua-block h3 {
+    margin-top: 0;
+    color: var(--accent);
+  }
+
+  .ua-block ul { padding-left: 18px; }
+  .ua-block li { margin: 8px 0; font-size: 0.94rem; line-height: 1.65; }
+
+  /* Verdict */
+  .verdict-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .verdict-box {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 16px;
+    border-radius: 2px;
+    font-size: 0.88rem;
+  }
+
+  .verdict-box .v-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .verdict-box .v-label.green { color: var(--green); }
+  .verdict-box .v-label.yellow { color: var(--yellow); }
+  .verdict-box .v-label.red { color: var(--red); }
+
+  .verdict-box p { color: var(--text-dim); margin: 0; line-height: 1.55; }
+
+  /* Sources */
+  .sources {
+    margin-top: 52px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources h3 {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+  }
+
+  .sources ol {
+    padding-left: 18px;
+    font-size: 0.84rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  .sources li { margin: 5px 0; }
+  .sources a { color: var(--accent-bright); text-decoration: none; }
+  .sources a:hover { text-decoration: underline; }
+
+  /* Author */
+  .author-block {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 18px 22px;
+    margin: 36px 0 0;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border-radius: 2px;
+  }
+
+  .author-block .a-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    background: var(--accent);
+    color: #111 !important;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--text-bright);
+    font-weight: 700;
+  }
+
+  .author-block strong { color: var(--text-bright); }
+  .author-block a { color: var(--accent-bright); text-decoration: none; }
+  .author-block a:hover { text-decoration: underline; }
+
+  /* Utility */
+  .ok  { color: var(--green); font-weight: 700; }
+  .mid { color: var(--yellow); font-weight: 700; }
+  .no  { color: var(--red); font-weight: 700; }
+
+  .mono { font-family: var(--mono); font-size: 0.88em; }
+
+  hr.thin { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  @media (max-width: 680px) {
+    .cmp-grid, .verdict-grid { grid-template-columns: 1fr; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+    table { font-size: 0.82rem; }
+    th, td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ═══ HEADER ═══ -->
+  <div class="eyebrow">Аналітичний матеріал · Системи ПРО · 2025</div>
+
+  <h1>Протибалістичний захист: технологія, стратегія та завдання для України</h1>
+
+  <p class="lead">
+    Повний технічний огляд систем протиракетної оборони, здатних перехоплювати балістичні ракети. Порівняльні характеристики, стратегії застосування та практичні висновки щодо пріоритетів для України.
+  </p>
+
+  <div class="meta-row">
+    <span>Автор: <strong style="color:var(--text)">vadim.li</strong></span>
+    <span class="meta-sep">·</span>
+    <span>Зв'язок: <a href="mailto:vadim.li@gmail.com" style="color:var(--accent-bright)">vadim.li@gmail.com</a></span>
+    <span class="meta-sep">·</span>
+    <span class="tag">Технічний аналіз</span>
+    <span class="tag">ПРО</span>
+    <span class="tag">Стратегія</span>
+  </div>
+
+
+  <!-- ═══ РОЗДІЛ 1 ═══ -->
+  <h2><span class="sec-num">01 /</span> Системи, здатні збивати балістичні ракети</h2>
+
+  <p>Балістична ракета — принципово інша ціль порівняно з крилатою ракетою або дроном. Вона підіймається у верхні шари атмосфери чи навіть у ближній космос, а потім падає на ціль майже вертикально зі швидкістю від 2 000 до 7 000 м/с. Жоден ЗРК, спроєктований для боротьби з аеродинамічними цілями, не розрахований на такі умови: ні за кутом огляду радара, ні за швидкістю ракети-перехоплювача, ні за принципом ураження боєголовки.</p>
+
+  <p>У світі існує обмежений перелік комплексів, здатних надійно вирішувати це завдання. Всі вони об'єднані кількома спільними ознаками: спеціалізований радар з можливістю вертикального супроводження, висока швидкість ракети-перехоплювача та або кінетичний удар (Hit-to-Kill), або надзвичайно точний підривний заряд із спрямованим ураженням.</p>
+
+  <h3>Чому NASAMS, IRIS-T, Бук і С-300 не перехоплюють балістику</h3>
+
+  <p>Це не питання якості систем — вони відмінно виконують власні завдання. Проблема в тому, що ці комплекси проєктувалися для боротьби з аеродинамічними цілями: літаками, вертольотами, крилатими ракетами та дронами. Балістика ставить три нерозв'язні для них виклики.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <h4>Швидкість</h4>
+        <p>Балістична ракета на термінальній стадії досягає 2 000–7 000 м/с. Ракети-перехоплювачі IRIS-T або Бука летять у кілька разів повільніше. Навіть при зустрічному курсі перехоплювач не встигає вийти на позицію перехоплення.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <h4>Кут падіння</h4>
+        <p>Радари звичайних ЗРК сканують горизонт і нижню півсферу. Балістична ракета падає майже вертикально. Переорієнтація антени займає 1–2 секунди, за які ціль проходить ще кілька кілометрів вертикально вниз.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <h4>Принцип ураження</h4>
+        <p>Звичайна зенітна ракета вибухає поруч із ціллю і вражає її уламками. Масивна балістична боєголовка з товстим термозахистом може витримати такий вплив і продовжити падіння за інерцією. Для гарантованого знищення потрібен або прямий кінетичний удар, або дуже потужний спрямований вибух впритул.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Системи, здатні перехоплювати балістику: порівняльна таблиця ТТХ</h3>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Система</th>
+          <th>Країна</th>
+          <th>Принцип ураження</th>
+          <th>Дальність (балістика)</th>
+          <th>Висота перехоплення</th>
+          <th>Швидкість ракети</th>
+          <th>Статус</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Patriot PAC-3 MSE</td>
+          <td>США</td>
+          <td>Hit-to-Kill (кінетичний удар)</td>
+          <td>до 60 км</td>
+          <td>до 36 км</td>
+          <td>~5 Мах</td>
+          <td><span class="ok">✓</span> Бойовий досвід</td>
+        </tr>
+        <tr>
+          <td>SAMP/T Aster 30 B1</td>
+          <td>Франція / Італія</td>
+          <td>Спрямована уламково-фугасна БЧ</td>
+          <td>30–35 км</td>
+          <td>до 25 км</td>
+          <td>~4.5 Мах</td>
+          <td><span class="ok">✓</span> Операційна</td>
+        </tr>
+        <tr>
+          <td>THAAD</td>
+          <td>США</td>
+          <td>Hit-to-Kill (поза атмосферою)</td>
+          <td>до 200 км</td>
+          <td>40–150 км</td>
+          <td>~8.2 Мах</td>
+          <td><span class="ok">✓</span> Розгорнута в Кореї, ОАЕ</td>
+        </tr>
+        <tr>
+          <td>Arrow 2 (Хец-2)</td>
+          <td>Ізраїль / США</td>
+          <td>Hit-to-Kill + спрямована БЧ</td>
+          <td>90 км</td>
+          <td>до 50 км</td>
+          <td>~9 Мах</td>
+          <td><span class="ok">✓</span> Бойовий досвід (Іран 2024)</td>
+        </tr>
+        <tr>
+          <td>Arrow 3 (Хец-3)</td>
+          <td>Ізраїль / США</td>
+          <td>Hit-to-Kill (заатмосферне)</td>
+          <td>~2 400 км</td>
+          <td>100 км+</td>
+          <td>&gt;10 Мах</td>
+          <td><span class="ok">✓</span> Перехоплення в космосі</td>
+        </tr>
+        <tr>
+          <td>Aegis SM-3 Block IIA</td>
+          <td>США / Японія</td>
+          <td>Hit-to-Kill (заатмосферне, морська база)</td>
+          <td>2 500 км</td>
+          <td>1 500 км</td>
+          <td>~15 Мах</td>
+          <td><span class="ok">✓</span> Кораблі ВМС США, Японії</td>
+        </tr>
+        <tr>
+          <td>Cheongung-II (KM-SAM)</td>
+          <td>Південна Корея</td>
+          <td>Hit-to-Kill</td>
+          <td>40 км</td>
+          <td>до 20 км</td>
+          <td>~4 Мах</td>
+          <td><span class="ok">✓</span> Власна розробка, в строю</td>
+        </tr>
+        <tr>
+          <td>L-SAM</td>
+          <td>Південна Корея</td>
+          <td>Hit-to-Kill (висока висота)</td>
+          <td>~150 км</td>
+          <td>до 60 км</td>
+          <td>~6 Мах</td>
+          <td><span class="mid">△</span> Випробування, 2024–25</td>
+        </tr>
+        <tr>
+          <td>HQ-19</td>
+          <td>Китай</td>
+          <td>Hit-to-Kill (аналог THAAD)</td>
+          <td>~250 км</td>
+          <td>до 150 км</td>
+          <td>~9 Мах</td>
+          <td><span class="mid">△</span> Обмежені публічні дані</td>
+        </tr>
+        <tr>
+          <td>С-300В4</td>
+          <td>Росія</td>
+          <td>Уламково-фугасна (без Hit-to-Kill)</td>
+          <td>до 40 км</td>
+          <td>до 35 км</td>
+          <td>~3 Мах</td>
+          <td><span class="mid">△</span> Обмежена ефективність</td>
+        </tr>
+        <tr>
+          <td>С-500 «Прометей»</td>
+          <td>Росія</td>
+          <td>Hit-to-Kill (заявлений)</td>
+          <td>600 км (заявлено)</td>
+          <td>до 200 км (заявлено)</td>
+          <td>Н/Д</td>
+          <td><span class="no">✗</span> Одиничні прим., не верифіковано</td>
+        </tr>
+        <tr>
+          <td>А-235 «Нудоль»</td>
+          <td>Росія</td>
+          <td>Hit-to-Kill (ASAT/ПРО)</td>
+          <td>~1 500 км</td>
+          <td>до 800 км</td>
+          <td>Н/Д</td>
+          <td><span class="mid">△</span> Стратегічна, лише Москва</td>
+        </tr>
+        <tr>
+          <td>Freyja / FP-7.X</td>
+          <td>Україна + ЄС</td>
+          <td>Hit-to-Kill (проєктується)</td>
+          <td>TBD</td>
+          <td>TBD</td>
+          <td>TBD</td>
+          <td><span class="mid">△</span> Проєкт, 2024–2026</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Класифікація за висотою перехоплення</h3>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Ешелон</th>
+          <th>Висота</th>
+          <th>Системи</th>
+          <th>Особливості</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Нижній (термінальний)</td>
+          <td>0–40 км</td>
+          <td>Patriot PAC-3 MSE, SAMP/T, Cheongung-II, С-300В4</td>
+          <td>Остання лінія перехоплення. Обмежений час реакції. Точкова оборона міст та об'єктів.</td>
+        </tr>
+        <tr>
+          <td>Середній</td>
+          <td>40–150 км</td>
+          <td>THAAD, Arrow 2, L-SAM</td>
+          <td>Перехоплення на висхідній або серединній ділянці траєкторії. Більша зона прикриття.</td>
+        </tr>
+        <tr>
+          <td>Заатмосферний (космічний)</td>
+          <td>150 км+</td>
+          <td>Arrow 3, Aegis SM-3 B.IIA, А-235</td>
+          <td>Перехоплення в ближньому космосі. Найбільша зона прикриття, але мінімальний арсенал у світі.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <strong>Висновок по розділу.</strong> Ефективна протибалістична оборона вимагає щонайменше двох ешелонів. Тільки Patriot PAC-3 або SAMP/T — це термінальний захист однієї точки. Для прикриття великої зони або кількох об'єктів одночасно потрібна комбінація систем нижнього та середнього ешелонів.
+  </div>
+
+
+  <!-- ═══ РОЗДІЛ 2 ═══ -->
+  <h2><span class="sec-num">02 /</span> Patriot PAC-3 проти SAMP/T: детальне порівняння</h2>
+
+  <p>Обидва комплекси є основою сучасної наземної протибалістичної оборони НАТО. Але за схожими цифрами ефективності стоять дві різні інженерні філософії — американський прагматизм максимальної вогневої потужності проти європейського підходу до гнучкості та інтеграції.</p>
+
+  <h3>Метод перехоплення</h3>
+
+  <div class="cmp-grid">
+    <div class="cmp-box">
+      <h4>Patriot PAC-3 MSE — Hit-to-Kill</h4>
+      <p>Ракета-перехоплювач фізично врізається у боєголовку супротивника. Кінетична енергія зіткнення на швидкості ~5 Мах настільки велика, що ворожа ракета руйнується в повітрі без власного вибуху перехоплювача.</p>
+      <p class="k">Перевага: гарантоване знищення корпусу та бойової частини. Боєголовка не «вижила» і не впаде за інерцією.</p>
+      <p class="k">Недолік: потрібна надзвичайно точна наводка — похибка понад кілька метрів означає промах.</p>
+    </div>
+    <div class="cmp-box">
+      <h4>SAMP/T Aster 30 — спрямована БЧ</h4>
+      <p>Ракета підлітає максимально близько до цілі й підриває спрямовану уламково-фугасну бойову частину. Aster 30 також здатна до прямого влучення, але основний розрахунок — вибух у безпосередній близькості.</p>
+      <p class="k">Перевага: більший допуск на похибку наводки, ніж у PAC-3. Надійний результат при влученні в зону ефективного ураження.</p>
+      <p class="k">Недолік: є теоретичний ризик, що фрагменти важкої боєголовки продовжать падіння. На практиці — мінімальний при правильному підриві.</p>
+    </div>
+  </div>
+
+  <h3>Радар: секторний проти кругового огляду</h3>
+
+  <div class="cmp-grid">
+    <div class="cmp-box">
+      <h4>Patriot AN/MPQ-65</h4>
+      <p>Секторний радар з кутом огляду ~120°. Орієнтується в один напрямок — туди, звідки очікується загроза. Переорієнтація займає 1–2 секунди.</p>
+      <p class="k">Перевага: вся потужність передавача сконцентрована на одному секторі — більша дальність виявлення і точність супроводу.</p>
+      <p class="k">Недолік: уразливість до атак з флангів і тилу. При раптовій зміні напрямку загрози — витрачається критичний час.</p>
+    </div>
+    <div class="cmp-box">
+      <h4>SAMP/T Kronos / Arabel</h4>
+      <p>Радар обертається безперервно, забезпечуючи 360° огляд. Одночасно супроводжує до 100 цілей у будь-якому секторі.</p>
+      <p class="k">Перевага: немає «мертвих зон». Комплекс реагує на загрозу з будь-якого напрямку без затримки на переорієнтацію.</p>
+      <p class="k">Недолік: потужність розподіляється по всій сфері — дещо менша дальність у кожному конкретному секторі порівняно з Patriot.</p>
+    </div>
+  </div>
+
+  <h3>Вектор пуску ракет</h3>
+
+  <div class="cmp-grid">
+    <div class="cmp-box">
+      <h4>Patriot — похилий старт</h4>
+      <p>Пускові контейнери піднімаються під кутом у напрямку очікуваної загрози. Ракета відразу летить до сектора ймовірного перехоплення.</p>
+      <p class="k">Перевага: менший час на початковій ділянці польоту до зони перехоплення.</p>
+      <p class="k">Недолік: потрібна попередня орієнтація пускової установки. При загрозі з несподіваного напрямку — ефективність знижується.</p>
+    </div>
+    <div class="cmp-box">
+      <h4>SAMP/T — вертикальний старт</h4>
+      <p>Ракета Aster вистрілюється строго вертикально, а потім розвертається у бік цілі за допомогою відхилення вектора тяги. Це дає можливість атакувати в будь-якому напрямку миттєво.</p>
+      <p class="k">Перевага: повна незалежність від попередньої орієнтації установки. Ідеально для непередбачуваних загроз.</p>
+      <p class="k">Недолік: кілька секунд витрачається на маневр розвороту після старту.</p>
+    </div>
+  </div>
+
+  <h3>Порівняння технічних характеристик</h3>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Параметр</th>
+          <th>Patriot PAC-3 MSE</th>
+          <th>SAMP/T Aster 30 Block 1NT</th>
+          <th>Перевага</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Дальність (балістика)</td>
+          <td>до 60 км</td>
+          <td>30–35 км</td>
+          <td><span class="ok">Patriot</span></td>
+        </tr>
+        <tr>
+          <td>Висота перехоплення</td>
+          <td>до 36 км</td>
+          <td>до 25 км</td>
+          <td><span class="ok">Patriot</span></td>
+        </tr>
+        <tr>
+          <td>Принцип ураження</td>
+          <td>Hit-to-Kill</td>
+          <td>Спрямована БЧ (+ Hit-to-Kill)</td>
+          <td><span class="ok">Patriot</span> (надійніший)</td>
+        </tr>
+        <tr>
+          <td>Огляд радара</td>
+          <td>120° (секторний)</td>
+          <td>360° (круговий)</td>
+          <td><span class="ok">SAMP/T</span></td>
+        </tr>
+        <tr>
+          <td>Вектор пуску</td>
+          <td>Похилий</td>
+          <td>Вертикальний</td>
+          <td><span class="ok">SAMP/T</span> (гнучкіший)</td>
+        </tr>
+        <tr>
+          <td>Час розгортання</td>
+          <td>15–20 хв</td>
+          <td>10–15 хв</td>
+          <td><span class="ok">SAMP/T</span></td>
+        </tr>
+        <tr>
+          <td>Ракет на бойовій машині</td>
+          <td>до 16</td>
+          <td>до 8</td>
+          <td><span class="ok">Patriot</span></td>
+        </tr>
+        <tr>
+          <td>Мобільність</td>
+          <td>Середня (колісна база)</td>
+          <td>Вища (компактніший)</td>
+          <td><span class="ok">SAMP/T</span></td>
+        </tr>
+        <tr>
+          <td>Стандарт зв'язку</td>
+          <td>JTIDS / Link-16</td>
+          <td>Link-16 (нативний)</td>
+          <td><span class="mid">Рівні</span></td>
+        </tr>
+        <tr>
+          <td>Вартість ракети</td>
+          <td>~$4–5 млн</td>
+          <td>~€2–3 млн</td>
+          <td><span class="ok">SAMP/T</span></td>
+        </tr>
+        <tr>
+          <td>Виробнича потужність</td>
+          <td>Обмежена (черга союзників)</td>
+          <td>Розширюється MBDA</td>
+          <td><span class="mid">Рівні</span></td>
+        </tr>
+        <tr>
+          <td>Бойовий досвід</td>
+          <td>Ізраїль, Саудівська Аравія, ОАЕ, Україна (2023–25)</td>
+          <td>Обмежений (Іран, Ємен — опосередковано)</td>
+          <td><span class="ok">Patriot</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Підсумковий вердикт</h3>
+
+  <div class="verdict-grid">
+    <div class="verdict-box">
+      <div class="v-label green">Patriot краще</div>
+      <p>Дальність та висота перехоплення. Більший боєзапас на позиції. Перевірений Hit-to-Kill. Масштабний бойовий досвід.</p>
+    </div>
+    <div class="verdict-box">
+      <div class="v-label green">SAMP/T краще</div>
+      <p>Круговий огляд без мертвих зон. Швидше розгортання. Нижча ціна ракети. Вертикальний старт — миттєва реакція з будь-якого напрямку.</p>
+    </div>
+    <div class="verdict-box">
+      <div class="v-label yellow">Оптимальне рішення</div>
+      <p>Комбінація обох систем. SAMP/T — для кругового виявлення та швидкого реагування. Patriot — для максимально надійного знищення підтвердженої балістичної цілі.</p>
+    </div>
+  </div>
+
+
+  <!-- ═══ РОЗДІЛ 3 ═══ -->
+  <h2><span class="sec-num">03 /</span> Стратегія: як закрити небо від балістики</h2>
+
+  <p>«Закрити небо» над цілою країною від балістичних ракет — технологічно та економічно неможливо. Жодна країна у світі не має суцільного протибалістичного щита. Реальна стратегія спирається на чотири рівні, кожен з яких вирішує окреме завдання.</p>
+
+  <h3>Рівень 1 — Точкова (об'єктова) оборона</h3>
+
+  <p>Ресурси ПРО (Patriot, SAMP/T, THAAD) концентруються навколо критично важливих об'єктів: великих міст, командних пунктів, атомних електростанцій, вузлових об'єктів енергетики та оборонного виробництва. Це — «куполи» захисту радіусом від 30 до 60 км, всередині яких система здатна перехоплювати балістику. Решта території залишається відкритою.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Пріоритет захисту</th>
+          <th>Обґрунтування</th>
+          <th>Мінімальний ресурс</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Місто з населенням 1 млн+</td>
+          <td>Цивільні жертви, моральний тиск, економічний центр</td>
+          <td>2–3 батареї Patriot / SAMP/T</td>
+        </tr>
+        <tr>
+          <td>АЕС</td>
+          <td>Ядерна аварія унеможливить захист великого регіону</td>
+          <td>2 батареї + резервний радар</td>
+        </tr>
+        <tr>
+          <td>Командний пункт ЗСУ</td>
+          <td>Знищення паралізує управління обороною</td>
+          <td>2–4 батареї</td>
+        </tr>
+        <tr>
+          <td>Вузловий аеропорт / логістичний хаб</td>
+          <td>Критичний для постачання зброї та медичної евакуації</td>
+          <td>1–2 батареї</td>
+        </tr>
+        <tr>
+          <td>Оборонне підприємство</td>
+          <td>Знищення обмежує власне виробництво дронів та ракет</td>
+          <td>1–2 батареї</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Рівень 2 — Знищення пускових установок (стратегія «Полювання»)</h3>
+
+  <p>Найефективніша «протибалістична зброя» — та, яка знищує ракету до запуску. Ця стратегія вимагає побудови повного ланцюга розвідки та ударів.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <h4>Супутникова та РЕР розвідка</h4>
+        <p>Системи типу SBIRS фіксують теплові сигнатури пуску миттєво. Радіоелектронна розвідка відстежує активацію радарів і комунікацій, пов'язаних із пусковими батареями.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <h4>Розвідувальні дрони глибокого тилу</h4>
+        <p>БПЛА типу RQ-4 Global Hawk або Bayraktar Akıncı з радарами синтетичної апертури (SAR) здатні виявляти мобільні пускові на маршах і стоянках у ворожому тилу на відстані до 300 км.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <h4>Удар по пускових, складах та ВПК</h4>
+        <p>ATACMS (300 км), Storm Shadow / SCALP (500+ км), власні FPV-дрони та дрони-камікадзе класу Shahed у зворотному застосуванні атакують пускові установки, склади рідкого кисню та твердого палива, виробничі потужності.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <h4>Знищення підприємств ВПК</h4>
+        <p>Кожен знищений завод — це місяці відсутності ракет на фронті. Удари по підприємствах з виробництва ракетних двигунів, систем наведення та компонентів паливних систем мають стратегічний мультиплікативний ефект.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Рівень 3 — Власна балістика та асиметрична відповідь</h3>
+
+  <p>Якщо ворог знає, що удар по великому місту гарантовано призведе до відповідного удару по порівнянному об'єкту у власній країні — він враховує цей ризик у своїх рішеннях. Це концепція «балансу страху» для неядерних держав.</p>
+
+  <div class="callout">
+    <strong>Важлива межа.</strong> Розробка або отримання ядерної зброї для країни, що прагне євроатлантичної інтеграції, означає миттєві та катастрофічні санкції, втрату підтримки союзників і виключення зі структур колективної безпеки. Це не варіант. Натомість розробка власних оперативно-тактичних і тактичних ракет із конвенційною бойовою частиною — цілком легітимний шлях, яким іде більшість розвинених країн.
+  </div>
+
+  <h3>Рівень 4 — Розподілена інфраструктура</h3>
+
+  <p>Якщо критична інфраструктура розосереджена, одна балістична ракета не здатна завдати системного удару. Замість однієї великої ТЕС — десятки газопоршневих або сонячних станцій. Замість централізованого командного пункту — розподілена мережа менших вузлів. Це знижує цінність кожної окремої ракетної атаки для ворога.</p>
+
+  <h3>Що саме потрібно робити Україні</h3>
+
+  <div class="ua-block">
+    <h3>Рекомендації щодо протибалістичної стратегії України</h3>
+    <ul>
+      <li><strong>Пріоритет — нарощення кількості батарей Patriot PAC-3 та SAMP/T.</strong> Наявного ресурсу критично мало для одночасного прикриття навіть 5–6 об'єктів першого пріоритету. Кожна додаткова батарея — це захист ще одного великого міста або АЕС.</li>
+      <li><strong>Диверсифікувати постачальників.</strong> Надмірна залежність від одного типу систем (наприклад, тільки Patriot) створює ризик вичерпання ракет і логістичних збоїв. Паралельне отримання SAMP/T від Франції та Італії — критично важливе.</li>
+      <li><strong>Продовжувати і нарощувати удари по ВПК Росії.</strong> Знищення заводів «Алмаз-Антей», виробників Іскандерів та запасів компонентів для них — це пряме скорочення кількості балістичних ракет, які Росія може застосувати. Ефект накопичується місяцями.</li>
+      <li><strong>Прискорити розробку власних ракет середньої дальності.</strong> Програми на зразок «Паляниця» та «Гром» мають стратегічний характер. Навіть обмежений арсенал власних ракет із дальністю 300–500 км змінює розрахунок ризиків для ворога.</li>
+      <li><strong>Розосередити критичну інфраструктуру.</strong> АЕС прикриті, але вузли електромережі, центри управління, логістичні вузли — ні. Розподіл цих функцій знижує ефективність кожної окремої ракетної атаки.</li>
+      <li><strong>Інтегруватися в НАТО-мережу Link-16.</strong> Режим «Engage on Remote» дозволяє польським або румунським радарам передавати цілевказівку на українські Patriot без увімкнення власного радара — це підвищує виживаність і ефективність системи.</li>
+      <li><strong>Розглянути отримання THAAD або SM-3 для середнього ешелону.</strong> Наявні системи — термінального ешелону. Додавання перехоплення на висотах 40–100 км дасть можливість зупиняти ракети ще до входу в зону дії Patriot, підвищуючи загальну ймовірність знищення.</li>
+    </ul>
+  </div>
+
+
+  <!-- ═══ РОЗДІЛ 4 ═══ -->
+  <h2><span class="sec-num">04 /</span> Системи раннього попередження: космос і земля</h2>
+
+  <p>Протибалістична оборона без системи раннього попередження — це армія зі зв'язаними руками. Сам по собі Patriot реагує на ціль у своєму радіусі дії — часу на перехоплення лишається близько 30–90 секунд. Система попередження дає ще 5–15 хвилин — час на евакуацію, переведення комплексів у бойовий режим та оптимальне позиціонування для перехоплення.</p>
+
+  <h3>Ешелон 1 — Космічний (виявлення факту пуску)</h3>
+
+  <p>Момент запуску ракетного двигуна генерує тепловий слід температурою 2 000–3 000 °C. Для інфрачервоних датчиків супутника на геостаціонарній орбіті це еквівалент яскравого спалаху на темному тлі — виявлення відбувається за 20–90 секунд після старту.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Система</th>
+          <th>Країна</th>
+          <th>Орбіта</th>
+          <th>Час виявлення</th>
+          <th>Покриття</th>
+          <th>Статус</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>SBIRS (Space-Based Infrared System)</td>
+          <td>США</td>
+          <td>ГСО + ВЕО</td>
+          <td>&lt;60 сек</td>
+          <td>Весь світ</td>
+          <td><span class="ok">✓</span> Операційна, 6 супутників</td>
+        </tr>
+        <tr>
+          <td>Next-Gen OPIR</td>
+          <td>США</td>
+          <td>ГСО</td>
+          <td>&lt;30 сек</td>
+          <td>Весь світ</td>
+          <td><span class="mid">△</span> Заміна SBIRS, 2024+</td>
+        </tr>
+        <tr>
+          <td>TWISTER / ODIN'S EYE</td>
+          <td>ЄС</td>
+          <td>ВЕО / МЕО</td>
+          <td>60–120 сек</td>
+          <td>Євразія + Близький Схід</td>
+          <td><span class="mid">△</span> Розробка, 2025–2030</td>
+        </tr>
+        <tr>
+          <td>DSP (Defense Support Program)</td>
+          <td>США</td>
+          <td>ГСО</td>
+          <td>60–90 сек</td>
+          <td>Весь світ</td>
+          <td><span class="mid">△</span> Частково виведена з ладу, резервна</td>
+        </tr>
+        <tr>
+          <td>ЄКС «Тундра» (14Ф142)</td>
+          <td>Росія</td>
+          <td>ВЕО</td>
+          <td>60–90 сек</td>
+          <td>США і Євразія</td>
+          <td><span class="mid">△</span> 4 супутники, обмежена надійність</td>
+        </tr>
+        <tr>
+          <td>Yaogan + SBIRS-аналог</td>
+          <td>Китай</td>
+          <td>ГСО + НОО</td>
+          <td>~60 сек</td>
+          <td>Азія + Тихоокеанський регіон</td>
+          <td><span class="mid">△</span> Розвивається, деталі закриті</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Ешелон 2 — Наземний (супроводження та класифікація цілі)</h3>
+
+  <p>Після того як супутник зафіксував пуск і передав попередні координати, наземні радари беруть ціль на безперервний супровід. Вони вираховують точну балістичну траєкторію, визначають точку падіння та передають цілевказівку комплексам Patriot або SAMP/T.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Система</th>
+          <th>Країна</th>
+          <th>Тип</th>
+          <th>Дальність</th>
+          <th>Можливості</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PAVE PAWS (AN/FPS-115)</td>
+          <td>США</td>
+          <td>Стаціонарна ФАРУ, 240°</td>
+          <td>5 500 км</td>
+          <td>Відстеження МБР, ВКО, одночасно сотні цілей</td>
+        </tr>
+        <tr>
+          <td>COBRA DANE (AN/FPS-108)</td>
+          <td>США (Аляска)</td>
+          <td>Стаціонарна ФАРУ, 120°</td>
+          <td>2 000 км</td>
+          <td>Відстеження пусків з Азії та Тихоокеанського регіону</td>
+        </tr>
+        <tr>
+          <td>SBX-1 (Sea-Based X-Band)</td>
+          <td>США</td>
+          <td>Рухомий, корабельний</td>
+          <td>2 000 км</td>
+          <td>Надточна класифікація — розрізнення боєголовки і декоїв</td>
+        </tr>
+        <tr>
+          <td>TPY-2 (THAAD Radar)</td>
+          <td>США</td>
+          <td>Мобільна ФАРУ, X-діапазон</td>
+          <td>1 000 км</td>
+          <td>Розгортається разом із THAAD, точний супровід</td>
+        </tr>
+        <tr>
+          <td>Thales SMART-L MM/N</td>
+          <td>Нідерланди / НАТО</td>
+          <td>Корабельний, S-діапазон</td>
+          <td>2 000 км</td>
+          <td>Раннє попередження, передача цілевказівки союзникам</td>
+        </tr>
+        <tr>
+          <td>Nostradamus</td>
+          <td>Франція</td>
+          <td>Загоризонтний (ЗГР)</td>
+          <td>3 000 км</td>
+          <td>Відбиття від іоносфери. Низька точність (~200 км), але раннє виявлення</td>
+        </tr>
+        <tr>
+          <td>Saab Giraffe AMB</td>
+          <td>Швеція / НАТО</td>
+          <td>Мобільна, 3D, C/S-діапазон</td>
+          <td>400 км</td>
+          <td>Тактичний рівень. Передача даних у систему НАТО</td>
+        </tr>
+        <tr>
+          <td>J/FPS-5 («Гамера»)</td>
+          <td>Японія</td>
+          <td>Стаціонарна ФАРУ</td>
+          <td>1 500 км</td>
+          <td>Відстеження корейських і китайських пусків</td>
+        </tr>
+        <tr>
+          <td>«Воронеж-ДМ» / «Контейнер»</td>
+          <td>Росія</td>
+          <td>Стаціонарні ФАРУ та ЗГР</td>
+          <td>4 000–6 000 км</td>
+          <td>Стратегічне попередження. Дані не передаються союзникам.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Як відрізняють справжню боєголовку від хибних цілей (декоїв)</h3>
+
+  <p>Ворог, знаючи про системи перехоплення, вживає контрзаходи: разом із бойовою частиною випускає легкі металізовані кульки, дипольні відбивачі або надувні макети. У вакуумі космосу вони летять поряд із боєголовкою, перевантажуючи радари. Але природа сама забезпечує фільтр:</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Ділянка траєкторії</th>
+          <th>Метод розрізнення</th>
+          <th>Надійність</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Космос (100+ км)</td>
+          <td>Мікродоплерівський аналіз: боєголовка обертається і дає характерний «тремтячий» сигнал. Легка кулька — ні. Також аналіз ІЧ-сигнатури: матеріал теплозахисту відбиває по-іншому.</td>
+          <td>70–85%</td>
+        </tr>
+        <tr>
+          <td>Верхня атмосфера (50–100 км)</td>
+          <td>Аеродинамічне гальмування: легкі декої стрімко сповільнюються через опір повітря та згоряють. Важка боєголовка продовжує рух — різниця у швидкості стає очевидною за кілька секунд.</td>
+          <td>90–95%</td>
+        </tr>
+        <tr>
+          <td>Щільна атмосфера (&lt;50 км)</td>
+          <td>Практично всі декої вже знищені. Радар Patriot / SAMP/T відстежує єдину ціль, яка продовжує рух. Проблема фільтрації вирішена природно.</td>
+          <td>98–99%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <strong>Ключовий висновок.</strong> Атмосфера — найкращий і найдешевший «сортувальник» між боєголовкою і декоями. Саме тому системи термінального ешелону (Patriot, SAMP/T) мають таку високу ефективність на практиці: до моменту, коли вони беруть ціль на супровід, природа вже прибрала 95% хибних цілей. Проблема декоїв актуальна лише для систем, що перехоплюють у космосі (Arrow 3, SM-3).
+  </div>
+
+
+  <!-- ═══ РОЗДІЛ 5 ═══ -->
+  <h2><span class="sec-num">05 /</span> Радари та ПРО: Європа, Азія, Росія</h2>
+
+  <h3>Європейські системи</h3>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Система / Країна</th>
+          <th>Тип</th>
+          <th>Дальність</th>
+          <th>Роль у системі НАТО</th>
+          <th>Стан</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>SMART-L MM/N (Нідерланди)</td>
+          <td>Корабельний, S-діапазон, 360°</td>
+          <td>2 000 км</td>
+          <td>Раннє попередження. Передає цілевказівку в мережу НАТО через Link-16. Розгорнутий у Балтійському морі та Північній Атлантиці.</td>
+          <td><span class="ok">✓</span> Операційна</td>
+        </tr>
+        <tr>
+          <td>Nostradamus (Франція)</td>
+          <td>Загоризонтний (ЗГР), HF-діапазон</td>
+          <td>3 000 км</td>
+          <td>Виявлення пусків у глибокому тилу противника через відбиття від іоносфери. Низька точність (~200 км) — лише попередження, не цілевказівка.</td>
+          <td><span class="ok">✓</span> Операційна</td>
+        </tr>
+        <tr>
+          <td>Giraffe AMB (Швеція / НАТО)</td>
+          <td>Мобільна 3D ФАРУ, C/S-діапазон</td>
+          <td>400 км</td>
+          <td>Тактичне виявлення та передача даних у систему НАТО. Розгорнутий у країнах Балтії та Польщі.</td>
+          <td><span class="ok">✓</span> Операційна</td>
+        </tr>
+        <tr>
+          <td>TWISTER / ODIN'S EYE (ЄС)</td>
+          <td>ІЧ-супутникове сузір'я (14 апаратів)</td>
+          <td>Глобальне</td>
+          <td>Незалежний від США космічний ешелон попередження. Ціль — дублювати SBIRS для Євросоюзу.</td>
+          <td><span class="mid">△</span> Розробка 2025–2030</td>
+        </tr>
+        <tr>
+          <td>HENSOLDT TwInvis (Німеччина)</td>
+          <td>Пасивний радар (без власного випромінювача)</td>
+          <td>250 км</td>
+          <td>Виявлення малопомітних цілей. Не створює власного ЕМ-поля — невидимий для засобів РЕБ ворога.</td>
+          <td><span class="mid">△</span> На випробуваннях</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Азійські системи ПРО</h3>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Країна / Система</th>
+          <th>Склад</th>
+          <th>Перехоплення балістики</th>
+          <th>Особливості</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Японія — JADGE / Aegis</td>
+          <td>Aegis BMD (кораблі DDG), Patriot PAC-3, радари J/FPS-5 («Гамера») та J/FPS-7</td>
+          <td>Дворівнева: SM-3 в космосі + PAC-3 термінально</td>
+          <td>Найрозвиненіша ПРО в Азії після США. Чотири Aegis-есмінці постійно чергують. Відпрацьовано перехоплення північнокорейських ракет.</td>
+        </tr>
+        <tr>
+          <td>Південна Корея — KAMD</td>
+          <td>Cheongung-II (KM-SAM), L-SAM (у випробуваннях), Aegis SM-2/3, PAC-3 (імпортний)</td>
+          <td>Нижній та середній ешелон. L-SAM — до 60 км висоти.</td>
+          <td>Активний розвиток власної компонентної бази. L-SAM — Hit-to-Kill власної розробки. Мета — повна незалежність від імпорту до 2030 р.</td>
+        </tr>
+        <tr>
+          <td>Китай — IADS</td>
+          <td>HQ-9B/C (аналог С-300), HQ-19 (аналог THAAD), власні супутники, загоризонтні радари</td>
+          <td>HQ-19 — заатмосферне. HQ-9C — термінальне.</td>
+          <td>Найбільший арсенал ПРО в Азії. Усі компоненти власної розробки. Закриті характеристики. HQ-19 пройшла перші льотні випробування 2023–24 рр.</td>
+        </tr>
+        <tr>
+          <td>Ізраїль — багатоешелонна ПРО</td>
+          <td>Iron Dome (дрони/міномети), David's Sling (крилаті/ОТР), Arrow 2 (балістика), Arrow 3 (заатмосферне)</td>
+          <td>Чотири ешелони. Arrow 3 — перехоплення в космосі.</td>
+          <td>Перша країна з підтвердженим бойовим заатмосферним перехопленням (Arrow 3, листопад 2023); масово застосовувала його під час атаки Ірану у квітні 2024. Найдосвідченіша ПРО за реальними умовами бою.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Російські системи ПРО</h3>
+
+  <p>Росія традиційно позиціонує свої системи як «кращі у світі». Реальна картина — значно скромніша, особливо з огляду на відсутність бойового досвіду перехоплення балістики і задокументованих даних про ефективність.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Система</th>
+          <th>Призначення</th>
+          <th>Ефективність проти балістики</th>
+          <th>Обмеження</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>С-400 «Тріумф»</td>
+          <td>Основна зенітна система. Призначена переважно для літаків, гелікоптерів і крилатих ракет.</td>
+          <td><span class="mid">△</span> Обмежена. Немає Hit-to-Kill. Ракета 48Н6 не призначена для надшвидкісних балістичних цілей.</td>
+          <td>Відсутність кінетичного перехоплювача. Ракета 40Н6Є (дальня) не верифікована проти балістики. Бойовий досвід в Україні — численні втрати від ATACMS та Storm Shadow.</td>
+        </tr>
+        <tr>
+          <td>С-300В4</td>
+          <td>Військовий варіант, створений саме для ПРО. Важкі надшвидкісні ракети на гусеничному шасі («Гладіатор» 9М83, «Гігант» 9М82).</td>
+          <td><span class="mid">△</span> Краща за С-400, але все ще без підтвердженого Hit-to-Kill.</td>
+          <td>Застаріла елементна база. Малосерійна система. Не інтегрована в сучасні мережецентричні архітектури.</td>
+        </tr>
+        <tr>
+          <td>С-500 «Прометей»</td>
+          <td>Заявлена як система ПРО/ПКО нового покоління. Заявлена дальність — 600 км, ціль — балістика і гіперзвукові апарати.</td>
+          <td><span class="no">✗</span> Не верифіковано. Відомо про одиничні прототипи. Дані з відкритих джерел украй суперечливі.</td>
+          <td>Санкції обмежили доступ до мікроелектроніки. Серійне виробництво — невідоме. Немає жодного підтвердженого перехоплення.</td>
+        </tr>
+        <tr>
+          <td>А-135 «Амур» / А-235 «Нудоль»</td>
+          <td>Стратегічна система захисту Москви від масованого ядерного удару. Поєднує ядерні перехоплювачі (53Т6) та кінетичні (14Ц033 для А-235).</td>
+          <td><span class="ok">✓</span> Призначена саме для цього, але виключно для захисту Москви.</td>
+          <td>Географічно прив'язана до Московського регіону. Кількість перехоплювачів — ~68 одиниць. Не придатна для мобільного розгортання.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <strong>Загальний висновок щодо Росії.</strong> Російська система ПРО — поєднання застарілих платформ (С-300В4, А-135), систем, що не призначалися для балістики (С-400), та заявлених, але не верифікованих розробок (С-500). Єдина справді спеціалізована система (А-235) захищає Москву, але не є мобільною. Бойовий досвід українських збройних сил із знищення С-300 і С-400 показав їхню уразливість до ударів ATACMS з відстані 250–300 км.
+  </div>
+
+
+  <!-- ═══ РОЗДІЛ 6 ═══ -->
+  <h2><span class="sec-num">06 /</span> Проєкт Freyja, ракета FP-7.X та стандарт Link-16</h2>
+
+  <p>Проєкт Freyja — це спроба Європи та України вирішити ключову проблему: Patriot дорогий, черга на поставки довга, а потреба у протибалістичних системах — вже зараз. Ціль — дешевша, ніж Patriot, але інтегрована в натовську архітектуру система перехоплення, яку можна виробляти на європейських потужностях.</p>
+
+  <h3>Ключові параметри проєкту Freyja</h3>
+
+  <div class="stat-grid">
+    <div class="stat-box">
+      <div class="val">&lt;€1M</div>
+      <div class="lbl">Цільова вартість ракети</div>
+      <div class="note">Проти $4–5 млн за PAC-3 MSE. Економія дозволяє мати вдвічі більший арсенал.</div>
+    </div>
+    <div class="stat-box">
+      <div class="val">13</div>
+      <div class="lbl">Компаній-партнерів</div>
+      <div class="note">Включно з Kongsberg (Норвегія), Diehl Defence (Німеччина), Fire Point (Україна).</div>
+    </div>
+    <div class="stat-box">
+      <div class="val">Link-16</div>
+      <div class="lbl">Стандарт обміну даними</div>
+      <div class="note">Нативна інтеграція в мережу НАТО з першого дня. Не потребує перехідників.</div>
+    </div>
+    <div class="stat-box">
+      <div class="val">FP-7.X</div>
+      <div class="lbl">Ракета-перехоплювач</div>
+      <div class="note">Українська розробка Fire Point. Надшвидкісна. Детальні ТТХ не публікуються.</div>
+    </div>
+  </div>
+
+  <h3>Порівняння Freyja з Patriot і SAMP/T</h3>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Параметр</th>
+          <th>Patriot PAC-3 MSE</th>
+          <th>SAMP/T Aster 30</th>
+          <th>Freyja / FP-7.X</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Вартість ракети</td>
+          <td>$4–5 млн</td>
+          <td>€2–3 млн</td>
+          <td>&lt;€1 млн (ціль)</td>
+        </tr>
+        <tr>
+          <td>Принцип ураження</td>
+          <td>Hit-to-Kill</td>
+          <td>Спрямована БЧ</td>
+          <td>Hit-to-Kill (проєктується)</td>
+        </tr>
+        <tr>
+          <td>Виробник</td>
+          <td>Lockheed Martin (США)</td>
+          <td>MBDA (Франція / Італія)</td>
+          <td>Консорціум ЄС + Fire Point (Україна)</td>
+        </tr>
+        <tr>
+          <td>Залежність від США</td>
+          <td>Повна (ліцензії, компоненти, ITAR)</td>
+          <td>Часткова</td>
+          <td>Відсутня</td>
+        </tr>
+        <tr>
+          <td>Link-16 (нативний)</td>
+          <td>Часткова підтримка</td>
+          <td>Так</td>
+          <td>Так, з першого дня</td>
+        </tr>
+        <tr>
+          <td>Радар</td>
+          <td>AN/MPQ-65 (секторний)</td>
+          <td>Kronos / Arabel (360°)</td>
+          <td>Модульний (вибір партнера)</td>
+        </tr>
+        <tr>
+          <td>Готовність</td>
+          <td>Операційна, є в строю</td>
+          <td>Операційна, є в строю</td>
+          <td>Проєкт, 2024–2026</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Стандарт Link-16: чому це критично важливо</h3>
+
+  <p>Link-16 — це захищений стандарт цифрового обміну тактичними даними між усіма ланками НАТО: літаками, кораблями, наземними системами ПРО, командними пунктами. Це не просто «військовий Wi-Fi» — це архітектура, яка дозволяє різним системам різних країн діяти як єдиний організм.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Функція Link-16</th>
+          <th>Що це дає на практиці</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>TDMA (розподіл часу)</td>
+          <td>Кожен учасник отримує власний мікро-слот у мілісекундному циклі. До 128 учасників в одній мережі без взаємних завад.</td>
+        </tr>
+        <tr>
+          <td>FHSS (стрибки частот)</td>
+          <td>Сигнал змінює частоту до 77 000 разів на секунду. Засоби РЕБ ворога неспроможні заглушити таку передачу.</td>
+        </tr>
+        <tr>
+          <td>Engage on Remote (EoR)</td>
+          <td>Польський або румунський радар виявляє ціль і передає J-повідомлення з координатами. Українська батарея Patriot перехоплює ціль, не вмикаючи власний радар. Позиція залишається невидимою для ворожого РЕБ.</td>
+        </tr>
+        <tr>
+          <td>Спільна повітряна картина (SIAP)</td>
+          <td>Усі учасники мережі бачать одне й те ж повітряне середовище в реальному часі. Виключає подвійне призначення цілей та «дружній вогонь».</td>
+        </tr>
+        <tr>
+          <td>Мережецентрична стрільба</td>
+          <td>Один сенсор (радар) може надати цілевказівку кільком стрільцям (Patriot + SAMP/T) одночасно, оптимізуючи розподіл боєзапасу.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ua-block">
+    <h3>Link-16 та Freyja — значення для України</h3>
+    <ul>
+      <li>Інтеграція в мережу Link-16 дозволяє Україні користуватися даними польських, румунських і натовських радарів без власного розкриття позицій.</li>
+      <li>Режим Engage on Remote критично підвищує виживаність батарей Patriot: позиція не розкривається під час бойового застосування.</li>
+      <li>Участь українських підприємств (Fire Point) у проєкті Freyja — це стратегічна інвестиція у власну виробничу компетенцію в галузі ПРО. Навіть якщо перші серійні системи з'являться після закінчення активної фази бойових дій, це формує тривалий оборонний потенціал.</li>
+      <li>Здешевлення перехоплювача у 4–5 разів порівняно з PAC-3 дозволить Україні підтримувати значно більший боєзапас за тих самих витрат союзників.</li>
+    </ul>
+  </div>
+
+
+  <!-- ═══ ВИСНОВКИ ═══ -->
+  <hr class="thin">
+
+  <h2><span class="sec-num">—</span> Загальні висновки</h2>
+
+  <p>Протибалістична оборона — це не одна система і не одне рішення. Це архітектура, що складається з кількох взаємопов'язаних шарів: попередження, виявлення, перехоплення та асиметричного удару по виробничій базі ворога.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Висновок</th>
+          <th>Що це означає практично</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Повного прикриття неба не існує</td>
+          <td>Будь-яка стратегія ПРО — це вибір пріоритетів. Міста і критична інфраструктура — першочергово. Тилові райони свідомо залишаються відкритими.</td>
+        </tr>
+        <tr>
+          <td>Patriot і SAMP/T — взаємодоповнювальні</td>
+          <td>Patriot: більша дальність і висота, гарантований Hit-to-Kill. SAMP/T: круговий огляд, швидше розгортання, нижча вартість боєприпасу. Оптимум — обидві системи на одній позиції.</td>
+        </tr>
+        <tr>
+          <td>Kill Chain ефективніший за перехоплення</td>
+          <td>Знищений завод ракетних двигунів позбавляє ворога десятків пусків. Це коштує у рази дешевше, ніж перехоплення тих самих ракет у польоті.</td>
+        </tr>
+        <tr>
+          <td>Атмосфера фільтрує декої автоматично</td>
+          <td>Системи термінального ешелону (Patriot, SAMP/T) перехоплюють вже відфільтровані атмосферою цілі. Проблема декоїв стосується лише космічного ешелону (Arrow 3, SM-3).</td>
+        </tr>
+        <tr>
+          <td>Link-16 — обов'язкова умова ефективності</td>
+          <td>Ізольована батарея Patriot — це лише точковий захист. Patriot в мережі Link-16 — це вузол у системі, що бачить увесь театр воєнних дій.</td>
+        </tr>
+        <tr>
+          <td>Freyja — стратегічна ставка, а не миттєве рішення</td>
+          <td>Перші серійні системи Freyja очікуються не раніше 2027–2028 рр. Зараз потрібні наявні системи. Але розвиток власних компетенцій у галузі ПРО є обов'язковим для довгострокової безпеки.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- ═══ ДЖЕРЕЛА ═══ -->
+  <div class="sources">
+    <h3>Джерела та посилання</h3>
+    <ol>
+      <li>Missile Defense Agency, U.S. Department of Defense — <a href="https://www.mda.mil" target="_blank">mda.mil</a> — офіційні ТТХ THAAD, Patriot, SM-3, SBIRS.</li>
+      <li>MBDA Group — <a href="https://www.mbda-systems.com" target="_blank">mbda-systems.com</a> — характеристики Aster 30, SAMP/T, проєкт TWISTER.</li>
+      <li>Lockheed Martin — <a href="https://www.lockheedmartin.com/en-us/products/pac-3.html" target="_blank">lockheedmartin.com</a> — PAC-3 MSE специфікація та бойовий досвід.</li>
+      <li>International Institute for Strategic Studies (IISS) — «The Military Balance 2024» — кількісні дані по системах ПРО різних країн.</li>
+      <li>Jane's by S&P Global — технічні довідники по системах ПРО (підписний доступ).</li>
+      <li>Israeli Ministry of Defense / Rafael Advanced Defense Systems — Arrow 2/3, David's Sling. Звіти по перехопленню іранських ракет, квітень 2024.</li>
+      <li>Korean Agency for Defense Development (ADD) — Cheongung-II, L-SAM — офіційні прес-релізи 2023–24.</li>
+      <li>NATO — Allied Command Transformation — документи по Link-16, JTIDS, архітектурі мережецентричної оборони.</li>
+      <li>Congressional Research Service (CRS) — «Ballistic Missile Defense: Historical Overview» (RL30024).</li>
+      <li>Arms Control Association — аналітичні матеріали щодо договорів ПРО та сучасних систем.</li>
+      <li>SIPRI (Stockholm International Peace Research Institute) — дані щодо постачань систем ПРО по країнах.</li>
+      <li>Fire Point / Freyja Project — офіційні прес-релізи та матеріали DSEI 2023, Eurosatory 2024.</li>
+    </ol>
+  </div>
+
+
+  <!-- ═══ АВТОР ═══ -->
+  <div class="author-block">
+    <div class="a-icon">VL</div>
+    <div>
+      <div><strong>vadim.li</strong> — незалежний аналітик та контент-продюсер</div>
+      <div style="margin-top:4px">Запити, дозволи на передрук, спеціальні замовлення: <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a></div>
+      <div style="margin-top:6px; font-size:0.82rem; color:var(--text-dim)">Матеріал підготовлено на основі відкритих джерел. Передрук — лише з посиланням на автора.</div>
+    </div>
+  </div>
+
+</div>
+<script src="../../assets/articles.js"></script>
+<script src="../../assets/site-nav.js"></script>
+</body>
+</html>
