@@ -149,6 +149,7 @@ SEO_RE = re.compile(r"\n?[ \t]*<!-- seo -->.*?<!-- /seo -->", re.S)
 
 def seo_block(*, title, desc, url, img, otype, locale, alts=(), extra="", noindex=False):
     t = ["<!-- seo -->",
+         f'<meta name="description" content="{esc(desc)}">',
          f'<link rel="canonical" href="{url}">',
          '<meta property="og:site_name" content="CODE38">',
          f'<meta property="og:type" content="{otype}">',
@@ -181,9 +182,12 @@ def build_article_seo():
             alts = [(a["lang"], url_of(a)), (p["lang"], url_of(p)), ("x-default", url_of(uk))]
         ld = {"@context": "https://schema.org", "@type": "Article",
               "headline": a["title"], "description": a.get("excerpt", ""),
-              "datePublished": a.get("date"), "inLanguage": a["lang"],
-              "author": {"@type": "Person", "name": "vadim.li"},
-              "publisher": {"@type": "Organization", "name": "CODE38"},
+              "datePublished": a.get("date"), "dateModified": a.get("updated", a.get("date")),
+              "inLanguage": a["lang"], "keywords": ", ".join(a.get("tags", [])),
+              "author": {"@type": "Person", "name": "vadim.li",
+                         "url": SITE + ("en/about.html" if a["lang"] == "en" else "about.html")},
+              "publisher": {"@type": "Organization", "name": "CODE38", "url": SITE,
+                            "logo": {"@type": "ImageObject", "url": SITE + "assets/logo.png"}},
               "image": og_of(a["id"]), "mainEntityOfPage": url_of(a)}
         extra = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>"
         blk = seo_block(title=a["title"], desc=a.get("excerpt", ""), url=url_of(a), img=og_of(a["id"]),
@@ -192,6 +196,8 @@ def build_article_seo():
         s = SEO_RE.sub("", s)
         s = re.sub(r'<html lang="[^"]*"', f'<html lang="{a["lang"]}"', s, count=1)
         s = re.sub(r'\n?[ \t]*<meta property="og:[^>]*>', "", s)
+        s = re.sub(r'\n?[ \t]*<meta[^>]*name="(?:description|twitter:[^"]*)"[^>]*>', "", s)
+        s = re.sub(r'<title>.*?</title>', f'<title>{esc(a["title"])} — CODE38</title>', s, count=1, flags=re.S)
         s = re.sub(r'\n?[ \t]*<link rel="canonical"[^>]*>', "", s)
         s = s.replace("</head>", blk + "\n</head>", 1)
         open(a["file"], "w", encoding="utf-8").write(s)
@@ -217,7 +223,7 @@ def card_html(a, lang, root):
 def page_head(lang, title, desc, seo, root):
     return (f'<!DOCTYPE html>\n<html lang="{lang}">\n<head>\n<meta charset="UTF-8">\n'
             f'<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>{esc(title)}</title>\n'
-            f'<meta name="description" content="{esc(desc)}">\n{FONTS}\n<link rel="stylesheet" href="{root}assets/site.css">\n{seo}\n</head>')
+            f'{FONTS}\n<link rel="stylesheet" href="{root}assets/site.css">\n{seo}\n</head>')
 
 def header(lang, root, active):
     L = I18N[lang]
@@ -250,7 +256,12 @@ def build_home(lang):
     grid = "".join(card_html(a, lang, root) for a in arts) or f'<div class="empty">{L["empty"]}</div>'
     tps = "".join(f'<a href="#{t["id"]}"><b>{esc(topic_name(t, lang))}</b><span>{esc(topic_desc(t, lang))}</span><em>{L["n"](cnt(t["id"]))}</em></a>'
                   for t in TOPICS if lang == "uk" or cnt(t["id"]))
-    seo = seo_block(title=L["title"], desc=L["ogdesc"], url=SITE if lang == "uk" else SITE + "en/",
+    site_ld = [{"@context": "https://schema.org", "@type": "WebSite", "name": "CODE38",
+                "alternateName": ["code38", "CODE38 — vadim.li"], "url": SITE, "inLanguage": lang},
+               {"@context": "https://schema.org", "@type": "Organization", "name": "CODE38",
+                "url": SITE, "logo": SITE + "assets/logo.png"}]
+    seo = seo_block(title=L["title"], desc=L["desc"], url=SITE if lang == "uk" else SITE + "en/",
+                    extra='<script type="application/ld+json">' + json.dumps(site_ld, ensure_ascii=False) + "</script>",
                     img=og_of(f"home-{lang}"), otype="website", locale=L["locale"], alts=home_alts(),
                     noindex=lang not in LANGS)
     body = f"""
