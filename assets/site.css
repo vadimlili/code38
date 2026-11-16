@@ -88,3 +88,8 @@ a.card:hover{border-color:var(--amber);transform:translateY(-2px)}
   .search{font-family:var(--mono)!important;min-width:0;width:100%}
   .controls{flex-direction:column;align-items:stretch}
 }
+
+/* перемикач мови */
+.site-head nav a.lang{border:1px solid var(--line2);padding:3px 8px;color:var(--text);letter-spacing:.1em}
+.site-head nav a.lang:hover{border-color:var(--amber);color:var(--amber)}
+.site-head nav a.lang[hidden]{display:none}
