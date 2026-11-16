@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vadimlili.github.io/code38/sitemap.xml
+Sitemap: https://code38.com.ua/sitemap.xml

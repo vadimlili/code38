@@ -13,7 +13,7 @@
 
 /* Адреса сайту. Після підключення домену змінити тут
    і знову запустити tools/build.py */
-window.SITE_URL = "https://vadimlili.github.io/code38/";
+window.SITE_URL = "https://code38.com.ua/";
 // GoatCounter: ім'я сайту (vadim → vadim.goatcounter.com). Порожньо — лічильник вимкнено.
 window.GOATCOUNTER = "vadim";
 
