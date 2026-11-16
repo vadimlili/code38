@@ -21,9 +21,10 @@ os.chdir(ROOT)
 # ── каталог ──────────────────────────────────────────────────────────────
 data = json.loads(subprocess.check_output(["node", "-e", """
 global.window={}; require('./assets/articles.js');
-console.log(JSON.stringify({url: window.SITE_URL, topics: window.TOPICS, articles: window.ARTICLES}));
+console.log(JSON.stringify({url: window.SITE_URL, gc: window.GOATCOUNTER || '', topics: window.TOPICS, articles: window.ARTICLES}));
 """]))
 SITE = data["url"].rstrip("/") + "/"
+GC = data["gc"]
 TOPICS = data["topics"]
 ARTS = data["articles"]
 for a in ARTS:
@@ -166,6 +167,7 @@ def seo_block(*, title, desc, url, img, otype, locale, alts=(), extra="", noinde
     t += [f'<link rel="alternate" hreflang="{hl}" href="{href}">' for hl, href in alts]
     if extra: t.append(extra)
     if noindex: t.append('<meta name="robots" content="noindex">')
+    if GC: t.append(f'<script data-goatcounter="https://{GC}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>')
     t.append("<!-- /seo -->")
     return "\n".join(t)
 

@@ -14,6 +14,8 @@
 /* Адреса сайту. Після підключення домену змінити тут
    і знову запустити tools/build.py */
 window.SITE_URL = "https://vadimlili.github.io/code38/";
+// GoatCounter: ім'я сайту (vadim → vadim.goatcounter.com). Порожньо — лічильник вимкнено.
+window.GOATCOUNTER = "vadim";
 
 window.TOPICS = [
   { id: "geopolitics", name: "Геополітика",       desc: "Realpolitik, союзи, інтереси великих держав",
@@ -156,5 +158,65 @@ window.ARTICLES = [
     lang: "en",
     read: 14,
     excerpt: "Patriot vs SAMP/T, intercept layers, early warning, Link-16 and the Freyja project — what actually shoots down ballistic missiles."
+  },
+  {
+    id: "tnc-vs-smart-money-en",
+    translation: "tnc-vs-smart-money",
+    title: "An economy of cashiers or a nation of creators?",
+    file: "articles/economy/tnc-vs-smart-money-en.html",
+    topic: "economy",
+    tags: ["multinationals", "investment", "smart money"],
+    date: "2026-11-01",
+    lang: "en",
+    read: 6,
+    excerpt: "The bitter truth about global brands: why multinational expansion and real investment in local business are two different things."
+  },
+  {
+    id: "cbdc-en",
+    translation: "cbdc",
+    title: "Why “expiring money” would be economic suicide",
+    file: "articles/finance/cbdc-en.html",
+    topic: "finance",
+    tags: ["CBDC", "macroeconomics", "conspiracy theories"],
+    date: "2026-07-20",
+    lang: "en",
+    read: 10,
+    excerpt: "A popular conspiracy theory about CBDCs from the standpoint of basic economics — simply, with examples, without panic."
+  },
+  {
+    id: "pension-trap-en",
+    translation: "pension-trap",
+    title: "The pension trap: why people in their 30s and 40s should rely only on their own investments",
+    file: "articles/economy/pension-trap-en.html",
+    topic: "economy",
+    tags: ["pensions", "demography", "investment", "IBKR"],
+    date: "2026-05-01",
+    lang: "en",
+    read: 14,
+    excerpt: "Demographic collapse, the bankruptcy of the pay-as-you-go system and a practical strategy for personal savings."
+  },
+  {
+    id: "presidents-economy-en",
+    translation: "presidents-economy",
+    title: "A dollar at 8, roads instead of missiles, and why we are still paying",
+    file: "articles/economy/presidents-economy-en.html",
+    topic: "economy",
+    tags: ["presidents", "National Bank", "public debt", "FX reserves"],
+    date: "2025-03-01",
+    lang: "en",
+    read: 25,
+    excerpt: "The economic decisions of every Ukrainian president in numbers — from Kravchuk’s hyperinflation to the “dollar at 8” and roads instead of missiles."
+  },
+  {
+    id: "biocentrism-en",
+    translation: "biocentrism",
+    title: "An alternative macrohistory of biocentrism",
+    file: "articles/ideas/biocentrism-en.html",
+    topic: "ideas",
+    tags: ["macrohistory", "energy", "nutrition"],
+    date: "2025-06-01",
+    lang: "en",
+    read: 12,
+    excerpt: "What if humanity had renounced the exploitation of animals in the 14th century: two scenarios — an optimistic one and a critical one."
   }
 ];

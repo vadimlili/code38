@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The pension trap: why Ukrainians in their 30s and 40s should rely only on their own investments</title>
+<meta content="Demographic collapse, the bankruptcy of the pay-as-you-go system and a personal investment strategy for Ukrainians aged 30–40." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d0f12;
+      --surface:   #13161b;
+      --border:    #1f2329;
+      --muted:     #2a2f38;
+      --text:      #d4d8e0;
+      --text-dim:  #6b7280;
+      --accent:    #c8a96e;
+      --accent-lt: #e8c98e;
+      --danger:    #e05c5c;
+      --safe:      #5cb87a;
+      --heading:   #f0f2f5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(13,15,18,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .eyebrow span { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 72px 24px 56px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.1rem);
+      font-weight: 900;
+      color: var(--heading);
+      line-height: 1.15;
+      margin-bottom: 22px;
+    }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-dim);
+      font-weight: 300;
+      max-width: 600px;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+    }
+    .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 56px 24px 96px;
+    }
+
+    /* sections */
+    .section { margin-bottom: 72px; }
+
+    /* part label */
+    .part-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      font-weight: 700;
+      color: var(--heading);
+      line-height: 1.25;
+      margin-bottom: 28px;
+    }
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 36px 0 12px;
+    }
+
+    p { margin-bottom: 20px; color: var(--text); }
+    p:last-child { margin-bottom: 0; }
+
+    strong { color: var(--heading); font-weight: 600; }
+    em { color: var(--accent-lt); font-style: italic; }
+
+    /* divider */
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: var(--accent);
+      margin: 56px 0;
+      opacity: 0.5;
+    }
+
+    /* blockquote */
+    blockquote {
+      border-left: 3px solid var(--accent);
+      margin: 32px 0;
+      padding: 20px 28px;
+      background: var(--surface);
+      border-radius: 0 6px 6px 0;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* callout boxes */
+    .callout {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin: 32px 0;
+      background: var(--surface);
+      position: relative;
+    }
+    .callout::before {
+      content: attr(data-label);
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .callout p { margin-bottom: 0; font-size: 15px; }
+    .callout.warning { border-color: rgba(224,92,92,0.3); }
+    .callout.warning::before { color: var(--danger); }
+
+    /* analogy block */
+    .analogy {
+      background: linear-gradient(135deg, rgba(200,169,110,0.06) 0%, rgba(200,169,110,0.02) 100%);
+      border: 1px solid rgba(200,169,110,0.2);
+      border-radius: 10px;
+      padding: 28px 32px;
+      margin: 32px 0;
+    }
+    .analogy-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .analogy p { font-size: 15.5px; margin-bottom: 10px; }
+
+    /* chain */
+    .chain {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-dim);
+      background: var(--muted);
+      padding: 16px 20px;
+      border-radius: 6px;
+      margin: 20px 0;
+      line-height: 2;
+    }
+    .chain span { color: var(--accent); }
+
+    /* table */
+    .table-wrap { overflow-x: auto; margin: 32px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    td:first-child { color: var(--heading); font-weight: 500; }
+    .tag-bad  { color: var(--danger); font-size: 13px; }
+    .tag-good { color: var(--safe);   font-size: 13px; }
+
+    /* list */
+    ul, ol {
+      padding-left: 22px;
+      margin-bottom: 20px;
+    }
+    li { margin-bottom: 8px; color: var(--text); }
+    li strong { color: var(--heading); }
+
+    /* sources */
+    .sources { margin-top: 72px; border-top: 1px solid var(--border); padding-top: 48px; }
+    .sources h2 { font-size: 1.3rem; margin-bottom: 28px; }
+    .sources-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
+    .source-item { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .source-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .source-org {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .source-title { font-size: 14px; font-weight: 600; color: var(--heading); margin-bottom: 6px; }
+    .source-link a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--accent);
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .source-link a:hover { color: var(--accent-lt); text-decoration: underline; }
+
+    /* footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 48px 20px 40px; }
+      .content { padding: 40px 20px 72px; }
+      h1 { font-size: 1.8rem; }
+      blockquote { padding: 16px 20px; }
+      .callout, .analogy { padding: 20px; }
+      .sources-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+<!-- seo -->
+<link rel="canonical" href="https://vadimlili.github.io/code38/articles/economy/pension-trap-en.html">
+<meta property="og:site_name" content="CODE38">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The pension trap: why people in their 30s and 40s should rely only on their own investments">
+<meta property="og:description" content="Demographic collapse, the bankruptcy of the pay-as-you-go system and a practical strategy for personal savings.">
+<meta property="og:url" content="https://vadimlili.github.io/code38/articles/economy/pension-trap-en.html">
+<meta property="og:image" content="https://vadimlili.github.io/code38/assets/og/pension-trap-en.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The pension trap: why people in their 30s and 40s should rely only on their own investments">
+<meta name="twitter:description" content="Demographic collapse, the bankruptcy of the pay-as-you-go system and a practical strategy for personal savings.">
+<meta name="twitter:image" content="https://vadimlili.github.io/code38/assets/og/pension-trap-en.jpg">
+<link rel="icon" href="https://vadimlili.github.io/code38/assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="en" href="https://vadimlili.github.io/code38/articles/economy/pension-trap-en.html">
+<link rel="alternate" hreflang="uk" href="https://vadimlili.github.io/code38/articles/economy/pension-trap.html">
+<link rel="alternate" hreflang="x-default" href="https://vadimlili.github.io/code38/articles/economy/pension-trap.html">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "The pension trap: why people in their 30s and 40s should rely only on their own investments", "description": "Demographic collapse, the bankruptcy of the pay-as-you-go system and a practical strategy for personal savings.", "datePublished": "2026-05-01", "inLanguage": "en", "author": {"@type": "Person", "name": "vadim.li"}, "publisher": {"@type": "Organization", "name": "CODE38"}, "image": "https://vadimlili.github.io/code38/assets/og/pension-trap-en.jpg", "mainEntityOfPage": "https://vadimlili.github.io/code38/articles/economy/pension-trap-en.html"}</script>
+<script data-goatcounter="https://vadim.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<!-- /seo -->
+</head>
+<body>
+<header>
+<div class="header-inner">
+<p class="eyebrow">Economic analysis · <span>Pensions and investment</span> · 2026</p>
+</div>
+</header>
+<main>
+<section class="hero">
+<span class="hero-tag">Demography vs the state</span>
+<h1>Ukraine’s pension trap: why people in their 30s and 40s should rely only on their own investments</h1>
+<p class="hero-sub">Demographic collapse, the bankruptcy of the pay-as-you-go system and a practical savings strategy for a generation to whom the state pension no longer guarantees anything.</p>
+<div class="hero-meta">
+<span>≈ 14 min read</span>
+<span>Analysis</span>
+<span>Pension system · Investment</span>
+<span>Author: vadim.li · <a href="mailto:vadim.li@gmail.com" style="color:var(--accent);text-decoration:none;">vadim.li@gmail.com</a></span>
+</div>
+<p style="margin-top:14px;font-size:12px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;">The text may be used only with the author’s permission. For inquiries and citations: <a href="mailto:vadim.li@gmail.com" style="color:var(--accent);text-decoration:none;">vadim.li@gmail.com</a></p>
+</section>
+<div class="content">
+<!-- INTRO -->
+<div class="section">
+<p>The macroeconomic stability of a pay-as-you-go pension system fundamentally depends on a demographic pyramid in which the working-age population far outnumbers people of pension age. In Ukraine this ratio has been irreversibly destroyed by a combination of long-term demographic trends and a full-scale war.</p>
+<p>The state has already effectively acknowledged the limit of its capabilities. The question is no longer whether there will be enough money for a decent pension — it is what a person of 30–40, who should no longer count on the pay-as-you-go system, ought to do.</p>
+</div>
+<div class="divider"></div>
+<!-- PART 1 -->
+<div class="section">
+<p class="part-label">Part 01</p>
+<h2>Demographic collapse as a fundamental constraint on the economy</h2>
+<p>According to estimates by the Ptoukha Institute for Demography and Social Studies of the National Academy of Sciences of Ukraine, the country’s cumulative demographic losses have reached <strong>10 million people</strong>. This figure covers not only irrecoverable losses and occupied territories, but also mass emigration, deaths exceeding births and unrealized demographic potential. Roughly 31.5 million people currently live in territory controlled by the Ukrainian government.</p>
+<p>Forced emigration has become the key factor destabilizing the labor force. According to Eurostat and international organizations, about 5 million Ukrainian refugees are abroad, 4.3 million of them registered in EU countries and another 700,000 in the US, the UK, Canada and elsewhere. The demographic structure of the emigration creates a long-term risk: about <strong>33% of migrants</strong> are children and teenagers under 18, while those aged 65 and over make up no more than 6%. Since European countries and private businesses have a systematic interest in absorbing an educated and adaptable Ukrainian workforce, a large share of young people will not return. After martial law is lifted, a second wave of emigration is expected — of men seeking to reunite with families abroad.</p>
+<p>At the same time the birth rate is collapsing. In 2021 the fertility rate was about 1.2 children per woman; by 2025 it had fallen to an extreme level of about <strong>0.7</strong>. Simple generational replacement requires 2.15. Even in an optimistic post-war scenario the rate would recover only to 1.6.</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Indicator</th>
+<th>Before 2022</th>
+<th>2025–2026</th>
+<th>Forecast 2040–2050</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Population (government-controlled areas)</td><td>~37.0–41.0 m</td><td>~31.5 m</td><td>~25.0–32.0 m</td></tr>
+<tr><td>Refugees abroad</td><td>&lt; 1.0 m</td><td>~5.0 m</td><td>assimilation &gt; 60%</td></tr>
+<tr><td>Fertility rate</td><td>1.2</td><td>0.7</td><td>1.6 (at best)</td></tr>
+<tr><td>Share of children among migrants</td><td>—</td><td>33%</td><td>irreversible loss of social-contribution payers</td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout warning" data-label="Long-term forecast">
+<p>The UN and Ukrainian demographers forecast that Ukraine’s population will shrink to 25 million over the next 30 years, possibly falling further to 15.3 million by 2100. The country is forming an inverted age pyramid in which a small young generation will be unable to generate tax revenue sufficient even for basic social obligations.</p>
+</div>
+</div>
+<div class="divider"></div>
+<!-- PART 2 -->
+<div class="section">
+<p class="part-label">Part 02</p>
+<h2>The bankruptcy of the pay-as-you-go system: the state guarantees only a minimum</h2>
+<p>A pay-as-you-go pension system works on the principle of immediate redistribution: money paid by the working population as the unified social contribution (USC) goes straight to paying current pensioners. Under a catastrophic demographic imbalance this model loses its financial viability.</p>
+<div class="chain">Falling birth rate <span>→</span> fewer future contributors <span>→</span> heavier burden per worker <span>→</span> Pension Fund deficit <span>→</span> pensions fall behind inflation</div>
+<p>According to the Pension Fund of Ukraine, there are about <strong>10.2 million pensioners</strong>. At the end of 2021 there were 10 million pensioners for 15.5 million workers (a ratio of 1.55 to 1); now the ratio has approached the critical 1:1. Pension Fund spending in 2025 amounted to <strong>UAH 799 billion</strong>, requiring constant subsidies from the state budget. Meanwhile the average pension in Ukraine is only UAH 6,437.</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Pension amount</th>
+<th>Share, 2025</th>
+<th>Share, 2026</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Up to UAH 3,000</td><td>3.71%</td><td>3.37%</td><td>absolute poverty</td></tr>
+<tr><td>UAH 3,001–4,000</td><td>31.95%</td><td>24.04%</td><td>bare survival</td></tr>
+<tr><td>UAH 4,001–5,000</td><td>20.48%</td><td>17.23%</td><td>below the subsistence minimum</td></tr>
+<tr><td>UAH 5,001–10,000</td><td>29.05%</td><td>36.52%</td><td>average work record and wages</td></tr>
+<tr><td>Over UAH 10,000</td><td>14.81%</td><td>18.84%</td><td>special pensions / high earnings</td></tr>
+</tbody>
+</table>
+</div>
+<blockquote>“In the future the pay-as-you-go pension will only be able to guarantee the minimum social level needed to protect against poverty” — Daria Marchak, First Deputy Minister of Social Policy of Ukraine.</blockquote>
+<p>The government’s reform plan envisages a move to a points system modeled on Germany and Austria: contributions will be converted into standardized points whose value will depend on the Pension Fund’s financial position. The reform will abolish more than 160 types of state supplements but does not solve the shortage of resources. Meanwhile the required insurance record keeps rising: in 2025 retiring at 60 required 32 years of contributions, in 2026 — 33, and by 2028 the threshold will reach 35 years.</p>
+<div class="callout" data-label="What it means in practice">
+<p>For people aged 30–40 this means a harsh reality: even with 35 years of official employment and conscientious payment of all taxes, the state pension in 2045–2055 will cover no more than <strong>20–25%</strong> of their usual working income.</p>
+</div>
+</div>
+<div class="divider"></div>
+<!-- PART 3 -->
+<div class="section">
+<p class="part-label">Part 03</p>
+<h2>Non-state pension funds (NPFs): a domestic savings instrument</h2>
+<p>Voluntary non-state pension provision (the third pillar) has existed in Ukraine for more than 20 years and is the first accessible alternative instrument for building your own capital. According to industry associations, there are <strong>50 non-state pension funds</strong> in the country with about 900,000 participants. Over their lifetime they have raised almost UAH 3.5 billion in contributions, paid out more than UAH 2 billion in pensions, and earned a cumulative investment income of UAH 5.5 billion.</p>
+<p>The most successful private funds (Dynasty, OTP Pension, PrivatFond, Enerit-Ukraine) show average annual returns of <strong>13.9%–18.7% in hryvnia</strong>, exceeding inflation, devaluation and bank deposit rates. The contributor base has changed: at the start employers made 97% of contributions; now voluntary contributions from individuals exceed corporate payments.</p>
+<div class="analogy">
+<p class="analogy-label">Tax advantages</p>
+<p>Officially employed people who pay personal income tax can claim back <strong>18% of their contributions</strong> to an NPF each year through a tax credit. Unlike deposits, where income is taxed every year, investment income in an NPF is reinvested without interim taxation.</p>
+<p>On payout, personal income tax (18%) and the military levy are withheld from only 60% of each payment. After age 70, payments are fully tax-exempt.</p>
+</div>
+<p>The calculations show how critically the size of savings depends on the age at which you start investing. For passive income of UAH 20,000 a month (adjusted for inflation) from age 60 to 80, the following monthly contributions are required:</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Starting age</th>
+<th>Contribution, UAH/month</th>
+<th>Burden</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>20</td><td>~UAH 1,900</td><td>baseline (40 years of compounding)</td></tr>
+<tr><td>30</td><td>~UAH 3,000</td><td>moderate (~1.6× baseline)</td></tr>
+<tr><td>40</td><td>~UAH 5,200</td><td>high (~2.7× baseline)</td></tr>
+<tr><td>50</td><td>~UAH 12,100</td><td>extreme (~6.3× baseline)</td></tr>
+</tbody>
+</table>
+</div>
+<p>Delaying the start of saving from 30 to 40 almost doubles the monthly contribution needed to reach the same final capital.</p>
+</div>
+<div class="divider"></div>
+<!-- PART 4 -->
+<div class="section">
+<p class="part-label">Part 04</p>
+<h2>Global stock markets: investing through foreign brokers</h2>
+<p>Accumulating capital only in the national currency carries high sovereign, inflation and devaluation risks. For people aged 30–40, currency diversification through global stock markets in hard currency (USD/EUR) is a strategic necessity.</p>
+<p>The main international broker that still opens accounts for and serves Ukrainian residents is <strong>Interactive Brokers (IBKR)</strong> — a US public company regulated by the SEC, the CFTC (US), the FCA (UK) and other global regulators.</p>
+<h3>National Bank currency restrictions and routing funds</h3>
+<ul>
+<li>Funding brokerage accounts directly from Ukrainian bank cards is prohibited</li>
+<li>Transfers to accounts abroad are capped at UAH 100,000 a month</li>
+<li>Investors use international payment systems and European neobanks (Wise, Revolut, ZEN): hryvnia → neobank within the National Bank limit → SEPA transfer (in euros) to IBKR’s account details. SEPA fees start at €0.10, much cheaper than a classic SWIFT transfer</li>
+</ul>
+<h3>Interactive Brokers trading terms</h3>
+<ul>
+<li><strong>Minimum deposit:</strong> from $0</li>
+<li><strong>Trading commission:</strong> $0.005 per US share (minimum $1, maximum 1% of the trade value)</li>
+<li><strong>Withdrawals:</strong> the first transaction each month is free, each subsequent one costs $10</li>
+<li><strong>Core instruments:</strong> diversified ETFs — Vanguard S&amp;P 500 (VOO), iShares Core S&amp;P 500 (IVV), Vanguard Total World Stock (VT), iShares Core MSCI World (URTH)</li>
+</ul>
+<h3>Taxation of income from foreign investments</h3>
+<p>Ukrainian law requires residents to declare income from foreign brokers themselves — IBKR is not a Ukrainian tax agent. The annual declaration of assets and income is filed by May 1.</p>
+<div class="callout" data-label="Two tax bases">
+<p><strong>Investment gains:</strong> the difference between the sale and purchase price, taxed at 18% personal income tax + 5% military levy (23% in total). <strong>Dividends:</strong> 9% income tax + 5% military levy (14% in total). Under the W-8BEN treaty form, the 15% US withholding tax on dividends is credited against Ukrainian income tax — no additional income tax is due, but the 5% military levy must be paid.</p>
+</div>
+</div>
+<div class="divider"></div>
+<!-- PART 5 -->
+<div class="section">
+<p class="part-label">Part 05</p>
+<h2>Comparing strategies and the math of compound interest</h2>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Pay-as-you-go (Pension Fund)</th>
+<th>NPF</th>
+<th>IBKR</th>
+<th>Real estate / deposits</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Return</td><td>negative (below inflation)</td><td>13.9–18.7% UAH</td><td>7–10% USD (S&amp;P 500 historically)</td><td>3–6% USD / 10–14% UAH</td></tr>
+<tr><td>Currency risk</td><td>100% hryvnia devaluation</td><td>100% UAH (government-bond cushion)</td><td>global diversification</td><td>high war / local risk</td></tr>
+<tr><td>Tax regime</td><td>22% social contribution, non-refundable</td><td>18% credit; tax on 60% of payout</td><td>18/9% income tax + 5% military levy; W-8BEN</td><td>18% income tax + 1.5–5% military levy</td></tr>
+<tr><td>Ownership</td><td>none</td><td>full, inheritable</td><td>full, inheritable</td><td>full, physical asset</td></tr>
+<tr><td>Systemic risks</td><td>critical (demography)</td><td>local regulatory</td><td>protected by US/EU regulators</td><td>war / local crisis</td></tr>
+</tbody>
+</table>
+</div>
+<h3>The compound-interest effect</h3>
+<p>Capital growth is described by the formula for compounding regular contributions: final capital depends on the monthly contribution, the monthly rate of return and the number of months invested.</p>
+<div class="analogy">
+<p class="analogy-label">Worked example</p>
+<p>With a monthly contribution of $300 at 8% a year in dollars, an investor who starts at <strong>30</strong> (a 30-year horizon, to age 60) accumulates <strong>~$447,000</strong> — own contributions total $108,000, and the remaining $339,000 (75.8%) is generated by compound interest.</p>
+<p>An investor who starts at <strong>40</strong> (a 20-year horizon) accumulates only <strong>~$177,000</strong> — $72,000 in contributions and $105,000 (59.3%) in investment gains.</p>
+</div>
+<div class="callout warning" data-label="The cost of delay">
+<p>Delaying the start of investing by 10 years, from 30 to 40, cuts final capital by a factor of <strong>2.5</strong> — while own contributions differ by only 33%.</p>
+</div>
+</div>
+<div class="divider"></div>
+<!-- PART 6 -->
+<div class="section">
+<p class="part-label">Part 06</p>
+<h2>Conclusions and a strategic action plan</h2>
+<p>The demographic crisis, the loss of 10 million citizens to war and emigration, a fertility rate down to 0.7 and the Pension Fund’s chronic deficit prove that the collapse of Ukraine’s pay-as-you-go system is irreversible. For today’s 30- and 40-year-olds the state will be able to provide only basic social assistance at subsistence level. To maintain their accustomed standard of living after their working years, citizens need an independent investment strategy.</p>
+<h3>A practical action plan</h3>
+<ul>
+<li><strong>A diversified portfolio:</strong> 70% of free savings in global index ETFs through a foreign broker (IBKR) in hard currency, transferred via neobanks within National Bank limits. The remaining 30% in local instruments (an NPF for the tax credit and FX-denominated government bonds)</li>
+<li><strong>Systematic saving:</strong> set aside at least 15–20% of monthly income for investment before current consumer spending</li>
+<li><strong>Tax discipline:</strong> an annual declaration of assets and income, correct records of securities purchase costs, use of W-8BEN treaty benefits</li>
+</ul>
+<p>Time is an investor’s main resource: starting to build your own capital at 30–40 is the only way to secure financial independence in later life.</p>
+</div>
+<!-- SOURCES -->
+<div class="sources">
+<h2>Sources to check for yourself (in Ukrainian)</h2>
+<div class="sources-grid">
+<div class="source-item">
+<p class="source-org">Economy and Society journal</p>
+<p class="source-title">An analysis of the current state of Ukraine’s pension system and ways to reform it</p>
+<p class="source-link"><a href="https://economyandsociety.in.ua/index.php/journal/article/download/2496/2415/" rel="noopener" target="_blank">economyandsociety.in.ua</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">Economy and Society journal</p>
+<p class="source-title">The demographic situation in Ukraine: prospects for overcoming the crisis</p>
+<p class="source-link"><a href="https://economyandsociety.in.ua/index.php/journal/article/download/6338/6281/" rel="noopener" target="_blank">economyandsociety.in.ua</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">UNIAN</p>
+<p class="source-title">A demographer assesses Ukraine’s losses from the war</p>
+<p class="source-link"><a href="https://www.unian.ua/society/demografichna-kriza-libanova-ocinila-vtrati-ukrajini-cherez-viynu-13215282.html" rel="noopener" target="_blank">unian.ua</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">IDSS</p>
+<p class="source-title">Institute for Demography and Social Studies</p>
+<p class="source-link"><a href="https://idss.org.ua/" rel="noopener" target="_blank">idss.org.ua</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">Frontliner</p>
+<p class="source-title">The IMF forecasts Ukraine’s population at 34 million by 2030</p>
+<p class="source-link"><a href="https://frontliner.ua/ukraina-skorochuietsia-i-starishaie/" rel="noopener" target="_blank">frontliner.ua</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">Suspilne</p>
+<p class="source-title">The Cabinet approves Ukraine’s Demographic Development Strategy to 2040</p>
+<p class="source-link"><a href="https://suspilne.media/849373-kabmin-pogodiv-strategiu-demograficnogo-rozvitku-ukraini-do-2040-roku-aki-prognozi/" rel="noopener" target="_blank">suspilne.media</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">Radio Liberty</p>
+<p class="source-title">Daria Marchak on payments to mothers, pensions and poverty</p>
+<p class="source-link"><a href="https://www.radiosvoboda.org/a/vyplaty-materyam-pensiyi-riven-bidnosti-vpo-dariya-marchak/33467280.html" rel="noopener" target="_blank">radiosvoboda.org</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">Suspilne</p>
+<p class="source-title">The Social Policy Ministry explains the reform of pay-as-you-go pensions</p>
+<p class="source-link"><a href="https://suspilne.media/839361-u-minsocpolitiki-rozpovili-pro-reformu-solidarnogo-pensijnogo-zabezpecenna/" rel="noopener" target="_blank">suspilne.media</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">RBC-Ukraine</p>
+<p class="source-title">The number of pensioners in Ukraine is falling</p>
+<p class="source-link"><a href="https://www.rbc.ua/rus/news/kilkist-pensioneriv-ukrayini-skorochuetsya-1755680616.html" rel="noopener" target="_blank">rbc.ua</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">RBC-Ukraine</p>
+<p class="source-title">The number of pensioners in Ukraine has fallen: which regions have the most</p>
+<p class="source-link"><a href="https://www.rbc.ua/rus/news/kilkist-pensioneriv-ukrayini-skorotilasya-1761199345.html" rel="noopener" target="_blank">rbc.ua</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">24 Kanal</p>
+<p class="source-title">Pensions 2025: why the number of pensioners in Ukraine is falling</p>
+<p class="source-link"><a href="https://24tv.ua/economy/pensiya-2025-chomu-ukrayini-skorochuyetsya-kilkist-pensioneriv_n2975535" rel="noopener" target="_blank">24tv.ua</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">Skilky-skilky</p>
+<p class="source-title">Pensions of UAH 3,000: the share of such pensioners fell from 26% to 4%</p>
+<p class="source-link"><a href="https://skilky-skilky.info/pensiia-v-3-tysiachi-chastka-takykh-pensioneriv-skorotylasia-z-26-do-4/" rel="noopener" target="_blank">skilky-skilky.info</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">7 Dniv</p>
+<p class="source-title">Pensions in Ukraine 2026: how much pensioners receive</p>
+<p class="source-link"><a href="https://7dniv.rv.ua/news/pensii-v-ukraini-2026-skilky-otrymuiut-pensionery/" rel="noopener" target="_blank">7dniv.rv.ua</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">24 Kanal</p>
+<p class="source-title">To work or not to work in retirement: the Pension Fund compares payments</p>
+<p class="source-link"><a href="https://24tv.ua/economy/riznitsya-pensiyi-mizh-pratsyuyuchim-ne-pratsyuyuchim-pensionerom_n2684255" rel="noopener" target="_blank">24tv.ua</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">33 Kanal</p>
+<p class="source-title">Ukrainians cannot count on a pay-as-you-go pension</p>
+<p class="source-link"><a href="https://33kanal.com/news/258471.html" rel="noopener" target="_blank">33kanal.com</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">24 Kanal</p>
+<p class="source-title">The new pension system: the date payments will be calculated the new way</p>
+<p class="source-link"><a href="https://24tv.ua/economy/nova-pensiyna-sistema-koli-viplati-rahuvatimut-po-novomu_n2650953" rel="noopener" target="_blank">24tv.ua</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">Ekonomichna Pravda</p>
+<p class="source-title">There are 50 non-state pension funds in Ukraine</p>
+<p class="source-link"><a href="https://epravda.com.ua/finances/naskilki-uspishno-v-ukrajini-pracyuyut-nederzhavni-pensiyni-fondii-811222/" rel="noopener" target="_blank">epravda.com.ua</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">NV Business</p>
+<p class="source-title">With returns above inflation: how many NPFs operate in Ukraine</p>
+<p class="source-link"><a href="https://biz.nv.ua/ukr/finance/nederzhavni-pensiyni-fondi-ukrajini-yaku-dohodnist-voni-proponuyut-50542362.html" rel="noopener" target="_blank">biz.nv.ua</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">Simeinyi Biudzhet</p>
+<p class="source-title">Non-state pension funds (NPFs)</p>
+<p class="source-link"><a href="https://simeinyi-budzhet.ua/nederzhavni-pensiini-fondy/" rel="noopener" target="_blank">simeinyi-budzhet.ua</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">Minfin</p>
+<p class="source-title">Non-state pension funds in Ukraine</p>
+<p class="source-link"><a href="https://minfin.com.ua/ua/invest/npf/" rel="noopener" target="_blank">minfin.com.ua</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">Finance.ua</p>
+<p class="source-title">How to start investing in US stocks if you are in Ukraine</p>
+<p class="source-link"><a href="https://finance.ua/ua/saving/yak-investuvaty-v-amerykanski-aktsii-v-ukraini" rel="noopener" target="_blank">finance.ua</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">AIN</p>
+<p class="source-title">Interactive Brokers for Ukrainians: how to open an account and start investing</p>
+<p class="source-link"><a href="https://ain.ua/2026/04/30/interactive-brokers/" rel="noopener" target="_blank">ain.ua</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">e-zubkovskiy</p>
+<p class="source-title">What taxes an investor pays on gains</p>
+<p class="source-link"><a href="https://e-zubkovskiy.com/blog/shcho-potribno-znati-pro-podatki-pered-pochatkom-investuvannya" rel="noopener" target="_blank">e-zubkovskiy.com</a></p>
+</div>
+<div class="source-item">
+<p class="source-org">Taxer.ua</p>
+<p class="source-title">Taxation of investment gains and dividends</p>
+<p class="source-link"><a href="https://taxer.ua/uk/kb/id1031" rel="noopener" target="_blank">taxer.ua</a></p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<p>Analysis based on open data · Non-commercial sharing with attribution is welcome</p>
+</footer>
+<script src="../../assets/articles.js"></script>
+<script src="../../assets/site-nav.js"></script>
+</body>
+</html>

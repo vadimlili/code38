@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>A dollar at 8, roads instead of missiles, and why we are still paying</title>
+<meta content="A complete breakdown of the economic decisions of every Ukrainian president — from Kravchuk’s hyperinflation to Hetmantsev’s fiscal trap." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d0f12;
+      --surface:   #13161b;
+      --border:    #1f2329;
+      --muted:     #2a2f38;
+      --text:      #d4d8e0;
+      --text-dim:  #6b7280;
+      --accent:    #c8a96e;
+      --accent-lt: #e8c98e;
+      --danger:    #e05c5c;
+      --safe:      #5cb87a;
+      --heading:   #f0f2f5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(13,15,18,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .eyebrow span { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 72px 24px 56px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.1rem);
+      font-weight: 900;
+      color: var(--heading);
+      line-height: 1.15;
+      margin-bottom: 22px;
+    }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-dim);
+      font-weight: 300;
+      max-width: 600px;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+    }
+    .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 56px 24px 96px;
+    }
+
+    /* sections */
+    .section { margin-bottom: 72px; }
+
+    /* part label */
+    .part-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      font-weight: 700;
+      color: var(--heading);
+      line-height: 1.25;
+      margin-bottom: 28px;
+    }
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 36px 0 12px;
+    }
+
+    p { margin-bottom: 20px; color: var(--text); }
+    p:last-child { margin-bottom: 0; }
+
+    strong { color: var(--heading); font-weight: 600; }
+    em { color: var(--accent-lt); font-style: italic; }
+
+    /* divider */
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: var(--accent);
+      margin: 56px 0;
+      opacity: 0.5;
+    }
+
+    /* blockquote */
+    blockquote {
+      border-left: 3px solid var(--accent);
+      margin: 32px 0;
+      padding: 20px 28px;
+      background: var(--surface);
+      border-radius: 0 6px 6px 0;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* callout boxes */
+    .callout {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin: 32px 0;
+      background: var(--surface);
+      position: relative;
+    }
+    .callout::before {
+      content: attr(data-label);
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .callout p { margin-bottom: 0; font-size: 15px; }
+    .callout.warning { border-color: rgba(224,92,92,0.3); }
+    .callout.warning::before { color: var(--danger); }
+
+    /* analogy block */
+    .analogy {
+      background: linear-gradient(135deg, rgba(200,169,110,0.06) 0%, rgba(200,169,110,0.02) 100%);
+      border: 1px solid rgba(200,169,110,0.2);
+      border-radius: 10px;
+      padding: 28px 32px;
+      margin: 32px 0;
+    }
+    .analogy-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .analogy p { font-size: 15.5px; margin-bottom: 10px; }
+
+    /* chain */
+    .chain {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-dim);
+      background: var(--muted);
+      padding: 16px 20px;
+      border-radius: 6px;
+      margin: 20px 0;
+      line-height: 2;
+    }
+    .chain span { color: var(--accent); }
+
+    /* table */
+    .table-wrap { overflow-x: auto; margin: 32px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    td:first-child { color: var(--heading); font-weight: 500; }
+    .tag-bad  { color: var(--danger); font-size: 13px; }
+    .tag-good { color: var(--safe);   font-size: 13px; }
+
+    /* list */
+    ul, ol {
+      padding-left: 22px;
+      margin-bottom: 20px;
+    }
+    li { margin-bottom: 8px; color: var(--text); }
+    li strong { color: var(--heading); }
+
+    /* sources */
+    .sources { margin-top: 72px; border-top: 1px solid var(--border); padding-top: 48px; }
+    .sources h2 { font-size: 1.3rem; margin-bottom: 28px; }
+    .sources-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
+    .source-item { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .source-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .source-org {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .source-title { font-size: 14px; font-weight: 600; color: var(--heading); margin-bottom: 6px; }
+    .source-link a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--accent);
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .source-link a:hover { color: var(--accent-lt); text-decoration: underline; }
+
+    /* footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 48px 20px 40px; }
+      .content { padding: 40px 20px 72px; }
+      h1 { font-size: 1.8rem; }
+      blockquote { padding: 16px 20px; }
+      .callout, .analogy { padding: 20px; }
+      .sources-grid { grid-template-columns: 1fr; }
+    }
+      .note { font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-dim); line-height:1.6; }
+    h3 + p strong:first-child { color: var(--heading); }
+  </style>
+<!-- seo -->
+<link rel="canonical" href="https://vadimlili.github.io/code38/articles/economy/presidents-economy-en.html">
+<meta property="og:site_name" content="CODE38">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A dollar at 8, roads instead of missiles, and why we are still paying">
+<meta property="og:description" content="The economic decisions of every Ukrainian president in numbers — from Kravchuk’s hyperinflation to the “dollar at 8” and roads instead of missiles.">
+<meta property="og:url" content="https://vadimlili.github.io/code38/articles/economy/presidents-economy-en.html">
+<meta property="og:image" content="https://vadimlili.github.io/code38/assets/og/presidents-economy-en.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A dollar at 8, roads instead of missiles, and why we are still paying">
+<meta name="twitter:description" content="The economic decisions of every Ukrainian president in numbers — from Kravchuk’s hyperinflation to the “dollar at 8” and roads instead of missiles.">
+<meta name="twitter:image" content="https://vadimlili.github.io/code38/assets/og/presidents-economy-en.jpg">
+<link rel="icon" href="https://vadimlili.github.io/code38/assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="en" href="https://vadimlili.github.io/code38/articles/economy/presidents-economy-en.html">
+<link rel="alternate" hreflang="uk" href="https://vadimlili.github.io/code38/articles/economy/presidents-economy.html">
+<link rel="alternate" hreflang="x-default" href="https://vadimlili.github.io/code38/articles/economy/presidents-economy.html">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "A dollar at 8, roads instead of missiles, and why we are still paying", "description": "The economic decisions of every Ukrainian president in numbers — from Kravchuk’s hyperinflation to the “dollar at 8” and roads instead of missiles.", "datePublished": "2025-03-01", "inLanguage": "en", "author": {"@type": "Person", "name": "vadim.li"}, "publisher": {"@type": "Organization", "name": "CODE38"}, "image": "https://vadimlili.github.io/code38/assets/og/presidents-economy-en.jpg", "mainEntityOfPage": "https://vadimlili.github.io/code38/articles/economy/presidents-economy-en.html"}</script>
+<script data-goatcounter="https://vadim.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<!-- /seo -->
+</head>
+<body>
+<header>
+<div class="header-inner">
+<p class="eyebrow">Economic analysis · <span>Presidents and the economy</span> · 1991–2026</p>
+</div>
+</header>
+<main>
+<section class="hero">
+<span class="hero-tag">30 years of decisions in numbers</span>
+<h1>A dollar at 8, roads instead of missiles, and why we are still paying</h1>
+<p class="hero-sub">A complete breakdown of the economic decisions of every Ukrainian president — from Kravchuk’s hyperinflation to Hetmantsev’s fiscal trap.</p>
+<div class="hero-meta">
+<span>≈ 25 min read</span>
+<span>Analysis</span>
+<span>Macroeconomics</span>
+<span>Author: vadim.li · <a href="mailto:vadim.li@gmail.com" style="color:var(--accent);text-decoration:none;">vadim.li@gmail.com</a></span>
+</div>
+<p style="margin-top:14px;font-size:12px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;">The text may be used only with the author’s permission. Inquiries: <a href="mailto:vadim.li@gmail.com" style="color:var(--accent);text-decoration:none;">vadim.li@gmail.com</a></p>
+</section>
+<div class="content">
+<p>There is one number most Ukrainians remember with nostalgia: <strong>8.00</strong>. The dollar rate under Yanukovych. Calm boards at currency exchanges. A feeling of stability. But open the National Bank’s reports, the budget documents and the IMF reports from those years, and the picture is completely different. Not stability but controlled demolition. Not prosperity but a loan against a future that was not ours to spend.</p>
+<p>This article is not about politics. It is about numbers. About how each president managed the country’s resources: foreign-exchange reserves, debt, the investment climate and business confidence. And about why the “safety margin” built by Poroshenko’s team was spent on asphalt instead of shells.</p>
+<div class="divider"></div>
+<p class="part-label">Part I</p>
+<h2>Timeline: 30 years of decisions</h2>
+<p>Each president inherited the country in a different state and left behind a certain “economic legacy.” Some built foundations; others ate them up.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>President</th>
+<th>Term</th>
+<th>Avg. GDP growth</th>
+<th>Inflation</th>
+<th>Public debt ($ bn)</th>
+<th>FX reserves ($ bn)</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L. Kravchuk</td>
+<td>1991–1994</td>
+<td>−14.5%</td>
+<td>up to 10,000% (1993)</td>
+<td>&lt;1</td>
+<td>~0</td>
+<td>Chaos</td>
+</tr>
+<tr>
+<td>L. Kuchma</td>
+<td>1994–2005</td>
+<td>+1.8%</td>
+<td>15%</td>
+<td>1 → 17</td>
+<td>0.6 → 9</td>
+<td>Foundation</td>
+</tr>
+<tr>
+<td>V. Yushchenko</td>
+<td>2005–2010</td>
+<td>+3.5%</td>
+<td>12%</td>
+<td>17 → 40</td>
+<td>9.7 → 26.5 (peak 38 in 2008)</td>
+<td>Boom / Crisis</td>
+</tr>
+<tr>
+<td><strong>V. Yanukovych</strong></td>
+<td><strong>2010–2014</strong></td>
+<td><strong>+1.2%</strong></td>
+<td><strong>4%</strong>*</td>
+<td><strong>40 → 73</strong></td>
+<td><strong>26.5 → 15 (peak 38.4 in 2011)</strong></td>
+<td><strong>Trap</strong></td>
+</tr>
+<tr>
+<td>P. Poroshenko</td>
+<td>2014–2019</td>
+<td>+1.3%</td>
+<td>15%</td>
+<td>73 → 78</td>
+<td>15 → 20</td>
+<td>Resuscitation</td>
+</tr>
+<tr>
+<td>V. Zelensky</td>
+<td>2019–2026</td>
+<td>−4.5%</td>
+<td>11%</td>
+<td>78 → 155+</td>
+<td>20 → 40+</td>
+<td>Survival</td>
+</tr>
+</tbody>
+</table></div>
+<p class="note"><em>* Low inflation under Yanukovych was achieved through administrative price controls and subsidized gas — not through market mechanisms.</em></p>
+<div class="callout" data-label="Key takeaway"><p>The lowest inflation (4%) and the lowest GDP growth (1.2%) combined with the fastest growth in debt (×1.8) is not stability. It is the classic profile of a country eating its assets.</p></div>
+<div class="divider"></div>
+<p class="part-label">Part II</p>
+<h2>Anatomy of the “dollar at 8”: how the trap was built</h2>
+<p>Ask an ordinary Ukrainian what they remember from 2010–2013 and the answer will be roughly: “calm, prices didn’t rise, you could buy a car.” That is a subjective truth. But the objective reality looked very different.</p>
+<h3>The mechanics of an illusion</h3>
+<p>To hold the rate at 8.00, supply and demand for dollars on the market have to match. But in those years Ukraine’s trade balance was chronically negative — the country bought far more abroad than it sold. Someone had to cover the difference. That someone was the National Bank.</p>
+<p><strong>Three key numbers:</strong></p>
+<ul>
+<li>FX reserves in 2011: <strong>$38 bn</strong></li>
+<li>FX reserves in early 2014: <strong>$15 bn</strong></li>
+<li>Trade deficit in 2013: <strong>−$16 bn</strong></li>
+</ul>
+<p>Three years of “stability” — and half of the country’s reserves spent on propping up the exchange rate. This was money that could have been a safety cushion in the next crisis. Instead it turned into “dollars at 8” in the pockets of people buying Turkish TVs and Chinese clothes.</p>
+<blockquote>The “dollar at 8” was not an achievement. It was the most expensive PR campaign in Ukraine’s history, and we are still paying the bill.</blockquote>
+<h3>Three mechanisms of destruction</h3>
+<p><strong>The first: burning reserves.</strong> Every month the National Bank sold hundreds of millions of dollars from the state treasury so that the number on the exchange boards would not change. Over three years more than $20 billion was burned. For scale: that is more than 10% of the country’s annual GDP at the time, or more than half of all reserves.</p>
+<p><strong>The second: the debt loop.</strong> When reserves began to run out, the government started borrowing heavily. Public debt rose from $40 billion to $73 billion — almost doubling in four years. But this money did not go to factories, roads or education. It went to the interbank market — to support that same number, 8.</p>
+<p><strong>The third: killing the producer.</strong> An artificially strong hryvnia meant Ukrainian products cost more on world markets than competitors’. Metals, grain, chemicals — everything lost competitiveness. Imports, meanwhile, became cheaper. Ukrainian plants cut output. That is the very −$16 billion trade deficit: the country was financing other economies with its own reserves.</p>
+<div class="callout warning" data-label="Critical fact"><p>By the end of 2013, <em>before the Maidan began</em>, the Ukrainian economy was already in recession. The IMF was refusing loans because of the lack of reforms. It was financial dead end, not geopolitics alone, that sent Yanukovych to Putin for a $15 billion “rescue loan” in exchange for sovereignty.</p></div>
+<h3>The corrupt “Family” as an additional tax</h3>
+<p>On top of the purely financial mechanisms of destruction came institutional decay. In 2013 Ukraine ranked <strong>144th</strong> in the Corruption Perceptions Index, scoring just 25 out of 100.</p>
+<p>Corporate raiding became a systemic tool. Successful businesses were “squeezed out” through captured courts. The result: not a single serious Western investor entered the market. Foreign direct investment fell from $10+ billion a year under Yushchenko to $4–5 billion under Yanukovych.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Indicator</th>
+<th>2013 (Yanukovych)</th>
+<th>2021 (pre-war)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Doing Business (rank)</td>
+<td>112</td>
+<td>64</td>
+</tr>
+<tr>
+<td>Corruption Perceptions Index (rank)</td>
+<td>144</td>
+<td>122</td>
+</tr>
+<tr>
+<td>Procurement transparency</td>
+<td>Closed tenders</td>
+<td>Prozorro</td>
+</tr>
+<tr>
+<td>E-government</td>
+<td>None</td>
+<td>Diia</td>
+</tr>
+</tbody>
+</table></div>
+<div class="divider"></div>
+<p class="part-label">Part III</p>
+<h2>Poroshenko: surgery without anesthesia</h2>
+<p>Petro Poroshenko inherited a country in clinical death. An empty treasury ($15 billion in reserves — a critical minimum), an active military operation, Crimea lost, part of Donbas out of control. Plus a banking system stuffed with “vacuum cleaners” — banks that siphoned money to oligarchs’ offshore accounts.</p>
+<h3>What was done:</h3>
+<p><strong>2014–2015 — Devaluation: painful but honest</strong> Instead of burning reserves to support the rate, the National Bank let the hryvnia float. It fell from 8 to 25–27 per dollar. Painful? Yes. But the reserves were preserved and became the foundation for later stabilization.</p>
+<p><strong>2014–2017 — The bank purge: cleaning up the system</strong> The National Bank under Valeria Gontareva closed more than 90 insolvent banks. The operation was painful, but it cleared the system of “toxic assets.” That is precisely why the banks did not collapse in 2022.</p>
+<p><strong>2015 — Decentralization: money to communities</strong> One of the most successful reforms: transferring financial resources to local level. It became critically important in 2022, when local authorities could respond quickly without waiting for decisions from Kyiv.</p>
+<p><strong>2016 — ProZorro: the end of “manual” tenders</strong> Public procurement moved to a transparent online system. Its first years saved billions of hryvnias of budget money.</p>
+<p><strong>2018 — Victory over Gazprom</strong> The Stockholm arbitration awarded Ukraine $4.6 billion from Gazprom. Ending direct gas purchases from Russia freed the country from its “energy needle.”</p>
+<h3>Failures:</h3>
+<ul>
+<li>Judicial reform effectively failed — the system remained corrupt</li>
+<li>The fight against corruption at the top was undermined by high-profile scandals</li>
+<li>Oligarchs kept significant influence over media and politics</li>
+</ul>
+<p>But <strong>the frame of the state — army, finances, decentralization — was built.</strong> An independent National Bank, a cleaned-up banking system, market gas pricing, decentralized communities and ProZorro — these four reforms became the load-bearing walls that held Ukraine up in 2022.</p>
+<div class="divider"></div>
+<p class="part-label">Part IV</p>
+<h2>Zelensky and the “safety margin”: the truth about 2019–2021</h2>
+<p>In 2019 Zelensky came to power in the best macroeconomic conditions of the entire post-Maidan period: a stable exchange rate, reformed banks, growing GDP (+3.2% in 2019), $20 billion in reserves and a working ProZorro. It was the best “starting position” any new president had had.</p>
+<p>And here comes the most interesting part of the analysis: <strong>what was done with that margin before February 2022?</strong></p>
+<h3>Pressure on National Bank independence</h3>
+<p>In July 2020 National Bank governor Yakiv Smolii resigned, publicly citing “systematic political pressure” on the regulator. It was a clear signal to international markets: the rules of the game could change again. Foreign investors began leaving Ukrainian government bonds en masse. Borrowing costs for the budget rose.</p>
+<h3>Personnel “turbo mode”</h3>
+<p>The Honcharuk government, made up of young technocrats, lasted exactly six months. In March 2020 it was replaced by Shmyhal’s. No strategic reforms followed. Instead came a personnel merry-go-round, especially in energy and the economy, where every change of minister meant frozen investment decisions.</p>
+<h3>Corporate governance: rollback</h3>
+<p>One of Poroshenko’s key achievements was introducing independent supervisory boards at state companies. In 2021 Zelensky’s government fired Naftogaz CEO Andriy Kobolyev and started a conflict with the supervisory board. For the West this was a signal: corporate governance reforms were up for revision.</p>
+<div class="divider"></div>
+<p class="part-label">Part V</p>
+<h2>Roads instead of missiles: the most expensive mistake of 2020–2021</h2>
+<p>Here are numbers that need to be said loudly and slowly:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Spending item</th>
+<th>2020</th>
+<th>2021</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Roads (“Big Construction”)</strong></td>
+<td>~UAH 115 bn</td>
+<td>~UAH 132 bn</td>
+</tr>
+<tr>
+<td><strong>Ministry of Defense</strong></td>
+<td>~UAH 117 bn</td>
+<td>~UAH 128 bn</td>
+</tr>
+</tbody>
+</table></div>
+<p>In 2020 state budget spending on roads almost equaled the Ministry of Defense budget, and in 2021 it <strong>exceeded it</strong>: according to the Centre for Economic Strategy, about UAH 132 billion went to roads while the Ministry of Defense received about UAH 128 billion. For completeness: the whole security and defense sector (army, National Guard, SBU, border guards) received roughly twice as much as roads. But it is the Ministry of Defense that is responsible for weapons and ammunition. Meanwhile intelligence services around the world were already warning of Russian troops massing on the border.</p>
+<div class="callout warning" data-label="The “COVID fund” scandal"><p>Of the UAH 66 billion special COVID-19 fund, about UAH 35 billion was redirected to “Big Construction.” Money intended for medical equipment and hospital support turned into asphalt.</p></div>
+<h3>What remained underfunded:</h3>
+<ul>
+<li>The Neptune and Vilkha missile programs — funded with delays</li>
+<li>The state defense order — systematically not fulfilled in full</li>
+<li>Ammunition purchases — instead of building domestic capacity</li>
+<li>Fortifications in the east</li>
+<li>Drones and electronic warfare systems</li>
+</ul>
+<blockquote>Asphalt doesn’t shoot. The missiles not bought in 2020 became the shortage of 2022.</blockquote>
+<p>The paradox is that roads did in a sense play a role in the first months of the full-scale war — as a logistics network for moving troops and evacuating civilians. But logistics is only part of defense capability. Weapons, ammunition and layered defenses are the key components. They were in short supply.</p>
+<div class="divider"></div>
+<p class="part-label">Part VI</p>
+<h2>The fiscal trap: the Hetmantsev doctrine</h2>
+<p>Alongside the construction “feast,” fiscal pressure on business intensified. With Danylo Hetmantsev heading the parliamentary tax committee from 2019, the state’s tax strategy changed radically.</p>
+<h3>What was introduced, and why business sees it as a brake:</h3>
+<p><strong>Mass fiscalization through cash registers and software registers.</strong> Even the smallest entrepreneurs — a coffee kiosk, a handyman, a market trader — must buy and maintain a cash register. The official goal is to “bring the economy out of the shadows.” The real effect: the administrative burden grew, and so did the grounds for fines and inspections.</p>
+<p><strong>The invoice-blocking system (SMKOR).</strong> An algorithm automatically blocks a company’s VAT invoices if it meets “risk criteria.” Businesses can wait months for unblocking — and all that time their money is stuck and their working capital frozen. In effect it is an <strong>interest-free compulsory loan from the producer to the state, without any court decision.</strong></p>
+<p><strong>Law No. 5600.</strong> Higher taxes for extractive industries, real estate and agriculture. It hit the investment appeal of key sectors.</p>
+<div class="callout" data-label="A structural problem"><p>Any tax system built on a <em>presumption of guilt</em> for business — where an entrepreneur is by default a “tax dodger who hasn’t been caught yet” — has two structural effects: it encourages staying small and “in the shadows,” and it encourages relocation to jurisdictions with clear rules of the game.</p></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Poroshenko (2016–2019)</th>
+<th>Zelensky / Hetmantsev (2019–2026)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Philosophy</td>
+<td>Gradual stabilization</td>
+<td>Maximum fiscalization</td>
+</tr>
+<tr>
+<td>Attitude to sole proprietors</td>
+<td>Relative balance</td>
+<td>Systematic attacks, mandatory cash registers</td>
+</tr>
+<tr>
+<td>VAT administration</td>
+<td>Electronic register</td>
+<td>Mass blocking (SMKOR)</td>
+</tr>
+<tr>
+<td>Effect on GDP</td>
+<td>Steady growth of 2–3%</td>
+<td>Slowdown before the invasion</td>
+</tr>
+</tbody>
+</table></div>
+<p>The result in numbers: a mass migration of Ukrainian businesses and entrepreneurs to Poland, Czechia and Romania. This is not only lost tax revenue — it is the draining of entrepreneurial culture and human capital that never fully returns.</p>
+<div class="divider"></div>
+<p class="part-label">Part VII</p>
+<h2>An economy on a ventilator: the West’s role since 2022</h2>
+<p>We need to be honest about what today’s Ukrainian economy is. Without external financing it would not have survived 2022 as a functioning state.</p>
+<p>The structure is simple: <strong>all domestic tax revenue goes to the army. All social spending — pensions, salaries of teachers and doctors — is covered by grants and loans from the US, the EU and the IMF.</strong> The budget deficit without external aid is about $40 billion a year. Covering it alone by “printing money” would mean inflation of 300–500% — a repeat of 1993, but in a total war.</p>
+<p>Record FX reserves ($40+ billion) under Zelensky are not an achievement of the economic model. They are the result of unprecedented international financial support. Unlike the growth of reserves in the 2000s, driven by real export growth, today’s reserves are “allies’ money” that keeps hospitals and schools running while the army holds the front.</p>
+<div class="divider"></div>
+<p class="part-label">Bottom line</p>
+<h2>Final comparison: Poroshenko vs Zelensky</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Indicator</th>
+<th>Poroshenko (2014–2019)</th>
+<th>Zelensky (2019–2025)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inflation</td>
+<td>Spike to 43% (2015) → stabilized at 8%</td>
+<td>Spike to 26% (2022) → ~10%</td>
+</tr>
+<tr>
+<td>FX reserves</td>
+<td>$15 bn → $20 bn (by market methods)</td>
+<td>$20 bn → $40+ bn (thanks to aid)</td>
+</tr>
+<tr>
+<td>GDP growth</td>
+<td>+2–3% after recovery</td>
+<td>−29% (2022), +5% (2023–24)</td>
+</tr>
+<tr>
+<td>Public debt / GDP</td>
+<td>80% (2016) → 50% (2019)</td>
+<td>50% → 90%+ (due to the war)</td>
+</tr>
+<tr>
+<td>National Bank independence</td>
+<td>Full (created and entrenched)</td>
+<td>Under pressure (Smolii’s resignation, 2020)</td>
+</tr>
+<tr>
+<td>Banking system</td>
+<td>Cleared of 90 “zombie” banks</td>
+<td>Resilient (thanks to the 2014–18 reforms)</td>
+</tr>
+<tr>
+<td>Army vs roads</td>
+<td>Army as priority (5% of GDP)</td>
+<td>Roads ≈ / &gt; Defense Ministry in 2020–2021</td>
+</tr>
+</tbody>
+</table></div>
+<div class="divider"></div>
+<p class="part-label">Bottom line</p>
+<h2>Five lessons Ukraine learned at the cost of blood</h2>
+<p><strong>The first lesson — from Yanukovych.</strong> Stability without real foundations is a time bomb. A fixed exchange rate, low inflation, “everything is fine” — these indicators are a lie if behind them lie burned reserves and growing debt. Real stability is measured by productivity growth, not by the number on an exchange board.</p>
+<p><strong>The second lesson — from Poroshenko.</strong> A painful truth is better than a comfortable lie. Devaluation to 25, closing banks, market gas prices — these decisions destroyed ratings but saved the system. The frame built in 2014–2018 proved stronger than any “soft” management.</p>
+<p><strong>The third lesson — from Zelensky (before 2022).</strong> A safety margin must be multiplied, not spent. When you inherit the best starting conditions in 25 years, the worst thing you can do is spend them on visually impressive but strategically secondary projects. Asphalt does not replace shells.</p>
+<p><strong>The fourth lesson — from Hetmantsev.</strong> Fiscal terror is not reform. If mid-sized businesses find moving to Poland more profitable than doing business at home, that is a failure of the system, not of entrepreneurs. After victory Ukraine will need not tighter screws but maximum economic freedom for reconstruction.</p>
+<p><strong>The fifth lesson — a general one.</strong> Independent institutions are not a reformers’ wish. They are the load-bearing structure of the state. The National Bank, the courts and anti-corruption bodies must be protected from “telephone justice.” Every time we break this, we pay twice: we lose investment and we break our partners’ trust.</p>
+<div class="divider"></div>
+<p class="note"><em>Data: National Bank of Ukraine, State Statistics Service of Ukraine, IMF (World Economic Outlook), World Bank (Doing Business), Transparency International (CPI). Some figures are estimates or averages over a term. This material is analytical and is not an official economic study.</em></p>
+</div>
+</main>
+<footer>
+<p>Analysis · vadim.li · Non-commercial sharing with attribution is welcome</p>
+</footer>
+<script src="../../assets/articles.js"></script>
+<script src="../../assets/site-nav.js"></script>
+</body>
+</html>

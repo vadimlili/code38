@@ -22,7 +22,7 @@
     "#vl-next .h{color:#6b7280;letter-spacing:.2em;text-transform:uppercase;font-size:11px;margin-bottom:10px}" +
     "#vl-next a{display:block;font-family:Inter,system-ui,sans-serif;font-size:15px;border:1px solid #1f2329;padding:14px 16px;margin-bottom:8px;color:#d4d8e0;text-decoration:none}" +
     "#vl-next a:hover{border-color:#c8a96e}" +
-    "#vl-bar .lang{margin-left:14px;border:1px solid #2a2f38;padding:3px 8px;color:#d4d8e0}#vl-bar .lang:hover{border-color:#c8a96e}#vl-next a small{display:block;color:#8a909b;margin-top:4px}";
+    "#vl-bar .lang{margin-left:14px;border:1px solid #2a2f38;padding:3px 8px;color:#d4d8e0}#vl-bar .lang:hover{border-color:#c8a96e}#vl-bar .views{margin-left:14px;color:#8a909b;letter-spacing:.06em}#vl-next a small{display:block;color:#8a909b;margin-top:4px}";
   document.head.appendChild(css);
 
   var lang = art ? (art.lang || "uk") : ((document.documentElement.lang || "uk").slice(0, 2) === "en" ? "en" : "uk");
@@ -37,6 +37,20 @@
   bar.innerHTML = '<div class="in"><a class="home" href="' + home + '">CODE<span>38</span></a>' +
     '<span class="crumb">' + (topic ? '<a href="' + home + "#" + topic.id + '">← ' + tname + "</a>" : '<a href="' + home + '">← ' + (lang === "en" ? "All articles" : "Усі статті") + "</a>") + sw + "</span></div>";
   document.body.insertBefore(bar, document.body.firstChild);
+
+  // лічильник переглядів (GoatCounter → Settings → "Allow adding visitor counts on your website")
+  if (art && window.GOATCOUNTER && window.fetch) {
+    fetch("https://" + window.GOATCOUNTER + ".goatcounter.com/counter/" + encodeURIComponent(location.pathname) + ".json")
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || !d.count) return;
+        var v = document.createElement("span");
+        v.className = "views";
+        v.title = lang === "en" ? "views" : "переглядів";
+        v.textContent = "◉ " + d.count;
+        bar.querySelector(".crumb").appendChild(v);
+      }).catch(function () {});
+  }
 
   if (art) {
     var more = arts.filter(function (a) { return a !== art && !a.draft && (a.lang || "uk") === lang && a.topic === art.topic; });

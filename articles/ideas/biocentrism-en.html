@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A systems analysis of a hypothetical scenario in which humanity renounced the exploitation of animals in the 14th century: energy, nitrogen, nutrition, epidemics, climate." name="description"/>
+<title>An alternative macrohistory of biocentrism</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--bg:#0d0f12;--surface:#13161b;--border:#1f2329;--muted:#2a2f38;--text:#d4d8e0;--text-dim:#8a909b;--accent:#c8a96e;--accent-lt:#e8c98e;--danger:#e05c5c;--safe:#5cb87a;--heading:#f0f2f5;--mono:'JetBrains Mono',ui-monospace,monospace;--display:'Playfair Display',Georgia,serif}
+        body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sans-serif;font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased}
+        .container{max-width:820px;margin:0 auto;padding:64px 24px 96px}
+        header{border-bottom:1px solid var(--border);padding-bottom:48px;margin-bottom:56px}
+        .meta{font-family:var(--mono);font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:20px}
+        h1{font-family:var(--display);font-size:clamp(2rem,5vw,3rem);font-weight:900;line-height:1.15;margin-bottom:22px;color:var(--heading)}
+        h1 .sub{display:block;font-size:.55em;font-weight:700;color:var(--text-dim);margin-top:14px;line-height:1.3}
+        .subtitle{color:var(--text-dim);font-size:18px;font-weight:300;line-height:1.6}
+        .byline{margin-top:24px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--text-dim)}
+        .byline a{color:var(--accent);border:0}
+        section{margin-bottom:24px}
+        h2{font-family:var(--display);font-size:clamp(1.5rem,3.5vw,2rem);font-weight:700;margin:64px 0 24px;color:var(--heading);line-height:1.25}
+        h3{font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin:36px 0 12px;color:var(--accent)}
+        p{margin-bottom:20px}
+        strong{color:var(--heading);font-weight:600}
+        em{color:var(--accent-lt)}
+        ul{padding-left:22px;margin-bottom:20px}
+        li{margin-bottom:8px}
+        .section-intro{background:var(--surface);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:20px 24px;margin:28px 0;font-size:16px;font-style:italic}
+        .table-wrap{overflow-x:auto;margin:28px 0}
+        table{width:100%;border-collapse:collapse;font-size:14.5px;margin:28px 0}
+        .table-wrap table{margin:0}
+        table th{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);font-weight:500;padding:12px 14px;text-align:left;border-bottom:1px solid var(--muted)}
+        table td{padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+        .cite{color:var(--accent);font-family:var(--mono);font-size:10px;vertical-align:super;margin:0 2px;opacity:.8}
+        .critical-box{background:rgba(224,92,92,.04);border:1px solid rgba(224,92,92,.25);border-radius:8px;padding:22px 26px;margin:28px 0;font-size:15.5px}
+        .critical-box .cb-header{font-family:var(--mono);color:var(--danger);font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px}
+        .critical-box p{margin-bottom:12px}
+        .critical-box p:last-child{margin-bottom:0}
+        .scenario-tag{display:inline-block;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;padding:4px 10px;border-radius:3px;margin-bottom:12px}
+        .tag-optimistic{background:rgba(92,184,122,.08);color:var(--safe);border:1px solid rgba(92,184,122,.3)}
+        .tag-critical{background:rgba(224,92,92,.08);color:var(--danger);border:1px solid rgba(224,92,92,.3)}
+        .framework-note{background:linear-gradient(135deg,rgba(200,169,110,.06),rgba(200,169,110,.02));border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:24px 28px;margin:32px 0;font-size:15.5px}
+        .framework-note .fn-header{font-family:var(--mono);color:var(--accent);font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px}
+        .framework-note p:last-child{margin-bottom:0}
+        .sources{margin-top:80px;padding-top:40px;border-top:1px solid var(--border);font-size:14px}
+        .sources h2{font-size:1.3rem;margin-top:0}
+        .source-item{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:44px 1fr;column-gap:8px}
+        .source-item:last-child{border-bottom:none}
+        .source-number{font-family:var(--mono);color:var(--accent);font-size:12px;grid-row:span 2}
+        .source-title{color:var(--heading);font-weight:600;margin-bottom:4px}
+        .source-desc{color:var(--text-dim);font-size:13px;line-height:1.6}
+        a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(200,169,110,.35)}
+        a:hover{color:var(--accent-lt)}
+        .plus{color:var(--safe)}
+        .minus{color:var(--danger)}
+        svg.fig{display:block;width:100%;height:auto;margin:32px 0;background:var(--surface);border:1px solid var(--border);border-radius:8px}
+        svg.fig text{font-family:'Inter',sans-serif}
+        footer{margin-top:64px;padding-top:28px;border-top:1px solid var(--border);font-family:var(--mono);font-size:12px;color:var(--text-dim);text-align:center;line-height:1.9}
+        @media (max-width:600px){.container{padding:44px 18px 72px}table{font-size:13px}table th,table td{padding:9px}.critical-box,.framework-note{padding:18px}}
+        figure.diagram{margin:36px 0;border:1px solid var(--border);border-radius:10px;background:var(--surface);padding:24px}
+        .diagram-title{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+        .diagram-sub{font-family:var(--display);font-size:21px;font-weight:700;color:var(--heading);line-height:1.3;margin-bottom:20px}
+        .dgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+        .dcol{border-radius:8px;padding:18px 18px 14px;border:1px solid;border-top-width:3px}
+        .dcol.pos{border-color:rgba(92,184,122,.28);border-top-color:var(--safe);background:rgba(92,184,122,.035)}
+        .dcol.neg{border-color:rgba(224,92,92,.28);border-top-color:var(--danger);background:rgba(224,92,92,.035)}
+        .dcol h4{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+        .dcol.pos h4{color:var(--safe)} .dcol.neg h4{color:var(--danger)}
+        .ditem{padding:11px 0;border-top:1px solid var(--border)}
+        .ditem:first-of-type{border-top:0;padding-top:2px}
+        .ditem b{display:block;color:var(--heading);font-size:15.5px;font-weight:600;margin-bottom:3px}
+        .ditem span{display:block;font-size:14px;color:var(--text-dim);line-height:1.55}
+        .dlist{list-style:none;padding:0;margin:0}
+        .dlist li{display:flex;gap:10px;font-size:15px;line-height:1.45;padding:8px 0;border-top:1px solid var(--border);margin:0;color:var(--heading)}
+        .dlist li:first-child{border-top:0;padding-top:2px}
+        .dlist li i{font-style:normal;font-family:var(--mono);font-size:13px;width:14px;flex:none;padding-top:2px}
+        .dcol.pos .dlist i{color:var(--safe)} .dcol.neg .dlist i{color:var(--danger)}
+        .dlist small{display:block;color:var(--text-dim);font-size:12.5px;margin-top:1px}
+        .dnote{margin-top:12px;padding-top:12px;border-top:1px dashed var(--border);font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+        .dcol.pos .dnote{color:var(--safe)} .dcol.neg .dnote{color:var(--danger)}
+        .bars{display:grid;gap:18px}
+        .bar-row{display:grid;grid-template-columns:190px 1fr;gap:16px;align-items:center}
+        .bar-label{font-size:15px;color:var(--heading);font-weight:500;line-height:1.3}
+        .bar-label small{display:block;color:var(--text-dim);font-size:12.5px;font-weight:400}
+        .bar-track{display:flex;align-items:center;gap:12px}
+        .bar-fill{height:30px;border-radius:4px;min-width:6px}
+        .bar-val{font-family:var(--mono);font-size:13px;color:var(--heading);white-space:nowrap}
+        .ratio{display:flex;gap:18px;align-items:center;margin-top:20px;padding-top:18px;border-top:1px dashed var(--border);font-size:14.5px;color:var(--text-dim);line-height:1.55}
+        .ratio b{font-family:var(--display);font-size:44px;font-weight:900;color:var(--accent);line-height:1;flex:none}
+        .fig-src{margin-top:14px;font-family:var(--mono);font-size:11px;color:var(--text-dim)}
+        @media (max-width:640px){.dgrid{grid-template-columns:1fr}.bar-row{grid-template-columns:1fr;gap:6px}figure.diagram{padding:18px}.ratio b{font-size:36px}}
+        a.cite{border:0;color:var(--accent);text-decoration:none;cursor:pointer;padding:0 1px;border-radius:2px}
+        a.cite:hover{color:var(--accent-lt);background:rgba(200,169,110,.12)}
+        html{scroll-behavior:smooth}
+        .source-item{scroll-margin-top:24px;border-radius:6px;transition:background .4s}
+        .source-item:target{background:rgba(200,169,110,.10);box-shadow:0 0 0 8px rgba(200,169,110,.10)}
+    </style>
+<!-- seo -->
+<link rel="canonical" href="https://vadimlili.github.io/code38/articles/ideas/biocentrism-en.html">
+<meta property="og:site_name" content="CODE38">
+<meta property="og:type" content="article">
+<meta property="og:title" content="An alternative macrohistory of biocentrism">
+<meta property="og:description" content="What if humanity had renounced the exploitation of animals in the 14th century: two scenarios — an optimistic one and a critical one.">
+<meta property="og:url" content="https://vadimlili.github.io/code38/articles/ideas/biocentrism-en.html">
+<meta property="og:image" content="https://vadimlili.github.io/code38/assets/og/biocentrism-en.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="An alternative macrohistory of biocentrism">
+<meta name="twitter:description" content="What if humanity had renounced the exploitation of animals in the 14th century: two scenarios — an optimistic one and a critical one.">
+<meta name="twitter:image" content="https://vadimlili.github.io/code38/assets/og/biocentrism-en.jpg">
+<link rel="icon" href="https://vadimlili.github.io/code38/assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="en" href="https://vadimlili.github.io/code38/articles/ideas/biocentrism-en.html">
+<link rel="alternate" hreflang="uk" href="https://vadimlili.github.io/code38/articles/ideas/biocentrism.html">
+<link rel="alternate" hreflang="x-default" href="https://vadimlili.github.io/code38/articles/ideas/biocentrism.html">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "An alternative macrohistory of biocentrism", "description": "What if humanity had renounced the exploitation of animals in the 14th century: two scenarios — an optimistic one and a critical one.", "datePublished": "2025-06-01", "inLanguage": "en", "author": {"@type": "Person", "name": "vadim.li"}, "publisher": {"@type": "Organization", "name": "CODE38"}, "image": "https://vadimlili.github.io/code38/assets/og/biocentrism-en.jpg", "mainEntityOfPage": "https://vadimlili.github.io/code38/articles/ideas/biocentrism-en.html"}</script>
+<script data-goatcounter="https://vadim.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<!-- /seo -->
+</head>
+<body>
+<div class="container">
+<header>
+<div class="meta">Macroeconomic analysis · History · Agroecology · 2025</div>
+<h1>An alternative macrohistory of biocentrism<span class="sub">A systematic scientific analysis of civilization developing without animal exploitation from the 14th century</span></h1>
+<div class="subtitle">A hypothetical scenario in which 14th-century human civilization adopts a universal ethical ban on killing and exploiting animals. An interdisciplinary analysis at the intersection of biophysics, agroecology, nutrition science, epidemiology and energy.</div>
+<div class="byline">≈ 12 min read · Analysis · Author: vadim.li · <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a><br/>The text may be used only with the author’s permission</div>
+</header>
+<section>
+<h2>1. The bifurcation point and the methodological framework</h2>
+<p>To examine a scenario in which 14th-century civilization adopts a universal ethical ban on killing and exploiting animals, an interdisciplinary approach is needed: biophysics, agroecology, nutrition science, epidemiology and energy analysis.</p>
+<p>In this model the ban is absolute: animals disappear from the economy not only as a source of dietary protein but also as draft power, as suppliers of raw materials for light industry (wool, leather, silk) and for lubricants and lighting (whale oil, tallow), as model organisms for medicine and as components of pharmaceuticals.</p>
+<p>The 14th century is chosen because of the crisis of Eurasia’s classic medieval agrarian order, which coincided with the onset of the Little Ice Age and demographic shocks<a class="cite" href="#src-1">[1]</a>. The analysis of what abandoning animal husbandry would mean weighs thermodynamic gains against the technological barriers humanity would have hit on its way to modernity.</p>
+<div class="framework-note">
+<div class="fn-header">Methodology: two scenarios in every section</div>
+<p>An early version of this analysis was too optimistic. So each section here is examined in two layers:</p>
+<p><strong style="color:#5cb87a;">The optimistic scenario</strong> — the model’s direct thermodynamic and ecological gains, which are genuinely real in theory (less cropland, less methane, no exposure to a number of zoonoses).</p>
+<p><strong style="color:#e05c5c;">The critical view of modern science</strong> — what current research says about the real cost of giving up animal protein and animal products without industrial means of compensation (synthetic B₁₂, fortification, agrochemistry). Modern nutrition science, immunology and development economics show unambiguously that chronic deficiency of complete protein and micronutrients is not an abstract theory but a measurable cause of stunting, cognitive losses and higher mortality in populations without access to animal-source foods or their industrial substitutes<a class="cite" href="#src-15">[15]</a>, <a class="cite" href="#src-16">[16]</a>.</p>
+</div>
+</section>
+<section>
+<h2>2. Agroecology and soil biochemistry: the nitrogen balance and productivity</h2>
+<p>Traditional Eurasian agriculture rested on an inseparable symbiosis of crop farming and livestock: animals concentrated biomass and, through manure, were the main source of organic nitrogen and phosphorus<a class="cite" href="#src-2">[2]</a>. Abandoning livestock confronts agronomy with a fundamental problem: how to maintain soil fertility before industrial nitrogen fixation exists.</p>
+<figure class="diagram">
+<div class="diagram-title">Diagram 1</div>
+<div class="diagram-sub">Abandoning livestock in the 14th century: what we gain and what we lose</div>
+<div class="dgrid">
+<div class="dcol pos">
+<h4>+ Gains</h4>
+<div class="ditem"><b>Trophic efficiency</b><span>Grain goes to people directly, with no “middleman.” Roughly three-quarters less farmland is needed</span></div>
+<div class="ditem"><b>Land released</b><span>Forests are not cleared for pasture; less soil erosion</span></div>
+<div class="ditem"><b>A climate shield</b><span>No methane from ruminants</span></div>
+</div>
+<div class="dcol neg">
+<h4>− Losses</h4>
+<div class="ditem"><b>Nitrogen crisis</b><span>No manure — a large share of arable land goes to legumes and green manure</span></div>
+<div class="ditem"><b>Parasitic contamination</b><span>Fertilizing with human waste spreads helminths and intestinal infections</span></div>
+<div class="ditem"><b>An energy gap</b><span>Draft animals disappear — the main “engine” of the pre-industrial era</span></div>
+</div>
+</div>
+</figure>
+<span class="scenario-tag tag-optimistic">The optimistic scenario</span>
+<h3>Pros and benefits for the biosphere</h3>
+<p><strong class="plus">+ Trophic optimization:</strong> By the laws of ecological thermodynamics, converting plant calories into animal calories loses 85–90% of the primary energy. Without the intermediate consumer, the whole harvest of grains and legumes goes directly to feeding people, and the need for farmland falls: by modern estimates, a fully plant-based diet requires roughly three-quarters less agricultural land<a class="cite" href="#src-3">[3]</a>.</p>
+<p><strong class="plus">+ Preventing large-scale deforestation:</strong> In real history vast areas of forest in Europe and North and South America were cleared for pasture and feed crops. In the biocentric model forests survive, soils suffer less from water and wind erosion, and continental hydrology is more stable<a class="cite" href="#src-4">[4]</a>.</p>
+<h3>Cons and agrochemical barriers</h3>
+<p><strong class="minus">− The nitrogen crisis and diverting cropland to green manure:</strong> As Vaclav Smil showed in <em>Enriching the Earth</em>, until ammonia synthesis by the Haber–Bosch process in 1909, yields were tightly limited by available reactive nitrogen<a class="cite" href="#src-2">[2]</a>. Without manure, the only source of nitrogen is biological fixation by the root-nodule bacteria of legumes (clover, lupine, vetch, alfalfa)<a class="cite" href="#src-2">[2]</a>. To keep soils in balance, farmers would have to regularly set aside a large share of sown area for legumes and green manure<a class="cite" href="#src-2">[2]</a>. That would eat up a noticeable part of the gain from having no livestock.</p>
+<p><strong class="minus">− Parasitic soil contamination:</strong> If the lack of fertilizer were offset by scaling up the East Asian practice of fertilizing with human waste (“night soil”), described by Franklin King in <em>Farmers of Forty Centuries</em><a class="cite" href="#src-6">[6]</a>, then without reliable composting it would contaminate soils and groundwater with helminth eggs and intestinal pathogens.</p>
+<div class="critical-box">
+<div class="cb-header">The critical view of modern science</div>
+<p>A meta-analysis of 66 studies (Seufert et al., <em>Nature</em>, 2012) found that even modern organic farming — which, unlike the scenario, has manure — yields on average about a quarter less than conventional farming, and for cereals the gap is explained mostly by nitrogen shortage<a class="cite" href="#src-7">[7]</a>. With medieval farming techniques and no scientific understanding of legume symbiosis and crop rotation, nitrogen deficiency would be not a temporary inconvenience but a chronic constraint lowering the caloric yield of harvests for centuries — a permanent background of undernourishment rather than a one-off crisis<a class="cite" href="#src-2">[2]</a>, <a class="cite" href="#src-7">[7]</a>.</p>
+</div>
+</section>
+<section>
+<h2>3. Energy analysis: the power trap and the pace of industrialization</h2>
+<p>The heaviest consequence of giving up animal exploitation is the loss of the main source of mechanical energy in the pre-industrial era<a class="cite" href="#src-8">[8]</a>.</p>
+<figure class="diagram">
+<div class="diagram-title">Diagram 2</div>
+<div class="diagram-sub">How much work one farm can do</div>
+<div class="bars">
+<div class="bar-row">
+<div class="bar-label">A pair of horses or oxen<small>sustained working power</small></div>
+<div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--accent)"></div><span class="bar-val">≈ 1,200 W</span></div>
+</div>
+<div class="bar-row">
+<div class="bar-label">An adult human<small>in continuous work</small></div>
+<div class="bar-track"><div class="bar-fill" style="width:7%;background:var(--danger)"></div><span class="bar-val">≈ 70–100 W</span></div>
+</div>
+</div>
+<div class="ratio"><b>×14</b><span>A pair of draft animals provides roughly 14 times the power of a human. Without them, plowing heavy soils, transport and pumping water out of mines all fall on human muscle.</span></div>
+<div class="fig-src">Source: Smil, “Energy and Civilization” <a class="cite" href="#src-8">[8]</a></div>
+</figure>
+<h3>Cons and energy barriers</h3>
+<p><strong class="minus">− Falling productivity and agrarian bondage:</strong> According to Vaclav Smil’s calculations (<em>Energy and Civilization: A History</em>), until the 19th century the muscle power of animals and people provided more than 90% of all mechanical work in the economy<a class="cite" href="#src-8">[8]</a>. A horse delivers a sustained working power of 500–750 W and an ox about 500 W, while the limit of human physiology in continuous work is only 70–100 W<a class="cite" href="#src-8">[8]</a>. Without draft animals, heavy clay soils cannot be turned with a moldboard plow<a class="cite" href="#src-9">[9]</a>. Farming everywhere is reduced to hand digging and hoe work. To feed itself, 90–95% of the population would have to stay in agriculture, sharply slowing urbanization and the development of crafts and fundamental science<a class="cite" href="#src-8">[8]</a>.</p>
+<p><strong class="minus">− A slower early mining industry:</strong> Before the steam engines of Savery and Newcomen, water was pumped out of deep mines and ore was hoisted with horse-driven whims. Without horse power, the growth of coal and metal mining in the 14th–17th centuries is delayed.</p>
+<p><strong class="minus">− A slower industrial transition:</strong> The cumulative deficit of mechanical energy pushes a full industrial revolution back by 150–200 years, shifting the technological level of the turn of the 19th–20th centuries into the 21st–22nd.</p>
+<div class="critical-box">
+<div class="cb-header">The critical view of modern science</div>
+<p>The 70–100 W estimate for a human assumes a worker who is <em>adequately fed</em>. A systematic review by Haas and Brownlie (2001) shows that iron-deficiency anemia causally reduces work capacity — not only strength but endurance falls, because the blood carries oxygen less well<a class="cite" href="#src-10">[10]</a>. In other words, the real power output of a medieval peasant who is undernourished and gets no animal protein would be <strong>lower</strong> than even this modest estimate. It is a vicious circle: less energy in the diet → less mechanical work → a smaller harvest → even less energy.</p>
+</div>
+<h3>Pros and engineering incentives</h3>
+<p><strong class="plus">+ Faster canal building:</strong> Since heavy loads cannot be hauled by draft animals, there is a strong incentive to build inland waterways, locked canals and rail systems long before their historical counterparts. Water transport, with far lower resistance, becomes the backbone of continental trade.</p>
+<p><strong class="plus">+ Early development of wind and water power:</strong> Engineering effort concentrates on improving water wheels, windmills and mechanical transmissions to replace manual labor in mills, sawmills and forges<a class="cite" href="#src-8">[8]</a>.</p>
+</section>
+<section>
+<h2>4. Climate and the biosphere: mitigating global warming</h2>
+<span class="scenario-tag tag-optimistic">The optimistic scenario</span>
+<p>One of the most visible advantages of the biocentric scenario is the absence of livestock as a source of anthropogenic greenhouse gases. This would change the planet’s climate trajectory.</p>
+<h3>Methane from ruminants</h3>
+<p>According to the UN Food and Agriculture Organization (FAO), livestock supply chains account for about 14.5% of all anthropogenic greenhouse gas emissions (18% in the 2006 report)<a class="cite" href="#src-11">[11]</a>. Ruminants (cattle, sheep, goats) emit methane through enteric fermentation — the bacterial breakdown of cellulose in the stomach<a class="cite" href="#src-11">[11]</a>. Over a 100-year horizon, one kilogram of methane is equivalent to 28–34 kilograms of carbon dioxide.</p>
+<p>In a biocentric world these emissions simply do not exist. Anthropogenic methane emissions would be noticeably lower: today livestock manure and enteric fermentation account for about 32% of all anthropogenic methane emissions<a class="cite" href="#src-12">[12]</a>.</p>
+<h3>Preserving forests and carbon sinks</h3>
+<p>The historical deforestation of Europe and the Americas was driven largely by the expansion of pasture. In 2017–2022, for example, about 78% of direct forest clearing in the Amazon went to pasture<a class="cite" href="#src-5">[5]</a>, and beef remains the largest driver of deforestation worldwide<a class="cite" href="#src-4">[4]</a>. Forest ecosystems are powerful carbon sinks: a hectare of intact tropical forest stores hundreds of tons of carbon in biomass and soil.</p>
+<p>Preserving the forests of Eurasia, the Americas and Africa means:</p>
+<ul>
+<li>Slower growth in global temperature (how much slower depends on modeling assumptions)</li>
+<li>A preserved water cycle (forests transpire moisture and sustain local rainfall systems)</li>
+<li>Much better preservation of biodiversity</li>
+</ul>
+<p>These benefits, however, would be partly offset by population growth, since people themselves produce carbon dioxide — through heating homes, cooking and so on.</p>
+<div class="critical-box">
+<div class="cb-header">The critical view of modern science</div>
+<p>The climate gain rests on the assumption that humanity does not compensate for low yields (Section 2) by expanding cropland. But historically that is exactly what happened: a shortage of calories per hectare pushes toward extensive farming — plowing new land instead of intensifying<a class="cite" href="#src-7">[7]</a>. The IPCC Special Report on Climate Change and Land (2019) shows that with low crop productivity, compensatory forest clearing for new cropland can partly or completely cancel the gain from having no livestock methane. So the climate effect of the scenario depends not on abandoning animals as such but on agrochemical knowledge that did not exist in the 14th century<a class="cite" href="#src-13">[13]</a>.</p>
+</div>
+</section>
+<section>
+<h2>5. Nutrition and human health: the biochemical challenges of a plant-based diet</h2>
+<p>Giving up all animal food with a medieval level of knowledge about physiology creates a set of nutritional risks that would determine the health of entire populations.</p>
+<div class="table-wrap"><table>
+<tr>
+<th>Health benefits</th>
+<th>Drawbacks and deficiencies</th>
+</tr>
+<tr>
+<td><strong class="plus">+ Minimal saturated fat</strong><br/>Less early atherosclerosis, a sharp drop in heart attacks</td>
+<td><strong class="minus">− Cobalamin (B₁₂) deficiency</strong><br/>Pernicious anemia, spinal cord damage</td>
+</tr>
+<tr>
+<td><strong class="plus">+ Less gout</strong><br/>Especially among elites, who historically suffered from it most</td>
+<td><strong class="minus">− Poor iron absorption</strong><br/>Blocked by phytates, iron-deficiency anemia</td>
+</tr>
+<tr>
+<td><strong class="plus">+ Plenty of fiber</strong><br/>Lower risk of colon cancer</td>
+<td><strong class="minus">− Zinc, calcium and vitamin D deficiency</strong><br/>Rickets, osteomalacia in pregnant women and children</td>
+</tr>
+</table></div>
+<h3>The cobalamin (vitamin B₁₂) problem</h3>
+<p>Plants do not synthesize vitamin B₁₂; in the biosphere it is produced only by bacteria and archaea. B₁₂ deficiency disrupts DNA synthesis in blood-forming tissue (megaloblastic anemia) and destroys the myelin sheath of nerve fibers in the spinal cord and brain<a class="cite" href="#src-14">[14]</a>. Until crystalline cobalamin was isolated in 1948 and microbial production established in the 1950s, humanity would have suffered a chronic hidden deficiency of this nutrient<a class="cite" href="#src-14">[14]</a>. It would be partly offset only by untreated water, soil bacteria on poorly washed vegetables and specific fermentation of legumes (tempeh, natto, miso).</p>
+<h3>Micronutrient absorption</h3>
+<p>Non-heme iron from legumes and grains is absorbed several times less efficiently than heme iron, and phytic acid binds zinc, magnesium and calcium into insoluble compounds. In lean years this would lead to outbreaks of anemia, rickets and osteomalacia, especially among pregnant women and children.</p>
+<div class="critical-box">
+<div class="cb-header">The critical view of modern science: this is not theory but a measurable fact</div>
+<p>This is probably the most serious weakness of the whole scenario. Modern vegan diets in developed countries are safe only thanks to industrial supplements — synthetic B₁₂, often iron and zinc — and a year-round variety of imported foods<a class="cite" href="#src-14">[14]</a>. None of this existed in the 14th century.</p>
+<p>Data from <em>The Lancet</em> series on maternal and child nutrition and controlled studies in developing countries, covering modern populations with chronic deficiency of animal protein (above all children in regions with limited access to meat and dairy), show a consistent link between protein-energy malnutrition and <strong>stunting</strong>, delayed cognitive development and higher child mortality from infections due to weakened immunity<a class="cite" href="#src-15">[15]</a>, <a class="cite" href="#src-16">[16]</a>. This is not a hypothesis — it is documented 20th- and 21st-century epidemiology.</p>
+<p>Complete protein (all 9 essential amino acids in the right proportion) on a medieval plant diet requires combining several crops at once (grains + legumes) in sufficient quantity every day — and sufficient quantity was exactly the main problem of pre-industrial farming (see Section 2). Layering an agronomic calorie deficit on top of biochemically incomplete protein means the realistic scenario is not a “healthy plant-based menu” but chronic undernourishment at the level of mid-20th-century developing countries, stretched over eight centuries.</p>
+</div>
+</section>
+<section>
+<h2>6. Famine mortality and the fragility of medieval farming</h2>
+<p>One often underestimated problem of the biocentric scenario is the <strong>extreme vulnerability</strong> of medieval farming to climate shocks. Abandoning livestock would make this fragility worse.</p>
+<h3>Livestock as a stability buffer</h3>
+<p>In real history livestock was a critical reserve of calories and protein in lean years<a class="cite" href="#src-17">[17]</a>. If winter rye froze in abnormal cold, peasants could survive on dairy, meat and animal fat. Animals that are undemanding feeders (eating grass, hay, crop residues) turned barely usable plant biomass into valuable dietary protein.</p>
+<p>In a biocentric world this safety cushion disappears. The famines of the 14th–17th centuries — from the Great Famine of 1315–1322 to the crises of the Little Ice Age — already claimed millions of lives<a class="cite" href="#src-1">[1]</a>, <a class="cite" href="#src-17">[17]</a>. Without livestock they would have been deadlier still, especially in regions at the climatic margin of farming (Scandinavia, northern Russia, the Alpine regions).</p>
+<h3>The demographic effect</h3>
+<p>The world’s population in the 14th–17th centuries would most likely have been noticeably smaller than it actually was — the exact size cannot be estimated without dedicated modeling. That might have prevented some ecological overload, but it would also have meant slower progress in science, art and technology: innovation needs a critical mass of people and the exchange of knowledge.</p>
+<div class="critical-box">
+<div class="cb-header">The critical view of modern science</div>
+<p>Studies of famine (notably Amartya Sen’s classic analysis) show that mortality depends not only on the total amount of food but also on whether families have <strong>assets that can be exchanged for food</strong>. Livestock was historically such an “edible bank reserve” — it could be turned into calories at any moment of a crisis, unlike grain, which rots in prolonged damp or is lost to rodents<a class="cite" href="#src-18">[18]</a>. Removing this buffer without a replacement (refrigeration, preserving, state grain reserves all came much later) means not just a smaller population but systematically sharper swings in mortality from year to year — clearly visible in modern famine research on regions with monoculture cropping and no livestock reserve<a class="cite" href="#src-18">[18]</a>.</p>
+</div>
+</section>
+<section>
+<h2>7. Epidemiology: fewer zoonoses, but new dead ends</h2>
+<p>The structure of human infectious disease is inseparably tied to people and domestic animals living together<a class="cite" href="#src-19">[19]</a>.</p>
+<figure class="diagram">
+<div class="diagram-title">Diagram 3</div>
+<div class="diagram-sub">The epidemiological balance of a biocentric world</div>
+<div class="dgrid">
+<div class="dcol pos">
+<h4>+ Would disappear or become rarer</h4>
+<ul class="dlist">
+<li><i>✓</i><div>Measles<small>derived from the rinderpest virus of cattle</small></div></li>
+<li><i>✓</i><div>Bovine tuberculosis</div></li>
+<li><i>✓</i><div>Zoonotic influenza A<small>pigs and birds as virus “mixing vessels”</small></div></li>
+<li><i>✓</i><div>Brucellosis and Q fever</div></li>
+<li><i>✓</i><div>Salmonellosis, taeniasis</div></li>
+</ul>
+<div class="dnote">Millions of children’s lives saved</div>
+</div>
+<div class="dcol neg">
+<h4>− Would remain or worsen</h4>
+<ul class="dlist">
+<li><i>✗</i><div>Bubonic plague</div></li>
+<li><i>✗</i><div>Epidemic typhus<small>carried by lice</small></div></li>
+<li><i>✗</i><div>Cholera, dysentery, typhoid fever</div></li>
+<li><i>✗</i><div>Amoebiasis</div></li>
+<li><i>✗</i><div>Smallpox without Jenner’s vaccine<small>no cowpox, no vaccine</small></div></li>
+</ul>
+<div class="dnote">Regular epidemics of intestinal infections</div>
+</div>
+</div>
+</figure>
+<h3>Diseases that would disappear</h3>
+<p><strong class="plus">+ Destroying the reservoirs of “crowd diseases”:</strong> As historian William McNeill (<em>Plagues and Peoples</em>) and Jared Diamond (<em>Guns, Germs, and Steel</em>) showed, the key infectious diseases of civilization arose from pathogens of herd animals<a class="cite" href="#src-19">[19]</a>, <a class="cite" href="#src-21">[21]</a>:</p>
+<ul>
+<li><strong>Measles</strong> arose when the rinderpest virus of cattle jumped to humans at high population density — according to molecular data, around the 11th–12th centuries<a class="cite" href="#src-20">[20]</a></li>
+<li><strong>Bovine tuberculosis</strong> (<em>Mycobacterium bovis</em>) caused pulmonary and extrapulmonary tuberculosis in humans for centuries<a class="cite" href="#src-19">[19]</a></li>
+<li><strong>Domestic pigs and poultry</strong> were the main “mixing vessels” in which the genome of influenza A was reshuffled<a class="cite" href="#src-19">[19]</a></li>
+</ul>
+<p>Isolating humans from farm animals prevents these diseases from arising or breaks their global pandemic chains, saving an enormous number of children’s lives over the centuries<a class="cite" href="#src-19">[19]</a>.</p>
+<h3>Immunological dead ends</h3>
+<p><strong class="minus">− No Jenner-style vaccination:</strong> In 1796 Edward Jenner made a scientific breakthrough using cross-immunity: inoculation with cowpox, harmless to humans, reliably protected against deadly smallpox<a class="cite" href="#src-22">[22]</a>. In a biocentric world without dairy farming there is simply no cowpox. Humanity is left without a universal safe smallpox vaccine until scientific virology and cell-line culture emerge in the late 19th and early 20th centuries.</p>
+<p><strong class="minus">− Outbreaks of intestinal infections:</strong> Farming’s dependence on the organic waste of human settlements triggers regular epidemics of cholera, amoebiasis and typhoid in river and lakeside urban centers.</p>
+<div class="critical-box">
+<div class="cb-header">The critical view of modern science</div>
+<p>The section above speaks of zoonoses disappearing, but modern immunology adds an important caveat: resistance to the <em>remaining</em> infections (plague, typhus, intestinal pathogens) itself depends on nutrition. Protein-energy malnutrition is a documented cause of immunodeficiency: antibody production falls, the barrier function of mucous membranes weakens, and infections last longer and run more severely<a class="cite" href="#src-15">[15]</a>. A population chronically short of complete protein (Section 5) would face bubonic plague and intestinal infections with weakened immunity. So part of the gain from “fewer diseases” is eaten up by the remaining diseases running harder and killing more often.</p>
+</div>
+</section>
+<section>
+<h2>8. Psychosocial effects: culture, philosophy and imagination</h2>
+<p>Beyond material factors, abandoning animal husbandry would profoundly change humanity’s intellectual and artistic culture — an area often skipped in economic and technical analysis.</p>
+<h3>New forms of elite leisure and symbols of power</h3>
+<p>Throughout history, hunting and horse riding were the main ways for the aristocracy to display status and military strength<a class="cite" href="#src-23">[23]</a>. Hunting required land, horses, dogs and considerable resources, so it was available only to elites. In a biocentric world hunting is banned outright. This means:</p>
+<ul>
+<li>The upper classes turn to other forms of physical culture (rowing, fencing, mountaineering)</li>
+<li>Land is allocated differently — instead of hunting grounds, groves for contemplation and spiritual practice</li>
+<li>A different visual language in art and heraldry (no lions, eagles or warhorses as symbols of greatness)</li>
+</ul>
+<h3>The development of bioethical philosophy</h3>
+<p>The most radical difference would be that <strong>European scholasticism and philosophy would develop on a biocentric rather than an anthropocentric foundation</strong>. If in the 14th century the ban on killing animals had been enshrined in religious and legal systems (as in the Indian traditions of ahimsa — Jainism, Buddhism, Hinduism)<a class="cite" href="#src-24">[24]</a>, then:</p>
+<ul>
+<li>Cartesian mechanism and the view of animals as “automata without consciousness” would never have spread so widely</li>
+<li>Vivisection and animal experiments in medicine would have met organized cultural resistance long before the 19th century</li>
+<li>The development of in vitro methods, computer modeling and chemical synthesis in pharmacology would have been driven by ethical, not only economic, reasons</li>
+</ul>
+<h3>The effect on the scientific method</h3>
+<p>The history of science shows that a society’s values shape its scientific priorities. A biocentric world would mean:</p>
+<ul>
+<li>Earlier development of ecology as a fundamental science (rather than a peripheral discipline until the 20th century)</li>
+<li>Priority for non-invasive research methods (microscopy, observation of living organisms) over vivisection</li>
+<li>A stronger biochemistry and microbiology as ways to understand life without dissecting living beings</li>
+</ul>
+<div class="critical-box">
+<div class="cb-header">The critical view of modern science</div>
+<p>The very mechanism for introducing a “universal ethical ban” in the 14th century is left outside the scenario. Historical examples of large-scale dietary and behavioral prohibitions (ascetic monastic orders, Buddhist and Jain communities, medieval sumptuary laws) show that such norms either remained the lot of a minority or required harsh institutional coercion — church or state control with punishments for violations. Historical sociology knows no case of an entire civilization voluntarily giving up a millennia-old dietary and economic practice without violence or prolonged ideological pressure. So the “peaceful” transition the scenario assumes is itself an optimistic assumption.</p>
+</div>
+</section>
+<section>
+<h2>9. Socio-economic structure, raw materials and logistics</h2>
+<p>A change in the material base fundamentally changes the direction of institutional development in European and world society. Without livestock as a source of clothing (wool, leather), lubricants (tallow) and fertilizer, entire industries disappear and new ones emerge.</p>
+<h3>Development of alternative materials</h3>
+<p><strong>Textile production</strong> shifts rapidly to plant fibers: flax, hemp, cotton (after colonization). This spurs the study of these crops and the development of their cultivation long before the industrial revolution.</p>
+<p><strong>Lubricants</strong> move to plant oils (linseed, nut, coconut). This accelerates the development of the oil-pressing industry and the chemistry of organic oils.</p>
+<h3>Cooperation and less social stratification</h3>
+<p>One can assume that without the need for large-scale livestock farming (which requires large holdings and concentrated resources), small peasant farming naturally survives. This prevents latifundia from forming spontaneously and probably weakens the great landed nobility.</p>
+<p>Instead, cooperative structures develop for exchanging farm produce and sharing scarce resources (plows, water mills). This prepares the psychological and organizational ground for an earlier and less violent transition to collective forms of economic life.</p>
+</section>
+<section>
+<h2>10. Matrix of systemic effects: the final balance</h2>
+<div class="section-intro">A final assessment of the scenario requires looking at all effects together: ecological, energy, epidemiological, nutritional and psychosocial. The trajectory of civilization would be qualitatively different.</div>
+<h3>Fundamental advantages of the scenario</h3>
+<div class="table-wrap"><table>
+<tr>
+<th>Aspect</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><span class="plus">[+] Ecological sustainability</span></td>
+<td>A preserved biosphere, no livestock methane, no clearing for pasture, slower climate warming</td>
+</tr>
+<tr>
+<td><span class="plus">[+] An epidemiological shield</span></td>
+<td>No measles, bovine tuberculosis or brucellosis, no avian or swine pandemic influenza strains. Many lives saved in the pre-antibiotic era</td>
+</tr>
+<tr>
+<td><span class="plus">[+] Crisis-free social evolution</span></td>
+<td>No tragedy of the enclosures, peasant landholding preserved, a non-violent transition to cooperation, biocentric philosophy as the foundation of culture</td>
+</tr>
+<tr>
+<td><span class="plus">[+] Early development of hydraulic engineering</span></td>
+<td>An extensive system of canals and water transport, early mechanization based on water and wind power</td>
+</tr>
+</table></div>
+<h3>Critical drawbacks of the scenario</h3>
+<div class="table-wrap"><table>
+<tr>
+<th>Aspect</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><span class="minus">[−] Energy failure</span></td>
+<td>Mechanical power per worker falls 10–15 times, 90% of the population is tied to manual hoe work. A likely slowdown of the industrial revolution (the author’s estimate: by 150–200 years)<a class="cite" href="#src-8">[8]</a></td>
+</tr>
+<tr>
+<td><span class="minus">[−] Nutritional pathologies</span></td>
+<td>Deficiency of vitamin B₁₂ (pernicious anemia, nervous system damage) and micronutrients (iron deficiency, rickets) until the 20th century. Lower average height and work capacity</td>
+</tr>
+<tr>
+<td><span class="minus">[−] Higher famine mortality</span></td>
+<td>Livestock disappears as a buffer against climate shocks. More frequent and deadlier famines in climatically marginal regions<a class="cite" href="#src-17">[17]</a>, <a class="cite" href="#src-18">[18]</a></td>
+</tr>
+<tr>
+<td><span class="minus">[−] Defenseless against smallpox</span></td>
+<td>Jenner’s classic vaccine cannot be created without cowpox. Dependence on dangerous variolation until the 20th century<a class="cite" href="#src-22">[22]</a></td>
+</tr>
+</table></div>
+<div class="critical-box">
+<div class="cb-header">Synthesis of the critical view: the scenario’s main systemic risk</div>
+<p>In almost every section above, the pros and cons are presented as parallel, independent effects. But modern nutrition science insists they are <strong>cascading</strong>. Protein deficiency (Section 5) lowers work capacity (Section 3) → which lowers yields → which worsens the nitrogen crisis (Section 2) → which makes famine more likely (Section 6) → and an exhausted population is more vulnerable to the remaining infections (Section 7). These are not five independent drawbacks but one vicious circle with a single point of failure — the absence of animal protein without industrial compensation<a class="cite" href="#src-10">[10]</a>, <a class="cite" href="#src-15">[15]</a>.</p>
+<p>The ecological and epidemiological advantages of the scenario are real and supported by modern data on livestock’s carbon footprint and the origins of zoonotic infections. But they are paid for by chronic undernourishment of the population for probably six to eight centuries — until 20th-century agrochemistry and nutrition science offered industrial solutions (synthetic nitrogen, synthetic B₁₂). The optimistic version of the scenario tacitly assumes not “giving up animals” but “giving up animals with 20th-century knowledge already in hand” — and those are two different scenarios.</p>
+</div>
+</section>
+<section>
+<h2>11. Projecting onto the present: what would our world look like?</h2>
+<p>Renouncing the exploitation of animals from the 14th century would lead to the following results in our hypothetical present (the 22nd–23rd centuries instead of the 21st):</p>
+<h3>A chronological shift in technology</h3>
+<p>Humanity would reach today’s level of technology (semiconductors, advanced chemistry, aviation, digitalization) not at the start of the 21st century but around the 22nd–23rd centuries. The reason is the low productivity of farm labor without draft animals in the 14th–18th centuries, which did not free up enough hands for a rapid industrial leap<a class="cite" href="#src-8">[8]</a>.</p>
+<h3>Overcoming the nutritional barrier</h3>
+<p>Until the mid-20th century (when in our history industrial production of B₁₂ and synthetic amino acids began), humanity would have been shorter on average and would have suffered from specific neurological and hematological disorders<a class="cite" href="#src-14">[14]</a>. Once microbial bioreactors appeared, however, the problem would have been fully solved by industrial fermentation. Interestingly, the absence of traditional animal husbandry would have meant <strong>earlier</strong> development of fermentation biotechnology as a pillar of the pharmaceutical industry.</p>
+<h3>Science without vivisection</h3>
+<p>The history of medicine and pharmacology would be qualitatively different. Had animal experiments been banned in the 14th century, alternative methods of studying life would have advanced faster — in the spirit of the “three Rs” program (replacement, reduction, refinement), which in reality was formulated only in 1959<a class="cite" href="#src-25">[25]</a>:</p>
+<ul>
+<li>Microscopy and histology (which in real history appeared in the 17th century) would have become biology’s main tools much earlier</li>
+<li>Chemical drug synthesis would have taken priority earlier</li>
+<li>In vitro cell and tissue culture methods would have appeared earlier than in the real 20th century</li>
+<li>Computer modeling of biochemical processes would have developed more intensively already in the 20th century</li>
+</ul>
+<h3>Settlement geography and logistics</h3>
+<p>Modern cities would be ultra-dense compact poleis along sea coasts, lakes and navigable rivers, connected by extensive canal networks and early electrified railways. Inland cities far from waterways would have remained much less developed until the 19th–20th centuries.</p>
+<h3>The state of Earth’s biosphere</h3>
+<p>Today’s planet would have:</p>
+<ul>
+<li>A much larger forest area: much of real-world clearing went to pasture and feed crops<a class="cite" href="#src-4">[4]</a></li>
+<li>Cleaner river basins with healthy fish and amphibian ecosystems</li>
+<li>Zero methane emissions from livestock</li>
+<li>A lower global temperature than today</li>
+<li>A larger area of Arctic sea ice</li>
+</ul>
+<p>These benefits, however, would be partly offset by CO₂ emissions from other energy sources (burning wood, later coal) and growing consumption of other resources. Global warming would have come later and been milder — how much depends on the model’s assumptions, and no exact figure can be given here.</p>
+<h3>Political and cultural institutions</h3>
+<p>Social institutions, law and science would have been shaped from the start by a biocentric ethic of non-violence, which could have weakened:</p>
+<ul>
+<li>Colonial wars justified by hunting traditions (hunting was often training in military skills)</li>
+<li>The romanticization of violence in art and literature as the norm</li>
+<li>Racism and chauvinism that relied on a hierarchy of “higher” and “lower” animals (often projected onto people)</li>
+</ul>
+<p>This would have eased the transition to ecologically closed production cycles and more humane relations between cultures (without an ideology of domination).</p>
+<div class="critical-box">
+<div class="cb-header">The final critical view</div>
+<p>“Our present” in this scenario arrives 150–200 years later — not because civilization solved the protein problem differently, but because for eight centuries it bore the costs, until 20th-century agrochemistry and nutrition science closed the gap with the same methods as in our history (ammonia synthesis, synthetic B₁₂, industrial fortification). The scenario describes not so much a sustainable alternative civilization as a demonstration: without a functionally equivalent substitute for animal protein, a total renunciation of animal husbandry in the pre-industrial era is not a utopia but a protracted public-health crisis disguised as ethical progress<a class="cite" href="#src-15">[15]</a>.</p>
+</div>
+</section>
+<section class="sources">
+<h2>Sources and references</h2>
+<div class="source-item" id="src-1">
+<div class="source-number">[1]</div>
+<div class="source-title">Bruce M. S. Campbell — The Great Transition: Climate, Disease and Society in the Late-Medieval World</div>
+<div class="source-desc">Cambridge University Press, 2016. ISBN 978-0-521-14443-8. Climate, epidemics and the crisis of the 14th century.</div>
+</div>
+<div class="source-item" id="src-2">
+<div class="source-number">[2]</div>
+<div class="source-title"><a href="https://mitpressbookstore.mit.edu/book/9780262693134" rel="noopener" target="_blank">Vaclav Smil — Enriching the Earth: Fritz Haber, Carl Bosch, and the Transformation of World Food Production</a></div>
+<div class="source-desc">MIT Press, 2001. Nitrogen, manure and legumes as sources of fertility before ammonia synthesis.</div>
+</div>
+<div class="source-item" id="src-3">
+<div class="source-number">[3]</div>
+<div class="source-title"><a href="https://doi.org/10.1126/science.aaq0216" rel="noopener" target="_blank">J. Poore, T. Nemecek — Reducing food’s environmental impacts through producers and consumers</a></div>
+<div class="source-desc">Science, 2018, 360(6392): 987–992. Plant-based diets and the need for agricultural land.</div>
+</div>
+<div class="source-item" id="src-4">
+<div class="source-number">[4]</div>
+<div class="source-title"><a href="https://ourworldindata.org/drivers-of-deforestation" rel="noopener" target="_blank">Our World in Data — Drivers of deforestation</a></div>
+<div class="source-desc">Hannah Ritchie. The role of beef and other commodities in deforestation.</div>
+</div>
+<div class="source-item" id="src-5">
+<div class="source-number">[5]</div>
+<div class="source-title"><a href="https://www.sei.org/about-sei/press-room/report-reveals-deforestation-drivers-in-the-amazon/" rel="noopener" target="_blank">Stockholm Environment Institute — Report reveals deforestation drivers in the Amazon</a></div>
+<div class="source-desc">SEI, Trase. Cattle ranching’s share of direct forest clearing in the Amazon, 2017–2022.</div>
+</div>
+<div class="source-item" id="src-6">
+<div class="source-number">[6]</div>
+<div class="source-title">F. H. King — Farmers of Forty Centuries</div>
+<div class="source-desc">1911. A classic account of fertilizing fields with human waste in East Asia.</div>
+</div>
+<div class="source-item" id="src-7">
+<div class="source-number">[7]</div>
+<div class="source-title"><a href="https://doi.org/10.1038/nature11069" rel="noopener" target="_blank">V. Seufert, N. Ramankutty, J. A. Foley — Comparing the yields of organic and conventional agriculture</a></div>
+<div class="source-desc">Nature, 2012, 485: 229–232. A meta-analysis of organic vs conventional farming yields.</div>
+</div>
+<div class="source-item" id="src-8">
+<div class="source-number">[8]</div>
+<div class="source-title"><a href="https://mitpress.mit.edu/9780262536165/energy-and-civilization/" rel="noopener" target="_blank">Vaclav Smil — Energy and Civilization: A History</a></div>
+<div class="source-desc">MIT Press, 2017. Human and draft-animal power, the role of muscle energy in the pre-industrial economy.</div>
+</div>
+<div class="source-item" id="src-9">
+<div class="source-number">[9]</div>
+<div class="source-title">Lynn White Jr. — Medieval Technology and Social Change</div>
+<div class="source-desc">Oxford University Press, 1962. The heavy plow, the horse harness and the agricultural revolution of the Middle Ages.</div>
+</div>
+<div class="source-item" id="src-10">
+<div class="source-number">[10]</div>
+<div class="source-title"><a href="https://doi.org/10.1093/jn/131.2.676s" rel="noopener" target="_blank">J. D. Haas, T. Brownlie — Iron Deficiency and Reduced Work Capacity: A Critical Review</a></div>
+<div class="source-desc">Journal of Nutrition, 2001, 131(2): 676S–690S.</div>
+</div>
+<div class="source-item" id="src-11">
+<div class="source-number">[11]</div>
+<div class="source-title"><a href="https://fao.org/4/i3437e/i3437e01.pdf" rel="noopener" target="_blank">FAO (P. Gerber et al.) — Tackling Climate Change Through Livestock</a></div>
+<div class="source-desc">UN FAO, 2013. An assessment of greenhouse gas emissions from livestock.</div>
+</div>
+<div class="source-item" id="src-12">
+<div class="source-number">[12]</div>
+<div class="source-title"><a href="https://www.sei.org/?p=87726" rel="noopener" target="_blank">UNEP / Climate and Clean Air Coalition — Global Methane Assessment</a></div>
+<div class="source-desc">2021. The sectoral structure of anthropogenic methane emissions.</div>
+</div>
+<div class="source-item" id="src-13">
+<div class="source-number">[13]</div>
+<div class="source-title"><a href="https://doi.org/10.25561/76618" rel="noopener" target="_blank">IPCC — Climate Change and Land (SRCCL)</a></div>
+<div class="source-desc">IPCC Special Report, 2019. Land use, food security and emissions.</div>
+</div>
+<div class="source-item" id="src-14">
+<div class="source-number">[14]</div>
+<div class="source-title"><a href="https://ods.od.nih.gov/factsheets/VitaminB12-Consumer/" rel="noopener" target="_blank">NIH Office of Dietary Supplements — Vitamin B12 Fact Sheet</a></div>
+<div class="source-desc">US National Institutes of Health. Sources of B₁₂ and the consequences of deficiency.</div>
+</div>
+<div class="source-item" id="src-15">
+<div class="source-number">[15]</div>
+<div class="source-title"><a href="https://doi.org/10.1016/S0140-6736(13)60937-X" rel="noopener" target="_blank">R. E. Black et al. — Maternal and child undernutrition and overweight in low-income and middle-income countries</a></div>
+<div class="source-desc">The Lancet, 2013, 382(9890): 427–451. Stunting, micronutrient deficiencies and child mortality.</div>
+</div>
+<div class="source-item" id="src-16">
+<div class="source-number">[16]</div>
+<div class="source-title"><a href="https://pubmed.ncbi.nlm.nih.gov/14672294/" rel="noopener" target="_blank">C. G. Neumann et al. — Animal source foods improve dietary quality, micronutrient status, growth and cognitive function in Kenyan school children</a></div>
+<div class="source-desc">Journal of Nutrition, 2003, 133(11 Suppl 2). A controlled study of the effect of animal-source foods on children.</div>
+</div>
+<div class="source-item" id="src-17">
+<div class="source-number">[17]</div>
+<div class="source-title"><a href="https://press.princeton.edu/node/51160" rel="noopener" target="_blank">William Chester Jordan — The Great Famine: Northern Europe in the Early Fourteenth Century</a></div>
+<div class="source-desc">Princeton University Press, 1996. The Great Famine of 1315–1322, crop failures and livestock murrain.</div>
+</div>
+<div class="source-item" id="src-18">
+<div class="source-number">[18]</div>
+<div class="source-title">Amartya Sen — Poverty and Famines: An Essay on Entitlement and Deprivation</div>
+<div class="source-desc">Oxford University Press, 1981. Famine as a loss of access to food, not only a shortage of it.</div>
+</div>
+<div class="source-item" id="src-19">
+<div class="source-number">[19]</div>
+<div class="source-title"><a href="https://pubmed.ncbi.nlm.nih.gov/17507975/" rel="noopener" target="_blank">N. D. Wolfe, C. P. Dunavan, J. Diamond — Origins of major human infectious diseases</a></div>
+<div class="source-desc">Nature, 2007, 447: 279–283. The animal origins of major human infectious diseases.</div>
+</div>
+<div class="source-item" id="src-20">
+<div class="source-number">[20]</div>
+<div class="source-title"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2838858" rel="noopener" target="_blank">Y. Furuse, A. Suzuki, H. Oshitani — Origin of measles virus: divergence from rinderpest virus between the 11th and 12th centuries</a></div>
+<div class="source-desc">Virology Journal, 2010, 7:52.</div>
+</div>
+<div class="source-item" id="src-21">
+<div class="source-number">[21]</div>
+<div class="source-title">William H. McNeill — Plagues and Peoples; Jared Diamond — Guns, Germs, and Steel</div>
+<div class="source-desc">1976; 1997. Classic works on the link between domestication and epidemics.</div>
+</div>
+<div class="source-item" id="src-22">
+<div class="source-number">[22]</div>
+<div class="source-title"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1200696" rel="noopener" target="_blank">Stefan Riedel — Edward Jenner and the history of smallpox and vaccination</a></div>
+<div class="source-desc">Proceedings (Baylor University Medical Center), 2005, 18(1): 21–25.</div>
+</div>
+<div class="source-item" id="src-23">
+<div class="source-number">[23]</div>
+<div class="source-title"><a href="https://openlibrary.org/works/OL2970113W" rel="noopener" target="_blank">John Cummins — The Hound and the Hawk: The Art of Medieval Hunting</a></div>
+<div class="source-desc">1988. Hunting as preparation for war and a symbol of aristocracy.</div>
+</div>
+<div class="source-item" id="src-24">
+<div class="source-number">[24]</div>
+<div class="source-title"><a href="https://www.sunypress.edu/isbn/9780791414972" rel="noopener" target="_blank">Christopher Key Chapple — Nonviolence to Animals, Earth, and Self in Asian Traditions</a></div>
+<div class="source-desc">SUNY Press, 1993. Ahimsa in Jainism, Hinduism and Buddhism.</div>
+</div>
+<div class="source-item" id="src-25">
+<div class="source-number">[25]</div>
+<div class="source-title"><a href="https://norecopa.no/textbase/the-principles-of-humane-experimental-technique/" rel="noopener" target="_blank">W. M. S. Russell, R. L. Burch — The Principles of Humane Experimental Technique</a></div>
+<div class="source-desc">1959. The “three Rs” principle: replacement, reduction and refinement of animal experiments.</div>
+</div>
+</section>
+<footer>
+            Analysis · Systems analysis · 2025 · vadim.li
+            <br/><br/>
+            Quotation and use of the text require the author’s written permission.
+            <br/>
+<a href="mailto:vadim.li@gmail.com">Contact: vadim.li@gmail.com</a>
+</footer>
+</div>
+<script src="../../assets/articles.js"></script>
+<script src="../../assets/site-nav.js"></script>
+</body>
+</html>
