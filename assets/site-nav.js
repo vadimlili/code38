@@ -46,7 +46,7 @@
       var box = document.createElement("div");
       box.id = "vl-next";
       box.innerHTML = '<div class="h">// ' + (lang === "en" ? "Read next" : "Читати далі") + '</div>' + more.map(function (a) {
-        return '<a href="' + root + a.file + '">' + a.title + "<small>" + (a.read ? a.read + " хв · " : "") + (a.excerpt || "") + "</small></a>";
+        return '<a href="' + root + a.file + '">' + a.title + "<small>" + (a.read ? a.read + (lang === "en" ? " min · " : " хв · ") : "") + (a.excerpt || "") + "</small></a>";
       }).join("");
       var foot = document.querySelector("footer");
       if (foot) foot.parentNode.insertBefore(box, foot); else document.body.appendChild(box);

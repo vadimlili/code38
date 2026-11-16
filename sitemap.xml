@@ -3,14 +3,36 @@
   <url>
     <loc>https://vadimlili.github.io/code38/</loc>
     <lastmod>2026-11-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vadimlili.github.io/code38/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vadimlili.github.io/code38/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vadimlili.github.io/code38/"/>
   </url>
   <url>
     <loc>https://vadimlili.github.io/code38/about.html</loc>
     <lastmod>2026-11-16</lastmod>
   </url>
   <url>
+    <loc>https://vadimlili.github.io/code38/en/</loc>
+    <lastmod>2026-11-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vadimlili.github.io/code38/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vadimlili.github.io/code38/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vadimlili.github.io/code38/"/>
+  </url>
+  <url>
+    <loc>https://vadimlili.github.io/code38/en/about.html</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
     <loc>https://vadimlili.github.io/code38/articles/geopolitics/realpolitik.html</loc>
     <lastmod>2026-11-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vadimlili.github.io/code38/articles/geopolitics/realpolitik.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vadimlili.github.io/code38/articles/geopolitics/realpolitik-en.html"/>
+  </url>
+  <url>
+    <loc>https://vadimlili.github.io/code38/articles/geopolitics/realpolitik-en.html</loc>
+    <lastmod>2026-11-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vadimlili.github.io/code38/articles/geopolitics/realpolitik-en.html"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vadimlili.github.io/code38/articles/geopolitics/realpolitik.html"/>
   </url>
   <url>
     <loc>https://vadimlili.github.io/code38/articles/economy/tnc-vs-smart-money.html</loc>
@@ -19,6 +41,14 @@
   <url>
     <loc>https://vadimlili.github.io/code38/articles/defense/mobilization-limits.html</loc>
     <lastmod>2026-07-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vadimlili.github.io/code38/articles/defense/mobilization-limits.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vadimlili.github.io/code38/articles/defense/mobilization-limits-en.html"/>
+  </url>
+  <url>
+    <loc>https://vadimlili.github.io/code38/articles/defense/mobilization-limits-en.html</loc>
+    <lastmod>2026-07-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vadimlili.github.io/code38/articles/defense/mobilization-limits-en.html"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vadimlili.github.io/code38/articles/defense/mobilization-limits.html"/>
   </url>
   <url>
     <loc>https://vadimlili.github.io/code38/articles/finance/cbdc.html</loc>
@@ -31,6 +61,14 @@
   <url>
     <loc>https://vadimlili.github.io/code38/articles/defense/missile-defense.html</loc>
     <lastmod>2025-10-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vadimlili.github.io/code38/articles/defense/missile-defense.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vadimlili.github.io/code38/articles/defense/missile-defense-en.html"/>
+  </url>
+  <url>
+    <loc>https://vadimlili.github.io/code38/articles/defense/missile-defense-en.html</loc>
+    <lastmod>2025-10-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vadimlili.github.io/code38/articles/defense/missile-defense-en.html"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://vadimlili.github.io/code38/articles/defense/missile-defense.html"/>
   </url>
   <url>
     <loc>https://vadimlili.github.io/code38/articles/ideas/biocentrism.html</loc>

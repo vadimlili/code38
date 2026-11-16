@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="An analysis of missile defense systems: technical characteristics, employment strategies and recommendations for Ukraine. Patriot, SAMP/T, THAAD, Arrow, Freyja." name="description"/>
+<title>Ballistic missile defense: technology, strategy, Ukraine</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0d0f12;
+    --bg2: #101318;
+    --bg3: #13161b;
+    --border: #1f2329;
+    --border2: #2a2f38;
+    --accent: #c8a96e;
+    --accent2: #7a6640;
+    --accent-bright: #c8a96e;
+    --text: #d4d8e0;
+    --text-dim: #8a909b;
+    --text-bright: #f0f2f5;
+    --green: #5cb87a;
+    --yellow: #d6a548;
+    --red: #e05c5c;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --display: 'Playfair Display', Georgia, serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.75;
+  }
+
+  /* Layout */
+  .wrap { max-width: 860px; margin: 0 auto; padding: 60px 24px 80px; }
+
+  /* Header */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    font-weight: 900;
+    line-height: 1.15;
+    color: var(--text-bright);
+    margin-bottom: 20px;
+  }
+
+  .lead {
+    font-size: 1.05rem;
+    color: var(--text-dim);
+    margin-bottom: 28px;
+    line-height: 1.8;
+    border-left: 3px solid var(--accent2);
+    padding-left: 16px;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 48px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    font-family: var(--mono);
+  }
+
+  .meta-row .tag {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    padding: 3px 10px;
+    border-radius: 3px;
+    color: var(--text-dim);
+  }
+
+  .meta-sep { color: var(--border2); }
+
+  /* Section headers */
+  h2 {
+    font-family: var(--display);
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    font-weight: 700;
+    color: var(--text-bright);
+    margin: 52px 0 18px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+
+  h2 .sec-num {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent-bright);
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 32px 0 12px;
+  }
+
+  p { margin: 14px 0; }
+
+  /* Tables */
+  .tbl-wrap { overflow-x: auto; margin: 24px 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    min-width: 540px;
+  }
+
+  thead tr { background: var(--bg3); }
+
+  th {
+    padding: 11px 14px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-bright);
+    border-bottom: 2px solid var(--border2);
+    font-size: 0.82rem;
+    letter-spacing: 0.3px;
+  }
+
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+
+  tbody tr:nth-child(odd) { background: rgba(255,255,255,0.015); }
+  tbody tr:hover { background: rgba(200,169,110,0.05); }
+
+  td:first-child { font-weight: 600; color: var(--text-bright); white-space: nowrap; }
+
+  /* Infographic blocks */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .stat-box {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    padding: 16px 18px;
+    border-radius: 2px;
+  }
+
+  .stat-box .val {
+    font-family: var(--display);
+    color: var(--accent) !important;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+
+  .stat-box .lbl {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .stat-box .note {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* Comparison two-col */
+  .cmp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .cmp-box {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 18px 20px;
+    border-radius: 2px;
+  }
+
+  .cmp-box h4 {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border2);
+  }
+
+  .cmp-box p { font-size: 0.9rem; margin: 6px 0; }
+  .cmp-box .k { color: var(--text-dim); font-size: 0.8rem; }
+
+  /* Steps */
+  .steps { margin: 20px 0; }
+
+  .step {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .step-n {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    background: var(--accent);
+    color: #111;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  .step-body h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 5px;
+  }
+
+  .step-body p { font-size: 0.9rem; margin: 0; }
+
+  /* Callout / blockquote */
+  .callout {
+    background: #13161b;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .callout strong { color: var(--text-bright); }
+
+  /* Ukraine block */
+  .ua-block {
+    background: rgba(200,169,110,0.05);
+    border: 1px solid var(--border2);
+    border-top: 3px solid var(--accent-bright);
+    padding: 24px 26px;
+    margin: 28px 0;
+    border-radius: 2px;
+  }
+
+  .ua-block h3 {
+    margin-top: 0;
+    color: var(--accent);
+  }
+
+  .ua-block ul { padding-left: 18px; }
+  .ua-block li { margin: 8px 0; font-size: 0.94rem; line-height: 1.65; }
+
+  /* Verdict */
+  .verdict-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .verdict-box {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 16px;
+    border-radius: 2px;
+    font-size: 0.88rem;
+  }
+
+  .verdict-box .v-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .verdict-box .v-label.green { color: var(--green); }
+  .verdict-box .v-label.yellow { color: var(--yellow); }
+  .verdict-box .v-label.red { color: var(--red); }
+
+  .verdict-box p { color: var(--text-dim); margin: 0; line-height: 1.55; }
+
+  /* Sources */
+  .sources {
+    margin-top: 52px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources h3 {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+  }
+
+  .sources ol {
+    padding-left: 18px;
+    font-size: 0.84rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  .sources li { margin: 5px 0; }
+  .sources a { color: var(--accent-bright); text-decoration: none; }
+  .sources a:hover { text-decoration: underline; }
+
+  /* Author */
+  .author-block {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 18px 22px;
+    margin: 36px 0 0;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border-radius: 2px;
+  }
+
+  .author-block .a-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    background: var(--accent);
+    color: #111 !important;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--text-bright);
+    font-weight: 700;
+  }
+
+  .author-block strong { color: var(--text-bright); }
+  .author-block a { color: var(--accent-bright); text-decoration: none; }
+  .author-block a:hover { text-decoration: underline; }
+
+  /* Utility */
+  .ok  { color: var(--green); font-weight: 700; }
+  .mid { color: var(--yellow); font-weight: 700; }
+  .no  { color: var(--red); font-weight: 700; }
+
+  .mono { font-family: var(--mono); font-size: 0.88em; }
+
+  hr.thin { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  @media (max-width: 680px) {
+    .cmp-grid, .verdict-grid { grid-template-columns: 1fr; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+    table { font-size: 0.82rem; }
+    th, td { padding: 8px 10px; }
+  }
+</style>
+<!-- seo -->
+<link rel="canonical" href="https://vadimlili.github.io/code38/articles/defense/missile-defense-en.html">
+<meta property="og:site_name" content="CODE38">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ballistic missile defense: technology, strategy and the task for Ukraine">
+<meta property="og:description" content="Patriot vs SAMP/T, intercept layers, early warning, Link-16 and the Freyja project — what actually shoots down ballistic missiles.">
+<meta property="og:url" content="https://vadimlili.github.io/code38/articles/defense/missile-defense-en.html">
+<meta property="og:image" content="https://vadimlili.github.io/code38/assets/og/missile-defense-en.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ballistic missile defense: technology, strategy and the task for Ukraine">
+<meta name="twitter:description" content="Patriot vs SAMP/T, intercept layers, early warning, Link-16 and the Freyja project — what actually shoots down ballistic missiles.">
+<meta name="twitter:image" content="https://vadimlili.github.io/code38/assets/og/missile-defense-en.jpg">
+<link rel="icon" href="https://vadimlili.github.io/code38/assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="en" href="https://vadimlili.github.io/code38/articles/defense/missile-defense-en.html">
+<link rel="alternate" hreflang="uk" href="https://vadimlili.github.io/code38/articles/defense/missile-defense.html">
+<link rel="alternate" hreflang="x-default" href="https://vadimlili.github.io/code38/articles/defense/missile-defense.html">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Ballistic missile defense: technology, strategy and the task for Ukraine", "description": "Patriot vs SAMP/T, intercept layers, early warning, Link-16 and the Freyja project — what actually shoots down ballistic missiles.", "datePublished": "2025-10-01", "inLanguage": "en", "author": {"@type": "Person", "name": "vadim.li"}, "publisher": {"@type": "Organization", "name": "CODE38"}, "image": "https://vadimlili.github.io/code38/assets/og/missile-defense-en.jpg", "mainEntityOfPage": "https://vadimlili.github.io/code38/articles/defense/missile-defense-en.html"}</script>
+<!-- /seo -->
+</head>
+<body>
+<div class="wrap">
+<!-- ═══ HEADER ═══ -->
+<div class="eyebrow">Analysis · Missile defense systems · 2025</div>
+<h1>Ballistic missile defense: technology, strategy and the task for Ukraine</h1>
+<p class="lead">A complete technical overview of missile defense systems capable of intercepting ballistic missiles. Comparative characteristics, employment strategies and practical conclusions on Ukraine’s priorities.</p>
+<div class="meta-row">
+<span>Author: <strong style="color:var(--text)">vadim.li</strong></span>
+<span class="meta-sep">·</span>
+<span>Contact: <a href="mailto:vadim.li@gmail.com" style="color:var(--accent-bright)">vadim.li@gmail.com</a></span>
+<span class="meta-sep">·</span>
+<span class="tag">Technical analysis</span>
+<span class="tag">BMD</span>
+<span class="tag">Strategy</span>
+</div>
+<!-- ═══ РОЗДІЛ 1 ═══ -->
+<h2><span class="sec-num">01 /</span> Systems that can shoot down ballistic missiles</h2>
+<p>A ballistic missile is a fundamentally different target from a cruise missile or a drone. It climbs into the upper atmosphere or even near space and then falls on its target almost vertically at 2,000 to 7,000 m/s. No air-defense system designed against aerodynamic targets is built for these conditions — not in radar elevation coverage, not in interceptor speed, not in how it destroys the warhead.</p>
+<p>Only a limited number of systems in the world can do this job reliably. They share a few features: a specialized radar able to track vertically, a fast interceptor, and either a kinetic hit (hit-to-kill) or an extremely precise directional warhead.</p>
+<h3>Why NASAMS, IRIS-T, Buk and S-300 don’t intercept ballistic missiles</h3>
+<p>This is not about the quality of these systems — they do their own jobs very well. The problem is that they were designed against aerodynamic targets: aircraft, helicopters, cruise missiles and drones. Ballistic missiles pose three challenges they cannot solve.</p>
+<div class="steps">
+<div class="step">
+<div class="step-n">1</div>
+<div class="step-body">
+<h4>Speed</h4>
+<p>In the terminal phase a ballistic missile reaches 2,000–7,000 m/s. IRIS-T or Buk interceptors fly several times slower. Even on a head-on course the interceptor cannot reach the intercept point in time.</p>
+</div>
+</div>
+<div class="step">
+<div class="step-n">2</div>
+<div class="step-body">
+<h4>Angle of descent</h4>
+<p>Conventional air-defense radars scan the horizon and the lower hemisphere. A ballistic missile falls almost vertically. Re-pointing the antenna takes 1–2 seconds, during which the target drops several more kilometers.</p>
+</div>
+</div>
+<div class="step">
+<div class="step-n">3</div>
+<div class="step-body">
+<h4>Kill mechanism</h4>
+<p>A conventional surface-to-air missile detonates near the target and hits it with fragments. A massive ballistic warhead with thick thermal protection can survive that and keep falling by inertia. Guaranteed destruction requires either a direct kinetic hit or a very powerful directional blast at point-blank range.</p>
+</div>
+</div>
+</div>
+<h3>Systems capable of intercepting ballistic missiles: comparison table</h3>
+<div class="tbl-wrap">
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Country</th>
+<th>Kill mechanism</th>
+<th>Range (ballistic)</th>
+<th>Intercept altitude</th>
+<th>Missile speed</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Patriot PAC-3 MSE</td>
+<td>USA</td>
+<td>Hit-to-kill (kinetic)</td>
+<td>up to 60 km</td>
+<td>up to 36 km</td>
+<td>~Mach 5</td>
+<td><span class="ok">✓</span> Combat-proven</td>
+</tr>
+<tr>
+<td>SAMP/T Aster 30 B1</td>
+<td>France / Italy</td>
+<td>Directional blast-fragmentation warhead</td>
+<td>30–35 km</td>
+<td>up to 25 km</td>
+<td>~Mach 4.5</td>
+<td><span class="ok">✓</span> Operational</td>
+</tr>
+<tr>
+<td>THAAD</td>
+<td>USA</td>
+<td>Hit-to-kill (exo-atmospheric)</td>
+<td>up to 200 km</td>
+<td>40–150 km</td>
+<td>~Mach 8.2</td>
+<td><span class="ok">✓</span> Deployed in Korea, UAE</td>
+</tr>
+<tr>
+<td>Arrow 2 (Hetz-2)</td>
+<td>Israel / USA</td>
+<td>Hit-to-kill + directional warhead</td>
+<td>90 km</td>
+<td>up to 50 km</td>
+<td>~Mach 9</td>
+<td><span class="ok">✓</span> Combat-proven (Iran 2024)</td>
+</tr>
+<tr>
+<td>Arrow 3 (Hetz-3)</td>
+<td>Israel / USA</td>
+<td>Hit-to-kill (exo-atmospheric)</td>
+<td>~2,400 km</td>
+<td>100 km+</td>
+<td>&gt;Mach 10</td>
+<td><span class="ok">✓</span> Intercepts in space</td>
+</tr>
+<tr>
+<td>Aegis SM-3 Block IIA</td>
+<td>USA / Japan</td>
+<td>Hit-to-kill (exo-atmospheric, sea-based)</td>
+<td>2,500 km</td>
+<td>1,500 km</td>
+<td>~Mach 15</td>
+<td><span class="ok">✓</span> US Navy and Japanese ships</td>
+</tr>
+<tr>
+<td>Cheongung-II (KM-SAM)</td>
+<td>South Korea</td>
+<td>Hit-to-Kill</td>
+<td>40 km</td>
+<td>up to 20 km</td>
+<td>~Mach 4</td>
+<td><span class="ok">✓</span> Domestic design, in service</td>
+</tr>
+<tr>
+<td>L-SAM</td>
+<td>South Korea</td>
+<td>Hit-to-kill (high altitude)</td>
+<td>~150 km</td>
+<td>up to 60 km</td>
+<td>~Mach 6</td>
+<td><span class="mid">△</span> Testing, 2024–25</td>
+</tr>
+<tr>
+<td>HQ-19</td>
+<td>China</td>
+<td>Hit-to-kill (THAAD analog)</td>
+<td>~250 km</td>
+<td>up to 150 km</td>
+<td>~Mach 9</td>
+<td><span class="mid">△</span> Limited public data</td>
+</tr>
+<tr>
+<td>S-300V4</td>
+<td>Russia</td>
+<td>Blast-fragmentation (no hit-to-kill)</td>
+<td>up to 40 km</td>
+<td>up to 35 km</td>
+<td>~Mach 3</td>
+<td><span class="mid">△</span> Limited effectiveness</td>
+</tr>
+<tr>
+<td>S-500 Prometey</td>
+<td>Russia</td>
+<td>Hit-to-kill (claimed)</td>
+<td>600 km (claimed)</td>
+<td>up to 200 km (claimed)</td>
+<td>N/A</td>
+<td><span class="no">✗</span> Few units, unverified</td>
+</tr>
+<tr>
+<td>A-235 Nudol</td>
+<td>Russia</td>
+<td>Hit-to-kill (ASAT/BMD)</td>
+<td>~1,500 km</td>
+<td>up to 800 km</td>
+<td>N/A</td>
+<td><span class="mid">△</span> Strategic, Moscow only</td>
+</tr>
+<tr>
+<td>Freyja / FP-7.X</td>
+<td>Ukraine + EU</td>
+<td>Hit-to-kill (in design)</td>
+<td>TBD</td>
+<td>TBD</td>
+<td>TBD</td>
+<td><span class="mid">△</span> Project, 2024–2026</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3>Classification by intercept altitude</h3>
+<div class="tbl-wrap">
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Altitude</th>
+<th>Systems</th>
+<th>Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lower (terminal)</td>
+<td>0–40 km</td>
+<td>Patriot PAC-3 MSE, SAMP/T, Cheongung-II, S-300V4</td>
+<td>The last line of interception. Limited reaction time. Point defense of cities and facilities.</td>
+</tr>
+<tr>
+<td>Middle</td>
+<td>40–150 km</td>
+<td>THAAD, Arrow 2, L-SAM</td>
+<td>Interception in the ascent or midcourse phase. Larger coverage area.</td>
+</tr>
+<tr>
+<td>Exo-atmospheric (space)</td>
+<td>150 km+</td>
+<td>Arrow 3, Aegis SM-3 B.IIA, A-235</td>
+<td>Interception in near space. The largest coverage area, but the smallest arsenal in the world.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout"><strong>Section takeaway.</strong> Effective ballistic missile defense requires at least two layers. Patriot PAC-3 or SAMP/T alone is terminal defense of a single point. Covering a large area or several sites at once requires a combination of lower- and middle-layer systems.</div>
+<!-- ═══ РОЗДІЛ 2 ═══ -->
+<h2><span class="sec-num">02 /</span> Patriot PAC-3 vs SAMP/T: a detailed comparison</h2>
+<p>Both systems form the backbone of NATO’s modern ground-based ballistic missile defense. But behind similar effectiveness figures lie two different engineering philosophies — American pragmatism of maximum firepower versus a European approach of flexibility and integration.</p>
+<h3>Intercept method</h3>
+<div class="cmp-grid">
+<div class="cmp-box">
+<h4>Patriot PAC-3 MSE — Hit-to-Kill</h4>
+<p>The interceptor physically rams the enemy warhead. The kinetic energy of a collision at ~Mach 5 is so great that the enemy missile disintegrates in the air without the interceptor detonating.</p>
+<p class="k">Advantage: guaranteed destruction of the airframe and warhead. The warhead does not “survive” and keep falling by inertia.</p>
+<p class="k">Drawback: requires extremely precise guidance — an error of more than a few meters means a miss.</p>
+</div>
+<div class="cmp-box">
+<h4>SAMP/T Aster 30 — directional warhead</h4>
+<p>The missile gets as close to the target as possible and detonates a directional blast-fragmentation warhead. Aster 30 can also score a direct hit, but the main design intent is a detonation at very close range.</p>
+<p class="k">Advantage: greater tolerance for guidance error than PAC-3. A reliable result once the target is inside the effective kill zone.</p>
+<p class="k">Drawback: there is a theoretical risk that fragments of a heavy warhead keep falling. In practice it is minimal with a correct detonation.</p>
+</div>
+</div>
+<h3>Radar: sector vs all-round coverage</h3>
+<div class="cmp-grid">
+<div class="cmp-box">
+<h4>Patriot AN/MPQ-65</h4>
+<p>A sector radar with a ~120° field of view. It faces one direction — where the threat is expected. Re-pointing takes 1–2 seconds.</p>
+<p class="k">Advantage: all transmitter power is concentrated on one sector — longer detection range and more accurate tracking.</p>
+<p class="k">Drawback: vulnerable to attacks from the flanks and rear. When the threat direction changes suddenly, critical time is lost.</p>
+</div>
+<div class="cmp-box">
+<h4>SAMP/T Kronos / Arabel</h4>
+<p>The radar rotates continuously, providing 360° coverage. It can track up to 100 targets simultaneously in any sector.</p>
+<p class="k">Advantage: no “dead zones.” The system responds to a threat from any direction without a re-pointing delay.</p>
+<p class="k">Drawback: power is spread across the whole sphere — somewhat shorter range in any given sector than Patriot.</p>
+</div>
+</div>
+<h3>Launch vector</h3>
+<div class="cmp-grid">
+<div class="cmp-box">
+<h4>Patriot — inclined launch</h4>
+<p>Launch canisters are raised at an angle toward the expected threat. The missile flies straight to the likely intercept sector.</p>
+<p class="k">Advantage: less time in the initial flight phase before reaching the intercept zone.</p>
+<p class="k">Drawback: the launcher must be pre-oriented. If the threat comes from an unexpected direction, effectiveness drops.</p>
+</div>
+<div class="cmp-box">
+<h4>SAMP/T — vertical launch</h4>
+<p>The Aster missile is fired straight up and then turns toward the target using thrust-vector control. This allows an immediate attack in any direction.</p>
+<p class="k">Advantage: complete independence from launcher orientation. Ideal for unpredictable threats.</p>
+<p class="k">Drawback: a few seconds are spent on the turn after launch.</p>
+</div>
+</div>
+<h3>Technical comparison</h3>
+<div class="tbl-wrap">
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Patriot PAC-3 MSE</th>
+<th>SAMP/T Aster 30 Block 1NT</th>
+<th>Edge</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Range (ballistic)</td>
+<td>up to 60 km</td>
+<td>30–35 km</td>
+<td><span class="ok">Patriot</span></td>
+</tr>
+<tr>
+<td>Intercept altitude</td>
+<td>up to 36 km</td>
+<td>up to 25 km</td>
+<td><span class="ok">Patriot</span></td>
+</tr>
+<tr>
+<td>Kill mechanism</td>
+<td>Hit-to-Kill</td>
+<td>Directional warhead (+ hit-to-kill)</td>
+<td><span class="ok">Patriot</span> (more reliable)</td>
+</tr>
+<tr>
+<td>Radar coverage</td>
+<td>120° (sector)</td>
+<td>360° (all-round)</td>
+<td><span class="ok">SAMP/T</span></td>
+</tr>
+<tr>
+<td>Launch vector</td>
+<td>Inclined</td>
+<td>Vertical</td>
+<td><span class="ok">SAMP/T</span> (more flexible)</td>
+</tr>
+<tr>
+<td>Deployment time</td>
+<td>15–20 min</td>
+<td>10–15 min</td>
+<td><span class="ok">SAMP/T</span></td>
+</tr>
+<tr>
+<td>Missiles per launcher</td>
+<td>up to 16</td>
+<td>up to 8</td>
+<td><span class="ok">Patriot</span></td>
+</tr>
+<tr>
+<td>Mobility</td>
+<td>Medium (wheeled)</td>
+<td>Higher (more compact)</td>
+<td><span class="ok">SAMP/T</span></td>
+</tr>
+<tr>
+<td>Datalink standard</td>
+<td>JTIDS / Link-16</td>
+<td>Link-16 (native)</td>
+<td><span class="mid">Even</span></td>
+</tr>
+<tr>
+<td>Missile cost</td>
+<td>~$4–5 m</td>
+<td>~€2–3 m</td>
+<td><span class="ok">SAMP/T</span></td>
+</tr>
+<tr>
+<td>Production capacity</td>
+<td>Limited (allied waiting list)</td>
+<td>MBDA is expanding</td>
+<td><span class="mid">Even</span></td>
+</tr>
+<tr>
+<td>Combat experience</td>
+<td>Israel, Saudi Arabia, UAE, Ukraine (2023–25)</td>
+<td>Limited (Iran, Yemen — indirectly)</td>
+<td><span class="ok">Patriot</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3>Bottom line</h3>
+<div class="verdict-grid">
+<div class="verdict-box">
+<div class="v-label green">Patriot is better at</div>
+<p>Range and intercept altitude. More missiles at the site. Proven hit-to-kill. Extensive combat experience.</p>
+</div>
+<div class="verdict-box">
+<div class="v-label green">SAMP/T is better at</div>
+<p>All-round coverage with no dead zones. Faster deployment. Cheaper missiles. Vertical launch — instant response from any direction.</p>
+</div>
+<div class="verdict-box">
+<div class="v-label yellow">Best solution</div>
+<p>A combination of both. SAMP/T for all-round detection and rapid response. Patriot for the most reliable kill of a confirmed ballistic target.</p>
+</div>
+</div>
+<!-- ═══ РОЗДІЛ 3 ═══ -->
+<h2><span class="sec-num">03 /</span> Strategy: how to close the sky to ballistic missiles</h2>
+<p>“Closing the sky” over an entire country against ballistic missiles is technologically and economically impossible. No country in the world has a seamless ballistic missile shield. A realistic strategy rests on four levels, each solving a separate problem.</p>
+<h3>Level 1 — Point (site) defense</h3>
+<p>Missile defense assets (Patriot, SAMP/T, THAAD) are concentrated around critical sites: large cities, command posts, nuclear power plants, key energy and defense-industry facilities. These are protective “domes” with a radius of 30 to 60 km, inside which the system can intercept ballistic missiles. The rest of the territory stays exposed.</p>
+<div class="tbl-wrap">
+<table>
+<thead>
+<tr>
+<th>Protection priority</th>
+<th>Rationale</th>
+<th>Minimum assets</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>City of 1 million+</td>
+<td>Civilian casualties, morale pressure, economic center</td>
+<td>2–3 Patriot / SAMP/T batteries</td>
+</tr>
+<tr>
+<td>Nuclear power plant</td>
+<td>A nuclear accident would make defending a large region impossible</td>
+<td>2 batteries + backup radar</td>
+</tr>
+<tr>
+<td>Armed Forces command post</td>
+<td>Its destruction would paralyze command of the defense</td>
+<td>2–4 batteries</td>
+</tr>
+<tr>
+<td>Key airport / logistics hub</td>
+<td>Critical for arms deliveries and medical evacuation</td>
+<td>1–2 batteries</td>
+</tr>
+<tr>
+<td>Defense plant</td>
+<td>Its destruction limits domestic production of drones and missiles</td>
+<td>1–2 batteries</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3>Level 2 — Destroying launchers (the “hunting” strategy)</h3>
+<p>The most effective “anti-ballistic weapon” is the one that destroys the missile before launch. This strategy requires building a complete reconnaissance-and-strike chain.</p>
+<div class="steps">
+<div class="step">
+<div class="step-n">1</div>
+<div class="step-body">
+<h4>Satellite and signals intelligence</h4>
+<p>Systems such as SBIRS detect the heat signature of a launch instantly. Electronic intelligence tracks activation of radars and communications associated with launch batteries.</p>
+</div>
+</div>
+<div class="step">
+<div class="step-n">2</div>
+<div class="step-body">
+<h4>Deep-reconnaissance drones</h4>
+<p>UAVs such as the RQ-4 Global Hawk or Bayraktar Akıncı with synthetic-aperture radar (SAR) can detect mobile launchers on the move and in hides deep behind enemy lines at ranges up to 300 km.</p>
+</div>
+</div>
+<div class="step">
+<div class="step-n">3</div>
+<div class="step-body">
+<h4>Strikes on launchers, depots and the defense industry</h4>
+<p>ATACMS (300 km), Storm Shadow / SCALP (500+ km), domestic FPV drones and Shahed-class kamikaze drones used in reverse attack launchers, stores of liquid oxygen and solid propellant, and production facilities.</p>
+</div>
+</div>
+<div class="step">
+<div class="step-n">4</div>
+<div class="step-body">
+<h4>Destroying defense-industry plants</h4>
+<p>Every destroyed plant means months without missiles at the front. Strikes on producers of rocket motors, guidance systems and fuel-system components have a strategic multiplier effect.</p>
+</div>
+</div>
+</div>
+<h3>Level 3 — Domestic ballistic missiles and an asymmetric response</h3>
+<p>If the enemy knows that a strike on a major city will certainly bring a retaliatory strike on a comparable target in its own country, it factors that risk into its decisions. This is the concept of a “balance of fear” for non-nuclear states.</p>
+<div class="callout"><strong>An important limit.</strong> For a country seeking Euro-Atlantic integration, developing or acquiring nuclear weapons would mean immediate and catastrophic sanctions, loss of allied support and exclusion from collective-security structures. It is not an option. Developing domestic operational-tactical and tactical missiles with conventional warheads, by contrast, is a fully legitimate path that most developed countries follow.</div>
+<h3>Level 4 — Distributed infrastructure</h3>
+<p>If critical infrastructure is dispersed, a single ballistic missile cannot deliver a systemic blow. Instead of one large thermal plant — dozens of gas-engine or solar stations. Instead of a centralized command post — a distributed network of smaller nodes. This lowers the value of each individual missile strike for the enemy.</p>
+<h3>What exactly Ukraine needs to do</h3>
+<div class="ua-block">
+<h3>Recommendations for Ukraine’s ballistic missile defense strategy</h3>
+<ul>
+<li><strong>Priority: more Patriot PAC-3 and SAMP/T batteries.</strong> Current assets are critically insufficient to cover even 5–6 top-priority sites at once. Every additional battery means protection for one more major city or nuclear plant.</li>
+<li><strong>Diversify suppliers.</strong> Over-reliance on a single system type (for example, Patriot only) creates a risk of running out of missiles and of logistics failures. Obtaining SAMP/T from France and Italy in parallel is critically important.</li>
+<li><strong>Continue and step up strikes on Russia’s defense industry.</strong> Destroying Almaz-Antey plants, Iskander producers and their component stocks directly reduces the number of ballistic missiles Russia can use. The effect accumulates over months.</li>
+<li><strong>Accelerate development of domestic medium-range missiles.</strong> Programs such as Palianytsia and Hrim are strategic in nature. Even a limited arsenal of domestic missiles with a 300–500 km range changes the enemy’s risk calculus.</li>
+<li><strong>Disperse critical infrastructure.</strong> Nuclear plants are covered, but grid nodes, control centers and logistics hubs are not. Distributing these functions lowers the effectiveness of each individual missile strike.</li>
+<li><strong>Integrate into NATO’s Link-16 network.</strong> The Engage on Remote mode lets Polish or Romanian radars pass targeting data to Ukrainian Patriots without them switching on their own radars — improving both survivability and effectiveness.</li>
+<li><strong>Consider acquiring THAAD or SM-3 for the middle layer.</strong> Current systems are terminal-layer. Adding interception at 40–100 km would make it possible to stop missiles before they even enter Patriot’s envelope, raising the overall kill probability.</li>
+</ul>
+</div>
+<!-- ═══ РОЗДІЛ 4 ═══ -->
+<h2><span class="sec-num">04 /</span> Early warning systems: space and ground</h2>
+<p>Ballistic missile defense without early warning is an army with its hands tied. On its own, Patriot reacts to a target within its range — leaving about 30–90 seconds to intercept. An early warning system adds another 5–15 minutes — time to evacuate, bring systems to combat readiness and position them optimally for interception.</p>
+<h3>Layer 1 — Space (detecting the launch)</h3>
+<p>Ignition of a rocket motor produces a heat plume of 2,000–3,000 °C. For the infrared sensors of a satellite in geostationary orbit this is like a bright flash against a dark background — detection comes 20–90 seconds after launch.</p>
+<div class="tbl-wrap">
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Country</th>
+<th>Orbit</th>
+<th>Detection time</th>
+<th>Coverage</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SBIRS (Space-Based Infrared System)</td>
+<td>USA</td>
+<td>GEO + HEO</td>
+<td>&lt;60 sec</td>
+<td>Global</td>
+<td><span class="ok">✓</span> Operational, 6 satellites</td>
+</tr>
+<tr>
+<td>Next-Gen OPIR</td>
+<td>USA</td>
+<td>GEO</td>
+<td>&lt;30 sec</td>
+<td>Global</td>
+<td><span class="mid">△</span> SBIRS replacement, 2024+</td>
+</tr>
+<tr>
+<td>TWISTER / ODIN'S EYE</td>
+<td>EU</td>
+<td>HEO / MEO</td>
+<td>60–120 sec</td>
+<td>Eurasia + Middle East</td>
+<td><span class="mid">△</span> In development, 2025–2030</td>
+</tr>
+<tr>
+<td>DSP (Defense Support Program)</td>
+<td>USA</td>
+<td>GEO</td>
+<td>60–90 sec</td>
+<td>Global</td>
+<td><span class="mid">△</span> Partly decommissioned, backup</td>
+</tr>
+<tr>
+<td>EKS Tundra (14F142)</td>
+<td>Russia</td>
+<td>HEO</td>
+<td>60–90 sec</td>
+<td>USA and Eurasia</td>
+<td><span class="mid">△</span> 4 satellites, limited reliability</td>
+</tr>
+<tr>
+<td>Yaogan + SBIRS analog</td>
+<td>China</td>
+<td>GEO + LEO</td>
+<td>~60 sec</td>
+<td>Asia + Pacific</td>
+<td><span class="mid">△</span> Developing, details classified</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3>Layer 2 — Ground (tracking and target classification)</h3>
+<p>Once a satellite has detected a launch and passed on preliminary coordinates, ground radars take over continuous tracking. They compute the exact ballistic trajectory, determine the impact point and pass targeting data to Patriot or SAMP/T batteries.</p>
+<div class="tbl-wrap">
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Country</th>
+<th>Type</th>
+<th>Range</th>
+<th>Capabilities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PAVE PAWS (AN/FPS-115)</td>
+<td>USA</td>
+<td>Fixed phased array, 240°</td>
+<td>5,500 km</td>
+<td>Tracking ICBMs and space objects, hundreds of targets at once</td>
+</tr>
+<tr>
+<td>COBRA DANE (AN/FPS-108)</td>
+<td>USA (Alaska)</td>
+<td>Fixed phased array, 120°</td>
+<td>2,000 km</td>
+<td>Tracking launches from Asia and the Pacific</td>
+</tr>
+<tr>
+<td>SBX-1 (Sea-Based X-Band)</td>
+<td>USA</td>
+<td>Mobile, sea-based</td>
+<td>2,000 km</td>
+<td>Ultra-precise discrimination — telling warheads from decoys</td>
+</tr>
+<tr>
+<td>TPY-2 (THAAD Radar)</td>
+<td>USA</td>
+<td>Mobile phased array, X-band</td>
+<td>1,000 km</td>
+<td>Deployed with THAAD, precision tracking</td>
+</tr>
+<tr>
+<td>Thales SMART-L MM/N</td>
+<td>Netherlands / NATO</td>
+<td>Shipborne, S-band</td>
+<td>2,000 km</td>
+<td>Early warning, passing targeting data to allies</td>
+</tr>
+<tr>
+<td>Nostradamus</td>
+<td>France</td>
+<td>Over-the-horizon (OTH)</td>
+<td>3,000 km</td>
+<td>Ionospheric reflection. Low accuracy (~200 km), but early detection</td>
+</tr>
+<tr>
+<td>Saab Giraffe AMB</td>
+<td>Sweden / NATO</td>
+<td>Mobile, 3D, C/S-band</td>
+<td>400 km</td>
+<td>Tactical level. Feeds data into the NATO system</td>
+</tr>
+<tr>
+<td>J/FPS-5 (“Gamera”)</td>
+<td>Japan</td>
+<td>Fixed phased array</td>
+<td>1,500 km</td>
+<td>Tracking Korean and Chinese launches</td>
+</tr>
+<tr>
+<td>Voronezh-DM / Konteyner</td>
+<td>Russia</td>
+<td>Fixed phased arrays and OTH</td>
+<td>4,000–6,000 km</td>
+<td>Strategic warning. Data not shared with allies.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3>How a real warhead is told apart from decoys</h3>
+<p>Knowing about intercept systems, the enemy uses countermeasures: along with the warhead it releases light metallized balloons, chaff or inflatable dummies. In the vacuum of space they fly alongside the warhead and overload radars. But nature itself provides a filter:</p>
+<div class="tbl-wrap">
+<table>
+<thead>
+<tr>
+<th>Trajectory phase</th>
+<th>Discrimination method</th>
+<th>Reliability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Space (100+ km)</td>
+<td>Micro-Doppler analysis: a warhead spins and produces a characteristic “jittering” signal; a light balloon does not. Also infrared signature analysis: thermal-protection material reflects differently.</td>
+<td>70–85%</td>
+</tr>
+<tr>
+<td>Upper atmosphere (50–100 km)</td>
+<td>Aerodynamic braking: light decoys slow down sharply due to air resistance and burn up. The heavy warhead keeps going — the speed difference becomes obvious within seconds.</td>
+<td>90–95%</td>
+</tr>
+<tr>
+<td>Dense atmosphere (&lt;50 km)</td>
+<td>Practically all decoys are already gone. The Patriot / SAMP/T radar tracks the single target that keeps moving. The filtering problem is solved naturally.</td>
+<td>98–99%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout"><strong>Key takeaway.</strong> The atmosphere is the best and cheapest “sorter” between warheads and decoys. That is why terminal-layer systems (Patriot, SAMP/T) are so effective in practice: by the time they start tracking, nature has already removed 95% of the false targets. The decoy problem matters only for systems that intercept in space (Arrow 3, SM-3).</div>
+<!-- ═══ РОЗДІЛ 5 ═══ -->
+<h2><span class="sec-num">05 /</span> Radars and missile defense: Europe, Asia, Russia</h2>
+<h3>European systems</h3>
+<div class="tbl-wrap">
+<table>
+<thead>
+<tr>
+<th>System / Country</th>
+<th>Type</th>
+<th>Range</th>
+<th>Role in the NATO system</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SMART-L MM/N (Netherlands)</td>
+<td>Shipborne, S-band, 360°</td>
+<td>2,000 km</td>
+<td>Early warning. Passes targeting data into the NATO network via Link-16. Deployed in the Baltic Sea and North Atlantic.</td>
+<td><span class="ok">✓</span> Operational</td>
+</tr>
+<tr>
+<td>Nostradamus (France)</td>
+<td>Over-the-horizon (OTH), HF band</td>
+<td>3,000 km</td>
+<td>Detects launches deep in enemy territory by ionospheric reflection. Low accuracy (~200 km) — warning only, not targeting.</td>
+<td><span class="ok">✓</span> Operational</td>
+</tr>
+<tr>
+<td>Giraffe AMB (Sweden / NATO)</td>
+<td>Mobile 3D phased array, C/S-band</td>
+<td>400 km</td>
+<td>Tactical detection and data transfer into the NATO system. Deployed in the Baltic states and Poland.</td>
+<td><span class="ok">✓</span> Operational</td>
+</tr>
+<tr>
+<td>TWISTER / ODIN'S EYE (EU)</td>
+<td>Infrared satellite constellation (14 spacecraft)</td>
+<td>Global</td>
+<td>A space warning layer independent of the US. The goal is to duplicate SBIRS for the European Union.</td>
+<td><span class="mid">△</span> In development 2025–2030</td>
+</tr>
+<tr>
+<td>HENSOLDT TwInvis (Germany)</td>
+<td>Passive radar (no emitter of its own)</td>
+<td>250 km</td>
+<td>Detects low-observable targets. Creates no EM field of its own — invisible to enemy electronic warfare.</td>
+<td><span class="mid">△</span> In testing</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3>Asian missile defense systems</h3>
+<div class="tbl-wrap">
+<table>
+<thead>
+<tr>
+<th>Country / System</th>
+<th>Components</th>
+<th>Ballistic interception</th>
+<th>Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Japan — JADGE / Aegis</td>
+<td>Aegis BMD (DDG ships), Patriot PAC-3, J/FPS-5 (“Gamera”) and J/FPS-7 radars</td>
+<td>Two-tier: SM-3 in space + PAC-3 in the terminal phase</td>
+<td>The most advanced missile defense in Asia after the US. Four Aegis destroyers are permanently on duty. Interception of North Korean missiles has been rehearsed.</td>
+</tr>
+<tr>
+<td>South Korea — KAMD</td>
+<td>Cheongung-II (KM-SAM), L-SAM (in testing), Aegis SM-2/3, PAC-3 (imported)</td>
+<td>Lower and middle layers. L-SAM — up to 60 km altitude.</td>
+<td>Active development of a domestic component base. L-SAM is a domestically designed hit-to-kill interceptor. The goal is full independence from imports by 2030.</td>
+</tr>
+<tr>
+<td>China — IADS</td>
+<td>HQ-9B/C (S-300 analog), HQ-19 (THAAD analog), domestic satellites, over-the-horizon radars</td>
+<td>HQ-19 — exo-atmospheric. HQ-9C — terminal.</td>
+<td>The largest missile defense arsenal in Asia. All components domestically designed. Specifications classified. HQ-19 completed its first flight tests in 2023–24.</td>
+</tr>
+<tr>
+<td>Israel — multi-layered missile defense</td>
+<td>Iron Dome (rockets/mortars), David's Sling (cruise/short-range ballistic), Arrow 2 (ballistic), Arrow 3 (exo-atmospheric)</td>
+<td>Four layers. Arrow 3 intercepts in space.</td>
+<td>The first country with a confirmed combat exo-atmospheric interception (Arrow 3, November 2023); used it on a large scale during Iran’s attack in April 2024. The most combat-experienced missile defense in the world.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3>Russian missile defense systems</h3>
+<p>Russia traditionally presents its systems as “the best in the world.” The real picture is far more modest, especially given the lack of combat experience intercepting ballistic missiles and of documented effectiveness data.</p>
+<div class="tbl-wrap">
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Purpose</th>
+<th>Effectiveness against ballistic missiles</th>
+<th>Limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S-400 Triumf</td>
+<td>The main air-defense system. Designed mainly against aircraft, helicopters and cruise missiles.</td>
+<td><span class="mid">△</span> Limited. No hit-to-kill. The 48N6 missile is not designed for very fast ballistic targets.</td>
+<td>No kinetic interceptor. The long-range 40N6E missile is unverified against ballistic targets. Combat experience in Ukraine — numerous losses to ATACMS and Storm Shadow.</td>
+</tr>
+<tr>
+<td>S-300V4</td>
+<td>The army variant, built specifically for missile defense. Heavy very fast missiles on a tracked chassis (Gladiator 9M83, Giant 9M82).</td>
+<td><span class="mid">△</span> Better than S-400, but still no confirmed hit-to-kill.</td>
+<td>Outdated components. Small-batch system. Not integrated into modern network-centric architectures.</td>
+</tr>
+<tr>
+<td>S-500 Prometey</td>
+<td>Presented as a next-generation missile and space defense system. Claimed range 600 km, targets: ballistic missiles and hypersonic vehicles.</td>
+<td><span class="no">✗</span> Unverified. Only isolated prototypes are known. Open-source data is highly contradictory.</td>
+<td>Sanctions have limited access to microelectronics. Series production unknown. Not a single confirmed interception.</td>
+</tr>
+<tr>
+<td>A-135 Amur / A-235 Nudol</td>
+<td>A strategic system defending Moscow against a massive nuclear strike. Combines nuclear-tipped interceptors (53T6) and kinetic ones (14Ts033 for A-235).</td>
+<td><span class="ok">✓</span> Designed exactly for this, but only to defend Moscow.</td>
+<td>Geographically tied to the Moscow region. About 68 interceptors. Not suitable for mobile deployment.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout"><strong>Overall verdict on Russia.</strong> Russia’s missile defense is a mix of outdated platforms (S-300V4, A-135), systems never designed for ballistic targets (S-400) and claimed but unverified developments (S-500). The only truly specialized system (A-235) protects Moscow but is not mobile. The Ukrainian armed forces’ experience destroying S-300s and S-400s has shown their vulnerability to ATACMS strikes from 250–300 km.</div>
+<!-- ═══ РОЗДІЛ 6 ═══ -->
+<h2><span class="sec-num">06 /</span> The Freyja project, the FP-7.X missile and the Link-16 standard</h2>
+<p>The Freyja project is an attempt by Europe and Ukraine to solve a key problem: Patriot is expensive, the delivery queue is long, and ballistic missile defense is needed now. The goal is an intercept system cheaper than Patriot but integrated into NATO architecture, which can be produced on European capacity.</p>
+<h3>Key parameters of the Freyja project</h3>
+<div class="stat-grid">
+<div class="stat-box">
+<div class="val">&lt;€1M</div>
+<div class="lbl">Target missile cost</div>
+<div class="note">Versus $4–5 m for PAC-3 MSE. The savings allow an arsenal twice as large.</div>
+</div>
+<div class="stat-box">
+<div class="val">13</div>
+<div class="lbl">Partner companies</div>
+<div class="note">Including Kongsberg (Norway), Diehl Defence (Germany), Fire Point (Ukraine).</div>
+</div>
+<div class="stat-box">
+<div class="val">Link-16</div>
+<div class="lbl">Data-exchange standard</div>
+<div class="note">Native integration into the NATO network from day one. No adapters needed.</div>
+</div>
+<div class="stat-box">
+<div class="val">FP-7.X</div>
+<div class="lbl">Interceptor missile</div>
+<div class="note">A Ukrainian design by Fire Point. Very high speed. Detailed specifications are not published.</div>
+</div>
+</div>
+<h3>Freyja compared with Patriot and SAMP/T</h3>
+<div class="tbl-wrap">
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Patriot PAC-3 MSE</th>
+<th>SAMP/T Aster 30</th>
+<th>Freyja / FP-7.X</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Missile cost</td>
+<td>$4–5 m</td>
+<td>€2–3 m</td>
+<td>&lt;€1 m (target)</td>
+</tr>
+<tr>
+<td>Kill mechanism</td>
+<td>Hit-to-Kill</td>
+<td>Directional warhead</td>
+<td>Hit-to-kill (in design)</td>
+</tr>
+<tr>
+<td>Manufacturer</td>
+<td>Lockheed Martin (USA)</td>
+<td>MBDA (France / Italy)</td>
+<td>EU consortium + Fire Point (Ukraine)</td>
+</tr>
+<tr>
+<td>Dependence on the US</td>
+<td>Full (licenses, components, ITAR)</td>
+<td>Partial</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Link-16 (native)</td>
+<td>Partial support</td>
+<td>Yes</td>
+<td>Yes, from day one</td>
+</tr>
+<tr>
+<td>Radar</td>
+<td>AN/MPQ-65 (sector)</td>
+<td>Kronos / Arabel (360°)</td>
+<td>Modular (partner’s choice)</td>
+</tr>
+<tr>
+<td>Readiness</td>
+<td>Operational, in service</td>
+<td>Operational, in service</td>
+<td>Project, 2024–2026</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3>The Link-16 standard: why it is critical</h3>
+<p>Link-16 is a secure standard for digital exchange of tactical data among all NATO elements: aircraft, ships, ground-based missile defense, command posts. It is not just “military Wi-Fi” — it is an architecture that lets different systems from different countries act as a single organism.</p>
+<div class="tbl-wrap">
+<table>
+<thead>
+<tr>
+<th>Link-16 function</th>
+<th>What it means in practice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TDMA (time division)</td>
+<td>Each participant gets its own micro-slot in a millisecond cycle. Up to 128 participants in one network without mutual interference.</td>
+</tr>
+<tr>
+<td>FHSS (frequency hopping)</td>
+<td>The signal changes frequency up to 77,000 times per second. Enemy electronic warfare cannot jam such a transmission.</td>
+</tr>
+<tr>
+<td>Engage on Remote (EoR)</td>
+<td>A Polish or Romanian radar detects the target and sends a J-message with coordinates. A Ukrainian Patriot battery intercepts the target without switching on its own radar. Its position stays invisible to enemy electronic warfare.</td>
+</tr>
+<tr>
+<td>Single Integrated Air Picture (SIAP)</td>
+<td>All network participants see the same air picture in real time. This rules out double targeting and friendly fire.</td>
+</tr>
+<tr>
+<td>Network-centric fire</td>
+<td>One sensor (radar) can provide targeting to several shooters (Patriot + SAMP/T) at once, optimizing the use of missiles.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="ua-block">
+<h3>Link-16 and Freyja — what they mean for Ukraine</h3>
+<ul>
+<li>Integration into the Link-16 network lets Ukraine use data from Polish, Romanian and NATO radars without revealing its own positions.</li>
+<li>Engage on Remote mode critically increases the survivability of Patriot batteries: the position is not revealed during combat use.</li>
+<li>The participation of Ukrainian companies (Fire Point) in the Freyja project is a strategic investment in domestic missile defense production capability. Even if the first series systems arrive after the active phase of fighting ends, it builds long-term defense potential.</li>
+<li>An interceptor 4–5 times cheaper than PAC-3 would let Ukraine maintain a much larger stock of missiles for the same allied spending.</li>
+</ul>
+</div>
+<!-- ═══ ВИСНОВКИ ═══ -->
+<hr class="thin"/>
+<h2><span class="sec-num">—</span> Overall conclusions</h2>
+<p>Ballistic missile defense is not one system or one solution. It is an architecture of several interconnected layers: warning, detection, interception and asymmetric strikes on the enemy’s production base.</p>
+<div class="tbl-wrap">
+<table>
+<thead>
+<tr>
+<th>Conclusion</th>
+<th>What it means in practice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Full sky coverage does not exist</td>
+<td>Any missile defense strategy is a choice of priorities. Cities and critical infrastructure come first. Rear areas are deliberately left exposed.</td>
+</tr>
+<tr>
+<td>Patriot and SAMP/T complement each other</td>
+<td>Patriot: greater range and altitude, guaranteed hit-to-kill. SAMP/T: all-round coverage, faster deployment, cheaper munitions. The optimum is both systems at one site.</td>
+</tr>
+<tr>
+<td>The kill chain beats interception</td>
+<td>A destroyed rocket-motor plant deprives the enemy of dozens of launches. That costs many times less than intercepting the same missiles in flight.</td>
+</tr>
+<tr>
+<td>The atmosphere filters decoys automatically</td>
+<td>Terminal-layer systems (Patriot, SAMP/T) intercept targets already filtered by the atmosphere. The decoy problem concerns only the space layer (Arrow 3, SM-3).</td>
+</tr>
+<tr>
+<td>Link-16 is a prerequisite for effectiveness</td>
+<td>An isolated Patriot battery is only point defense. A Patriot on the Link-16 network is a node in a system that sees the entire theater of operations.</td>
+</tr>
+<tr>
+<td>Freyja is a strategic bet, not an immediate solution</td>
+<td>The first series Freyja systems are expected no earlier than 2027–2028. Existing systems are what is needed now. But building domestic missile defense capability is essential for long-term security.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- ═══ ДЖЕРЕЛА ═══ -->
+<div class="sources">
+<h3>Sources and references</h3>
+<ol>
+<li>Missile Defense Agency, U.S. Department of Defense — <a href="https://www.mda.mil" target="_blank">mda.mil</a> — official specifications for THAAD, Patriot, SM-3, SBIRS.</li>
+<li>MBDA Group — <a href="https://www.mbda-systems.com" target="_blank">mbda-systems.com</a> — Aster 30, SAMP/T characteristics, the TWISTER project.</li>
+<li>Lockheed Martin — <a href="https://www.lockheedmartin.com/en-us/products/pac-3.html" target="_blank">lockheedmartin.com</a> — PAC-3 MSE specification and combat record.</li>
+<li>International Institute for Strategic Studies (IISS) — “The Military Balance 2024” — quantitative data on missile defense systems by country.</li>
+<li>Jane's by S&amp;P Global — technical reference works on missile defense systems (subscription access).</li>
+<li>Israeli Ministry of Defense / Rafael Advanced Defense Systems — Arrow 2/3, David's Sling. Reports on interception of Iranian missiles, April 2024.</li>
+<li>Korean Agency for Defense Development (ADD) — Cheongung-II, L-SAM — official press releases 2023–24.</li>
+<li>NATO — Allied Command Transformation — documents on Link-16, JTIDS and network-centric defense architecture.</li>
+<li>Congressional Research Service (CRS) — «Ballistic Missile Defense: Historical Overview» (RL30024).</li>
+<li>Arms Control Association — analysis of missile defense treaties and modern systems.</li>
+<li>SIPRI (Stockholm International Peace Research Institute) — data on transfers of missile defense systems by country.</li>
+<li>Fire Point / Freyja Project — official press releases and materials from DSEI 2023, Eurosatory 2024.</li>
+</ol>
+</div>
+<!-- ═══ АВТОР ═══ -->
+<div class="author-block">
+<div class="a-icon">VL</div>
+<div>
+<div><strong>vadim.li</strong> — independent analyst and content producer</div>
+<div style="margin-top:4px">Inquiries, republishing permissions, commissions: <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a></div>
+<div style="margin-top:6px; font-size:0.82rem; color:var(--text-dim)">The material is based on open sources. Republishing only with attribution to the author.</div>
+</div>
+</div>
+</div>
+<script src="../../assets/articles.js"></script>
+<script src="../../assets/site-nav.js"></script>
+</body>
+</html>

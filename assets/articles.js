@@ -117,5 +117,44 @@ window.ARTICLES = [
     lang: "uk",
     read: 12,
     excerpt: "Що було б, якби людство відмовилося від експлуатації тварин у XIV столітті: два сценарії — оптимістичний і критичний."
+  },
+
+  // ── English translations ──
+  {
+    id: "realpolitik-en",
+    translation: "realpolitik",
+    title: "Geopolitics without rose-tinted glasses: why weapons aren’t a reward for “good behavior”",
+    file: "articles/geopolitics/realpolitik-en.html",
+    topic: "geopolitics",
+    tags: ["USA", "CIA", "military aid"],
+    date: "2026-11-15",
+    lang: "en",
+    read: 16,
+    excerpt: "Sixty years of covert US arms deliveries: dictators, Islamists, drug traffickers — and not one certificate of clean governance.",
+    featured: true
+  },
+  {
+    id: "mobilization-limits-en",
+    translation: "mobilization-limits",
+    title: "The economic limits of total mobilization",
+    file: "articles/defense/mobilization-limits-en.html",
+    topic: "defense",
+    tags: ["mobilization", "budget", "war economy"],
+    date: "2026-07-25",
+    lang: "en",
+    read: 15,
+    excerpt: "Why the slogan “everyone will fight” doesn’t survive contact with the budget — and what to do about Russia’s autumn mobilization."
+  },
+  {
+    id: "missile-defense-en",
+    translation: "missile-defense",
+    title: "Ballistic missile defense: technology, strategy and the task for Ukraine",
+    file: "articles/defense/missile-defense-en.html",
+    topic: "defense",
+    tags: ["air defense", "BMD", "Patriot", "SAMP/T"],
+    date: "2025-10-01",
+    lang: "en",
+    read: 14,
+    excerpt: "Patriot vs SAMP/T, intercept layers, early warning, Link-16 and the Freyja project — what actually shoots down ballistic missiles."
   }
 ];

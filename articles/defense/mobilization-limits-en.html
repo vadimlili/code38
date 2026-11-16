@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Why the idea that “everyone will fight” is mathematically self-defeating for Ukraine’s defense capability — the budget mechanics of the war, labor depletion, historical precedents of total mobilization and the scenario of Russia’s autumn mobilization wave." name="description"/>
+<title>The economic limits of total mobilization — vadim.li</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  :root{
+    --bg: #0d0f12;
+    --bg-raised: #13161b;
+    --bg-card: #13161b;
+    --line: #1f2329;
+    --line-soft: #181b20;
+    --ink: #f0f2f5;
+    --ink-dim: #d4d8e0;
+    --ink-mute: #8a909b;
+    --brass: #c8a96e;
+    --brass-dim: #7a6640;
+    --alert: #e05c5c;
+    --alert-dim: #8a3a3a;
+    --ok: #5cb87a;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before{
+    content:"";
+    position: fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px);
+    background-size: 100% 44px;
+    opacity: 0;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{
+    position: relative; z-index:1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ---------- Header ---------- */
+  header.hero{
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow-row{
+    display:flex; align-items:center; gap:10px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .tag{
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brass);
+    border: 1px solid var(--brass-dim);
+    padding: 5px 10px;
+    border-radius: 3px;
+    background: rgba(200,169,110,0.06);
+  }
+  .tag.alert{ color: var(--alert); border-color: var(--alert-dim); background: rgba(224,92,92,0.08); }
+  .kicker{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+
+  h1{
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    line-height: 1.15;
+    margin: 0 0 18px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  h1 em{
+    font-style: italic;
+    color: var(--brass);
+  }
+
+  .subtitle{
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--ink-dim);
+    max-width: 60ch;
+    margin: 0 0 28px;
+  }
+
+  .meta-line{
+    display:flex; flex-wrap: wrap; gap: 6px 14px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink-mute);
+  }
+  .meta-line .dot::before{ content:"·"; margin-right: 14px; color: var(--line); }
+  .meta-line a{ color: var(--brass); text-decoration: none; border-bottom: 1px solid var(--brass-dim); }
+  .meta-line a:hover{ color: var(--ink); }
+
+  .license-note{
+    margin-top: 18px;
+    font-size: 12px;
+    color: var(--ink-mute);
+    font-family: var(--mono);
+    padding: 10px 14px;
+    border-left: 2px solid var(--brass-dim);
+    background: var(--bg-raised);
+  }
+  .license-note a{ color: var(--brass); }
+
+  /* ---------- Body typography ---------- */
+  .lede{
+    font-size: 18px;
+    color: var(--ink-dim);
+    margin: 36px 0;
+  }
+  p{ margin: 0 0 20px; font-size: 17px; line-height: 1.75; color: var(--ink-dim); }
+  strong{ color: var(--ink); font-weight: 600; }
+
+  section.part{ margin-top: 64px; }
+
+  .part-label{
+    display:flex; align-items: baseline; gap: 14px;
+    margin-bottom: 18px;
+  }
+  .part-num{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--brass);
+    letter-spacing: 0.08em;
+  }
+  .part-num::before{ content:""; display:inline-block; width:22px; height:1px; background: var(--brass-dim); margin-right:10px; vertical-align: middle; }
+
+  h2{
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    color: var(--ink);
+    margin: 4px 0 0;
+    line-height: 1.3;
+  }
+  h3{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--ink);
+    margin: 32px 0 14px;
+  }
+
+  ul, ol{ margin: 0 0 20px; padding-left: 22px; color: var(--ink-dim); }
+  li{ margin-bottom: 10px; font-size: 16px; }
+  li::marker{ color: var(--brass-dim); }
+
+  /* ---------- Ledger / budget visual ---------- */
+  .ledger{
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    margin: 28px 0 32px;
+    overflow: hidden;
+  }
+  .ledger-head{
+    display:flex; justify-content: space-between; align-items:baseline;
+    padding: 16px 20px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .ledger-head .t{ font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-mute); }
+  .ledger-head .v{ font-family: var(--serif); font-size: 24px; color: var(--brass); font-weight: 600; }
+  .ledger-bar{ display:flex; height: 34px; }
+  .ledger-bar span{ display:flex; align-items:center; justify-content:center; font-family: var(--mono); font-size: 11px; color: var(--bg); font-weight:600; }
+  .seg-a{ background: var(--ink-mute); flex: 0 0 4%; }
+  .seg-b{ background: var(--ok); flex: 0 0 3%; }
+  .seg-c{ background: var(--brass); flex: 1; }
+  .ledger-rows{ padding: 14px 20px 18px; display:grid; gap: 10px; }
+  .ledger-row{ display:flex; justify-content: space-between; gap: 16px; font-size: 14.5px; }
+  .ledger-row .label{ color: var(--ink-dim); }
+  .ledger-row .val{ font-family: var(--mono); color: var(--ink); white-space:nowrap; }
+  .swatch{ display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:8px; vertical-align:1px; }
+
+  /* ---------- Stat strip ---------- */
+  .stat-strip{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin: 28px 0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .stat{
+    background: var(--bg-card);
+    padding: 18px 16px;
+  }
+  .stat .num{ font-family: var(--serif); font-size: 28px; color: var(--brass); font-weight: 600; line-height:1; }
+  .stat .num.alert{ color: var(--alert); }
+  .stat .lbl{ font-size: 12px; color: var(--ink-mute); margin-top: 8px; line-height:1.4; }
+
+  /* ---------- Callout / example box ---------- */
+  .callout{
+    margin: 28px 0;
+    padding: 20px 22px;
+    background: var(--bg-raised);
+    border-left: 3px solid var(--brass);
+    border-radius: 0 4px 4px 0;
+  }
+  .callout.alert{ border-left-color: var(--alert); }
+  .callout .cal-title{
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--brass);
+    margin-bottom: 10px;
+  }
+  .callout.alert .cal-title{ color: var(--alert); }
+  .callout p:last-child{ margin-bottom:0; }
+
+  blockquote{
+    margin: 28px 0;
+    padding: 4px 0 4px 22px;
+    border-left: 2px solid var(--brass-dim);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-dim);
+  }
+
+  /* ---------- Tables ---------- */
+  table{ width:100%; border-collapse: collapse; margin: 24px 0; font-size: 14.5px; }
+  th, td{ padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); }
+  th{ font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-mute); font-weight:500; }
+  td{ color: var(--ink-dim); }
+  td.yes{ color: var(--ok); }
+  td.no{ color: var(--alert); }
+
+  /* ---------- Country cards ---------- */
+  .cases{ display:grid; gap: 14px; margin: 28px 0; }
+  .case{
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 20px 22px;
+  }
+  .case-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 10px; gap: 10px; flex-wrap:wrap; }
+  .case-head .name{ font-family: var(--serif); font-weight:600; font-size: 18px; color: var(--ink); }
+  .case-head .years{ font-family: var(--mono); font-size: 12px; color: var(--brass); }
+  .case p{ font-size: 15px; margin-bottom: 0; color: var(--ink-dim); }
+
+  /* ---------- Conclusion ---------- */
+  .conclusion{
+    margin-top: 64px;
+    padding: 30px 26px;
+    background: var(--bg-card);
+    border: 1px solid var(--brass-dim);
+    border-radius: 6px;
+  }
+  .conclusion h2{ margin-top:0; }
+
+  /* ---------- Sources ---------- */
+  .sources{ margin-top: 64px; }
+  .src-list{ display:grid; gap: 8px; margin-top: 20px; }
+  .src{
+    display:flex; gap: 12px; align-items:baseline;
+    padding: 10px 14px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line-soft);
+    border-radius: 3px;
+    font-size: 13px;
+  }
+  .src .n{ font-family: var(--mono); color: var(--ink-mute); flex: 0 0 22px; }
+  .src a{ color: var(--ink-dim); text-decoration: none; }
+  .src a:hover{ color: var(--brass); }
+  .src .domain{ font-family: var(--mono); font-size: 11px; color: var(--brass-dim); margin-left: auto; white-space: nowrap; padding-left: 10px; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    margin-top: 72px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-mute);
+    text-align:center;
+    line-height: 1.9;
+  }
+  footer a{ color: var(--brass); text-decoration:none; border-bottom: 1px solid var(--brass-dim); }
+  footer a:hover{ color: var(--ink); }
+
+  @media (max-width: 560px){
+    .wrap{ padding: 0 16px 60px; }
+    header.hero{ padding: 40px 0 32px; }
+    .ledger-head{ flex-direction:column; align-items:flex-start; gap:6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+  }
+</style>
+<!-- seo -->
+<link rel="canonical" href="https://vadimlili.github.io/code38/articles/defense/mobilization-limits-en.html">
+<meta property="og:site_name" content="CODE38">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The economic limits of total mobilization">
+<meta property="og:description" content="Why the slogan “everyone will fight” doesn’t survive contact with the budget — and what to do about Russia’s autumn mobilization.">
+<meta property="og:url" content="https://vadimlili.github.io/code38/articles/defense/mobilization-limits-en.html">
+<meta property="og:image" content="https://vadimlili.github.io/code38/assets/og/mobilization-limits-en.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The economic limits of total mobilization">
+<meta name="twitter:description" content="Why the slogan “everyone will fight” doesn’t survive contact with the budget — and what to do about Russia’s autumn mobilization.">
+<meta name="twitter:image" content="https://vadimlili.github.io/code38/assets/og/mobilization-limits-en.jpg">
+<link rel="icon" href="https://vadimlili.github.io/code38/assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="en" href="https://vadimlili.github.io/code38/articles/defense/mobilization-limits-en.html">
+<link rel="alternate" hreflang="uk" href="https://vadimlili.github.io/code38/articles/defense/mobilization-limits.html">
+<link rel="alternate" hreflang="x-default" href="https://vadimlili.github.io/code38/articles/defense/mobilization-limits.html">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "The economic limits of total mobilization", "description": "Why the slogan “everyone will fight” doesn’t survive contact with the budget — and what to do about Russia’s autumn mobilization.", "datePublished": "2026-07-25", "inLanguage": "en", "author": {"@type": "Person", "name": "vadim.li"}, "publisher": {"@type": "Organization", "name": "CODE38"}, "image": "https://vadimlili.github.io/code38/assets/og/mobilization-limits-en.jpg", "mainEntityOfPage": "https://vadimlili.github.io/code38/articles/defense/mobilization-limits-en.html"}</script>
+<!-- /seo -->
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+<div class="eyebrow-row"><span class="tag">War economy</span> <span class="tag alert">Mobilization</span> <span class="kicker">2026</span></div>
+<h1>The economic limits of total mobilization: why the idea that <em>“everyone will fight”</em> is ruinous for Ukraine’s defense capability</h1>
+<p class="subtitle">Why the numbers in the budget don’t add up to the popular slogan — and where Russia’s autumn mobilization comes in.</p>
+<div class="meta-line">
+<span>≈ 15 min read</span>
+<span class="dot">Analysis</span>
+<span class="dot">Macroeconomics · Defense</span>
+<span class="dot">Author: vadim.li · <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a></span>
+</div>
+<div class="license-note">
+      The text may be used only with the author’s permission. For republishing, citation or collaboration, write to <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a>.
+    </div>
+</header>
+<p class="lede">A thesis is heard more and more often in society and among the military: sooner or later we will have to move to the principle that “everyone will fight.” It is clear where it comes from — a protracted war, lack of rotation, exhaustion at the front. But look at it not emotionally but through the lens of the budget, logistics and the basic arithmetic of governing, and the picture changes: drafting the entire working-age population is not just impossible — it destroys itself faster than it can deliver results.</p>
+<p>An army does not exist on its own. It eats what the farm sector grew, runs on fuel someone extracted and refined, and is paid from taxes someone paid. Take a critical mass of people out of the home front and the state instantly loses revenue, breaks its supply chains and eventually has nothing to feed and arm even those it has already mobilized.</p>
+<!-- ЧАСТИНА 01 -->
+<section class="part">
+<div class="part-label"><span class="part-num">Part 01</span></div>
+<h2>The fiscal mechanics of the war: what an army costs and the role of the home front</h2>
+<p>To see where the real limit of mobilization lies, start by counting what it costs to maintain one soldier. According to official Defense Ministry data, it is roughly <strong>UAH 1.2 million a year</strong> — about $30,000. And that is only the baseline: no heavy weapons, vehicles, ammunition or fuel.</p>
+<div class="ledger">
+<div class="ledger-head"><span class="t">Annual cost of maintaining one soldier</span> <span class="v">~UAH 1.2 m</span></div>
+<div class="ledger-bar"><span class="seg-a"></span><span class="seg-b"></span><span class="seg-c">pay, allowances, medical care, training</span></div>
+<div class="ledger-rows">
+<div class="ledger-row"><span class="label"><span class="swatch" style="background:var(--ink-mute)"></span>Clothing and protective equipment</span><span class="val">&gt; UAH 50,000/yr</span></div>
+<div class="ledger-row"><span class="label"><span class="swatch" style="background:var(--ok)"></span>Food</span><span class="val">~ UAH 55,000–65,000/yr</span></div>
+<div class="ledger-row"><span class="label"><span class="swatch" style="background:var(--brass)"></span>Pay, combat allowances, medical care, training</span><span class="val">~ UAH 1,085,000–1,095,000/yr</span></div>
+</div>
+</div>
+<p style="font-size:12.5px;color:var(--ink-mute);font-family:var(--mono);margin-top:-14px;">* Under the State Rear Operator’s contracts for 2025–2026, a daily ration costs UAH 128 (contracted price) against a ceiling of UAH 171.5 per day — roughly UAH 47,000–63,000 a year.</p>
+<p>The biggest item is pay: base salary, rank supplement, length-of-service bonus and, of course, combat allowances of UAH 30,000, 70,000 or 100,000 a month depending on where exactly the soldier is fighting. The rest goes to training centers, transport, medical treatment and insurance.</p>
+<h3>The iron rule of wartime budget financing</h3>
+<p>There is a point that is often missed. All international assistance — grants and concessional loans from the US, the EU and the IMF — may by law go only to civilian and social items: pensions, salaries of teachers and doctors, social payments. That money cannot be spent on the army.</p>
+<p>In other words, the entire security and defense sector rests exclusively on domestic revenue — taxes, customs duties and domestic government bonds. In the first half of the year it took UAH 1.4 trillion, or 63% of all general-fund spending, and in June alone the army “ate” UAH 263.5 billion. The military levy on its own brings in more than UAH 163.6 billion a year.</p>
+<div class="stat-strip">
+<div class="stat"><div class="num">63%</div><div class="lbl">of general-fund spending went to security and defense in the first half of the year</div></div>
+<div class="stat"><div class="num">UAH 1.4 tn</div><div class="lbl">security and defense spending in the first half of the year</div></div>
+<div class="stat"><div class="num">UAH 163.6 bn</div><div class="lbl">military levy revenue per year</div></div>
+</div>
+<p>Now consider how much of this a single employee pays: 18% personal income tax plus 5% military levy plus 22% unified social contribution. For sole proprietors it is simpler but still adds up — from 10% of the minimum wage (UAH 864.7/month) to 1–5% of income or turnover. Every person removed from this chain is a hole in the revenue side of the budget at exactly the moment money is needed most.</p>
+</section>
+<!-- ЧАСТИНА 02 -->
+<section class="part">
+<div class="part-label"><span class="part-num">Part 02</span></div>
+<h2>The math of mobilization: 1 to 6–8, and the 500,000 example</h2>
+<p>Since the army is financed solely by domestic taxes, the Cabinet and the President’s Office cite the same ratio: keeping one soldier at the front takes <strong>6 to 8</strong> people on the home front working officially and paying taxes.</p>
+<blockquote>“We must understand: one warrior means 6 people in civilian life paying taxes” — from public statements on the “math” of mobilization.</blockquote>
+<div class="callout">
+<div class="cal-title">Worked example: mobilizing an additional 500,000 people</div>
+<p><strong>Direct maintenance cost:</strong> an extra UAH 600 billion, all from domestic sources.</p>
+<p><strong>Home-front support required:</strong> to feed and equip 500,000 new conscripts, the civilian sector would need another 3–4 million official taxpayers. Where they would come from is a rhetorical question.</p>
+</div>
+<p>And here an unpleasant nuance emerges — call it the “double hit.” It is not the unemployed who are drafted but precisely those who work. Take one average taxpayer off the payroll and the budget immediately loses his monthly income tax, social contribution, military levy and even the VAT he generated by shopping. In return it takes on an obligation to pay that same person UAH 100,000 a month. The result is not “plus one soldier” but “minus one taxpayer and plus one spending item” at the same time.</p>
+<p>The government understands this, of course, which is why it is developing economic deferment tools — legal-salary criteria or a fixed military levy (for example, UAH 20,000 a month per employee). The idea is simple: let businesses keep key people, and give the budget another UAH 68–307 billion a year directly for the Armed Forces without hurting production.</p>
+</section>
+<!-- ЧАСТИНА 03 -->
+<section class="part">
+<div class="part-label"><span class="part-num">Part 03</span></div>
+<h2>Labor depletion in critical industries and the risk of systemic collapse</h2>
+<p>The labor market is already cracking. 78% of Ukrainian businesses now report an acute staff shortage — a year ago it was 60%. 69% of employers name mobilization as the main reason, and 61% name emigration.</p>
+<div class="stat-strip">
+<div class="stat"><div class="num alert">78%</div><div class="lbl">of businesses face an acute staff shortage</div></div>
+<div class="stat"><div class="num">69%</div><div class="lbl">of employers name mobilization as the cause</div></div>
+<div class="stat"><div class="num">39%</div><div class="lbl">of agricultural companies report a staff shortage</div></div>
+</div>
+<p>The problem is not the numbers as such but who exactly is being taken. Not everyone can be replaced by someone off the street — and this is where it hurts most:</p>
+<ul>
+<li><strong>Agriculture</strong> depends on tractor drivers, combine operators, machine operators and agronomists — 39% of agricultural companies are already sounding the alarm over staff shortages. No one at the controls of expensive machinery means fewer hectares sown and less foreign currency from agricultural exports.</li>
+<li><strong>Energy and utilities</strong> depend on repair crews patching up shelling damage around the clock. Take engineers out of them and instead of supporting the front and the home front you get industrial accidents that paralyze both.</li>
+<li><strong>Logistics and transport</strong> carry military cargo, fuel and humanitarian aid. There are already not enough drivers and railway repair workers — and this is being felt now, not in theory.</li>
+</ul>
+</section>
+<!-- ЧАСТИНА 04 -->
+<section class="part">
+<div class="part-label"><span class="part-num">Part 04</span></div>
+<h2>Anatomy of “putting the economy on a war footing”</h2>
+<p>When someone says “put the economy on a war footing,” they usually just mean “produce more weapons.” In public-administration theory and 20th-century practice, though, it means something far more radical: abolishing the market economy, severely restricting people’s rights and completely restructuring how society works. Here is what it actually consists of:</p>
+<ul>
+<li><strong>Compulsory labor service.</strong> Even a person not drafted into the army loses the right to choose a job — he is assigned to a specific factory, mine or collective farm, full stop.</li>
+<li><strong>Ration cards instead of free trade.</strong> The state distributes food and medicine by quota: defense workers get more, everyone else gets the survival minimum.</li>
+<li><strong>Requisition and nationalization.</strong> Private businesses are either shut down or turned into executors of state orders with no thought of profitability. Transport, warehouses and capacity are seized. Bank deposits are frozen.</li>
+<li><strong>Criminal liability for anything that gets in the system’s way.</strong> Missed a shift, failed the quota, tried to quit — that is now “labor desertion,” and it carries real prison terms.</li>
+</ul>
+<p>Such a scenario is possible only in a state with absolute internal control — in essence, a dictatorship. In an open market economy, an attempt to introduce anything similar ends predictably: business goes into the shadows, investment stops and governability collapses.</p>
+</section>
+<!-- ЧАСТИНА 05 -->
+<section class="part">
+<div class="part-label"><span class="part-num">Part 05</span></div>
+<h2>International and historical experience: the cost of ignoring macroeconomic limits</h2>
+<p>History is fairly unambiguous here: every time a state ignored these limits and pushed mobilization beyond what the home front could bear, it ended in exhaustion and defeat — whatever the era.</p>
+<div class="cases">
+<div class="case">
+<div class="case-head"><span class="name">The USSR in the Second World War</span><span class="years">1941–1945</span></div>
+<p>The classic case of total centralization. The mobilization plan of June 30, 1941 switched the country to directive management; ration cards were introduced in July and lasted until December 1947: workers at defense plants got 800 g of bread a day, everyone else 400 g. The working day was 8 hours plus a mandatory 3 hours of overtime, and leaving a factory without permission was punished with 5–8 years in prison as desertion. Even under that pressure the USSR held out — but only thanks to a totalitarian apparatus of coercion, enormous raw-material reserves and Lend-Lease from the Allies. Without those three factors the model simply does not work.</p>
+</div>
+<div class="case">
+<div class="case-head"><span class="name">The German Empire in the First World War</span><span class="years">1914–1918</span></div>
+<p>The Blitzkrieg failed, the naval blockade began — and in 1916 the Hindenburg Program was adopted, with compulsory labor for men aged 16–60. Drafting farm workers collapsed agricultural output and famine followed — the “turnip winter” of 1916/1917, when rations covered no more than half of calorie needs. The army, meanwhile, held the front. But it was the home front, not the front line, that broke first — and that, not defeat on the battlefield, led to revolution and capitulation in 1918.</p>
+</div>
+<div class="case">
+<div class="case-head"><span class="name">Syria</span><span class="years">2011–2024</span></div>
+<p>Here the sheer scale of destruction is telling. Foreign trade turnover fell from $29 billion in 2010 to $4 billion in 2023, and exports shrank to $650 million. Unemployment reached 57%, the pound lost 270 times its value, and inflation topped 141%. Total economic losses exceeded $260 billion.</p>
+</div>
+<div class="case">
+<div class="case-head"><span class="name">Israel</span><span class="years">2023–2026</span></div>
+<p>And here is an example of a developed economy stopping in time. After the escalation in October 2023 Israel called up more than 300,000 reservists — and within a few months began demobilizing them in stages because the losses proved too large. One reservist cost about 48,000 shekels (~$13,000) a month, direct costs reached 5 billion shekels ($1.3 billion) a month, and losses from people not going to work added another 1.6 billion shekels ($427 million). To avoid sliding into recession, Israel reduced the call-up and bet on protecting high tech — the sector that provides more than half of the country’s exports.</p>
+</div>
+</div>
+</section>
+<!-- ЧАСТИНА 06 -->
+<section class="part">
+<div class="part-label"><span class="part-num">Part 06</span></div>
+<h2>Scenario: Russia’s autumn mobilization of 500,000 and what Ukraine should do about it</h2>
+<p>In July 2026 Andriy Kovalenko, head of the Center for Countering Disinformation at Ukraine’s National Security and Defense Council, said plainly: the Kremlin is preparing to mobilize at least 500,000 people this autumn. Some will be thrown into battle within two weeks to plug holes in the east; the rest will train for a month, apparently for a new axis of the front. Which raises the question: if Russia keeps building up such waves, should Ukraine respond in kind — with its own mobilization in response? This is exactly where the same arithmetic should be applied, only to the enemy.</p>
+<h3>What it will cost the Kremlin itself</h3>
+<p>Under Russian law, mobilized soldiers cannot be paid less than contract soldiers in equivalent posts — and those sums have long since stopped being symbolic. The one-off signing bonus alone consists of a federal 400,000 rubles plus a regional part averaging about 2.1 million rubles nationwide and reaching 3.4–4.5 million in St Petersburg or Krasnodar Krai. In total that is roughly <strong>2.5 million rubles per person</strong> — before the first paycheck.</p>
+<div class="callout alert">
+<div class="cal-title">Simple arithmetic of a single wave</div>
+<p>500,000 × ~2.5 million rubles comes to <strong>1.2–1.3 trillion rubles</strong> in signing payments alone, without monthly pay, equipment or combat allowances. For comparison, that is almost a tenth of Russia’s entire annual defense budget (12.93 trillion rubles for 2026).</p>
+</div>
+<p>And it lands on a budget that is already bursting at the seams. By the end of June 2026 Russia’s cumulative federal budget deficit had reached 5.7 trillion rubles — 2.5% of GDP, well above the 1.6% planned for the whole year. The liquid part of the National Wealth Fund, which the Kremlin uses to patch holes, shrank in the first months of 2026 from about 4.2 trillion rubles (~$55 billion) to 3.6 trillion. Defense spending was supposed to be cut by about 11% this year — but at the current pace of escalation that looks less and less realistic.</p>
+<div class="stat-strip">
+<div class="stat"><div class="num alert">₽5.7 tn</div><div class="lbl">Russia’s budget deficit as of June 2026 (2.5% of GDP)</div></div>
+<div class="stat"><div class="num">29,3%</div><div class="lbl">defense share of Russia’s 2026 budget</div></div>
+<div class="stat"><div class="num alert">14,5%</div><div class="lbl">Bank of Russia key rate — a consequence of a persistent labor shortage</div></div>
+</div>
+<p>Interestingly, even the Bank of Russia effectively acknowledges the same problem in its own materials: limited labor plus state demand (including defense demand) produces not output growth but inflation, because wages grow faster than productivity. In essence, the same “double hit” we examined for Ukraine in Part 02 works in Russia too. Just with a longer runway.</p>
+<h3>Why Russia’s runway is longer — but not endless</h3>
+<p>Russia’s population is about four times Ukraine’s (146 million vs 38 million); it has access to migrant workers from Central Asia, it has prisoners, and above all it has an authoritarian apparatus of coercion able to crush any labor or social discontent. That is precisely the “war footing” toolkit from Part 04. So the Kremlin can push its macroeconomic mobilization limit much further than an open market economy could afford. But the limit does not disappear; it is simply further away. A depleted labor market, a shrinking National Wealth Fund, persistent inflation and the risk of new sanctions do their work — just more slowly than in Ukraine.</p>
+<h3>What Ukraine should do — not mirror, but play on its own field</h3>
+<p>If total mobilization harms Ukraine’s economy even for the sake of its own front-line needs, it makes even less sense as a “number for number” response to a wave Russia can sustain longer. In a race of human resources the enemy has a structural advantage — and there is no point trying to win it. It is more rational to act on a different plane:</p>
+<ul>
+<li><strong>Make every mobilized Russian more expensive for the Kremlin.</strong> Strikes on refineries, chemical plants, drone factories and logistics hubs — already happening in 2026 — hit the same budget mechanics, only from the enemy’s spending side.</li>
+<li><strong>Replace manpower with machines.</strong> Interceptor drones, ground robotics and autonomous platforms make it possible to hold sections of the front with fewer people — a way to lower the “1 soldier = 6–8 taxpayers” ratio rather than chase the numerator.</li>
+<li><strong>Bet on contracts, not mass mobilization.</strong> Market-rate contract pay, financed mainly by external assistance and frozen assets rather than the domestic tax base, increases troop numbers without the same “double hit” to the budget.</li>
+<li><strong>Keep deferments for critical industries.</strong> Energy, agriculture, logistics and the defense industry determine whether the home front can sustain a longer war of attrition — and they are the easiest to lose first.</li>
+<li><strong>Invest in fortifications.</strong> Fewer losses at the front mean fewer replacements needed and less pressure on the home-front economy. Everything here is directly connected.</li>
+</ul>
+<div class="callout">
+<div class="cal-title">Scenario summary</div>
+<p>An autumn wave of 500,000 — and probably more to follow — is no reason to repeat the very mistake this whole article warns against. Time and macroeconomics are more likely on the side of whoever protects the productive base of the home front: Russia’s budget deficit, depleted labor market and shrinking National Wealth Fund mean the Kremlin’s numerical advantage also has a ceiling — just further away than Ukraine’s. The task is not to chase that ceiling with our own mobilization, but to make reaching it as costly and as fast as possible for Russia.</p>
+</div>
+</section>
+<div class="conclusion">
+<h2>Conclusions</h2>
+<p>To boil it down to one idea: “everyone will fight” is a good line for a rally, but it doesn’t survive contact with the budget. International assistance legally cannot finance the army, so the Armed Forces live exclusively on taxes from civilian businesses and working people. Removing the entire workforce from the economy means removing the very source that feeds that army.</p>
+<p>An attempt to take the entire working-age population out of the economy will end in collapsing tax revenue, paralyzed critical infrastructure and a state that simply cannot feed, clothe and pay those it has already mobilized. Resilience in a war of attrition is not about how many people can be put under arms, but about whether a balance can be kept between the needs of the front and what the home front can produce.</p>
+</div>
+<table style="margin-top:40px;">
+<thead>
+<tr><th>The idea that “everyone will fight”</th><th>What actually happens</th></tr>
+</thead>
+<tbody>
+<tr><td>The front gets unlimited reinforcements</td><td class="no">✕ The budget loses its tax base faster than it can arm new soldiers</td></tr>
+<tr><td>The state controls the labor force</td><td class="no">✕ Critical industries (energy, agriculture, logistics) collapse</td></tr>
+<tr><td>The home front can bear any load</td><td class="no">✕ History (USSR, Germany, Syria) shows the opposite without a totalitarian apparatus of coercion</td></tr>
+<tr><td>Mobilization is a purely military decision</td><td class="yes">✓ It is above all a budget equation: 1 soldier = 6–8 taxpayers on the home front</td></tr>
+</tbody>
+</table>
+<section class="sources">
+<h3 style="margin-top:0;">Sources (mostly in Ukrainian and Russian)</h3>
+<div class="src-list">
+<div class="src"><span class="n">01</span><a href="https://www.ukr.net/ru/news/details/economics/104295889.html" rel="noopener" target="_blank">How much it costs to maintain one soldier — the Defense Ministry names the figure</a><span class="domain">ukr.net</span></div>
+<div class="src"><span class="n">02</span><a href="https://www.rbc.ua/ukr/news/minoboroni-ukrayini-nazvali-sumu-vitrat-utrimannya-1715776575.html" rel="noopener" target="_blank">Ukraine’s Defense Ministry names annual spending per soldier</a><span class="domain">rbc.ua</span></div>
+<div class="src"><span class="n">03</span><a href="https://armyinform.com.ua/2024/05/04/u-minoborony-rozpovily-skilky-koshtuye-utrymannya-odnogo-vijskovosluzhbovczya/" rel="noopener" target="_blank">The Defense Ministry explains what one service member costs</a><span class="domain">armyinform.com.ua</span></div>
+<div class="src"><span class="n">04</span><a href="https://www.ukrinform.ua/rubric-society/3864044-utrimanna-odnogo-vijskovogo-obhoditsa-ukraini-orientovno-v-12-miljona-na-rik-minoboroni.html" rel="noopener" target="_blank">One soldier costs Ukraine about UAH 1.2 million a year</a><span class="domain">ukrinform.ua</span></div>
+<div class="src"><span class="n">05</span><a href="https://mobilizatsiya.novyny.live/skilki-groshei-vitrachaiut-na-yizhu-formu-ta-meditsinu-dlia-viiskovikh-vidpovid-mou-173083.html" rel="noopener" target="_blank">How much is spent on food, uniforms and medical care for soldiers</a><span class="domain">novyny.live</span></div>
+<div class="src"><span class="n">06</span><a href="https://bip.net.ua/ru/articles/vijskovij-zbir/" rel="noopener" target="_blank">Military levy: rates, rules, changes</a><span class="domain">bip.net.ua</span></div>
+<div class="src"><span class="n">07</span><a href="https://epravda.com.ua/rus/finances/rashody-gosbyudzheta-na-armiyu-potratili-63-procenta-za-polgoda-823753/" rel="noopener" target="_blank">The Finance Ministry shows how much general-fund money was spent, and on what, in six months</a><span class="domain">epravda.com.ua</span></div>
+<div class="src"><span class="n">08</span><a href="https://minfin.com.ua/2026/07/21/178166134/" rel="noopener" target="_blank">The Finance Ministry raises over UAH 6 billion from domestic bond placement</a><span class="domain">minfin.com.ua</span></div>
+<div class="src"><span class="n">09</span><a href="https://www.pravda.com.ua/rus/news/2023/12/19/7433760/" rel="noopener" target="_blank">Zelensky defends civilians: behind every soldier stand 6 taxpayers</a><span class="domain">pravda.com.ua</span></div>
+<div class="src"><span class="n">10</span><a href="https://mof.gov.ua/uk/news/z_1_lipnia_viiskovii_zbir_spriamovuietsia_do_spetsfondu_derzhbiudzhetu_na_groshove_zabezpechennia_viiskovosluzhbovtsiv-5809" rel="noopener" target="_blank">From July 1 the military levy goes to service members’ pay</a><span class="domain">mof.gov.ua</span></div>
+<div class="src"><span class="n">11</span><a href="https://taxer.ua/uk/kb/vijskovij-zbir" rel="noopener" target="_blank">Knowledge base — Military levy</a><span class="domain">taxer.ua</span></div>
+<div class="src"><span class="n">12</span><a href="https://sud.ua/ru/news/publication/288571-my-dolzhny-ponimat-odin-voin-eto-6-chelovek-v-grazhdanskoy-zhizni-uplachivayuschikh-nalogi-vladimir-zelenskiy-o-matematike-mobilizatsii" rel="noopener" target="_blank">“One warrior means 6 people in civilian life” — on the “math” of mobilization</a><span class="domain">sud.ua</span></div>
+<div class="src"><span class="n">13</span><a href="https://hromadske.ua/ru/posts/shmygal-o-bronirovanii-na-odnogo-voennogo-dolzhno-prihoditsya-vosem-teh-kto-ego-obespechivaet-v-tylu" rel="noopener" target="_blank">Shmyhal on deferments: every soldier should be supported by eight people on the home front</a><span class="domain">hromadske.ua</span></div>
+<div class="src"><span class="n">14</span><a href="https://forbes.ua/ru/news/zarplata-podatki-vpliv-na-ekonomiku-uryad-gotue-novi-pidkhodi-do-bronyuvannya-viyskovozobovyazanikh-04032024-19642" rel="noopener" target="_blank">Shmyhal announces new approaches to deferments for those liable for service</a><span class="domain">forbes.ua</span></div>
+<div class="src"><span class="n">15</span><a href="https://24tv.ua/business/ru/rabota-v-ukraine-kompanii-zhalujutsja-na-nehvatku-kadrov-iz-za-mobilizacii_n3107055" rel="noopener" target="_blank">78% of companies sound the alarm over staff shortages</a><span class="domain">24tv.ua</span></div>
+<div class="src"><span class="n">16</span><a href="https://ua.news/ru/ukraine/biznes-v-ukrayini-bie-na-spolokh-cherez-nestachu-pratsivnikiv" rel="noopener" target="_blank">Business in Ukraine sounds the alarm over a lack of workers</a><span class="domain">ua.news</span></div>
+<div class="src"><span class="n">17</span><a href="https://biz.liga.net/all/news/okolo-39-agrokompanii-ukrainy-zhaluyutsya-na-defitsit-kadrov-prichina-v-mobilizatsii" rel="noopener" target="_blank">About 39% of Ukrainian agricultural companies complain of staff shortages</a><span class="domain">liga.net</span></div>
+<div class="src"><span class="n">18</span><a href="https://bppk.info:446/media/attachments/6adf97f83acf6453d4a6a4b1070f3754_ACcKpfa.pdf" rel="noopener" target="_blank">The Soviet home front during the Great Patriotic War</a><span class="domain">bppk.info</span></div>
+<div class="src"><span class="n">19</span><a href="https://novayagazeta.ru/articles/2022/10/24/ravnenie-na-lopatu-media" rel="noopener" target="_blank">How the USSR’s labor armies were organized</a><span class="domain">novayagazeta.ru</span></div>
+<div class="src"><span class="n">20</span><a href="https://opteey.livejournal.com/61376.html" rel="noopener" target="_blank">Mobilization of the Soviet population and compulsory labor during the war</a><span class="domain">opteey.livejournal.com</span></div>
+<div class="src"><span class="n">21</span><a href="https://dengi.ua/budget/6019912-produktovye-kartochki-v-sssr-kakoj-byla-zhizn-pri-talonakh" rel="noopener" target="_blank">Food ration cards in the USSR: life on coupons</a><span class="domain">dengi.ua</span></div>
+<div class="src"><span class="n">22</span><a href="https://www.partner-inform.de/partner/detail/2023/3/235/11173/kartochnaja-sistema-v-rossii-i-germanii?lang=ru" rel="noopener" target="_blank">The rationing system in Russia and Germany</a><span class="domain">partner-inform.de</span></div>
+<div class="src"><span class="n">23</span><a href="https://topwar.ru/217992-mobilizacija-jekonomiki-germanskoj-imperii-v-period-pervoj-mirovoj-vojny.html" rel="noopener" target="_blank">Mobilization of the German Empire’s economy in the First World War</a><span class="domain">topwar.ru</span></div>
+<div class="src"><span class="n">24</span><a href="https://kp.ua/life/a697485-ekonomicheskie-bronirovanie-i-mobilizatsija-kak-eto-bylo-v-hody-pervoj-mirovoj-vojny" rel="noopener" target="_blank">Economic deferments and mobilization in the First World War</a><span class="domain">kp.ua</span></div>
+<div class="src"><span class="n">25</span><a href="https://postnauka.org/longreads/29279" rel="noopener" target="_blank">The First World War: causes and consequences</a><span class="domain">postnauka.org</span></div>
+<div class="src"><span class="n">26</span><a href="https://inshe.tv/suspilstvo/2016-11-12/179330/" rel="noopener" target="_blank">Syria’s war has already cost $260 billion in economic losses — UN</a><span class="domain">inshe.tv</span></div>
+<div class="src"><span class="n">27</span><a href="https://www.aa.com.tr/ru/%D0%BC%D0%B8%D1%80/%D0%BF%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0-%D1%80%D0%B5%D0%B6%D0%B8%D0%BC%D0%B0-%D0%B0%D1%81%D0%B0%D0%B4%D0%B0-%D1%80%D0%B0%D0%B7%D1%80%D1%83%D1%88%D0%B8%D0%BB%D0%B0-%D1%81%D0%B8%D1%80%D0%B8%D1%8E-%D0%B8-%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D0%BB%D0%B0-%D0%BA-%D0%BA%D1%80%D0%B0%D1%85%D1%83-%D0%B5%D0%B5-%D1%8D%D0%BA%D0%BE%D0%BD%D0%BE%D0%BC%D0%B8%D0%BA%D0%B8/3427810" rel="noopener" target="_blank">The Assad regime’s policies destroyed Syria and led to the collapse of its economy</a><span class="domain">aa.com.tr</span></div>
+<div class="src"><span class="n">28</span><a href="https://www.aa.com.tr/en/middle-east/israel-considers-reducing-reserve-forces-due-to-high-economic-costs/3056759" rel="noopener" target="_blank">Israel considers reducing reserve forces due to high economic costs</a><span class="domain">aa.com.tr</span></div>
+<div class="src"><span class="n">29</span><a href="https://www.inss.org.il/publication/economy-danger/" rel="noopener" target="_blank">Three Events, One Concern: A Threat to Israel's Economy</a><span class="domain">inss.org.il</span></div>
+<div class="src"><span class="n">30</span><a href="https://www.eurasiareview.com/22052026-israeli-economic-and-financial-resilience-amid-wartime-shocks-analysis/" rel="noopener" target="_blank">Israeli Economic And Financial Resilience Amid Wartime Shocks</a><span class="domain">eurasiareview.com</span></div>
+<div class="src"><span class="n">31</span><a href="https://nashigroshi.org/2025/12/15/dot-zakontraktuvav-kharchiv-na-15-mlrd-za-katalohom-zaraz-prykuriuiut-na-neiakisniy-kovbasi-syri-i-konservakh/" rel="noopener" target="_blank">The State Rear Operator contracted UAH 15 billion of food: ration ceiling UAH 171.5, contracted price UAH 128</a><span class="domain">nashigroshi.org</span></div>
+<div class="src"><span class="n">32</span><a href="https://nbnews.com.ua/suspilstvo/2026/07/18/rosiya-gotuyetsya-mobilizuvaty-shhonajmenshe-500-tysyach-lyudej-voseny-glava-czpd-kovalenko/" rel="noopener" target="_blank">Russia prepares a large-scale mobilization for autumn 2026 — Center for Countering Disinformation head Kovalenko</a><span class="domain">nbnews.com.ua</span></div>
+<div class="src"><span class="n">33</span><a href="https://forbes.ua/ru/news/rosiya-vpershe-tsogorich-zavershila-misyats-iz-profitsitom-byudzhetu-ale-vitrati-na-viynu-zrostayut-bloomberg-09072026-40282" rel="noopener" target="_blank">Russia’s budget deficit and National Wealth Fund spending in 2026 — Forbes.ua / Bloomberg</a><span class="domain">forbes.ua</span></div>
+<div class="src"><span class="n">34</span><a href="https://www.vedomosti.ru/economics/articles/2025/10/22/1144107-osnovnie-parametri-byudzheta" rel="noopener" target="_blank">Key parameters of Russia’s 2026 budget</a><span class="domain">vedomosti.ru</span></div>
+<div class="src"><span class="n">35</span><a href="https://www.rnk.ru/article/218768-vyplaty-i-lgoty-uchastnikam-svo" rel="noopener" target="_blank">Payments and benefits for participants of the “special military operation” in 2026 — one-off payment amounts</a><span class="domain">rnk.ru</span></div>
+<div class="src"><span class="n">36</span><a href="https://gogov.ru/contract-payroll/msk" rel="noopener" target="_blank">Payments to contract soldiers in Moscow and Russia’s regions in 2026</a><span class="domain">gogov.ru</span></div>
+<div class="src"><span class="n">37</span><a href="https://cbr.ru/dkp/mp_dec/decision_key_rate/summary_key_rate_01072026/" rel="noopener" target="_blank">Summary of the key rate discussion — labor shortage and inflationary pressure</a><span class="domain">cbr.ru</span></div>
+</div>
+</section>
+<footer>
+    This analysis is based on open sources and official data.<br/>
+    © 2026 vadim.li · Non-commercial sharing with attribution to the author is welcome.<br/>
+    Questions, collaboration, republishing: <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a>
+</footer>
+</div>
+<script src="../../assets/articles.js"></script>
+<script src="../../assets/site-nav.js"></script>
+</body>
+</html>
