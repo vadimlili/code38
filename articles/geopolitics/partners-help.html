@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Стурбованість замість бригад: чому партнери допомагають рівно настільки, наскільки дозволяє їхній страх — CODE38</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  :root{
+    --bg: #0d0f12;
+    --bg-raised: #13161b;
+    --bg-card: #13161b;
+    --line: #1f2329;
+    --line-soft: #181b20;
+    --ink: #f0f2f5;
+    --ink-dim: #d4d8e0;
+    --ink-mute: #8a909b;
+    --brass: #c8a96e;
+    --brass-dim: #7a6640;
+    --alert: #e05c5c;
+    --alert-dim: #8a3a3a;
+    --ok: #5cb87a;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before{
+    content:"";
+    position: fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px);
+    background-size: 100% 44px;
+    opacity: 0;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{
+    position: relative; z-index:1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ---------- Header ---------- */
+  header.hero{
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow-row{
+    display:flex; align-items:center; gap:10px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .tag{
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brass);
+    border: 1px solid var(--brass-dim);
+    padding: 5px 10px;
+    border-radius: 3px;
+    background: rgba(200,169,110,0.06);
+  }
+  .tag.alert{ color: var(--alert); border-color: var(--alert-dim); background: rgba(224,92,92,0.08); }
+  .kicker{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+
+  h1{
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    line-height: 1.15;
+    margin: 0 0 18px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  h1 em{
+    font-style: italic;
+    color: var(--brass);
+  }
+
+  .subtitle{
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--ink-dim);
+    max-width: 60ch;
+    margin: 0 0 28px;
+  }
+
+  .meta-line{
+    display:flex; flex-wrap: wrap; gap: 6px 14px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink-mute);
+  }
+  .meta-line .dot::before{ content:"·"; margin-right: 14px; color: var(--line); }
+  .meta-line a{ color: var(--brass); text-decoration: none; border-bottom: 1px solid var(--brass-dim); }
+  .meta-line a:hover{ color: var(--ink); }
+
+  .license-note{
+    margin-top: 18px;
+    font-size: 12px;
+    color: var(--ink-mute);
+    font-family: var(--mono);
+    padding: 10px 14px;
+    border-left: 2px solid var(--brass-dim);
+    background: var(--bg-raised);
+  }
+  .license-note a{ color: var(--brass); }
+
+  /* ---------- Body typography ---------- */
+  .lede{
+    font-size: 18px;
+    color: var(--ink-dim);
+    margin: 36px 0;
+  }
+  p{ margin: 0 0 20px; font-size: 17px; line-height: 1.75; color: var(--ink-dim); }
+  strong{ color: var(--ink); font-weight: 600; }
+
+  section.part{ margin-top: 64px; }
+
+  .part-label{
+    display:flex; align-items: baseline; gap: 14px;
+    margin-bottom: 18px;
+  }
+  .part-num{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--brass);
+    letter-spacing: 0.08em;
+  }
+  .part-num::before{ content:""; display:inline-block; width:22px; height:1px; background: var(--brass-dim); margin-right:10px; vertical-align: middle; }
+
+  h2{
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    color: var(--ink);
+    margin: 4px 0 0;
+    line-height: 1.3;
+  }
+  h3{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--ink);
+    margin: 32px 0 14px;
+  }
+
+  ul, ol{ margin: 0 0 20px; padding-left: 22px; color: var(--ink-dim); }
+  li{ margin-bottom: 10px; font-size: 16px; }
+  li::marker{ color: var(--brass-dim); }
+
+  /* ---------- Ledger / budget visual ---------- */
+  .ledger{
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    margin: 28px 0 32px;
+    overflow: hidden;
+  }
+  .ledger-head{
+    display:flex; justify-content: space-between; align-items:baseline;
+    padding: 16px 20px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .ledger-head .t{ font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-mute); }
+  .ledger-head .v{ font-family: var(--serif); font-size: 24px; color: var(--brass); font-weight: 600; }
+  .ledger-bar{ display:flex; height: 34px; }
+  .ledger-bar span{ display:flex; align-items:center; justify-content:center; font-family: var(--mono); font-size: 11px; color: var(--bg); font-weight:600; }
+  .seg-a{ background: var(--ink-mute); flex: 0 0 4%; }
+  .seg-b{ background: var(--ok); flex: 0 0 3%; }
+  .seg-c{ background: var(--brass); flex: 1; }
+  .ledger-rows{ padding: 14px 20px 18px; display:grid; gap: 10px; }
+  .ledger-row{ display:flex; justify-content: space-between; gap: 16px; font-size: 14.5px; }
+  .ledger-row .label{ color: var(--ink-dim); }
+  .ledger-row .val{ font-family: var(--mono); color: var(--ink); white-space:nowrap; }
+  .swatch{ display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:8px; vertical-align:1px; }
+
+  /* ---------- Stat strip ---------- */
+  .stat-strip{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin: 28px 0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .stat{
+    background: var(--bg-card);
+    padding: 18px 16px;
+  }
+  .stat .num{ font-family: var(--serif); font-size: 28px; color: var(--brass); font-weight: 600; line-height:1; }
+  .stat .num.alert{ color: var(--alert); }
+  .stat .lbl{ font-size: 12px; color: var(--ink-mute); margin-top: 8px; line-height:1.4; }
+
+  /* ---------- Callout / example box ---------- */
+  .callout{
+    margin: 28px 0;
+    padding: 20px 22px;
+    background: var(--bg-raised);
+    border-left: 3px solid var(--brass);
+    border-radius: 0 4px 4px 0;
+  }
+  .callout.alert{ border-left-color: var(--alert); }
+  .callout .cal-title{
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--brass);
+    margin-bottom: 10px;
+  }
+  .callout.alert .cal-title{ color: var(--alert); }
+  .callout p:last-child{ margin-bottom:0; }
+
+  blockquote{
+    margin: 28px 0;
+    padding: 4px 0 4px 22px;
+    border-left: 2px solid var(--brass-dim);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-dim);
+  }
+
+  /* ---------- Tables ---------- */
+  table{ width:100%; border-collapse: collapse; margin: 24px 0; font-size: 14.5px; }
+  th, td{ padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); }
+  th{ font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-mute); font-weight:500; }
+  td{ color: var(--ink-dim); }
+  td.yes{ color: var(--ok); }
+  td.no{ color: var(--alert); }
+
+  /* ---------- Country cards ---------- */
+  .cases{ display:grid; gap: 14px; margin: 28px 0; }
+  .case{
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 20px 22px;
+  }
+  .case-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 10px; gap: 10px; flex-wrap:wrap; }
+  .case-head .name{ font-family: var(--serif); font-weight:600; font-size: 18px; color: var(--ink); }
+  .case-head .years{ font-family: var(--mono); font-size: 12px; color: var(--brass); }
+  .case p{ font-size: 15px; margin-bottom: 0; color: var(--ink-dim); }
+
+  /* ---------- Conclusion ---------- */
+  .conclusion{
+    margin-top: 64px;
+    padding: 30px 26px;
+    background: var(--bg-card);
+    border: 1px solid var(--brass-dim);
+    border-radius: 6px;
+  }
+  .conclusion h2{ margin-top:0; }
+
+  /* ---------- Sources ---------- */
+  .sources{ margin-top: 64px; }
+  .src-list{ display:grid; gap: 8px; margin-top: 20px; }
+  .src{
+    display:flex; gap: 12px; align-items:baseline;
+    padding: 10px 14px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line-soft);
+    border-radius: 3px;
+    font-size: 13px;
+  }
+  .src .n{ font-family: var(--mono); color: var(--ink-mute); flex: 0 0 22px; }
+  .src a{ color: var(--ink-dim); text-decoration: none; }
+  .src a:hover{ color: var(--brass); }
+  .src .domain{ font-family: var(--mono); font-size: 11px; color: var(--brass-dim); margin-left: auto; white-space: nowrap; padding-left: 10px; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    margin-top: 72px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-mute);
+    text-align:center;
+    line-height: 1.9;
+  }
+  footer a{ color: var(--brass); text-decoration:none; border-bottom: 1px solid var(--brass-dim); }
+  footer a:hover{ color: var(--ink); }
+
+  @media (max-width: 560px){
+    .wrap{ padding: 0 16px 60px; }
+    header.hero{ padding: 40px 0 32px; }
+    .ledger-head{ flex-direction:column; align-items:flex-start; gap:6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+  }
+
+  /* посилання на джерела */
+  a.cite{ font-family: var(--mono); font-size: .72em; color: var(--brass); text-decoration: none; vertical-align: super; line-height: 0; margin-left: 1px; }
+  a.cite:hover{ text-decoration: underline; }
+  .src{ scroll-margin-top: 80px; transition: background .3s; }
+  .src:target{ background: rgba(200,169,110,.12); outline: 1px solid var(--brass-dim); }
+  .stat .lbl a.cite{ vertical-align: baseline; font-size: 1em; }
+</style>
+<!-- seo -->
+<meta name="description" content="Скільки насправді дав Захід, чому цього мало, чому не буде військ — і де закінчується обережність і починається рука Москви.">
+<link rel="canonical" href="https://code38.com.ua/articles/geopolitics/partners-help.html">
+<meta property="og:site_name" content="CODE38">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Стурбованість замість бригад: чому партнери допомагають рівно настільки, наскільки дозволяє їхній страх">
+<meta property="og:description" content="Скільки насправді дав Захід, чому цього мало, чому не буде військ — і де закінчується обережність і починається рука Москви.">
+<meta property="og:url" content="https://code38.com.ua/articles/geopolitics/partners-help.html">
+<meta property="og:image" content="https://code38.com.ua/assets/og/partners-help.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="uk_UA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Стурбованість замість бригад: чому партнери допомагають рівно настільки, наскільки дозволяє їхній страх">
+<meta name="twitter:description" content="Скільки насправді дав Захід, чому цього мало, чому не буде військ — і де закінчується обережність і починається рука Москви.">
+<meta name="twitter:image" content="https://code38.com.ua/assets/og/partners-help.jpg">
+<link rel="icon" href="https://code38.com.ua/assets/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Стурбованість замість бригад: чому партнери допомагають рівно настільки, наскільки дозволяє їхній страх", "description": "Скільки насправді дав Захід, чому цього мало, чому не буде військ — і де закінчується обережність і починається рука Москви.", "datePublished": "2026-11-17", "dateModified": "2026-11-17", "inLanguage": "uk", "keywords": "допомога, НАТО, ЄС, вплив РФ", "author": {"@type": "Person", "name": "vadim.li", "url": "https://code38.com.ua/about.html"}, "publisher": {"@type": "Organization", "name": "CODE38", "url": "https://code38.com.ua/", "logo": {"@type": "ImageObject", "url": "https://code38.com.ua/assets/logo.png"}}, "image": "https://code38.com.ua/assets/og/partners-help.jpg", "mainEntityOfPage": "https://code38.com.ua/articles/geopolitics/partners-help.html"}</script>
+<script data-goatcounter="https://vadim.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<!-- /seo -->
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow-row">
+      <span class="tag">Геополітика</span>
+      <span class="tag alert">Допомога партнерів</span>
+      <span class="kicker">2026</span>
+    </div>
+
+    <h1>Стурбованість замість бригад: чому партнери допомагають <em>рівно настільки, наскільки дозволяє їхній страх</em></h1>
+
+    <p class="subtitle">Скільки насправді дав Захід, чому цього мало, чому не буде військ — і де в цій історії закінчується обережність і починається рука Москви.</p>
+
+    <div class="meta-line">
+      <span>≈ 14 хвилин читання</span>
+      <span class="dot">Аналітичний матеріал</span>
+      <span class="dot">Геополітика · Безпека</span>
+      <span class="dot">Автор: vadim.li · <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a></span>
+    </div>
+
+    <div class="license-note">
+      Використання тексту — лише з дозволу автора. Для передруку, посилань або співпраці пишіть на <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a>.
+    </div>
+  </header>
+
+  <p class="lede">«Висловлюємо глибоку стурбованість» — фраза, яку українці за чотири роки великої війни навчилися ненавидіти. За нею зазвичай стоїть пауза: пакет допомоги, який обговорюють місяцями, ракети, які «ще розглядають», війська, які «можуть з'явитися після припинення вогню». Звідси популярна теза: партнери лише говорять, а реально не допомагають.</p>
+
+  <p>Ця теза наполовину хибна і наполовину справедлива. Хибна — бо допомога вимірюється сотнями мільярдів євро і без неї Україна не втрималася б. Справедлива — бо в масштабі економік донорів ці гроші мізерні, приходять із запізненням, а найпотрібніші рішення роками блокуються страхом, бюрократією, вето окремих урядів і — що задокументовано слідством і судами — російськими операціями впливу. Розберімо все це на цифрах.</p>
+
+  <!-- ЧАСТИНА 01 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 01</span></div>
+    <h2>Скільки допомоги насправді: перевірка тези цифрами</h2>
+
+    <p>Найповніша база даних про допомогу Україні — Ukraine Support Tracker Кільського інституту світової економіки. Він рахує не обіцянки в новинах, а конкретні виділені суми від кожного уряду.</p>
+
+    <div class="stat-strip">
+      <div class="stat"><div class="num">€267 млрд</div><div class="lbl">виділено Україні всіма донорами за 2022–2024 роки — понад €80 млрд на рік <a class="cite" href="#src-1">[1]</a></div></div>
+      <div class="stat"><div class="num">€200 млрд</div><div class="lbl">від Європи з січня 2022-го до лютого 2026-го — проти ~€115 млрд від США <a class="cite" href="#src-8">[8]</a></div></div>
+      <div class="stat"><div class="num alert">−99%</div><div class="lbl">падіння допомоги США у 2025 році <a class="cite" href="#src-4">[4]</a></div></div>
+    </div>
+
+    <p>Тобто «нічого не дають» — неправда. Але структура допомоги за останні два роки радикально змінилася. Сполучені Штати фактично припинили безоплатну військову допомогу. Європа майже компенсувала цей провал: у 2025 році загальний обсяг допомоги лишився близьким до попередніх років, але військова допомога все одно була на 13% нижчою за середній рівень 2022–2024 років <a class="cite" href="#src-5">[5]</a>.</p>
+
+    <h3>Американська зброя тепер за європейські гроші</h3>
+    <p>Найпоказовіша зміна — механізм PURL. Адміністрація Трампа погодилася продовжувати передачу американської зброї лише за умови, що її оплачують союзники <a class="cite" href="#src-10">[10]</a>. Країни НАТО скидаються в спільні пакети приблизно по $500 млн, а США закуповують і постачають за ці гроші зброю — передусім засоби протиповітряної оборони. За рік через PURL зібрали майже $7 млрд <a class="cite" href="#src-9">[9]</a>.</p>
+    <p>Це важливо для розуміння: найдефіцитніше для України — протиракетна оборона — досі залежить від американського виробництва. Навіть рекордні європейські внески впираються в те, що Європа, за висновком Кільського інституту, і далі значною мірою покладається на зброю зі США <a class="cite" href="#src-6">[6]</a>.</p>
+  </section>
+
+  <!-- ЧАСТИНА 02 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 02</span></div>
+    <h2>Чому цього мало: допомога як «побічний проєкт»</h2>
+
+    <p>Абсолютні цифри виглядають солідно. Але щойно їх порівняти з розміром економік донорів, картина змінюється.</p>
+
+    <div class="stat-strip">
+      <div class="stat"><div class="num">&lt; 0,2%</div><div class="lbl">ВВП на рік виділяли на Україну Німеччина, Велика Британія і США <a class="cite" href="#src-2">[2]</a></div></div>
+      <div class="stat"><div class="num">≈ 0,1%</div><div class="lbl">ВВП на рік — Франція, Італія, Іспанія <a class="cite" href="#src-2">[2]</a></div></div>
+      <div class="stat"><div class="num">1,7%</div><div class="lbl">ВВП — Норвегія, лідер за часткою від економіки <a class="cite" href="#src-7">[7]</a></div></div>
+    </div>
+
+    <p>Керівник трекера Крістоф Требеш оцінив сукупну допомогу за три роки як «радше дрібний політичний побічний проєкт, ніж серйозне бюджетне зусилля» <a class="cite" href="#src-1">[1]</a>. Кілька порівнянь із досліджень Кільського інституту:</p>
+
+    <div class="callout alert">
+      <div class="cal-title">Пріоритети в цифрах</div>
+      <p><strong>Дизель проти зброї.</strong> Податкова пільга Німеччини на дизельне пальне коштує платникам податків утричі більше на рік, ніж уся військова допомога Німеччини Україні <a class="cite" href="#src-2">[2]</a>.</p>
+      <p><strong>Кувейт проти України.</strong> Допомога Німеччини у звільненні Кувейту в 1990–1991 роках значно перевищувала її допомогу Україні у 2022-му <a class="cite" href="#src-3">[3]</a>.</p>
+      <p><strong>Власні виборці проти союзника.</strong> У 2022 році уряди ЄС мобілізували вдесятеро більше коштів на нові енергетичні субсидії для власного населення, ніж на Україну <a class="cite" href="#src-3">[3]</a>.</p>
+    </div>
+
+    <p>Допомога ще й розподілена дуже нерівномірно. Балтійські й північні країни дають непропорційно багато відносно свого ВВП, а великі економіки Західної Європи — помітно менше. Саме великі економіки мають найбільші армії, заводи й бюджети, тож їхня обережність коштує Україні найдорожче.</p>
+  </section>
+
+  <!-- ЧАСТИНА 03 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 03</span></div>
+    <h2>Чому запізно: «червоні лінії», які потім зникали</h2>
+
+    <p>Друга претензія — не лише обсяг, а й час. Майже кожна важлива система проходила однаковий цикл: «неможливо, це ескалація» → місяці дискусій → постачання тоді, коли Росія вже пристосувалася.</p>
+
+    <div class="cases">
+      <div class="case">
+        <div class="case-head"><span class="name">ATACMS по території Росії</span><span class="years">2024</span></div>
+        <p>США передали ракети ATACMS з умовою використовувати їх лише в межах України. Навесні 2024-го дозволили обмежені удари одразу за кордоном, а використання вглиб Росії — лише 17 листопада 2024 року, після місяців прохань Києва й у відповідь на перекидання північнокорейських військ <a class="cite" href="#src-14">[14]</a>. До того адміністрація публічно стверджувала, що такі удари мають «маргінальну користь», а приватно — боялася ескалації.</p>
+      </div>
+      <div class="case">
+        <div class="case-head"><span class="name">Taurus</span><span class="years">2023–2026</span></div>
+        <p>Олаф Шольц роками відмовляв у німецьких крилатих ракетах. Фрідріх Мерц у передвиборчій кампанії обіцяв переглянути цю позицію, але в березні 2026-го вже як канцлер заявив, що бачить мало сенсу в постачанні: мовляв, українська далекобійна зброя ефективніша за невелику кількість Taurus, яку могла б передати Німеччина <a class="cite" href="#src-15">[15]</a>. Жодної ракети Україна так і не отримала.</p>
+      </div>
+      <div class="case">
+        <div class="case-head"><span class="name">Конгрес США</span><span class="years">2023–2024</span></div>
+        <p>Через блокування нового законопроєкту в Конгресі потік американської допомоги суттєво скоротився на дев'ять місяців <a class="cite" href="#src-1">[1]</a> — саме в період, коли Росія нарощувала тиск на фронті.</p>
+      </div>
+    </div>
+
+    <p>У кожному з цих випадків рішення зрештою або ухвалювали, або воно втрачало актуальність. Але ціна затримки — території, люди й ініціатива, яку вже не повернути.</p>
+  </section>
+
+  <!-- ЧАСТИНА 04 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 04</span></div>
+    <h2>Чому не буде військ: найчесніша відповідь</h2>
+
+    <p>Ідея, що союзники можуть надіслати війська воювати разом з Україною, — найпопулярніша і найменш реалістична. Причина проста: пряме зіткнення армій країн НАТО з Росією — це ризик війни між ядерними державами. Жоден демократичний уряд не продасть такий ризик власним виборцям.</p>
+
+    <p>Навіть найсміливіший формат — «коаліція охочих» — говорить лише про війська <em>після</em> припинення вогню. У січні 2026-го Велика Британія, Франція й Україна підписали декларацію про намір розмістити багатонаціональні сили в Україні після війни <a class="cite" href="#src-12">[12]</a>. Масштаб показовий:</p>
+
+    <div class="stat-strip">
+      <div class="stat"><div class="num">~10 000</div><div class="lbl">військових готові надіслати Британія та Франція разом — по бригаді <a class="cite" href="#src-11">[11]</a></div></div>
+      <div class="stat"><div class="num">60 000</div><div class="lbl">військових НАТО патрулювали ~1 000 км лінії в Боснії у 1990-х <a class="cite" href="#src-11">[11]</a></div></div>
+      <div class="stat"><div class="num">~50 000</div><div class="lbl">— для 300 км кордону в Косові <a class="cite" href="#src-11">[11]</a></div></div>
+    </div>
+
+    <p>Інші країни коаліції твердих зобов'язань і цифр не назвали <a class="cite" href="#src-11">[11]</a>. А за даними The Telegraph, дедалі більше членів коаліції приватно визнають, що надішлють миротворців лише за згоди Путіна <a class="cite" href="#src-13">[13]</a>. Тобто фактично віддають Москві право вето на власні гарантії безпеки для України.</p>
+  </section>
+
+  <!-- ЧАСТИНА 05 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 05</span></div>
+    <h2>Як блокують: вето замість прямої відмови</h2>
+
+    <p>У ЄС багато рішень ухвалюють одноголосно. Це означає, що одна країна може зупинити допомогу всієї коаліції, не відмовляючи Україні напряму. Найпоказовіший приклад — Європейський фонд миру (EPF), який компенсує країнам частину вартості переданої Україні зброї.</p>
+
+    <div class="cases">
+      <div class="case">
+        <div class="case-head"><span class="name">Угорщина блокує компенсації</span><span class="years">2023–2026</span></div>
+        <p>Уряд Віктора Орбана з 2023 року блокував транші EPF, а з ними — й новий Фонд допомоги Україні на €5 млрд <a class="cite" href="#src-16">[16]</a>. Причини називали різні. Зокрема, Будапешт заявляв, що не розблокує €6,5 млрд компенсацій, доки Україна не відновить транзит нафти Lukoil своєю територією <a class="cite" href="#src-17">[17]</a>. У фонді накопичилося понад €40 млрд заявок на компенсацію, що дратувало навіть найбільших донорів — Німеччину й Нідерланди <a class="cite" href="#src-18">[18]</a>.</p>
+      </div>
+      <div class="case">
+        <div class="case-head"><span class="name">Розв'язка</span><span class="years">2026</span></div>
+        <p>Новий уряд Петера Мадяра зняв вето <a class="cite" href="#src-18">[18]</a>, і країни ЄС погодилися вивільнити €6,6 млрд, які були заблоковані з 2023 року <a class="cite" href="#src-19">[19]</a>. Одна зміна влади в одній країні змінила потік грошей для всієї коаліції.</p>
+      </div>
+      <div class="case">
+        <div class="case-head"><span class="name">Заморожені російські активи</span><span class="years">2025–2026</span></div>
+        <p>План «репараційного кредиту» на основі €210 млрд заморожених активів Центробанку РФ зупинила Бельгія, де ці кошти здебільшого зберігає депозитарій Euroclear. Замість нього ЄС узяв €90 млрд спільного боргу на 2026–2027 роки, а Угорщина, Словаччина й Чехія від участі відмовилися <a class="cite" href="#src-20">[20]</a>. Мотиви Бельгії — юридичні й фінансові ризики, а не симпатії до Москви. Але результат для України той самий: гроші є, а скористатися ними не можна.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЧАСТИНА 06 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 06</span></div>
+    <h2>Рука Москви: що доведено, а що лише підозрюється</h2>
+
+    <p>Звинуватити в усьому «агентів Кремля» — спокусливо. Але для аналізу важливо розрізняти три рівні доказовості. Змішувати їх — означає підігрувати тій самій пропаганді, яка живе з неперевірених тверджень.</p>
+
+    <h3>Рівень 1. Доведено в суді</h3>
+    <p>У травні 2025 року лондонський суд засудив шістьох громадян Болгарії до строків до майже 11 років за шпигунство на користь Росії <a class="cite" href="#src-23">[23]</a>. Мережею керував Ян Марсалек — колишній топменеджер німецької компанії Wirecard, який, за даними слідства, переховується в Росії. За даними обвинувачення, серед завдань групи було стеження за українськими військовими, яких навчали на американській базі в Німеччині, — щоб відстежувати їхні переміщення на полі бою <a class="cite" href="#src-24">[24]</a>.</p>
+
+    <h3>Рівень 2. Розкрито спецслужбами, суду ще не було</h3>
+    <p><strong>«Voice of Europe».</strong> У березні 2024 року чеська контррозвідка разом із польськими колегами розкрила мережу впливу, пов'язану з сайтом «Voice of Europe»; за даними розвідки, оприлюдненими владою, політикам платили, щоб вплинути на вибори до Європарламенту <a class="cite" href="#src-21">[21]</a>. Бельгійська прокуратура відкрила справу про втручання, пасивну корупцію й участь у злочинній організації, а поліція проводила обшуки в офісах Європарламенту <a class="cite" href="#src-22">[22]</a>. Конкретні імена в цій справі ми не наводимо: вироків поки немає, а презумпцію невинуватості ніхто не скасовував.</p>
+    <p><strong>Саботаж.</strong> Нідерландський аналітичний центр нарахував 151 операцію гібридної війни, пов'язану з Росією, у Європі з 2022 року <a class="cite" href="#src-25">[25]</a>. За даними західних розвідок, вербуванням «одноразових» виконавців — часто дрібних злочинців і безробітних — дедалі частіше займаються колишні вербувальники «Вагнера» <a class="cite" href="#src-26">[26]</a>. У Литві поліція повідомила про групу, яка під керівництвом ГРУ намагалася підпалити оборонну техніку, що прямувала в Україну <a class="cite" href="#src-27">[27]</a>.</p>
+
+    <h3>Рівень 3. Політики з проросійськими позиціями</h3>
+    <p>Це найтонша межа. Політик, який виступає проти допомоги Україні, — не обов'язково агент. Це може бути його переконання, розрахунок на виборців чи бізнес-інтереси. Без доказів називати його агентом — наклеп. Але його <em>дії</em> — вето, голосування, заяви — можна і треба аналізувати як факти. Саме так у Частині 05 ми розглянули блокування EPF: не як «зраду», а як задокументоване рішення конкретного уряду з публічно названими умовами.</p>
+
+    <div class="callout">
+      <div class="cal-title">Навіщо Москві це все</div>
+      <p>Логіка операцій впливу проста: Росії не треба переконувати всю Європу. Достатньо, щоб кожне рішення ухвалювалося на кілька місяців пізніше, кожен пакет був трохи меншим, а одна-дві країни мали привід для вето. Сумарний ефект затримок на фронті може бути більшим, ніж будь-яка окрема диверсія.</p>
+    </div>
+  </section>
+
+  <!-- ЧАСТИНА 07 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 07</span></div>
+    <h2>Що з цього випливає для України</h2>
+
+    <p>Висновок не в тому, що партнери «погані» чи «зрадники». Вони поводяться як держави: рахують власні ризики, бюджети й виборців. Зброю дають не за «хорошу поведінку», а коли бачать, що перемога чи стійкість України розв'язує їхню власну проблему. Звідси — кілька практичних висновків.</p>
+
+    <p><strong>1. Говорити мовою їхньої безпеки, а не співчуття.</strong> Аргумент «нам важко» працює гірше, ніж «кожна ракета Patriot в Україні — це ракета, яка не знадобиться над Варшавою чи Вільнюсом».</p>
+    <p><strong>2. Ставка на виробництво, а не на подарунки.</strong> Спільне виробництво в Україні та закупівлі в української оборонки за гроші партнерів менш залежні від політичних циклів, ніж передача зі складів. Показово, що саме власну далекобійну зброю Мерц назвав причиною, чому Taurus «вже не потрібні» <a class="cite" href="#src-15">[15]</a>.</p>
+    <p><strong>3. Працювати з людьми, а не тільки з урядами.</strong> Вето окремих країн знімаються зі зміною влади — як показав приклад Угорщини. Тому важлива робота з громадською думкою, опозицією й медіа країн-партнерів.</p>
+    <p><strong>4. Не дарувати Москві аргументів.</strong> Кожна гучна корупційна історія в Україні стає зручним приводом для тих, хто й так шукав причину загальмувати допомогу. Це не головна причина затримок — але привід, якого краще не давати.</p>
+  </section>
+
+  <table style="margin-top:40px;">
+    <thead>
+      <tr><th>Популярна теза</th><th>Що показують дані</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>«Партнери нічого не дають»</td><td class="no">✕ У середньому понад €80 млрд на рік від усіх донорів; Європа майже компенсувала вихід США</td></tr>
+      <tr><td>«Дають достатньо»</td><td class="no">✕ 0,1–0,2% ВВП великих економік — менше за дизельну пільгу Німеччини</td></tr>
+      <tr><td>«Війська НАТО прийдуть на допомогу»</td><td class="no">✕ Навіть після перемир'я йдеться про ~10 000 військових, і то з оглядкою на Москву</td></tr>
+      <tr><td>«Усе блокують агенти Кремля»</td><td class="no">✕ Доведені судом випадки — шпигунство й диверсії; вето й обережність здебільшого — політика, а не агентура</td></tr>
+      <tr><td>Допомога залежить від інтересів партнерів</td><td class="yes">✓ Найпереконливіший аргумент для Заходу — його власна безпека</td></tr>
+    </tbody>
+  </table>
+
+  <section class="sources">
+    <h3 style="margin-top:0;">Джерела</h3>
+    <div class="src-list">
+      <div class="src" id="src-1"><span class="n">01</span><a href="https://www.ifw-kiel.de/publications/news/ukraine-support-after-3-years-of-war-aid-flows-remain-low-but-steady-shift-towards-weapons-procurement/" target="_blank" rel="noopener">Ukraine support after 3 years of war: aid flows remain low but steady</a><span class="domain">ifw-kiel.de</span></div>
+      <div class="src" id="src-2"><span class="n">02</span><a href="https://idw-online.de/en/news847499" target="_blank" rel="noopener">Kiel Institute: aid as a share of donor GDP, diesel subsidy comparison</a><span class="domain">idw-online.de</span></div>
+      <div class="src" id="src-3"><span class="n">03</span><a href="https://www.ifw-kiel.de/fileadmin/Dateiverwaltung/IfW-Publications/fis-import/87bb7b0f-ed26-4240-8979-5e6601aea9e8-KWP_2218_Trebesch_et_al_Ukraine_Support_Tracker.pdf" target="_blank" rel="noopener">Trebesch et al. — The Ukraine Support Tracker (Kiel Working Paper 2218, PDF)</a><span class="domain">ifw-kiel.de</span></div>
+      <div class="src" id="src-4"><span class="n">04</span><a href="https://ideas.repec.org/p/zbw/ifwkpb/336813.html" target="_blank" rel="noopener">Europe steps up: Ukraine support after four years of war (Kiel Policy Brief 203)</a><span class="domain">repec.org</span></div>
+      <div class="src" id="src-5"><span class="n">05</span><a href="https://idw-online.de/en/news865808" target="_blank" rel="noopener">Ukraine support after 4 years of war: Europe steps up</a><span class="domain">idw-online.de</span></div>
+      <div class="src" id="src-6"><span class="n">06</span><a href="https://nachrichten.idw-online.de/2026/08/13/ukraine-support-tracker-europe-leads-on-aid-us-weapons-remain-key" target="_blank" rel="noopener">Ukraine Support Tracker: Europe leads on aid — US weapons remain key (серпень 2026)</a><span class="domain">idw-online.de</span></div>
+      <div class="src" id="src-7"><span class="n">07</span><a href="https://idw-online.de/de/news820209" target="_blank" rel="noopener">Kiel Institute: Norway leads with aid of 1.7% of GDP</a><span class="domain">idw-online.de</span></div>
+      <div class="src" id="src-8"><span class="n">08</span><a href="https://www.statista.com/chart/amp/35554/military-financial-and-humanitarian-aid-allocated-to-ukraine-us-vs-europe-timeline/" target="_blank" rel="noopener">Government support allocated to Ukraine: Europe vs US, 2022–2026</a><span class="domain">statista.com</span></div>
+      <div class="src" id="src-9"><span class="n">09</span><a href="https://www.kmu.gov.ua/en/news/rik-purl-maizhe-7-mlrd-dlia-postavok-krytychnoho-ozbroiennia-dlia-ukrainy" target="_blank" rel="noopener">Рік PURL: майже $7 млрд на постачання критичного озброєння — Міноборони</a><span class="domain">kmu.gov.ua</span></div>
+      <div class="src" id="src-10"><span class="n">10</span><a href="https://euromaidanpress.com/2026/02/11/britain-joins-purl-205-million-for-us-made-weapons-as-nato-aims-to-raise-15-billion-for-ukraine-in-2026/" target="_blank" rel="noopener">Britain joins PURL: how the allied-funded US weapons scheme works</a><span class="domain">euromaidanpress.com</span></div>
+      <div class="src" id="src-11"><span class="n">11</span><a href="https://www.militarytimes.com/global/europe/2026/04/23/as-iran-saps-us-focus-the-troop-math-for-monitoring-a-ukraine-peace-deal-looks-grim/" target="_blank" rel="noopener">The troop math for monitoring a Ukraine peace deal looks grim</a><span class="domain">militarytimes.com</span></div>
+      <div class="src" id="src-12"><span class="n">12</span><a href="https://kyivindependent.com/zelensky-uk-france-sign-declaration-on-multinational-force-deployment-in-ukraine-post-war" target="_blank" rel="noopener">Zelensky, UK, France sign declaration on deploying troops in Ukraine post-war</a><span class="domain">kyivindependent.com</span></div>
+      <div class="src" id="src-13"><span class="n">13</span><a href="https://euromaidanpress.com/?p=393881" target="_blank" rel="noopener">Telegraph: Coalition of the Willing will only send troops with Putin’s consent</a><span class="domain">euromaidanpress.com</span></div>
+      <div class="src" id="src-14"><span class="n">14</span><a href="https://www.adn.com/nation-world/2024/11/17/biden-approves-ukraines-use-of-long-range-us-weapons-inside-russia-reversing-policy/" target="_blank" rel="noopener">Biden approves Ukraine’s use of long-range US weapons inside Russia (AP)</a><span class="domain">adn.com</span></div>
+      <div class="src" id="src-15"><span class="n">15</span><a href="https://www.pravda.com.ua/eng/news/2026/03/25/8027157" target="_blank" rel="noopener">Мерц не бачить сенсу в постачанні Taurus Україні</a><span class="domain">pravda.com.ua</span></div>
+      <div class="src" id="src-16"><span class="n">16</span><a href="https://www.euronews.com/my-europe/2024/05/27/it-has-gone-very-far-eu-countries-voice-exasperation-over-hungarys-vetoes-on-ukraine-aid" target="_blank" rel="noopener">EU countries voice exasperation over Hungary’s vetoes on Ukraine aid</a><span class="domain">euronews.com</span></div>
+      <div class="src" id="src-17"><span class="n">17</span><a href="https://ukrinform.net/rubric-economy/3888265-hungary-to-block-eu-funds-for-member-states-until-ukraine-allows-lukoil-transit-reuters.html" target="_blank" rel="noopener">Hungary to block EU funds until Ukraine allows Lukoil transit — Reuters</a><span class="domain">ukrinform.net</span></div>
+      <div class="src" id="src-18"><span class="n">18</span><a href="https://www.ukrinform.net/amp/rubric-polytics/4130151-hungary-lifts-block-on-ukraine-arms-reimbursements-politico.html" target="_blank" rel="noopener">Hungary lifts block on Ukraine arms reimbursements — Politico</a><span class="domain">ukrinform.net</span></div>
+      <div class="src" id="src-19"><span class="n">19</span><a href="https://www.kyivpost.com/post/85439" target="_blank" rel="noopener">EU agrees to release €6.6 billion from the European Peace Facility</a><span class="domain">kyivpost.com</span></div>
+      <div class="src" id="src-20"><span class="n">20</span><a href="https://euromaidanpress.com/?p=381667" target="_blank" rel="noopener">EU approves €90bn joint debt for Ukraine as reparations loan hits wall</a><span class="domain">euromaidanpress.com</span></div>
+      <div class="src" id="src-21"><span class="n">21</span><a href="https://pism.pl/publications/unravelling-russias-network-of-influence-agents-in-europe" target="_blank" rel="noopener">Unravelling Russia’s Network of Influence Agents in Europe</a><span class="domain">pism.pl</span></div>
+      <div class="src" id="src-22"><span class="n">22</span><a href="https://novayagazeta.eu/en/articles/2024/05/29/police-investigating-russian-interference-operation-search-european-parliament-en-news" target="_blank" rel="noopener">Police investigating Russian interference operation search European Parliament</a><span class="domain">novayagazeta.eu</span></div>
+      <div class="src" id="src-23"><span class="n">23</span><a href="https://www.news4jax.com/news/2025/05/12/6-bulgarians-convicted-in-uk-of-spying-for-russia-get-prison-terms-up-to-nearly-11-years/" target="_blank" rel="noopener">6 Bulgarians convicted in UK of spying for Russia get prison terms up to nearly 11 years (AP)</a><span class="domain">news4jax.com</span></div>
+      <div class="src" id="src-24"><span class="n">24</span><a href="https://www.thestar.com.my/news/world/2025/03/07/three-bulgarians-convicted-of-spying-for-russia-after-uk-trial" target="_blank" rel="noopener">Bulgarians convicted in UK of being Russian spies working for Wirecard fugitive (Reuters)</a><span class="domain">thestar.com.my</span></div>
+      <div class="src" id="src-25"><span class="n">25</span><a href="https://www.themoscowtimes.com/2026/02/26/russia-linked-to-151-hybrid-warfare-operations-in-europe-since-2022-dutch-think-tank-says-a92065" target="_blank" rel="noopener">Russia linked to 151 hybrid warfare operations in Europe since 2022</a><span class="domain">themoscowtimes.com</span></div>
+      <div class="src" id="src-26"><span class="n">26</span><a href="https://www.eurointegration.com.ua/eng/news/2026/02/16/7231258/" target="_blank" rel="noopener">Wagner Group recruiters shift focus to organised sabotage in Europe</a><span class="domain">eurointegration.com.ua</span></div>
+      <div class="src" id="src-27"><span class="n">27</span><a href="https://euromaidanpress.com/2026/01/19/russia-linked-sabotage-group-tried-to-burn-lithuanian-defense-tech-bound-for-ukraine-police-say-video/" target="_blank" rel="noopener">Russia-linked sabotage group tried to burn Lithuanian defense tech bound for Ukraine</a><span class="domain">euromaidanpress.com</span></div>
+    </div>
+  </section>
+
+  <footer>
+    Аналітичний матеріал підготовлено на основі відкритих джерел та офіційних даних.<br>
+    © 2026 vadim.li · Некомерційне поширення з посиланням на автора — вітається.<br>
+    Питання, співпраця, передрук: <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a>
+  </footer>
+
+</div>
+<script src="../../assets/articles.js"></script>
+<script src="../../assets/site-nav.js"></script>
+</body>
+</html>
