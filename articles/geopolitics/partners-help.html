@@ -448,13 +448,17 @@
     <p>У кожному з цих випадків рішення зрештою або ухвалювали, або воно втрачало актуальність. Але ціна затримки — території, люди й ініціатива, яку вже не повернути.</p>
   
     <h3>Хроніка в цифрах: обіцяли — привезли — скільки</h3>
-    <p>Точні щомісячні обсяги постачань здебільшого засекречені, тому нижче — лише події й кількості, підтверджені офіційно або великими медіа. Оберіть тип озброєння: шкала показує, скільки місяців минуло між рішенням і реальною поставкою, а смуги — наскільки малими були партії порівняно з потребою.</p>
+    <p>Точні щомісячні обсяги постачань здебільшого засекречені, тому нижче — лише події й кількості, підтверджені офіційно або великими медіа. Оберіть тип озброєння — від того, що прийшло із запізненням, до того, що так і не прийшло: шкала показує, скільки місяців минуло між рішенням і реальною поставкою, а смуги — наскільки малими були партії порівняно з потребою.</p>
 
     <figure class="chron" id="chron">
       <div class="chron-tabs" role="tablist">
         <button role="tab" data-k="atacms" class="on">ATACMS</button>
         <button role="tab" data-k="tanks">Танки</button>
         <button role="tab" data-k="patriot">Patriot</button>
+        <button role="tab" data-k="f16">F-16 / авіація</button>
+        <button role="tab" data-k="taurus">Taurus</button>
+        <button role="tab" data-k="tomahawk">Tomahawk</button>
+        <button role="tab" data-k="gripen">Gripen</button>
       </div>
       <div class="chron-lead" id="chron-lead"></div>
       <div class="chron-track-wrap"><div class="chron-track" id="chron-track"></div></div>
@@ -569,6 +573,82 @@
             { l: "Потреба: 2–3 перехоплювачі на одну ракету × 70", v: 175, s: "140–210", c: "dim" }
           ],
           note: "Для порівняння: за три роки Україна отримала близько 600 перехоплювачів Patriot, а лише за зиму 2025–2026 Росія випустила ~250 балістичних, аеробалістичних і гіперзвукових ракет." + C(42) + C(39)
+        },
+        f16: {
+          from: "2023-08", to: "2026-12",
+          lead: "Винищувачі погодили лише в серпні 2023-го. Перші літаки прийшли через рік, решта — частинами до 2026-го. Флот невеликий, кожна втрата відчутна, а пілотів готують роками.",
+          gaps: [ { a: "2023-08-20", b: "2024-07-31", t: "≈ 1 рік до перших літаків" } ],
+          ev: [
+            { d: "2023-08-20", s: "08.2023", k: "promise", t: "США погоджують передачу F-16: Данія обіцяє 19, Нідерланди — 24." + C(45) },
+            { d: "2024-07-31", s: "31.07.2024", k: "delivery", t: "Перші F-16 в Україні. За даними The Economist — 10 із 79 обіцяних коаліцією." + C(46) },
+            { d: "2024-08-26", s: "26.08.2024", k: "alarm", t: "Перша втрата: загинув пілот Олексій Мес («Moonfish») під час відбиття масованої атаки." + C(61) },
+            { d: "2024-10-15", s: "10.2024", k: "delivery", t: "Перша партія нідерландських F-16." + C(59) },
+            { d: "2025-02-06", s: "02.2025", k: "delivery", t: "Друга партія з Нідерландів і перші французькі Mirage 2000." + C(60) },
+            { d: "2025-04-12", s: "12.04.2025", k: "alarm", t: "Загинув 26-річний пілот Павло Іванов." + C(61) },
+            { d: "2025-05-26", s: "26.05.2025", k: "delivery", t: "Нідерланди першими завершують передачу — усі 24 F-16." + C(59) },
+            { d: "2025-08-15", s: "до 08.2025", k: "alarm", t: "Втрачено 4 F-16, загинули троє пілотів." + C(62) },
+            { d: "2026-07-29", s: "29.07.2026", k: "alarm", t: "П'ята втрата — бортова аварія, пілот катапультувався." + C(62) + C(63) },
+            { d: "2026-09-29", s: "29.09.2026", k: "promise", t: "Бельгія обіцяє почати передачу своїх F-16 до кінця року — перша партія з трьох літаків. Командувач ПС: пілоти F-16 збили понад 3 150 цілей, зокрема 666 крилатих ракет, — «з обмеженими запасами боєприпасів»." + C(47) + C(64) }
+          ],
+          barsTitle: "F-16: обіцяно, отримано, втрачено",
+          bars: [
+            { l: "Загалом обіцяно (Бельгія 30, Нідерланди 24, Данія 19, Норвегія 12)", v: 85, s: "≈ 85", c: "dim" },
+            { l: "Нідерланди — передано повністю (травень 2025)", v: 24, s: "24 з 24" },
+            { l: "Бельгія — перша партія до кінця 2026", v: 3, s: "3 з 30", c: "red" },
+            { l: "Втрачено літаків (загинули 3 пілоти)", v: 5, s: "5", c: "red" }
+          ],
+          note: "Точну кількість F-16 в Україні донори й Повітряні сили не розкривають. Обмеження — не лише літаки, а й підготовлені пілоти, техніки та ракети до них." + C(65)
+        },
+        taurus: {
+          from: "2023-09", to: "2026-11",
+          lead: "Німецькі крилаті ракети Taurus обговорюються з 2023 року. Два канцлери, різні аргументи — результат однаковий: жодної ракети.",
+          gaps: [ { a: "2023-10-05", b: "2026-11-15", t: "3+ роки — передано 0" } ],
+          ev: [
+            { d: "2023-10-05", s: "10.2023", k: "alarm", t: "Канцлер Шольц: Німеччина не передаватиме Taurus Україні." + C(53) },
+            { d: "2024-11-15", s: "11.2024", k: "promise", t: "Кандидат у канцлери Мерц заявляє, що розгляне постачання Taurus." + C(54) },
+            { d: "2025-07-13", s: "13.07.2025", k: "alarm", t: "Уже за Мерца міністр оборони Пісторіус: Taurus не буде, натомість — Patriot, куплені в США." + C(55) },
+            { d: "2026-03-25", s: "25.03.2026", k: "alarm", t: "Мерц: сенсу в Taurus немає, українська далекобійна зброя ефективніша." + C(15) }
+          ],
+          barsTitle: "Скільки Taurus отримала Україна",
+          bars: [
+            { l: "Передано ракет Taurus", v: 0, s: "0", c: "red" }
+          ],
+          note: "Офіційні аргументи змінювалися: ризик ескалації, потреба в німецьких військових для обслуговування, нестача робочих ракет на складах." + C(54)
+        },
+        tomahawk: {
+          from: "2025-09", to: "2026-11",
+          lead: "Восени 2025-го Tomahawk здавалися вирішеним питанням: Трамп казав, що «майже ухвалив рішення», Пентагон дав згоду. Ракет Україна так і не отримала.",
+          gaps: [ { a: "2025-09-26", b: "2026-11-15", t: "≈ 14 міс. — передано 0" } ],
+          ev: [
+            { d: "2025-09-26", s: "09.2025", k: "promise", t: "Зеленський просить у Трампа Tomahawk (дальність — до 1 600 км і більше)." + C(48) },
+            { d: "2025-10-12", s: "10.2025", k: "promise", t: "Трамп: «здебільшого вже ухвалив рішення» щодо Tomahawk." + C(48) },
+            { d: "2025-10-22", s: "22.10.2025", k: "alarm", t: "Трамп пояснює відмову тим, що навчання зайняло б забагато часу." + C(50) },
+            { d: "2025-10-31", s: "31.10.2025", k: "promise", t: "Пентагон дає згоду на передачу, остаточне рішення — за Трампом." + C(49) },
+            { d: "2025-12-30", s: "12.2025", k: "alarm", t: "Трамп: «слава Богу», що не дав Україні Tomahawk." + C(51) }
+          ],
+          barsTitle: "Масштаб: закупівлі США і передача Україні",
+          bars: [
+            { l: "Tomahawk, які США планують закупити у 2026 році", v: 57, s: "57", c: "dim" },
+            { l: "Передано Україні", v: 0, s: "0", c: "red" }
+          ],
+          note: "За даними Reuters, наявні запаси Tomahawk закріплені за ВМС США та іншими завданнями." + C(52)
+        },
+        gripen: {
+          from: "2025-10", to: "2030-12",
+          lead: "Шведські Gripen — приклад того, як «скоро» відсувається на роки: у 2025-му перші поставки очікували у 2026-му, тепер — 2027-й для старих і 2029–2030 для нових.",
+          gaps: [ { a: "2025-10-22", b: "2027-02-15", t: "перші вживані Gripen C/D" }, { a: "2025-10-22", b: "2029-06-15", t: "нові Gripen E", y: 2 } ],
+          ev: [
+            { d: "2025-10-22", s: "22.10.2025", k: "promise", t: "Лист про наміри: до 150 Gripen E, перші поставки очікують у 2026-му." + C(56) },
+            { d: "2026-05-28", s: "28.05.2026", k: "promise", t: "Швеція обіцяє подарувати до 16 вживаних Gripen C/D — на початку 2027-го." + C(57) },
+            { d: "2026-06-30", s: "30.06.2026", k: "promise", t: "Контракт на 16 нових Gripen E — поставки у 2029–2030 роках." + C(58) }
+          ],
+          barsTitle: "Від наміру до контракту",
+          bars: [
+            { l: "Лист про наміри (жовтень 2025)", v: 150, s: "до 150", c: "dim" },
+            { l: "Твердий контракт на нові Gripen E", v: 16, s: "16" },
+            { l: "Отримано станом на листопад 2026", v: 0, s: "0", c: "red" }
+          ],
+          note: "Нові літаки виробляються роками — це обмеження європейської промисловості, а не лише політичне рішення."
         }
       };
 
@@ -772,6 +852,27 @@
       <div class="src" id="src-42"><span class="n">42</span><a href="https://razomua.media/en/news/politika/250-balistychnykh-raket-za-odnu-zymu-i-lyshe-odyn-perekhoplyuvach-na-kozhnu-yak-ukrayina-zakhyshchayetsya-vid-zahrozy-yakoyi-mayzhe-nichym-vidbyvaty" target="_blank" rel="noopener">250 балістичних ракет за одну зиму — і лише один перехоплювач на кожну</a><span class="domain">razomua.media</span></div>
       <div class="src" id="src-43"><span class="n">43</span><a href="https://chronicle.lu/category/international-news/49516-us-quietly-shipped-long-range-atacms-missiles-to-ukraine" target="_blank" rel="noopener">US quietly shipped long-range ATACMS missiles to Ukraine (Reuters)</a><span class="domain">chronicle.lu</span></div>
       <div class="src" id="src-44"><span class="n">44</span><a href="https://www.twz.com/first-leopard-2-tanks-arrive-in-ukraine" target="_blank" rel="noopener">First Leopard 2 tanks arrive in Ukraine (Poland)</a><span class="domain">twz.com</span></div>
+      <div class="src" id="src-45"><span class="n">45</span><a href="https://thedefensepost.com/2024/08/02/fighter-jets-arrive-ukraine/amp/" target="_blank" rel="noopener">First F-16 fighter jets arrive in Ukraine</a><span class="domain">thedefensepost.com</span></div>
+      <div class="src" id="src-46"><span class="n">46</span><a href="https://novayagazeta.eu/amp/en/articles/2024/08/05/volodymyr-zelensky-confirms-long-awaited-arrival-of-first-f-16-fighter-jets-in-ukraine-en-news" target="_blank" rel="noopener">Zelensky confirms arrival of first F-16 fighter jets (10 of 79 — The Economist)</a><span class="domain">novayagazeta.eu</span></div>
+      <div class="src" id="src-47"><span class="n">47</span><a href="https://sofrep.com/news/ukraines-f-16-fighters-in-combat/" target="_blank" rel="noopener">Ukraine’s F-16 fighters in combat; Belgium to begin transfer</a><span class="domain">sofrep.com</span></div>
+      <div class="src" id="src-48"><span class="n">48</span><a href="https://news.liga.net/en/amp/politics/news/trump-says-he-has-virtually-made-a-decision-on-tomahawk-deliveries-to-ukraine" target="_blank" rel="noopener">Trump says he has “virtually made a decision” on Tomahawk deliveries to Ukraine</a><span class="domain">liga.net</span></div>
+      <div class="src" id="src-49"><span class="n">49</span><a href="https://interfax.com.ua/news/general/1117213.html" target="_blank" rel="noopener">Pentagon approves transfer of Tomahawk missiles to Ukraine, leaving final decision to Trump</a><span class="domain">interfax.com.ua</span></div>
+      <div class="src" id="src-50"><span class="n">50</span><a href="https://m.washingtontimes.com/news/2025/oct/22/trump-explains-decision-give-ukraine-tomahawk-missiles/" target="_blank" rel="noopener">Trump explains decision not to give Ukraine Tomahawk missiles</a><span class="domain">washingtontimes.com</span></div>
+      <div class="src" id="src-51"><span class="n">51</span><a href="https://defensemirror.com/news/40796/No_Tomahawks_for_Ukraine_Following_Putin_Residence_Attack__Trump" target="_blank" rel="noopener">No Tomahawks for Ukraine: Trump</a><span class="domain">defensemirror.com</span></div>
+      <div class="src" id="src-52"><span class="n">52</span><a href="https://www.thecitizen.co.tz/tanzania/news/international/us-tomahawk-missile-shipments-to-ukraine-unlikely-sources-say-5215324" target="_blank" rel="noopener">US Tomahawk missile shipments to Ukraine unlikely, sources say (Reuters)</a><span class="domain">thecitizen.co.tz</span></div>
+      <div class="src" id="src-53"><span class="n">53</span><a href="https://en.protothema.gr/?p=356618" target="_blank" rel="noopener">Germany will not send Taurus missiles to Ukraine, Chancellor Olaf Scholz said</a><span class="domain">protothema.gr</span></div>
+      <div class="src" id="src-54"><span class="n">54</span><a href="https://euromaidanpress.com/2026/03/26/germany-wont-send-taurus-missiles-to-ukraine/" target="_blank" rel="noopener">Germany won’t send Taurus missiles to Ukraine — Merz</a><span class="domain">euromaidanpress.com</span></div>
+      <div class="src" id="src-55"><span class="n">55</span><a href="https://kyivindependent.com/germany-wont-supply-ukraine-with-taurus-missiles-urges-weapons-makers-to-step-up-defense-minister-says/amp" target="_blank" rel="noopener">Germany won’t supply Ukraine with Taurus missiles, defense minister says</a><span class="domain">kyivindependent.com</span></div>
+      <div class="src" id="src-56"><span class="n">56</span><a href="https://euronews.com/2025/10/22/ukraine-and-sweden-sign-a-long-term-deal-for-up-to-150-gripen-fighter-jets-for-kyiv" target="_blank" rel="noopener">Ukraine and Sweden sign a long-term deal for up to 150 Gripen fighter jets</a><span class="domain">euronews.com</span></div>
+      <div class="src" id="src-57"><span class="n">57</span><a href="https://www.twz.com/air/ukrainian-gripen-fighters-to-arrive-in-2027-long-range-meteor-missiles-claimed-to-be-included" target="_blank" rel="noopener">Ukrainian Gripen fighters to arrive in 2027</a><span class="domain">twz.com</span></div>
+      <div class="src" id="src-58"><span class="n">58</span><a href="https://www.grosswald.org/sweden-saab-16-gripen-e-ukraine-24-6-billion-sek-fmv/" target="_blank" rel="noopener">Saab signs SEK 24.6 billion contract for 16 Gripen E for Ukraine, delivery 2029–2030</a><span class="domain">grosswald.org</span></div>
+      <div class="src" id="src-59"><span class="n">59</span><a href="https://www.airdatanews.com/netherlands-completes-delivery-of-f-16-fighters-to-ukraine/" target="_blank" rel="noopener">Netherlands completes delivery of 24 F-16 fighters to Ukraine (Oct 2024 — Feb 2025 — May 2025)</a><span class="domain">airdatanews.com</span></div>
+      <div class="src" id="src-60"><span class="n">60</span><a href="https://euromaidanpress.com/?p=320274" target="_blank" rel="noopener">More Dutch F-16s arrive in Ukraine as France delivers its first Mirage 2000 jets</a><span class="domain">euromaidanpress.com</span></div>
+      <div class="src" id="src-61"><span class="n">61</span><a href="https://www.sofx.com/ukraine-loses-third-f-16-as-pilot-ejects-during-night-mission-to-repel-russian-air-attack/" target="_blank" rel="noopener">Ukraine loses third F-16: chronology of F-16 losses</a><span class="domain">sofx.com</span></div>
+      <div class="src" id="src-62"><span class="n">62</span><a href="https://euromaidanpress.com/2026/07/29/ukraine-loses-another-f-16-to-onboard-emergency/" target="_blank" rel="noopener">Ukraine loses another F-16 to onboard emergency (July 2026)</a><span class="domain">euromaidanpress.com</span></div>
+      <div class="src" id="src-63"><span class="n">63</span><a href="https://www.trenchart.us/p/ukraine-lost-another-f-16" target="_blank" rel="noopener">Ukraine lost another F-16 — the fifth loss for the type</a><span class="domain">trenchart.us</span></div>
+      <div class="src" id="src-64"><span class="n">64</span><a href="https://migflug.com/afterburner/ukraine-f-16-3150-aerial-targets-666-cruise-missiles-lockheed-block-70-2026/" target="_blank" rel="noopener">Ukraine’s F-16s have downed 3,150 aerial targets, Air Force says</a><span class="domain">migflug.com</span></div>
+      <div class="src" id="src-65"><span class="n">65</span><a href="https://theaviationist.com/2025/05/26/netherlands-completes-f-16-delivery-ukraine/" target="_blank" rel="noopener">Netherlands completes F-16 delivery; 85 F-16s expected in total</a><span class="domain">theaviationist.com</span></div>
     </div>
   </section>
 
