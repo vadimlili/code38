@@ -446,6 +446,193 @@
     </div>
 
     <p>У кожному з цих випадків рішення зрештою або ухвалювали, або воно втрачало актуальність. Але ціна затримки — території, люди й ініціатива, яку вже не повернути.</p>
+  
+    <h3>Хроніка в цифрах: обіцяли — привезли — скільки</h3>
+    <p>Точні щомісячні обсяги постачань здебільшого засекречені, тому нижче — лише події й кількості, підтверджені офіційно або великими медіа. Оберіть тип озброєння: шкала показує, скільки місяців минуло між рішенням і реальною поставкою, а смуги — наскільки малими були партії порівняно з потребою.</p>
+
+    <figure class="chron" id="chron">
+      <div class="chron-tabs" role="tablist">
+        <button role="tab" data-k="atacms" class="on">ATACMS</button>
+        <button role="tab" data-k="tanks">Танки</button>
+        <button role="tab" data-k="patriot">Patriot</button>
+      </div>
+      <div class="chron-lead" id="chron-lead"></div>
+      <div class="chron-track-wrap"><div class="chron-track" id="chron-track"></div></div>
+      <div class="chron-legend"><span><i class="k-promise"></i>рішення / обіцянка</span><span><i class="k-delivery"></i>поставка / застосування</span><span><i class="k-alarm"></i>тривожний сигнал</span></div>
+      <ol class="chron-events" id="chron-events"></ol>
+      <div class="chron-bars-title" id="chron-bars-title"></div>
+      <div class="chron-bars" id="chron-bars"></div>
+      <figcaption id="chron-note"></figcaption>
+    </figure>
+
+    <style>
+      .chron{ margin: 34px 0; padding: 22px 22px 18px; background: var(--bg-card); border: 1px solid var(--line); border-radius: 6px; }
+      .chron-tabs{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+      .chron-tabs button{ font-family: var(--mono); font-size: 12px; letter-spacing:.08em; text-transform: uppercase; padding: 7px 14px; background: transparent; color: var(--ink-dim); border: 1px solid var(--line); border-radius: 3px; cursor: pointer; }
+      .chron-tabs button.on{ color: var(--bg); background: var(--brass); border-color: var(--brass); }
+      .chron-lead{ font-size: 15px; color: var(--ink); margin-bottom: 18px; }
+      .chron-track-wrap{ overflow-x: auto; padding-bottom: 6px; }
+      .chron-track{ position: relative; height: 142px; }
+      .chron-track .axis{ position:absolute; left:18px; right:18px; top:98px; height:2px; background: var(--line); }
+      .chron-track .tick{ position:absolute; top:106px; font-family: var(--mono); font-size: 10.5px; color: var(--ink-mute); transform: translateX(-50%); white-space: nowrap; }
+      .chron-track .tick::before{ content:""; position:absolute; left:50%; top:-10px; width:1px; height:6px; background: var(--line); }
+      .chron-track .gap{ position:absolute; top:22px; height:14px; border:1px solid var(--alert-dim); border-bottom:none; }
+      .chron-track .gap span{ position:absolute; top:-17px; left:50%; transform:translateX(-50%);} .chron-track .gap.al span{ left:0; transform:none; } .chron-track .gap.ar span{ left:auto; right:0; transform:none; } .chron-track .gap span{ font-family: var(--mono); font-size: 11px; color: var(--alert); white-space: nowrap; }
+      .chron-track .dot{ position:absolute; top:92px; width:14px; height:14px; margin-left:-7px; border-radius:50%; border:2px solid var(--brass); background: var(--bg-card); cursor:pointer; padding:0; }
+      .chron-track .dot.delivery{ background: var(--brass); }
+      .chron-track .dot.alarm{ border-color: var(--alert); background: var(--alert); }
+      .chron-track .dot.sel{ box-shadow: 0 0 0 4px rgba(200,169,110,.25); }
+      .chron-track .dot b{ position:absolute; top:-19px; left:50%; transform:translateX(-50%); font-family: var(--mono); font-size: 10px; color: var(--ink-dim); font-weight: 500; }
+      .chron-legend{ display:flex; gap:16px; flex-wrap:wrap; font-family: var(--mono); font-size: 11px; color: var(--ink-mute); margin: 6px 0 14px; }
+      .chron-legend i{ display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:6px; vertical-align:-1px; border:2px solid var(--brass); }
+      .chron-legend .k-delivery{ background: var(--brass); }
+      .chron-legend .k-alarm{ background: var(--alert); border-color: var(--alert); }
+      .chron-events{ list-style:none; margin:0 0 22px; padding:0; display:grid; gap:6px; counter-reset: ev; }
+      .chron-events li{ counter-increment: ev; display:grid; grid-template-columns: 26px 92px 1fr; gap:10px; padding:8px 10px; border-left:2px solid var(--line); font-size:14.5px; color: var(--ink-dim); cursor:pointer; }
+      .chron-events li::before{ content: counter(ev); font-family: var(--mono); font-size: 11px; color: var(--ink-mute); }
+      .chron-events li.delivery{ border-left-color: var(--brass); }
+      .chron-events li.alarm{ border-left-color: var(--alert); }
+      .chron-events li.sel{ background: var(--bg-raised); color: var(--ink); }
+      .chron-events time{ font-family: var(--mono); font-size: 12px; color: var(--brass); }
+      .chron-bars-title{ font-family: var(--mono); font-size: 11.5px; letter-spacing:.08em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 10px; }
+      .chron-bars{ display:grid; gap:9px; margin-bottom: 14px; }
+      .bar-r{ display:grid; grid-template-columns: minmax(0,1fr) 92px; gap:10px; align-items:center; }
+      .bar-r .lab{ font-size: 13.5px; color: var(--ink-dim); margin-bottom: 4px; }
+      .bar-r .trk{ height: 10px; background: var(--bg-raised); border-radius: 2px; overflow:hidden; }
+      .bar-r .fil{ height:100%; background: var(--brass); border-radius: 2px; min-width: 3px; }
+      .bar-r.red .fil{ background: var(--alert); }
+      .bar-r.dim .fil{ background: var(--ink-mute); }
+      .bar-r .val{ font-family: var(--mono); font-size: 13px; color: var(--ink); text-align:right; }
+      .chron figcaption{ font-family: var(--mono); font-size: 11.5px; line-height: 1.6; color: var(--ink-mute); }
+      @media (max-width: 600px){ .chron{ padding: 16px 14px; } .chron-events li{ grid-template-columns: 22px 1fr; } .chron-events time{ grid-column: 2; } .chron-events li span{ grid-column: 2; } }
+    </style>
+
+    <script>
+    (function(){
+      var C = function(n){ return ' <a class="cite" href="#src-' + n + '">[' + n + ']</a>'; };
+      var D = {
+        atacms: {
+          from: "2023-09", to: "2024-12",
+          lead: "Україна місяцями просила балістичні ракети ATACMS. Першу партію отримала найстарішої модифікації (165 км), у кількості, яку США так і не розкрили.",
+          gaps: [ { a: "2024-02-15", b: "2024-04-17", t: "2 міс. від рішення до 1-го удару" } ],
+          ev: [
+            { d: "2023-10-17", s: "17.10.2023", k: "delivery", t: "Перше застосування ATACMS M39 (Block I, 165 км) по аеродромах у Бердянську й Луганську. Кількість не розкрита: за AP — менше дюжини, за NYT — до 20." + C(29) },
+            { d: "2024-02", s: "02.2024", k: "promise", t: "Байден таємно доручає передати далекобійні ATACMS (300 км) — але лише для ударів по території України." + C(30) },
+            { d: "2024-03-12", s: "12.03.2024", k: "delivery", t: "Ракети йдуть у пакеті на $300 млн. Кількість — «значна», без цифр." + C(28) },
+            { d: "2024-04-17", s: "17.04.2024", k: "delivery", t: "Перший удар далекобійними ATACMS — по аеродрому в Джанкої." + C(43) },
+            { d: "2024-11-17", s: "17.11.2024", k: "promise", t: "Дозвіл на обмежені удари ATACMS по території РФ — у відповідь на перекидання військ КНДР." + C(14) }
+          ],
+          barsTitle: "Масштаб: що мають США і що отримала Україна",
+          bars: [
+            { l: "Вироблено ATACMS у США (станом на 2018; понад 600 уже використано)", v: 3850, s: "> 3 850" },
+            { l: "Перша партія Україні, жовтень 2023 (оцінка медіа)", v: 20, s: "≤ 20", c: "red" }
+          ],
+          note: "Офіційних цифр щодо кількості переданих ATACMS немає; Kyiv Post оцінював загальний обсяг до середини 2024 року як «менше 50»." + C(28) + C(31)
+        },
+        tanks: {
+          from: "2023-01", to: "2023-11",
+          lead: "Західні танки погодили лише в січні 2023-го — після майже року повномасштабної війни. Європейські прийшли за 2–3 місяці, американські Abrams — за 8.",
+          gaps: [ { a: "2023-01-14", b: "2023-03-27", t: "≈2 міс. Leopard 2 / Challenger 2", y: 2 }, { a: "2023-01-25", b: "2023-09-25", t: "8 міс. Abrams" } ],
+          ev: [
+            { d: "2023-01-14", s: "14.01.2023", k: "promise", t: "Британія першою обіцяє західні танки — 14 Challenger 2." + C(32) },
+            { d: "2023-01-25", s: "25.01.2023", k: "promise", t: "Німеччина погоджує Leopard 2 (спершу 14, згодом 18), США — 31 Abrams." + C(33) + C(35) },
+            { d: "2023-02-24", s: "24.02.2023", k: "delivery", t: "Перші 4 з 14 польських Leopard 2 в Україні." + C(44) },
+            { d: "2023-03-27", s: "27–28.03.2023", k: "delivery", t: "Прибувають 18 німецьких Leopard 2 і перші Challenger 2." + C(32) },
+            { d: "2023-04-02", s: "02.04.2023", k: "alarm", t: "Отримано 68 європейських танків із 282 обіцяних — близько 20%." + C(34) },
+            { d: "2023-09-25", s: "25.09.2023", k: "delivery", t: "Перші Abrams в Україні — коли літній контрнаступ уже згасав." + C(35) },
+            { d: "2023-10-17", s: "17.10.2023", k: "delivery", t: "Усі 31 Abrams передано — один батальйон." + C(35) }
+          ],
+          barsTitle: "Обіцяно проти отримано (європейські танки, квітень 2023)",
+          bars: [
+            { l: "Обіцяно європейськими країнами", v: 282, s: "282" },
+            { l: "Фактично в Україні на 02.04.2023", v: 68, s: "68", c: "red" },
+            { l: "Abrams від США (загалом)", v: 31, s: "31", c: "dim" }
+          ],
+          note: "Дати — за офіційними заявами урядів і міністерств оборони."
+        },
+        patriot: {
+          from: "2022-12", to: "2026-08",
+          lead: "Patriot — єдина західна система, що надійно збиває балістику. Перший комплекс прийшов за 4 місяці після обіцянки. Але головна проблема — ракети-перехоплювачі: Росія виробляє балістики більше, ніж увесь світ — PAC-3.",
+          gaps: [ { a: "2022-12-21", b: "2023-04-19", t: "4 міс. до першого Patriot" } ],
+          ev: [
+            { d: "2022-12-21", s: "21.12.2022", k: "promise", t: "США оголошують передачу однієї батареї Patriot." + C(36) },
+            { d: "2023-04-19", s: "19.04.2023", k: "delivery", t: "Перші Patriot (від Німеччини, США, Нідерландів) в Україні." + C(37) },
+            { d: "2025-01", s: "01.2025", k: "alarm", t: "Росія випускає по Україні 28 балістичних ракет за місяць." + C(38) },
+            { d: "2026-01", s: "01.2026", k: "alarm", t: "Рекорд — 91 балістична ракета за місяць." + C(38) },
+            { d: "2026-07", s: "07.2026", k: "alarm", t: "Перехоплювачі PAC-3 фактично закінчились до 1 липня. За дві ночі — 24 і 23 балістичні ракети, жодна не збита." + C(40) },
+            { d: "2026-08", s: "08.2026", k: "alarm", t: "Зеленський: перехоплювачів у 2,5 раза менше, ніж у 2025-му, а балістики Росія випускає вдвічі більше. Повітряні сили припиняють публікувати дані про збиття балістики." + C(41) }
+          ],
+          barsTitle: "Щомісяця: загроза проти засобів захисту",
+          bars: [
+            { l: "Виробництво балістики в РФ (Іскандер-М + Кинджал), оцінка ГУР", v: 70, s: "≈ 70", c: "red" },
+            { l: "Виробництво PAC-3 MSE Lockheed — на весь світ (2025)", v: 54, s: "≈ 52–56" },
+            { l: "Потреба: 2–3 перехоплювачі на одну ракету × 70", v: 175, s: "140–210", c: "dim" }
+          ],
+          note: "Для порівняння: за три роки Україна отримала близько 600 перехоплювачів Patriot, а лише за зиму 2025–2026 Росія випустила ~250 балістичних, аеробалістичних і гіперзвукових ракет." + C(42) + C(39)
+        }
+      };
+
+      var mIdx = function(s){ var p = s.split("-"); return (+p[0]) * 12 + (+p[1] - 1) + (p[2] ? (+p[2] - 1) / 31 : 0.5); };
+      var MON = ["січ","лют","бер","кві","тра","чер","лип","сер","вер","жов","лис","гру"];
+      var $ = function(id){ return document.getElementById(id); };
+
+      function render(key){
+        var d = D[key], a = mIdx(d.from + "-01"), b = mIdx(d.to + "-01") + 1, span = Math.max(1, b - a);
+        var X = function(v){ var p = Math.max(0, Math.min(1, (v - a) / span)); return "calc(18px + (100% - 36px) * " + p.toFixed(4) + ")"; };
+        var W = Math.max(200, $("chron-track").clientWidth - 36), px = function(v){ return (v - a) / span * W; };
+        $("chron-lead").textContent = d.lead;
+        var tr = '<div class="axis"></div>';
+        var step = [1, 2, 3, 6, 12].filter(function(t){ return W / span * t >= 46; })[0] || 12;
+        var py = -1;
+        for (var m = a; m < b; m += step){
+          var y = Math.floor(m / 12), mo = m % 12;
+          tr += '<div class="tick" style="left:' + X(m + 0.5) + '">' + MON[mo] + (y !== py ? " " + String(y).slice(2) : "") + '</div>';
+          py = y;
+        }
+        (d.gaps || []).forEach(function(g){
+          var ga = mIdx(g.a), gb = mIdx(g.b), pl = px(ga), pr = px(gb);
+          var al = pl < 70 ? ' al' : (pr > W - 70 ? ' ar' : '');
+          tr += '<div class="gap' + al + '" style="left:' + X(ga) + ';width:' + Math.max(4, pr - pl).toFixed(1) + 'px;top:' + (g.y ? 14 + 24 * (g.y - 1) : 14) + 'px"><span>' + g.t + '</span></div>';
+        });
+        var lis = "";
+        var last = -1e9, lane = 0;
+        d.ev.forEach(function(e, i){
+          var p = px(mIdx(e.d)); lane = (p - last < 18) ? lane + 1 : 0; last = p;
+          tr += '<button class="dot ' + e.k + '" data-i="' + i + '" style="left:' + X(mIdx(e.d)) + ';top:' + (92 - lane * 20) + 'px" aria-label="' + e.s + '"><b>' + (i + 1) + '</b></button>';
+          lis += '<li class="' + e.k + '" data-i="' + i + '"><time>' + e.s + '</time><span>' + e.t + '</span></li>';
+        });
+        $("chron-track").innerHTML = tr;
+        $("chron-events").innerHTML = lis;
+        $("chron-bars-title").textContent = d.barsTitle;
+        var mx = Math.max.apply(null, d.bars.map(function(x){ return x.v; }));
+        $("chron-bars").innerHTML = d.bars.map(function(x){
+          return '<div class="bar-r ' + (x.c || "") + '"><div><div class="lab">' + x.l + '</div><div class="trk"><div class="fil" style="width:' + (x.v / mx * 100).toFixed(2) + '%"></div></div></div><div class="val">' + x.s + '</div></div>';
+        }).join("");
+        $("chron-note").innerHTML = d.note;
+      }
+
+      function select(i){
+        var root = $("chron");
+        root.querySelectorAll("[data-i]").forEach(function(el){ el.classList.toggle("sel", el.getAttribute("data-i") === String(i)); });
+      }
+
+      var root = $("chron");
+      root.querySelectorAll(".chron-tabs button").forEach(function(btn){
+        btn.addEventListener("click", function(){
+          root.querySelectorAll(".chron-tabs button").forEach(function(b){ b.classList.toggle("on", b === btn); });
+          render(btn.getAttribute("data-k"));
+        });
+      });
+      root.addEventListener("click", function(e){
+        var el = e.target.closest("[data-i]");
+        if (el && !e.target.closest("a")) select(el.getAttribute("data-i"));
+      });
+      var cur = "atacms"; render(cur);
+      root.querySelectorAll(".chron-tabs button").forEach(function(b){ b.addEventListener("click", function(){ cur = b.getAttribute("data-k"); }); });
+      var rt; window.addEventListener("resize", function(){ clearTimeout(rt); rt = setTimeout(function(){ render(cur); }, 150); });
+    })();
+    </script>
+
   </section>
 
   <!-- ЧАСТИНА 04 -->
@@ -568,6 +755,23 @@
       <div class="src" id="src-25"><span class="n">25</span><a href="https://www.themoscowtimes.com/2026/02/26/russia-linked-to-151-hybrid-warfare-operations-in-europe-since-2022-dutch-think-tank-says-a92065" target="_blank" rel="noopener">Russia linked to 151 hybrid warfare operations in Europe since 2022</a><span class="domain">themoscowtimes.com</span></div>
       <div class="src" id="src-26"><span class="n">26</span><a href="https://www.eurointegration.com.ua/eng/news/2026/02/16/7231258/" target="_blank" rel="noopener">Wagner Group recruiters shift focus to organised sabotage in Europe</a><span class="domain">eurointegration.com.ua</span></div>
       <div class="src" id="src-27"><span class="n">27</span><a href="https://euromaidanpress.com/2026/01/19/russia-linked-sabotage-group-tried-to-burn-lithuanian-defense-tech-bound-for-ukraine-police-say-video/" target="_blank" rel="noopener">Russia-linked sabotage group tried to burn Lithuanian defense tech bound for Ukraine</a><span class="domain">euromaidanpress.com</span></div>
+      <div class="src" id="src-28"><span class="n">28</span><a href="https://kyivpost.com/post/42443" target="_blank" rel="noopener">How many ATACMS does Ukraine have?</a><span class="domain">kyivpost.com</span></div>
+      <div class="src" id="src-29"><span class="n">29</span><a href="https://english.nv.ua/nation/how-ukraine-could-use-us-supplied-atacms-missiles-50363080.html" target="_blank" rel="noopener">How Ukraine could use US-supplied ATACMS missiles (AP vs NYT estimates)</a><span class="domain">nv.ua</span></div>
+      <div class="src" id="src-30"><span class="n">30</span><a href="https://kyivindependent.com/reuters-us-secretly-send-long-range-atacms-missiles-to-ukraine" target="_blank" rel="noopener">State Department confirms US secretly provided long-range ATACMS in March</a><span class="domain">kyivindependent.com</span></div>
+      <div class="src" id="src-31"><span class="n">31</span><a href="https://www.axios.com/2024/04/24/us-long-range-missiles-atacms-ukraine-war" target="_blank" rel="noopener">What to know about the long-range missiles the U.S. quietly gave Ukraine</a><span class="domain">axios.com</span></div>
+      <div class="src" id="src-32"><span class="n">32</span><a href="https://intellinews.com/the-first-german-leopard-2-uk-challenger-2-tanks-arrive-in-ukraine-274172" target="_blank" rel="noopener">The first German Leopard 2, UK Challenger 2 tanks arrive in Ukraine</a><span class="domain">intellinews.com</span></div>
+      <div class="src" id="src-33"><span class="n">33</span><a href="https://dsm.forecastinternational.com/2023/04/12/leopard-2-and-challenger-2-steal-a-march-on-the-abrams-in-ukraine/" target="_blank" rel="noopener">Leopard 2 and Challenger 2 steal a march on the Abrams in Ukraine</a><span class="domain">forecastinternational.com</span></div>
+      <div class="src" id="src-34"><span class="n">34</span><a href="https://www.armyrecognition.com/archives/archives-land-defense/land-defense-2023/ukraine-has-already-received-68-european-tanks-out-of-the-282-promised" target="_blank" rel="noopener">Ukraine has already received 68 European tanks out of the 282 promised</a><span class="domain">armyrecognition.com</span></div>
+      <div class="src" id="src-35"><span class="n">35</span><a href="https://www.eurointegration.com.ua/eng/news/2023/10/17/7171593/" target="_blank" rel="noopener">US completes delivery of Abrams tanks promised to Ukraine</a><span class="domain">eurointegration.com.ua</span></div>
+      <div class="src" id="src-36"><span class="n">36</span><a href="https://www.everycrsreport.com/files/2025-07-17_IF12297_ffc9a500cbff2df3dc66b061d1ad2d19a6c0f9a6.html" target="_blank" rel="noopener">Congressional Research Service — PATRIOT Air and Missile Defense System for Ukraine</a><span class="domain">everycrsreport.com</span></div>
+      <div class="src" id="src-37"><span class="n">37</span><a href="https://www.pravda.com.ua/eng/news/2023/04/19/7398523" target="_blank" rel="noopener">Перші Patriot прибули в Україну — міністр оборони</a><span class="domain">pravda.com.ua</span></div>
+      <div class="src" id="src-38"><span class="n">38</span><a href="https://euromaidanpress.com/2026/07/09/year-ago-russia-fired-28-ballistic-missiles-in-month-at-ukraine-now-its-firing-three-times-that" target="_blank" rel="noopener">Year ago, Russia fired 28 ballistic missiles in a month at Ukraine. Now it’s firing three times that</a><span class="domain">euromaidanpress.com</span></div>
+      <div class="src" id="src-39"><span class="n">39</span><a href="https://euromaidanpress.com/2026/06/02/russias-monthly-ballistic-missile-production-now-exceeds-lockheed-martins-pac-3-production-and-it-takes-2-3-interceptors-to-stop-one-iskander/" target="_blank" rel="noopener">Russia’s monthly ballistic-missile production now exceeds Lockheed Martin’s PAC-3 production</a><span class="domain">euromaidanpress.com</span></div>
+      <div class="src" id="src-40"><span class="n">40</span><a href="https://kyivpost.com/post/80023" target="_blank" rel="noopener">Ukraine critically short of PAC-3 interceptors: July 2026 strikes</a><span class="domain">kyivpost.com</span></div>
+      <div class="src" id="src-41"><span class="n">41</span><a href="https://defensenews.com/global/europe/2026/08/20/ukraine-braces-for-combined-salvos-of-up-to-200-missiles-as-overnight-attack-kills-15-in-kyiv" target="_blank" rel="noopener">Ukraine braces for combined salvos of up to 200 missiles</a><span class="domain">defensenews.com</span></div>
+      <div class="src" id="src-42"><span class="n">42</span><a href="https://razomua.media/en/news/politika/250-balistychnykh-raket-za-odnu-zymu-i-lyshe-odyn-perekhoplyuvach-na-kozhnu-yak-ukrayina-zakhyshchayetsya-vid-zahrozy-yakoyi-mayzhe-nichym-vidbyvaty" target="_blank" rel="noopener">250 балістичних ракет за одну зиму — і лише один перехоплювач на кожну</a><span class="domain">razomua.media</span></div>
+      <div class="src" id="src-43"><span class="n">43</span><a href="https://chronicle.lu/category/international-news/49516-us-quietly-shipped-long-range-atacms-missiles-to-ukraine" target="_blank" rel="noopener">US quietly shipped long-range ATACMS missiles to Ukraine (Reuters)</a><span class="domain">chronicle.lu</span></div>
+      <div class="src" id="src-44"><span class="n">44</span><a href="https://www.twz.com/first-leopard-2-tanks-arrive-in-ukraine" target="_blank" rel="noopener">First Leopard 2 tanks arrive in Ukraine (Poland)</a><span class="domain">twz.com</span></div>
     </div>
   </section>
 
