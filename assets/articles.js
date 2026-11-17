@@ -123,14 +123,14 @@ window.ARTICLES = [
 
   {
     id: "payments-access",
-    title: "Чому Україна відрізана від PayPal, Stripe і Revolut: хто насправді зачинив двері",
+    title: "Країна продавців без каси: чому Україна 15 років відрізана від PayPal і Stripe",
     file: "articles/finance/payments-access.html",
     topic: "finance",
-    tags: ["PayPal", "Stripe", "Revolut", "НБУ"],
+    tags: ["PayPal", "Stripe", "Etsy", "НБУ", "Молдова"],
     date: "2026-11-18",
     lang: "uk",
-    read: 12,
-    excerpt: "Шість років обіцянок, закон за європейським зразком — і жодної заявки на ліцензію від Stripe чи PayPal. Хто, що і чому зробив або не зробив."
+    read: 14,
+    excerpt: "Українці продають на Etsy більше за Іспанію, а прийняти оплату через PayPal не можуть. Молдова може. Ретроспектива з 2011 року: регулятор, компанії, санкційна географія."
   },
 
   // ── English translations ──
