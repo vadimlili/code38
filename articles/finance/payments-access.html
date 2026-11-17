@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Чому Україна відрізана від PayPal, Stripe і Revolut: хто насправді зачинив двері — CODE38</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  :root{
+    --bg: #0d0f12;
+    --bg-raised: #13161b;
+    --bg-card: #13161b;
+    --line: #1f2329;
+    --line-soft: #181b20;
+    --ink: #f0f2f5;
+    --ink-dim: #d4d8e0;
+    --ink-mute: #8a909b;
+    --brass: #c8a96e;
+    --brass-dim: #7a6640;
+    --alert: #e05c5c;
+    --alert-dim: #8a3a3a;
+    --ok: #5cb87a;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before{
+    content:"";
+    position: fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px);
+    background-size: 100% 44px;
+    opacity: 0;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{
+    position: relative; z-index:1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ---------- Header ---------- */
+  header.hero{
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow-row{
+    display:flex; align-items:center; gap:10px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .tag{
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brass);
+    border: 1px solid var(--brass-dim);
+    padding: 5px 10px;
+    border-radius: 3px;
+    background: rgba(200,169,110,0.06);
+  }
+  .tag.alert{ color: var(--alert); border-color: var(--alert-dim); background: rgba(224,92,92,0.08); }
+  .kicker{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+
+  h1{
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    line-height: 1.15;
+    margin: 0 0 18px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  h1 em{
+    font-style: italic;
+    color: var(--brass);
+  }
+
+  .subtitle{
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--ink-dim);
+    max-width: 60ch;
+    margin: 0 0 28px;
+  }
+
+  .meta-line{
+    display:flex; flex-wrap: wrap; gap: 6px 14px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink-mute);
+  }
+  .meta-line .dot::before{ content:"·"; margin-right: 14px; color: var(--line); }
+  .meta-line a{ color: var(--brass); text-decoration: none; border-bottom: 1px solid var(--brass-dim); }
+  .meta-line a:hover{ color: var(--ink); }
+
+  .license-note{
+    margin-top: 18px;
+    font-size: 12px;
+    color: var(--ink-mute);
+    font-family: var(--mono);
+    padding: 10px 14px;
+    border-left: 2px solid var(--brass-dim);
+    background: var(--bg-raised);
+  }
+  .license-note a{ color: var(--brass); }
+
+  /* ---------- Body typography ---------- */
+  .lede{
+    font-size: 18px;
+    color: var(--ink-dim);
+    margin: 36px 0;
+  }
+  p{ margin: 0 0 20px; font-size: 17px; line-height: 1.75; color: var(--ink-dim); }
+  strong{ color: var(--ink); font-weight: 600; }
+
+  section.part{ margin-top: 64px; }
+
+  .part-label{
+    display:flex; align-items: baseline; gap: 14px;
+    margin-bottom: 18px;
+  }
+  .part-num{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--brass);
+    letter-spacing: 0.08em;
+  }
+  .part-num::before{ content:""; display:inline-block; width:22px; height:1px; background: var(--brass-dim); margin-right:10px; vertical-align: middle; }
+
+  h2{
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    color: var(--ink);
+    margin: 4px 0 0;
+    line-height: 1.3;
+  }
+  h3{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--ink);
+    margin: 32px 0 14px;
+  }
+
+  ul, ol{ margin: 0 0 20px; padding-left: 22px; color: var(--ink-dim); }
+  li{ margin-bottom: 10px; font-size: 16px; }
+  li::marker{ color: var(--brass-dim); }
+
+  /* ---------- Ledger / budget visual ---------- */
+  .ledger{
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    margin: 28px 0 32px;
+    overflow: hidden;
+  }
+  .ledger-head{
+    display:flex; justify-content: space-between; align-items:baseline;
+    padding: 16px 20px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .ledger-head .t{ font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-mute); }
+  .ledger-head .v{ font-family: var(--serif); font-size: 24px; color: var(--brass); font-weight: 600; }
+  .ledger-bar{ display:flex; height: 34px; }
+  .ledger-bar span{ display:flex; align-items:center; justify-content:center; font-family: var(--mono); font-size: 11px; color: var(--bg); font-weight:600; }
+  .seg-a{ background: var(--ink-mute); flex: 0 0 4%; }
+  .seg-b{ background: var(--ok); flex: 0 0 3%; }
+  .seg-c{ background: var(--brass); flex: 1; }
+  .ledger-rows{ padding: 14px 20px 18px; display:grid; gap: 10px; }
+  .ledger-row{ display:flex; justify-content: space-between; gap: 16px; font-size: 14.5px; }
+  .ledger-row .label{ color: var(--ink-dim); }
+  .ledger-row .val{ font-family: var(--mono); color: var(--ink); white-space:nowrap; }
+  .swatch{ display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:8px; vertical-align:1px; }
+
+  /* ---------- Stat strip ---------- */
+  .stat-strip{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin: 28px 0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .stat{
+    background: var(--bg-card);
+    padding: 18px 16px;
+  }
+  .stat .num{ font-family: var(--serif); font-size: 28px; color: var(--brass); font-weight: 600; line-height:1; }
+  .stat .num.alert{ color: var(--alert); }
+  .stat .lbl{ font-size: 12px; color: var(--ink-mute); margin-top: 8px; line-height:1.4; }
+
+  /* ---------- Callout / example box ---------- */
+  .callout{
+    margin: 28px 0;
+    padding: 20px 22px;
+    background: var(--bg-raised);
+    border-left: 3px solid var(--brass);
+    border-radius: 0 4px 4px 0;
+  }
+  .callout.alert{ border-left-color: var(--alert); }
+  .callout .cal-title{
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--brass);
+    margin-bottom: 10px;
+  }
+  .callout.alert .cal-title{ color: var(--alert); }
+  .callout p:last-child{ margin-bottom:0; }
+
+  blockquote{
+    margin: 28px 0;
+    padding: 4px 0 4px 22px;
+    border-left: 2px solid var(--brass-dim);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-dim);
+  }
+
+  /* ---------- Tables ---------- */
+  table{ width:100%; border-collapse: collapse; margin: 24px 0; font-size: 14.5px; }
+  th, td{ padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); }
+  th{ font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-mute); font-weight:500; }
+  td{ color: var(--ink-dim); }
+  td.yes{ color: var(--ok); }
+  td.no{ color: var(--alert); }
+
+  /* ---------- Country cards ---------- */
+  .cases{ display:grid; gap: 14px; margin: 28px 0; }
+  .case{
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 20px 22px;
+  }
+  .case-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 10px; gap: 10px; flex-wrap:wrap; }
+  .case-head .name{ font-family: var(--serif); font-weight:600; font-size: 18px; color: var(--ink); }
+  .case-head .years{ font-family: var(--mono); font-size: 12px; color: var(--brass); }
+  .case p{ font-size: 15px; margin-bottom: 0; color: var(--ink-dim); }
+
+  /* ---------- Conclusion ---------- */
+  .conclusion{
+    margin-top: 64px;
+    padding: 30px 26px;
+    background: var(--bg-card);
+    border: 1px solid var(--brass-dim);
+    border-radius: 6px;
+  }
+  .conclusion h2{ margin-top:0; }
+
+  /* ---------- Sources ---------- */
+  .sources{ margin-top: 64px; }
+  .src-list{ display:grid; gap: 8px; margin-top: 20px; }
+  .src{
+    display:flex; gap: 12px; align-items:baseline;
+    padding: 10px 14px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line-soft);
+    border-radius: 3px;
+    font-size: 13px;
+  }
+  .src .n{ font-family: var(--mono); color: var(--ink-mute); flex: 0 0 22px; }
+  .src a{ color: var(--ink-dim); text-decoration: none; }
+  .src a:hover{ color: var(--brass); }
+  .src .domain{ font-family: var(--mono); font-size: 11px; color: var(--brass-dim); margin-left: auto; white-space: nowrap; padding-left: 10px; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    margin-top: 72px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-mute);
+    text-align:center;
+    line-height: 1.9;
+  }
+  footer a{ color: var(--brass); text-decoration:none; border-bottom: 1px solid var(--brass-dim); }
+  footer a:hover{ color: var(--ink); }
+
+  @media (max-width: 560px){
+    .wrap{ padding: 0 16px 60px; }
+    header.hero{ padding: 40px 0 32px; }
+    .ledger-head{ flex-direction:column; align-items:flex-start; gap:6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+  }
+
+  a.cite{ font-family: var(--mono); font-size: .72em; color: var(--brass); text-decoration: none; vertical-align: super; line-height: 0; margin-left: 1px; }
+  a.cite:hover{ text-decoration: underline; }
+  .src{ scroll-margin-top: 80px; transition: background .3s; }
+  .src:target{ background: rgba(200,169,110,.12); outline: 1px solid var(--brass-dim); }
+  td.mid{ color: var(--brass); }
+  .table-wrap{ overflow-x:auto; }
+  .table-wrap table{ min-width: 640px; }
+</style>
+<!-- seo -->
+<meta name="description" content="Шість років обіцянок, закон за європейським зразком — і жодної заявки на ліцензію від Stripe чи PayPal. Хто, що і чому зробив або не зробив.">
+<link rel="canonical" href="https://code38.com.ua/articles/finance/payments-access.html">
+<meta property="og:site_name" content="CODE38">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Чому Україна відрізана від PayPal, Stripe і Revolut: хто насправді зачинив двері">
+<meta property="og:description" content="Шість років обіцянок, закон за європейським зразком — і жодної заявки на ліцензію від Stripe чи PayPal. Хто, що і чому зробив або не зробив.">
+<meta property="og:url" content="https://code38.com.ua/articles/finance/payments-access.html">
+<meta property="og:image" content="https://code38.com.ua/assets/og/payments-access.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="uk_UA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Чому Україна відрізана від PayPal, Stripe і Revolut: хто насправді зачинив двері">
+<meta name="twitter:description" content="Шість років обіцянок, закон за європейським зразком — і жодної заявки на ліцензію від Stripe чи PayPal. Хто, що і чому зробив або не зробив.">
+<meta name="twitter:image" content="https://code38.com.ua/assets/og/payments-access.jpg">
+<link rel="icon" href="https://code38.com.ua/assets/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Чому Україна відрізана від PayPal, Stripe і Revolut: хто насправді зачинив двері", "description": "Шість років обіцянок, закон за європейським зразком — і жодної заявки на ліцензію від Stripe чи PayPal. Хто, що і чому зробив або не зробив.", "datePublished": "2026-11-18", "dateModified": "2026-11-18", "inLanguage": "uk", "keywords": "PayPal, Stripe, Revolut, НБУ", "author": {"@type": "Person", "name": "vadim.li", "url": "https://code38.com.ua/about.html"}, "publisher": {"@type": "Organization", "name": "CODE38", "url": "https://code38.com.ua/", "logo": {"@type": "ImageObject", "url": "https://code38.com.ua/assets/logo.png"}}, "image": "https://code38.com.ua/assets/og/payments-access.jpg", "mainEntityOfPage": "https://code38.com.ua/articles/finance/payments-access.html"}</script>
+<script data-goatcounter="https://vadim.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<!-- /seo -->
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow-row">
+      <span class="tag">Гроші і фінанси</span>
+      <span class="tag alert">Платежі</span>
+      <span class="kicker">2026</span>
+    </div>
+
+    <h1>Чому Україна відрізана від PayPal, Stripe і Revolut: <em>хто насправді зачинив двері</em></h1>
+
+    <p class="subtitle">Шість років обіцянок, закон за європейським зразком — і жодної заявки на ліцензію від Stripe чи PayPal. Розбираємо, хто, що і чому зробив або не зробив.</p>
+
+    <div class="meta-line">
+      <span>≈ 12 хвилин читання</span>
+      <span class="dot">Аналітичний матеріал</span>
+      <span class="dot">Фінанси · Регулювання</span>
+      <span class="dot">Автор: vadim.li · <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a></span>
+    </div>
+
+    <div class="license-note">
+      Використання тексту — лише з дозволу автора. Для передруку, посилань або співпраці пишіть на <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a>.
+    </div>
+  </header>
+
+  <p class="lede">Український дизайнер не може отримати оплату через Stripe. Розробник не може продавати шаблони на Gumroad напряму. Фрілансер не може виставити рахунок через PayPal. А користувачі Revolut у грудні 2025-го отримали лист: за 60 днів рахунки закриють. Звична відповідь — «нас не пускають». Але якщо подивитися на документи, картина складніша: частину дверей зачинили компанії, частину — наш регулятор, а частину так ніхто й не спробував відчинити.</p>
+
+  <!-- ЧАСТИНА 01 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 01</span></div>
+    <h2>Карта доступу: що працює, що наполовину, що ні</h2>
+
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Сервіс</th><th>Статус</th><th>Що можна</th><th>Чого не можна</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Stripe</strong></td><td class="no" style="white-space:nowrap">✕ Немає</td><td>—</td><td>Не працював в Україні навіть частково й ніколи не оголошував планів виходу <a class="cite" href="#src-1">[1]</a></td></tr>
+        <tr><td><strong>PayPal</strong></td><td class="mid" style="white-space:nowrap">◑ Частково</td><td>З 2022 року — отримувати перекази від іноземних клієнтів, надсилати гроші, платити в іноземних магазинах <a class="cite" href="#src-1">[1]</a></td><td>Поповнювати напряму з українських карток і виводити через українські банкомати чи банки <a class="cite" href="#src-1">[1]</a>; повноцінно приймати оплату за товари й послуги <a class="cite" href="#src-2">[2]</a></td></tr>
+        <tr><td><strong>Revolut</strong></td><td class="no" style="white-space:nowrap">✕ Закрито</td><td>Українці, які живуть у ЄЕЗ, обслуговуються далі <a class="cite" href="#src-3">[3]</a></td><td>Рахунки резидентів України закриті з 22 лютого 2026 року <a class="cite" href="#src-4">[4]</a></td></tr>
+        <tr><td><strong>Wise</strong></td><td class="no" style="white-space:nowrap">✕ Згорнуто</td><td>—</td><td>З 8 грудня 2024-го — виплати на Visa українських банків; українцям недоступна реєстрація нових акаунтів <a class="cite" href="#src-1">[1]</a></td></tr>
+        <tr><td><strong>Gumroad</strong></td><td class="no" style="white-space:nowrap">✕ Фактично ні</td><td>—</td><td>Платежі й виплати йдуть через Stripe <a class="cite" href="#src-5">[5]</a>, а PayPal не дає українцям приймати комерційні платежі <a class="cite" href="#src-2">[2]</a>; українські автори збирають петиції з вимогою відкрити виплати <a class="cite" href="#src-6">[6]</a></td></tr>
+        <tr><td><strong>Etsy Payments</strong></td><td class="yes" style="white-space:nowrap">✓ Працює</td><td>З жовтня 2023 року — офіційно відкривати магазини й отримувати виплати через Payoneer <a class="cite" href="#src-7">[7]</a> <a class="cite" href="#src-8">[8]</a></td><td>Комісія за обробку платежу вища, ніж у продавців зі США <a class="cite" href="#src-29">[29]</a></td></tr>
+        <tr><td><strong>Interactive Brokers</strong></td><td class="yes" style="white-space:nowrap">✓ Працює</td><td>Резиденти України можуть відкрити рахунок <a class="cite" href="#src-9">[9]</a></td><td>Поповнення — у межах валютних лімітів НБУ <a class="cite" href="#src-10">[10]</a></td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p>Видно, що проблема не одна, а щонайменше три різні: компанії, які ніколи не заходили (Stripe), компанії, які зайшли частково й так і не стали повноцінними (PayPal, Wise), і компанія, яка зайшла без української ліцензії й була змушена піти (Revolut).</p>
+  </section>
+
+  <!-- ЧАСТИНА 02 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 02</span></div>
+    <h2>Хроніка: шість років обіцянок</h2>
+
+    <div class="cases">
+      <div class="case">
+        <div class="case-head"><span class="name">Мінцифри починає переговори</span><span class="years">2020</span></div>
+        <p>У травні 2020-го Мінцифри заявило про діалог із PayPal щодо виходу на український ринок; заступник міністра Олександр Борняков згадував також переговори зі Stripe <a class="cite" href="#src-11">[11]</a>. Згодом Михайло Федоров обіцяв: «Stripe точно буде в Україні», а PayPal «треба зайти в Україну» <a class="cite" href="#src-12">[12]</a>.</p>
+      </div>
+      <div class="case">
+        <div class="case-head"><span class="name">Закон за європейським зразком</span><span class="years">2021–2022</span></div>
+        <p>У квітні 2021-го Мінцифри, Мінфін і НБУ на нараді в прем'єр-міністра обговорили план залучення платіжних систем і назвали важливим кроком зміни до законодавства <a class="cite" href="#src-13">[13]</a>. 30 червня 2021 року Рада ухвалила закон про платіжні послуги, який запроваджує європейські правила PSD2 та директиву про електронні гроші <a class="cite" href="#src-14">[14]</a>. Набрав чинності закон 1 серпня 2022 року, а відповідальність за порушення НБУ почав застосовувати з 1 грудня <a class="cite" href="#src-15">[15]</a>.</p>
+      </div>
+      <div class="case">
+        <div class="case-head"><span class="name">PayPal відкриває перекази</span><span class="years">2022</span></div>
+        <p>Після початку повномасштабної війни PayPal на прохання українського уряду дозволив українцям отримувати перекази від друзів і родини та виводити кошти на картки <a class="cite" href="#src-16">[16]</a>. Отримувати оплату за товари й послуги так і не дозволили <a class="cite" href="#src-2">[2]</a>. У квітні того ж року Мінцифри повідомило, що до діалогу зі Stripe долучилися НБУ та Visa <a class="cite" href="#src-17">[17]</a>.</p>
+      </div>
+      <div class="case">
+        <div class="case-head"><span class="name">Etsy: закрили і відкрили</span><span class="years">2021–2023</span></div>
+        <p>У 2021 році Etsy зробив Etsy Payments обов'язковим для нових магазинів, а оскільки в Україні він не працював, українці не могли відкривати нові магазини <a class="cite" href="#src-18">[18]</a>. У жовтні 2023-го Etsy запустив Etsy Payments в Україні через партнерство з Payoneer — і магазини знову стало можна відкривати офіційно <a class="cite" href="#src-7">[7]</a> <a class="cite" href="#src-8">[8]</a>. Це єдиний випадок у цій історії, коли переговори Мінцифри закінчилися повним результатом.</p>
+      </div>
+      <div class="case">
+        <div class="case-head"><span class="name">Wise згортається</span><span class="years">2022–2024</span></div>
+        <p>Wise працював в Україні з 2014 року. Після вторгнення поступово обмежував послуги: спершу перекази в гривні, а з 8 грудня 2024-го — виплати на картки Visa українських банків. Компанія пояснила, що війна ускладнює контроль за ситуацією і гарантування безпечних послуг <a class="cite" href="#src-1">[1]</a>.</p>
+      </div>
+      <div class="case">
+        <div class="case-head"><span class="name">Revolut: прийшов і пішов</span><span class="years">2025–2026</span></div>
+        <p>У лютому 2025-го Revolut відкрив реєстрацію для українців: за перший тиждень зареєструвалися близько 40 тисяч людей, ще 260 тисяч стали в чергу. Приблизно за два тижні реєстрацію призупинили через відсутність ліцензії НБУ <a class="cite" href="#src-1">[1]</a>. У грудні 2025-го Revolut повідомив про закриття рахунків резидентів України з 22 лютого 2026 року <a class="cite" href="#src-19">[19]</a>.</p>
+      </div>
+      <div class="case">
+        <div class="case-head"><span class="name">НБУ: заявок не було</span><span class="years">листопад 2025</span></div>
+        <p>На запит DOU Нацбанк відповів, що Stripe і PayPal жодного разу не зверталися до регулятора за ліцензією чи іншим дозволом <a class="cite" href="#src-1">[1]</a> <a class="cite" href="#src-20">[20]</a>. Тобто після п'яти років «переговорів» жодна з компаній не зробила навіть формального першого кроку.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЧАСТИНА 03 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 03</span></div>
+    <h2>Чому компанії не йдуть: їхній розрахунок</h2>
+
+    <p>Для глобальної платіжної компанії вихід на ринок — бізнес-рішення: скільки це коштує, скільки принесе і що може піти не так. Економісти KSE Institute, яких опитав DOU, називають кілька чинників <a class="cite" href="#src-1">[1]</a>:</p>
+
+    <div class="stat-strip">
+      <div class="stat"><div class="num alert">Війна</div><div class="lbl">ризики, макроекономічна невизначеність і непередбачувані правила</div></div>
+      <div class="stat"><div class="num alert">Валютний контроль</div><div class="lbl">обмеження НБУ на рух капіталу й виведення прибутку</div></div>
+      <div class="stat"><div class="num">Малий ринок</div><div class="lbl">витрати на ліцензування проти невеликого й низькоприбуткового через війну ринку</div></div>
+    </div>
+
+    <p>До цього додається конкуренція: зручну нішу цифрових платежів уже зайняли місцеві фінтехи на кшталт monobank <a class="cite" href="#src-1">[1]</a>. А Wise прямо пояснив свій відхід вимогами міжнародного регулювання й тим, що в умовах війни складно гарантувати надійний сервіс <a class="cite" href="#src-1">[1]</a>.</p>
+
+    <div class="callout">
+      <div class="cal-title">Попит є — і великий</div>
+      <p>Історія Revolut показує, що проблема не в браку клієнтів: 40 тисяч реєстрацій за тиждень і 260 тисяч у черзі <a class="cite" href="#src-1">[1]</a>. Компанії бачать попит. Але попит — лише одна частина розрахунку; інша — ризики й витрати, які в Україні під час війни для них вищі, ніж у Польщі чи Литві.</p>
+    </div>
+  </section>
+
+  <!-- ЧАСТИНА 04 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 04</span></div>
+    <h2>Що зробила держава</h2>
+
+    <p><strong>Закон за правилами ЄС.</strong> Закон про платіжні послуги відтворює європейську директиву PSD2, тому терміни авторизації подібні до європейських <a class="cite" href="#src-1">[1]</a>. Формально юридичного бар'єра, якого немає в ЄС, не існує.</p>
+    <p><strong>Переговори й петиції.</strong> Мінцифри роками вело переговори з керівництвом PayPal, Stripe, Etsy, запускало публічні петиції <a class="cite" href="#src-17">[17]</a>, а після двох років переговорів навіть попросило Stripe дорожню карту з датами <a class="cite" href="#src-21">[21]</a>. Результати — PayPal для приватних переказів (2022) і Etsy Payments (2023).</p>
+    <p><strong>Поступове пом'якшення валютних обмежень.</strong> З 11 серпня 2026 року фізособи можуть переказувати за кордон в оплату товарів, робіт і послуг до 200 000 грн на місяць з усіх своїх валютних рахунків <a class="cite" href="#src-10">[10]</a>; ліміт на такі платежі з гривневих рахунків зріс зі 100 до 200 тисяч гривень <a class="cite" href="#src-22">[22]</a>.</p>
+  </section>
+
+  <!-- ЧАСТИНА 05 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 05</span></div>
+    <h2>Що не зроблено — і що заважає</h2>
+
+    <h3>Європейська ліцензія в Україні не діє</h3>
+    <p>Revolut працював з українцями через литовський Revolut Bank UAB — за ліцензією, що дозволяє роботу в країнах ЄС <a class="cite" href="#src-23">[23]</a>. Позиція НБУ: правила однакові для всіх, і будь-яка компанія, що надає фінансові послуги резидентам України, має пройти авторизацію за українським законодавством <a class="cite" href="#src-24">[24]</a>. Юридично це коректно: Україна не член ЄС, і «паспорт» європейської ліцензії на неї не поширюється. Але на практиці це означає, що для українського ринку компанія має пройти окрему процедуру — заради ринку, який вона сама оцінює як малий і ризиковий.</p>
+
+    <h3>Інтереси місцевих гравців</h3>
+    <p>Співзасновник monobank Олег Гороховський назвав вихід Revolut «банальним порушенням українських законів» <a class="cite" href="#src-25">[25]</a> і наголосив: «Ми були б раді бачити Revolut в Україні, але з повагою до українських законів» <a class="cite" href="#src-26">[26]</a>. Він також нагадав, що monobank не пустили в Польщу <a class="cite" href="#src-25">[25]</a>. Це легітимна позиція — і водночас позиція конкурента. DOU фіксує загальну тенденцію: великі банки схильні бачити в іноземних гравцях конкурентів, а менші — партнерів <a class="cite" href="#src-1">[1]</a>.</p>
+
+    <h3>Валютні обмеження воєнного часу</h3>
+    <p>Обмеження, запроваджені в лютому 2022-го, захищали резерви й курс у найважчий момент. Але саме вони, за оцінкою KSE, відлякують компанії, яким потрібно вільно виводити прибуток <a class="cite" href="#src-1">[1]</a>. Лібералізація йде, проте поступово й з лімітами <a class="cite" href="#src-27">[27]</a>.</p>
+
+    <h3>Інтерес держави, про який говорять рідше</h3>
+    <p>Економісти KSE звертають увагу й на інший бік: коли платежі йдуть через іноземні сервіси, комісії й доходи залишаються за кордоном, гроші важче відстежувати — це податкові ризики й «сіра зона», а НБУ отримує менше даних про грошові потоки <a class="cite" href="#src-1">[1]</a>. Тобто в держави є й власні причини не поспішати.</p>
+
+    <div class="callout alert">
+      <div class="cal-title">Головний незручний факт</div>
+      <p>Шість років публічних обіцянок «Stripe точно буде» — і жодної заявки на ліцензію від Stripe чи PayPal <a class="cite" href="#src-20">[20]</a>. Переговори, які не доходять до формальної процедури, — це не переговори про вихід на ринок, а обмін люб'язностями. Публічного звіту про те, на якому етапі ці розмови і що саме не влаштовує компанії, у відкритих джерелах ми не знайшли.</p>
+    </div>
+  </section>
+
+  <!-- ЧАСТИНА 06 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 06</span></div>
+    <h2>Що реально може змінити ситуацію</h2>
+
+    <p><strong>1. Вступ до ЄС і «паспортизація» ліцензій.</strong> Закон уже побудований за PSD2. Коли Україна стане частиною єдиного ринку, ліцензія з Литви чи Ірландії діятиме і тут — так само, як вона діє в Польщі. До того часу можна думати про спрощену процедуру для компаній, що вже мають ліцензію в ЄС.</p>
+    <p><strong>2. Продовження валютної лібералізації.</strong> Можливість вільно виводити прибуток — одна з умов, які називають самі експерти <a class="cite" href="#src-1">[1]</a>. Без неї будь-які переговори впиратимуться в ту саму стіну.</p>
+    <p><strong>3. Публічна дорожня карта.</strong> Замість обіцянок «буде» — відкритий перелік вимог кожної компанії і того, що з них держава вже виконала. Це перевело б розмову з рівня гасел на рівень конкретних рішень.</p>
+    <p><strong>4. Чесна конкуренція.</strong> Якщо закон однаковий для всіх, він має бути однаково досяжним для всіх. Конкуренція з глобальними гравцями, за оцінкою KSE, могла б підштовхнути місцеві банки покращувати сервіс <a class="cite" href="#src-1">[1]</a>.</p>
+
+    <div class="callout">
+      <div class="cal-title">Що працює вже зараз</div>
+      <p><strong>Etsy</strong> — через Etsy Payments і Payoneer <a class="cite" href="#src-8">[8]</a>. <strong>Interactive Brokers</strong> — рахунки для резидентів України <a class="cite" href="#src-9">[9]</a>. <strong>PayPal</strong> — для приватних переказів, але не для продажу товарів <a class="cite" href="#src-2">[2]</a>. Для цифрових товарів з'являються українські аналоги Gumroad з оплатою в гривні через українські банки <a class="cite" href="#src-28">[28]</a>. Посередницькі сервіси, які приймають оплату через Stripe чи PayPal і розраховуються з українськими продавцями, існують, але беруть свою комісію <a class="cite" href="#src-21">[21]</a>.</p>
+    </div>
+  </section>
+
+  <table style="margin-top:40px;">
+    <thead>
+      <tr><th>Популярна теза</th><th>Що показують факти</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>«Stripe і PayPal не пускає держава»</td><td class="no">✕ Жодна з компаній не подавала заявки на ліцензію в НБУ</td></tr>
+      <tr><td>«Revolut вигнали»</td><td class="mid">◑ Revolut працював без української ліцензії; НБУ вимагав її, і компанія сама вирішила піти</td></tr>
+      <tr><td>«Etsy для українців закритий»</td><td class="no">✕ З жовтня 2023 року Etsy Payments працює через Payoneer</td></tr>
+      <tr><td>«Законодавство не відповідає європейському»</td><td class="no">✕ Закон про платіжні послуги побудований за PSD2</td></tr>
+      <tr><td>Бар'єри — війна, валютний контроль, малий ринок і інтереси місцевих гравців</td><td class="yes">✓ Саме ці чинники називають експерти й самі компанії</td></tr>
+    </tbody>
+  </table>
+
+  <section class="sources">
+    <h3 style="margin-top:0;">Джерела</h3>
+    <div class="src-list">
+      <div class="src" id="src-1"><span class="n">01</span><a href="https://dou.ua/lenta/articles/stripe-wise-revolut-dont-work-in-ukraine/" target="_blank" rel="noopener">Чому в Україні не працюють PayPal, Wise, Stripe і Revolut та що це означає для айтівців (28.11.2025)</a><span class="domain">dou.ua</span></div>
+      <div class="src" id="src-2"><span class="n">02</span><a href="https://westernbid.com/en/?p=23509" target="_blank" rel="noopener">PayPal in Ukraine 2026: how to get paid for goods by buyers abroad</a><span class="domain">westernbid.com</span></div>
+      <div class="src" id="src-3"><span class="n">03</span><a href="https://www.financemagnates.com/fintech/ukraines-central-bank-says-revoluts-account-closures-stem-from-a-lack-of-local-licensing/amp" target="_blank" rel="noopener">Ukraine’s central bank says Revolut’s account closures stem from a lack of local licensing</a><span class="domain">financemagnates.com</span></div>
+      <div class="src" id="src-4"><span class="n">04</span><a href="https://scroll.media/en/?p=32271" target="_blank" rel="noopener">Revolut to close Ukrainian accounts within 60 days</a><span class="domain">scroll.media</span></div>
+      <div class="src" id="src-5"><span class="n">05</span><a href="https://www.dreamgrow.com/payment-processing-payouts-and-paypal-a-chance-for-creators-to-thrivecart-at-the-end-of-the-gumroad/" target="_blank" rel="noopener">Payment processing, payouts and PayPal: Gumroad uses Stripe for payouts</a><span class="domain">dreamgrow.com</span></div>
+      <div class="src" id="src-6"><span class="n">06</span><a href="https://www.change.org/p/demand-gumroad-com-to-enable-bank-payouts-for-ukraine-creators" target="_blank" rel="noopener">Demand Gumroad.com to enable bank payouts for Ukraine creators</a><span class="domain">change.org</span></div>
+      <div class="src" id="src-7"><span class="n">07</span><a href="https://kyivindependent.com/etsy-launches-payment-system-in-ukraine-sellers-now-able-to-open-official-stores" target="_blank" rel="noopener">Ukrainians can now officially open stores on Etsy</a><span class="domain">kyivindependent.com</span></div>
+      <div class="src" id="src-8"><span class="n">08</span><a href="https://www.digitalcommerce360.com/2023/10/24/etsy-payments-expands-to-seven-more-countries/amp/" target="_blank" rel="noopener">Etsy Payments expands to seven more countries, in partnership with Payoneer</a><span class="domain">digitalcommerce360.com</span></div>
+      <div class="src" id="src-9"><span class="n">09</span><a href="https://tradersunion.com/brokers/forex/view/interactive_brokers/is-regulated-in-ukraine/" target="_blank" rel="noopener">Interactive Brokers services in Ukraine</a><span class="domain">tradersunion.com</span></div>
+      <div class="src" id="src-10"><span class="n">10</span><a href="https://ap-bank.com/en/news/post/valyutni-obmezhennya" target="_blank" rel="noopener">НБУ пом'якшив валютні обмеження: що змінилося з 11.08.2026</a><span class="domain">ap-bank.com</span></div>
+      <div class="src" id="src-11"><span class="n">11</span><a href="https://www.unian.info/economics/doing-business-in-ukraine-gov-t-in-talks-with-paypal-netflix-amp-11308286.html" target="_blank" rel="noopener">Digital transformation ministry in talks with PayPal, Netflix, Stripe</a><span class="domain">unian.info</span></div>
+      <div class="src" id="src-12"><span class="n">12</span><a href="https://www.ukrinform.net/rubric-economy/3201084-fedorov-says-stripe-payment-system-will-be-available-in-ukraine.html" target="_blank" rel="noopener">Fedorov says Stripe payment system will be available in Ukraine</a><span class="domain">ukrinform.net</span></div>
+      <div class="src" id="src-13"><span class="n">13</span><a href="https://en.interfax.com.ua/news/economic/735985.html" target="_blank" rel="noopener">Digital Transformation Ministry, PM, Finance Ministry, NBU discuss bringing Stripe, PayPal to Ukraine (07.04.2021)</a><span class="domain">interfax.com.ua</span></div>
+      <div class="src" id="src-14"><span class="n">14</span><a href="https://eba.com.ua/en/wp-json/wp/v2/posts/350120" target="_blank" rel="noopener">EBA: Verkhovna Rada adopted a new payment services law (30.06.2021)</a><span class="domain">eba.com.ua</span></div>
+      <div class="src" id="src-15"><span class="n">15</span><a href="https://kinstellar.com/upload/Payment%20Services%20Law%20Overview_March%202023.pdf" target="_blank" rel="noopener">Kinstellar — Payment Services Law Overview (PDF)</a><span class="domain">kinstellar.com</span></div>
+      <div class="src" id="src-16"><span class="n">16</span><a href="https://techcrunch.com/?p=2286352" target="_blank" rel="noopener">PayPal expands services in Ukraine at the government’s request (2022)</a><span class="domain">techcrunch.com</span></div>
+      <div class="src" id="src-17"><span class="n">17</span><a href="https://interfax.com/newsroom/top-stories/77862/" target="_blank" rel="noopener">Etsy ready to consider opening platform for Ukrainians; NBU and Visa join Stripe dialogue</a><span class="domain">interfax.com</span></div>
+      <div class="src" id="src-18"><span class="n">18</span><a href="https://en.ain.ua/2021/05/12/etsy-stops-registration-of-new-shops-from-ukraine-russia-belarus-and-other-countries" target="_blank" rel="noopener">Etsy stops registration of new shops from Ukraine and other countries (2021)</a><span class="domain">ain.ua</span></div>
+      <div class="src" id="src-19"><span class="n">19</span><a href="https://razomua.media/en/news/finansy/nbu-pro-zakryttya-rakhunkiv-revolut-rehulyatornyy-dialoh-zamist-zadnikh-dverey" target="_blank" rel="noopener">NBU on Revolut account closures: regulatory dialogue instead of “back doors”</a><span class="domain">razomua.media</span></div>
+      <div class="src" id="src-20"><span class="n">20</span><a href="https://news.finance.ua/ua/nacbank-poyasnyv-chomu-stripe-i-paypal-dosi-oficiyno-ne-pracyuyut-v-ukraini" target="_blank" rel="noopener">Нацбанк пояснив, чому Stripe і PayPal досі офіційно не працюють в Україні</a><span class="domain">finance.ua</span></div>
+      <div class="src" id="src-21"><span class="n">21</span><a href="https://westernbid.com/en/?p=23283" target="_blank" rel="noopener">Stripe payment system: prospects for Ukrainian online sellers</a><span class="domain">westernbid.com</span></div>
+      <div class="src" id="src-22"><span class="n">22</span><a href="https://www.intellinews.com/nbu-announces-major-currency-liberalisation-for-individuals-businesses-and-the-financial-sector-460604/" target="_blank" rel="noopener">NBU announces major currency liberalisation (August 2026)</a><span class="domain">intellinews.com</span></div>
+      <div class="src" id="src-23"><span class="n">23</span><a href="https://dev.ua/en/news/natsbank-nahadav-revolut-pro-litsenziiu-1740649947" target="_blank" rel="noopener">NBU reminds Revolut about the need for a licence (27.02.2025)</a><span class="domain">dev.ua</span></div>
+      <div class="src" id="src-24"><span class="n">24</span><a href="https://dev.ua/en/news/nbu-pro-vykhid-revolut-1766564307" target="_blank" rel="noopener">NBU: “the rules are the same for everyone” — position on Revolut</a><span class="domain">dev.ua</span></div>
+      <div class="src" id="src-25"><span class="n">25</span><a href="https://dev.ua/news/natsbank-nahadav-revolut-pro-litsenziiu-1740649947" target="_blank" rel="noopener">Нацбанк нагадав Revolut про ліцензію; коментар Олега Гороховського</a><span class="domain">dev.ua</span></div>
+      <div class="src" id="src-26"><span class="n">26</span><a href="https://scroll.media/en/?p=10506" target="_blank" rel="noopener">NBU: Revolut must obtain a license in Ukraine</a><span class="domain">scroll.media</span></div>
+      <div class="src" id="src-27"><span class="n">27</span><a href="https://eba.com.ua/en/?p=764426" target="_blank" rel="noopener">NBU continues to ease currency restrictions (19.08.2026)</a><span class="domain">eba.com.ua</span></div>
+      <div class="src" id="src-29"><span class="n">29</span><a href="https://westernbid.com/en/?p=23351" target="_blank" rel="noopener">How to open an Etsy shop from Ukraine 2026: commissions</a><span class="domain">westernbid.com</span></div>
+      <div class="src" id="src-28"><span class="n">28</span><a href="https://www.producthunt.com/products/blacksea/alternatives" target="_blank" rel="noopener">BlackSea — Ukrainian localized alternative to Gumroad</a><span class="domain">producthunt.com</span></div>
+    </div>
+  </section>
+
+  <footer>
+    Аналітичний матеріал підготовлено на основі відкритих джерел та офіційних даних.<br>
+    © 2026 vadim.li · Некомерційне поширення з посиланням на автора — вітається.<br>
+    Питання, співпраця, передрук: <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a>
+  </footer>
+
+</div>
+<script src="../../assets/articles.js"></script>
+<script src="../../assets/site-nav.js"></script>
+</body>
+</html>

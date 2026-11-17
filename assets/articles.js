@@ -121,6 +121,18 @@ window.ARTICLES = [
     excerpt: "Що було б, якби людство відмовилося від експлуатації тварин у XIV столітті: два сценарії — оптимістичний і критичний."
   },
 
+  {
+    id: "payments-access",
+    title: "Чому Україна відрізана від PayPal, Stripe і Revolut: хто насправді зачинив двері",
+    file: "articles/finance/payments-access.html",
+    topic: "finance",
+    tags: ["PayPal", "Stripe", "Revolut", "НБУ"],
+    date: "2026-11-18",
+    lang: "uk",
+    read: 12,
+    excerpt: "Шість років обіцянок, закон за європейським зразком — і жодної заявки на ліцензію від Stripe чи PayPal. Хто, що і чому зробив або не зробив."
+  },
+
   // ── English translations ──
   {
     id: "realpolitik-en",
