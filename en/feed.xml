@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="https://code38.com.ua/assets/feed.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>CODE38 (English)</title>
+  <link>https://code38.com.ua/en/</link>
+  <description>Geopolitics, defense, Ukraine’s economy and finance — without rose-tinted glasses.</description>
+  <language>en</language>
+  <atom:link href="https://code38.com.ua/en/feed.xml" rel="self" type="application/rss+xml"/>
+  <image><url>https://code38.com.ua/assets/logo.png</url><title>CODE38</title><link>https://code38.com.ua/en/</link></image>
+  <lastBuildDate>Wed, 18 Nov 2026 09:00:00 +0000</lastBuildDate>
+  <item>
+    <title>A country of sellers without a till: why Ukraine has been cut off from PayPal and Stripe for 15 years</title>
+    <link>https://code38.com.ua/articles/finance/payments-access-en.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/finance/payments-access-en.html</guid>
+    <pubDate>Wed, 18 Nov 2026 09:00:00 +0000</pubDate>
+    <description>Ukrainians sell more on Etsy than Spain, yet can’t accept PayPal payments. Moldova can. A retrospective since 2011: the regulator, the companies, the geography of sanctions.</description>
+    <category>Money &amp; Finance</category>
+    <enclosure url="https://code38.com.ua/assets/og/payments-access-en.jpg" length="59183" type="image/jpeg"/>
+  </item>
+  <item>
+    <title>Geopolitics without rose-tinted glasses: why weapons aren’t a reward for “good behavior”</title>
+    <link>https://code38.com.ua/articles/geopolitics/realpolitik-en.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/geopolitics/realpolitik-en.html</guid>
+    <pubDate>Sun, 15 Nov 2026 09:00:00 +0000</pubDate>
+    <description>Sixty years of covert US arms deliveries: dictators, Islamists, drug traffickers — and not one certificate of clean governance.</description>
+    <category>Geopolitics</category>
+    <enclosure url="https://code38.com.ua/assets/og/realpolitik-en.jpg" length="56270" type="image/jpeg"/>
+  </item>
+  <item>
+    <title>An economy of cashiers or a nation of creators?</title>
+    <link>https://code38.com.ua/articles/economy/tnc-vs-smart-money-en.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/economy/tnc-vs-smart-money-en.html</guid>
+    <pubDate>Sun, 01 Nov 2026 09:00:00 +0000</pubDate>
+    <description>The bitter truth about global brands: why multinational expansion and real investment in local business are two different things.</description>
+    <category>Ukraine’s Economy</category>
+    <enclosure url="https://code38.com.ua/assets/og/tnc-vs-smart-money-en.jpg" length="36323" type="image/jpeg"/>
+  </item>
+  <item>
+    <title>The economic limits of total mobilization</title>
+    <link>https://code38.com.ua/articles/defense/mobilization-limits-en.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/defense/mobilization-limits-en.html</guid>
+    <pubDate>Sat, 25 Jul 2026 09:00:00 +0000</pubDate>
+    <description>Why the slogan “everyone will fight” doesn’t survive contact with the budget — and what to do about Russia’s autumn mobilization.</description>
+    <category>Defense</category>
+    <enclosure url="https://code38.com.ua/assets/og/mobilization-limits-en.jpg" length="31467" type="image/jpeg"/>
+  </item>
+  <item>
+    <title>Why “expiring money” would be economic suicide</title>
+    <link>https://code38.com.ua/articles/finance/cbdc-en.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/finance/cbdc-en.html</guid>
+    <pubDate>Mon, 20 Jul 2026 09:00:00 +0000</pubDate>
+    <description>A popular conspiracy theory about CBDCs from the standpoint of basic economics — simply, with examples, without panic.</description>
+    <category>Money &amp; Finance</category>
+    <enclosure url="https://code38.com.ua/assets/og/cbdc-en.jpg" length="37361" type="image/jpeg"/>
+  </item>
+  <item>
+    <title>The pension trap: why people in their 30s and 40s should rely only on their own investments</title>
+    <link>https://code38.com.ua/articles/economy/pension-trap-en.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/economy/pension-trap-en.html</guid>
+    <pubDate>Fri, 01 May 2026 09:00:00 +0000</pubDate>
+    <description>Demographic collapse, the bankruptcy of the pay-as-you-go system and a practical strategy for personal savings.</description>
+    <category>Ukraine’s Economy</category>
+    <enclosure url="https://code38.com.ua/assets/og/pension-trap-en.jpg" length="56010" type="image/jpeg"/>
+  </item>
+  <item>
+    <title>Ballistic missile defense: technology, strategy and the task for Ukraine</title>
+    <link>https://code38.com.ua/articles/defense/missile-defense-en.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/defense/missile-defense-en.html</guid>
+    <pubDate>Wed, 01 Oct 2025 09:00:00 +0000</pubDate>
+    <description>Patriot vs SAMP/T, intercept layers, early warning, Link-16 and the Freyja project — what actually shoots down ballistic missiles.</description>
+    <category>Defense</category>
+    <enclosure url="https://code38.com.ua/assets/og/missile-defense-en.jpg" length="46996" type="image/jpeg"/>
+  </item>
+  <item>
+    <title>An alternative macrohistory of biocentrism</title>
+    <link>https://code38.com.ua/articles/ideas/biocentrism-en.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/ideas/biocentrism-en.html</guid>
+    <pubDate>Sun, 01 Jun 2025 09:00:00 +0000</pubDate>
+    <description>What if humanity had renounced the exploitation of animals in the 14th century: two scenarios — an optimistic one and a critical one.</description>
+    <category>History &amp; Ideas</category>
+    <enclosure url="https://code38.com.ua/assets/og/biocentrism-en.jpg" length="34079" type="image/jpeg"/>
+  </item>
+  <item>
+    <title>A dollar at 8, roads instead of missiles, and why we are still paying</title>
+    <link>https://code38.com.ua/articles/economy/presidents-economy-en.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/economy/presidents-economy-en.html</guid>
+    <pubDate>Sat, 01 Mar 2025 09:00:00 +0000</pubDate>
+    <description>The economic decisions of every Ukrainian president in numbers — from Kravchuk’s hyperinflation to the “dollar at 8” and roads instead of missiles.</description>
+    <category>Ukraine’s Economy</category>
+    <enclosure url="https://code38.com.ua/assets/og/presidents-economy-en.jpg" length="45069" type="image/jpeg"/>
+  </item>
+</channel>
+</rss>

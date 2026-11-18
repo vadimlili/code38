@@ -53,6 +53,7 @@ I18N = {
                     "Кожен текст спирається на першоджерела: звіти урядів, розсекречені документи, дані центробанків і розслідування, на які можна перейти й перевірити.</p>\n"
                     "    <p>Окремо працюю з консалтинговими задачами: ринкові стратегії, презентації, аналітичні записки.</p>"),
         empty="Нічого не знайдено.",
+        sub_t="// Нові статті", sub_p="Підпишіться, щоб не пропустити нові матеріали: RSS-стрічка працює в будь-якій читалці — Feedly, Inoreader, NetNewsWire.",
     ),
     "en": dict(
         months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
@@ -72,6 +73,7 @@ I18N = {
                     "Every piece is built on primary sources: government reports, declassified documents, central-bank data and investigations you can open and check yourself.</p>\n"
                     "    <p>I also take on consulting work: market strategy, presentations and analytical memos.</p>"),
         empty="English translations are on the way.",
+        sub_t="// New articles", sub_p="Subscribe so you don’t miss new pieces: the RSS feed works in any reader — Feedly, Inoreader, NetNewsWire.",
     ),
 }
 
@@ -166,6 +168,8 @@ def seo_block(*, title, desc, url, img, otype, locale, alts=(), extra="", noinde
          f'<meta name="twitter:image" content="{img}">',
          f'<link rel="icon" href="{SITE}assets/favicon.svg" type="image/svg+xml">']
     t += [f'<link rel="alternate" hreflang="{hl}" href="{href}">' for hl, href in alts]
+    fl = "en" if locale.startswith("en") else "uk"
+    t.append(f'<link rel="alternate" type="application/rss+xml" title="CODE38{" (EN)" if fl == "en" else ""}" href="{feed_url(fl)}">')
     if extra: t.append(extra)
     if noindex: t.append('<meta name="robots" content="noindex">')
     if GC: t.append(f'<script data-goatcounter="https://{GC}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>')
@@ -296,6 +300,8 @@ def build_home(lang):
   <div class="topic-desc" id="topic-desc">{L["allDesc"]}</div>
   <div class="grid" id="grid">{grid}</div>
 
+  {subscribe_html(lang, root)}
+
   <div id="rubryky">
     <div class="sec-h">{L["topics"]}</div>
     <div class="topics" id="topics">{tps}</div>
@@ -337,6 +343,47 @@ def build_about(lang):
 """
     write("about.html" if lang == "uk" else "en/about.html", page_head(lang, L["about_title"], L["desc"], seo, root) + body)
 
+# ── RSS ───────────────────────────────────────────────────────────────────
+def feed_url(lang): return SITE + ("en/" if lang == "en" else "") + "feed.xml"
+
+def build_feed(lang):
+    from email.utils import format_datetime
+    from datetime import datetime, timezone
+    L = I18N[lang]
+    arts = [a for a in ARTS if a["lang"] == lang and not a.get("draft") and os.path.exists(a["file"])]
+    arts.sort(key=lambda a: a.get("date", ""), reverse=True)
+    rfc = lambda d: format_datetime(datetime.fromisoformat(d).replace(hour=9, tzinfo=timezone.utc))
+    home = SITE + ("en/" if lang == "en" else "")
+    xml = ['<?xml version="1.0" encoding="UTF-8"?>',
+           f'<?xml-stylesheet type="text/xsl" href="{SITE}assets/feed.xsl"?>',
+           '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">', "<channel>",
+           f"  <title>CODE38{' (English)' if lang == 'en' else ''}</title>",
+           f"  <link>{home}</link>",
+           f"  <description>{esc(L['ogdesc'])}</description>",
+           f"  <language>{'en' if lang == 'en' else 'uk'}</language>",
+           f'  <atom:link href="{feed_url(lang)}" rel="self" type="application/rss+xml"/>',
+           f"  <image><url>{SITE}assets/logo.png</url><title>CODE38</title><link>{home}</link></image>"]
+    if arts: xml.append(f"  <lastBuildDate>{rfc(arts[0]['date'])}</lastBuildDate>")
+    for a in arts[:30]:
+        t = next((x for x in TOPICS if x["id"] == a["topic"]), None)
+        img = f"assets/og/{a['id']}.jpg"
+        xml += ["  <item>", f"    <title>{esc(a['title'])}</title>", f"    <link>{url_of(a)}</link>",
+                f'    <guid isPermaLink="true">{url_of(a)}</guid>', f"    <pubDate>{rfc(a['date'])}</pubDate>",
+                f"    <description>{esc(a.get('excerpt', ''))}</description>"]
+        if t: xml.append(f"    <category>{esc(topic_name(t, lang))}</category>")
+        if os.path.exists(img):
+            xml.append(f'    <enclosure url="{SITE}{img}" length="{os.path.getsize(img)}" type="image/jpeg"/>')
+        xml.append("  </item>")
+    xml += ["</channel>", "</rss>"]
+    write(("en/" if lang == "en" else "") + "feed.xml", "\n".join(xml) + "\n")
+
+def subscribe_html(lang, root):
+    L = I18N[lang]
+    from urllib.parse import quote
+    feedly = "https://feedly.com/i/subscription/feed/" + quote(feed_url(lang), safe="")
+    return (f'<div class="subscribe"><div class="sub-t">{L["sub_t"]}</div><p>{L["sub_p"]}</p>'
+            f'<div class="sub-b"><a href="{feed_url(lang)}">RSS</a><a href="{feedly}" target="_blank" rel="noopener">Feedly</a></div></div>')
+
 # ── sitemap / robots ──────────────────────────────────────────────────────
 def build_sitemap():
     today = date.today().isoformat()
@@ -363,5 +410,6 @@ if __name__ == "__main__":
     for lang in ("uk", "en"):
         build_home(lang)
         build_about(lang)
+        if lang in LANGS: build_feed(lang)
     build_sitemap()
     print("SITE:", SITE, "| мови:", LANGS, "| статей:", sum(1 for a in ARTS if not a.get("draft")))

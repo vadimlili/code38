@@ -22,7 +22,12 @@
     "#vl-next .h{color:#a3a9b4;letter-spacing:.2em;text-transform:uppercase;font-size:11px;margin-bottom:10px}" +
     "#vl-next a{display:block;font-family:Inter,system-ui,sans-serif;font-size:15px;border:1px solid #1f2329;padding:14px 16px;margin-bottom:8px;color:#dfe3ea;text-decoration:none}" +
     "#vl-next a:hover{border-color:#c8a96e}" +
-    "#vl-bar .lang{margin-left:14px;border:1px solid #2a2f38;padding:3px 8px;color:#dfe3ea}#vl-bar .lang:hover{border-color:#c8a96e}#vl-bar .views{margin-left:14px;color:#b8bec8;letter-spacing:.06em}#vl-next a small{display:block;color:#b8bec8;margin-top:4px}";
+    "#vl-bar .lang{margin-left:14px;border:1px solid #2a2f38;padding:3px 8px;color:#dfe3ea}#vl-bar .lang:hover{border-color:#c8a96e}#vl-bar .views{margin-left:14px;color:#b8bec8;letter-spacing:.06em}#vl-next a small{display:block;color:#b8bec8;margin-top:4px}" +
+    "#vl-sub{max-width:720px;margin:56px auto 0;padding:0 24px;box-sizing:border-box}#vl-sub .in{border:1px solid #1f2329;background:#13161b;padding:20px 22px}" +
+    "#vl-sub .h{font:12.5px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#c8a96e}" +
+    "#vl-sub p{font:15px/1.6 Inter,system-ui,sans-serif;color:#dfe3ea;margin:10px 0 14px}" +
+    "#vl-sub .b{display:flex;gap:10px;flex-wrap:wrap}#vl-sub .b a{font:13px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.08em;color:#f0f2f5;text-decoration:none;border:1px solid #7a6640;padding:8px 16px}" +
+    "#vl-sub .b a:hover{border-color:#c8a96e;color:#c8a96e}";
   document.head.appendChild(css);
 
   var lang = art ? (art.lang || "uk") : ((document.documentElement.lang || "uk").slice(0, 2) === "en" ? "en" : "uk");
@@ -50,6 +55,20 @@
         v.textContent = "◉ " + d.count;
         bar.querySelector(".crumb").appendChild(v);
       }).catch(function () {});
+  }
+
+  if (art) {
+    // блок підписки на нові статті (RSS)
+    var feed = (window.SITE_URL || "/").replace(/\/?$/, "/") + (lang === "en" ? "en/" : "") + "feed.xml";
+    var sub = document.createElement("div");
+    sub.id = "vl-sub";
+    sub.innerHTML = '<div class="in"><div class="h">// ' + (lang === "en" ? "New articles" : "Нові статті") + '</div><p>' +
+      (lang === "en" ? "Subscribe so you don’t miss new pieces: the RSS feed works in any reader — Feedly, Inoreader, NetNewsWire."
+                     : "Підпишіться, щоб не пропустити нові матеріали: RSS-стрічка працює в будь-якій читалці — Feedly, Inoreader, NetNewsWire.") +
+      '</p><div class="b"><a href="' + feed + '">RSS</a><a href="https://feedly.com/i/subscription/feed/' + encodeURIComponent(feed) +
+      '" target="_blank" rel="noopener">Feedly</a></div></div>';
+    var f0 = document.querySelector("footer");
+    if (f0) f0.parentNode.insertBefore(sub, f0); else document.body.appendChild(sub);
   }
 
   if (art) {

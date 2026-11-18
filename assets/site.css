@@ -94,3 +94,9 @@ a.card:hover{border-color:var(--amber);transform:translateY(-2px)}
 .site-head nav a.lang:hover{border-color:var(--amber);color:var(--amber)}
 .site-head nav a.lang[hidden]{display:none}
 html[lang="en"] .card.featured::after{content:"NEW"}
+.subscribe{border:1px solid var(--line);background:var(--panel);padding:22px 24px;margin:40px 0 0}
+.subscribe .sub-t{font-family:var(--mono);font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber)}
+.subscribe p{color:var(--text);margin:10px 0 16px;font-size:15px;line-height:1.6}
+.sub-b{display:flex;gap:10px;flex-wrap:wrap}
+.sub-b a{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--heading);text-decoration:none;border:1px solid var(--amber-dim);padding:8px 16px}
+.sub-b a:hover{border-color:var(--amber);color:var(--amber)}

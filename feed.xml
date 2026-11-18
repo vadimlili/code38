@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="https://code38.com.ua/assets/feed.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>CODE38</title>
+  <link>https://code38.com.ua/</link>
+  <description>Геополітика, оборона, економіка України та фінанси — без рожевих окулярів.</description>
+  <language>uk</language>
+  <atom:link href="https://code38.com.ua/feed.xml" rel="self" type="application/rss+xml"/>
+  <image><url>https://code38.com.ua/assets/logo.png</url><title>CODE38</title><link>https://code38.com.ua/</link></image>
+  <lastBuildDate>Wed, 18 Nov 2026 09:00:00 +0000</lastBuildDate>
+  <item>
+    <title>Країна продавців без каси: чому Україна 15 років відрізана від PayPal і Stripe</title>
+    <link>https://code38.com.ua/articles/finance/payments-access.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/finance/payments-access.html</guid>
+    <pubDate>Wed, 18 Nov 2026 09:00:00 +0000</pubDate>
+    <description>Українці продають на Etsy більше за Іспанію, а прийняти оплату через PayPal не можуть. Молдова може. Ретроспектива з 2011 року: регулятор, компанії, санкційна географія.</description>
+    <category>Гроші та фінанси</category>
+    <enclosure url="https://code38.com.ua/assets/og/payments-access.jpg" length="52731" type="image/jpeg"/>
+  </item>
+  <item>
+    <title>Геополітика без рожевих окулярів: чому зброю дають не за «хорошу поведінку»</title>
+    <link>https://code38.com.ua/articles/geopolitics/realpolitik.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/geopolitics/realpolitik.html</guid>
+    <pubDate>Sun, 15 Nov 2026 09:00:00 +0000</pubDate>
+    <description>Шістдесят років таємних постачань США: диктатори, ісламісти, наркоторговці — і жодної довідки про відсутність корупції.</description>
+    <category>Геополітика</category>
+    <enclosure url="https://code38.com.ua/assets/og/realpolitik.jpg" length="54828" type="image/jpeg"/>
+  </item>
+  <item>
+    <title>Економіка касирів чи нація творців?</title>
+    <link>https://code38.com.ua/articles/economy/tnc-vs-smart-money.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/economy/tnc-vs-smart-money.html</guid>
+    <pubDate>Sun, 01 Nov 2026 09:00:00 +0000</pubDate>
+    <description>Гірка правда про глобальні бренди: чому експансія ТНК і справжні інвестиції в локальний бізнес — це дві різні речі.</description>
+    <category>Економіка України</category>
+    <enclosure url="https://code38.com.ua/assets/og/tnc-vs-smart-money.jpg" length="32487" type="image/jpeg"/>
+  </item>
+  <item>
+    <title>Економічні межі тотальної мобілізації</title>
+    <link>https://code38.com.ua/articles/defense/mobilization-limits.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/defense/mobilization-limits.html</guid>
+    <pubDate>Sat, 25 Jul 2026 09:00:00 +0000</pubDate>
+    <description>Чому гасло «воювати будуть усі» не витримує зустрічі з бюджетом — і що робити з осінньою мобілізацією в Росії.</description>
+    <category>Оборона</category>
+    <enclosure url="https://code38.com.ua/assets/og/mobilization-limits.jpg" length="32460" type="image/jpeg"/>
+  </item>
+  <item>
+    <title>Чому «гроші, що згорають» — це економічне самогубство</title>
+    <link>https://code38.com.ua/articles/finance/cbdc.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/finance/cbdc.html</guid>
+    <pubDate>Mon, 20 Jul 2026 09:00:00 +0000</pubDate>
+    <description>Популярна теорія змови про CBDC з позиції фундаментальної економіки — просто, з прикладами, без паніки.</description>
+    <category>Гроші та фінанси</category>
+    <enclosure url="https://code38.com.ua/assets/og/cbdc.jpg" length="41263" type="image/jpeg"/>
+  </item>
+  <item>
+    <title>Пенсійна пастка: чому 30–40-річним варто розраховувати лише на власні інвестиції</title>
+    <link>https://code38.com.ua/articles/economy/pension-trap.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/economy/pension-trap.html</guid>
+    <pubDate>Fri, 01 May 2026 09:00:00 +0000</pubDate>
+    <description>Демографічний колапс, банкрутство солідарної системи та практична стратегія особистих накопичень.</description>
+    <category>Економіка України</category>
+    <enclosure url="https://code38.com.ua/assets/og/pension-trap.jpg" length="56535" type="image/jpeg"/>
+  </item>
+  <item>
+    <title>Протибалістичний захист: технологія, стратегія та завдання для України</title>
+    <link>https://code38.com.ua/articles/defense/missile-defense.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/defense/missile-defense.html</guid>
+    <pubDate>Wed, 01 Oct 2025 09:00:00 +0000</pubDate>
+    <description>Patriot проти SAMP/T, ешелони перехоплення, раннє попередження, Link-16 і проєкт Freyja — що реально збиває балістику.</description>
+    <category>Оборона</category>
+    <enclosure url="https://code38.com.ua/assets/og/missile-defense.jpg" length="49984" type="image/jpeg"/>
+  </item>
+  <item>
+    <title>Альтернативна макроісторія біоцентризму</title>
+    <link>https://code38.com.ua/articles/ideas/biocentrism.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/ideas/biocentrism.html</guid>
+    <pubDate>Sun, 01 Jun 2025 09:00:00 +0000</pubDate>
+    <description>Що було б, якби людство відмовилося від експлуатації тварин у XIV столітті: два сценарії — оптимістичний і критичний.</description>
+    <category>Історія та ідеї</category>
+    <enclosure url="https://code38.com.ua/assets/og/biocentrism.jpg" length="35820" type="image/jpeg"/>
+  </item>
+  <item>
+    <title>Долар по 8, дороги замість ракет і чому ми платимо досі</title>
+    <link>https://code38.com.ua/articles/economy/presidents-economy.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/economy/presidents-economy.html</guid>
+    <pubDate>Sat, 01 Mar 2025 09:00:00 +0000</pubDate>
+    <description>Економічні рішення кожного президента України в цифрах — від гіперінфляції Кравчука до «долара по 8» і доріг замість ракет.</description>
+    <category>Економіка України</category>
+    <enclosure url="https://code38.com.ua/assets/og/presidents-economy.jpg" length="41444" type="image/jpeg"/>
+  </item>
+</channel>
+</rss>
