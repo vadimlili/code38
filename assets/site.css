@@ -108,3 +108,5 @@ html[lang="en"] .card.featured::after{content:"NEW"}
 .sort-b button.on{border-color:var(--amber);color:var(--amber)}
 .sort-b button:hover{border-color:var(--amber)}
 .card .foot em.v{font-style:normal;margin-right:12px}
+.grid.masonry{columns:auto;display:flex;gap:20px;align-items:flex-start}
+.grid.masonry .col{flex:1 1 0;min-width:0}

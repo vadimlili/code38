@@ -76,7 +76,35 @@
     list = sorted(list);
     renderSort();
     grid.innerHTML = list.length ? list.map(card).join("") : '<div class="empty">' + (A.length ? I18N.empty : I18N.none) + "</div>";
+    order = [].slice.call(grid.querySelectorAll(".card"));
+    layout(true);
   }
+
+  // мансонрі по рядках: картки йдуть зліва направо, кожна — у найнижчу колонку,
+  // тож порядок сортування читається зверху вниз, а не стовпчиками
+  var lastN = 0, order = [];
+  function layout(force) {
+    var cards = order;
+    var n = Math.max(1, Math.min(3, Math.floor((grid.clientWidth + 20) / 340)));
+    if (!force && n === lastN) return;
+    lastN = n;
+    if (n < 2 || cards.length < 2) {
+      grid.classList.remove("masonry");
+      if (cards.length) { grid.innerHTML = ""; cards.forEach(function (c) { grid.appendChild(c); }); }
+      return;
+    }
+    grid.classList.add("masonry");
+    var cols = [];
+    for (var i = 0; i < n; i++) { var c = document.createElement("div"); c.className = "col"; cols.push(c); }
+    grid.innerHTML = "";
+    cols.forEach(function (c) { grid.appendChild(c); });
+    cards.forEach(function (card) {
+      var low = cols.reduce(function (m, c) { return c.offsetHeight < m.offsetHeight ? c : m; }, cols[0]);
+      low.appendChild(card);
+    });
+  }
+  var rt;
+  window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { layout(); }, 120); });
 
   function sorted(list) {
     var pinned = list.filter(function (a) { return a.id === newestId; });
