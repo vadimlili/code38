@@ -135,6 +135,18 @@ window.ARTICLES = [
 
   // ── English translations ──
   {
+    id: "payments-access-en",
+    translation: "payments-access",
+    title: "A country of sellers without a till: why Ukraine has been cut off from PayPal and Stripe for 15 years",
+    file: "articles/finance/payments-access-en.html",
+    topic: "finance",
+    tags: ["PayPal", "Stripe", "Etsy", "NBU", "Moldova"],
+    date: "2026-11-18",
+    lang: "en",
+    read: 14,
+    excerpt: "Ukrainians sell more on Etsy than Spain, yet can’t accept PayPal payments. Moldova can. A retrospective since 2011: the regulator, the companies, the geography of sanctions."
+  },
+  {
     id: "realpolitik-en",
     translation: "realpolitik",
     title: "Geopolitics without rose-tinted glasses: why weapons aren’t a reward for “good behavior”",
