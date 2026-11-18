@@ -37,7 +37,7 @@ partial = lambda name: open(f"tools/partials/{name}", encoding="utf-8").read().s
 I18N = {
     "uk": dict(
         months=["січ","лют","бер","кві","тра","чер","лип","сер","вер","жов","лис","гру"],
-        min="хв", soon="СКОРО", all="Усі", allDesc="Усі матеріали, свіжі — першими.",
+        min="хв", soon="СКОРО", all="Усі", allDesc="Усі матеріали.",
         n=lambda n: f"{n} " + ("стаття" if n % 10 == 1 and n % 100 != 11 else "статті" if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14 else "статей"),
         title="CODE38 — аналітика: геополітика, оборона, економіка",
         desc="Аналітичні статті CODE38 про геополітику, оборону, економіку України та фінанси — на документах, а не на емоціях.",
@@ -58,7 +58,7 @@ I18N = {
     ),
     "en": dict(
         months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
-        min="min", soon="SOON", all="All", allDesc="All articles, newest first.",
+        min="min", soon="SOON", all="All", allDesc="All articles.",
         n=lambda n: f"{n} article" + ("" if n == 1 else "s"),
         title="CODE38 — analysis: geopolitics, defense, economics",
         desc="CODE38 publishes long-form analysis on geopolitics, defense, Ukraine’s economy and finance — built on documents, not emotions.",

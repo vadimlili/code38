@@ -100,3 +100,11 @@ html[lang="en"] .card.featured::after{content:"NEW"}
 .sub-b{display:flex;gap:10px;flex-wrap:wrap}
 .sub-b a{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--heading);text-decoration:none;border:1px solid var(--amber-dim);padding:8px 16px}
 .sub-b a:hover{border-color:var(--amber);color:var(--amber)}
+.sort{padding-bottom:16px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.sort .topic-desc{margin:0;padding-bottom:0}
+.sort-b{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.sort-b span{margin-right:4px}
+.sort-b button{font:inherit;background:none;border:1px solid var(--line2);color:var(--text);padding:5px 12px;cursor:pointer}
+.sort-b button.on{border-color:var(--amber);color:var(--amber)}
+.sort-b button:hover{border-color:var(--amber)}
+.card .foot em.v{font-style:normal;margin-right:12px}
