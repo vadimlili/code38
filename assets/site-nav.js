@@ -45,7 +45,7 @@
 
   // лічильник переглядів (GoatCounter → Settings → "Allow adding visitor counts on your website")
   if (art && window.GOATCOUNTER && window.fetch) {
-    fetch("https://" + window.GOATCOUNTER + ".goatcounter.com/counter/" + encodeURIComponent(location.pathname) + ".json")
+    fetch("https://" + window.GOATCOUNTER + ".goatcounter.com/counter/" + encodeURIComponent(location.pathname) + ".json", { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (d) {
         if (!d || !d.count) return;

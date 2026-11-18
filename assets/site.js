@@ -140,7 +140,7 @@
   if (window.GOATCOUNTER && window.fetch) {
     var left = live.length;
     live.forEach(function (a) {
-      fetch("https://" + window.GOATCOUNTER + ".goatcounter.com/counter/" + encodeURIComponent("/" + a.file) + ".json")
+      fetch("https://" + window.GOATCOUNTER + ".goatcounter.com/counter/" + encodeURIComponent("/" + a.file) + ".json", { cache: "no-cache" })
         .then(function (r) { return r.ok ? r.json() : null; })
         .then(function (d) { var n = d && parseInt(String(d.count).replace(/\D/g, ""), 10); if (n) { VIEWS[a.id] = n; viewsOk = true; } })
         .catch(function () {})
