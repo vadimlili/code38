@@ -56,7 +56,7 @@ a.card:hover{border-color:var(--amber);transform:translateY(-2px)}
 .card .tags span{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--line2);padding:1px 7px}
 .card .foot{font-family:var(--mono);display:flex;justify-content:space-between;padding:10px 16px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--dim)}
 .card.featured{border-color:var(--amber-dim)}
-.card.featured::after{font-family:var(--mono);content:"ГОЛОВНЕ";position:absolute;top:-1px;right:16px;transform:translateY(-50%);background:var(--amber);color:#111;font-size:11px;font-weight:700;letter-spacing:.2em;padding:2px 8px}
+.card.featured::after{font-family:var(--mono);content:"НОВЕ";position:absolute;top:-1px;right:16px;transform:translateY(-50%);background:var(--amber);color:#111;font-size:11px;font-weight:700;letter-spacing:.2em;padding:2px 8px}
 .card.draft{opacity:.5}
 .card.draft .foot b{color:var(--red);font-weight:600}
 .empty{color:var(--muted);padding:40px 0}
@@ -93,3 +93,4 @@ a.card:hover{border-color:var(--amber);transform:translateY(-2px)}
 .site-head nav a.lang{border:1px solid var(--line2);padding:3px 8px;color:var(--text);letter-spacing:.1em}
 .site-head nav a.lang:hover{border-color:var(--amber);color:var(--amber)}
 .site-head nav a.lang[hidden]{display:none}
+html[lang="en"] .card.featured::after{content:"NEW"}

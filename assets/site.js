@@ -26,6 +26,8 @@
   });
   var byId = {}; T.forEach(function (t) { byId[t.id] = t; });
   var live = A.filter(function (a) { return !a.draft; });
+  // позначка «НОВЕ» — лише на найсвіжішій опублікованій статті
+  var newestId = live.length ? live[0].id : null;
 
   var grid = document.getElementById("grid"), chips = document.getElementById("chips"),
       q = document.getElementById("q"), desc = document.getElementById("topic-desc"),
@@ -47,7 +49,7 @@
 
   function card(a) {
     var t = byId[a.topic] || { name: a.topic };
-    var cls = "card" + (a.featured && !a.draft ? " featured" : "") + (a.draft ? " draft" : "");
+    var cls = "card" + (a.id === newestId ? " featured" : "") + (a.draft ? " draft" : "");
     var inner =
       '<div class="top"><span class="t">' + esc(t.name) + "</span><span>" + (a.lang === "uk" ? "UA" : (a.lang || "").toUpperCase()) + "</span></div>" +
       '<div class="body"><h2>' + esc(a.title) + "</h2>" + (a.excerpt ? "<p>" + esc(a.excerpt) + "</p>" : "") +

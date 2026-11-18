@@ -40,8 +40,7 @@ window.ARTICLES = [
     date: "2026-11-15",
     lang: "uk",
     read: 16,
-    excerpt: "Шістдесят років таємних постачань США: диктатори, ісламісти, наркоторговці — і жодної довідки про відсутність корупції.",
-    featured: true
+    excerpt: "Шістдесят років таємних постачань США: диктатори, ісламісти, наркоторговці — і жодної довідки про відсутність корупції."
   },
   {
     id: "tnc-vs-smart-money",
@@ -156,8 +155,7 @@ window.ARTICLES = [
     date: "2026-11-15",
     lang: "en",
     read: 16,
-    excerpt: "Sixty years of covert US arms deliveries: dictators, Islamists, drug traffickers — and not one certificate of clean governance.",
-    featured: true
+    excerpt: "Sixty years of covert US arms deliveries: dictators, Islamists, drug traffickers — and not one certificate of clean governance."
   },
   {
     id: "mobilization-limits-en",

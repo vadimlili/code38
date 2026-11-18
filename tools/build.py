@@ -215,14 +215,14 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">')
 
-def card_html(a, lang, root):
+def card_html(a, lang, root, newest=None):
     t = next((x for x in TOPICS if x["id"] == a["topic"]), {"name": a["topic"]})
     L = I18N[lang]
-    cls = "card" + (" featured" if a.get("featured") and not a.get("draft") else "") + (" draft" if a.get("draft") else "")
+    cls = "card" + (" featured" if newest and a["id"] == newest else "") + (" draft" if a.get("draft") else "")
     tags = "".join(f"<span>#{esc(x)}</span>" for x in a.get("tags", []))
     when = f'<b>{L["soon"]}</b>' if a.get("draft") else fmt_date(a["date"], lang)
     mins = f'{a["read"]} {L["min"]}' if a.get("read") else ""
-    inner = (f'<div class="top"><span class="t">{esc(topic_name(t, lang))}</span><span>{a["lang"].upper()}</span></div>'
+    inner = (f'<div class="top"><span class="t">{esc(topic_name(t, lang))}</span><span>{"UA" if a["lang"] == "uk" else a["lang"].upper()}</span></div>'
              f'<div class="body"><h2>{esc(a["title"])}</h2>' + (f'<p>{esc(a["excerpt"])}</p>' if a.get("excerpt") else "")
              + (f'<div class="tags">{tags}</div>' if tags else "") + "</div>"
              f'<div class="foot"><span>{when}</span><span>{mins}</span></div>')
@@ -261,7 +261,8 @@ def build_home(lang):
     cnt = lambda tid: sum(1 for a in live if a["topic"] == tid)
     chips = f'<button class="chip on" data-t="all">{L["all"]}<i>{len(live)}</i></button>' + "".join(
         f'<button class="chip" data-t="{t["id"]}">{esc(topic_name(t, lang))}<i>{cnt(t["id"])}</i></button>' for t in TOPICS)
-    grid = "".join(card_html(a, lang, root) for a in arts) or f'<div class="empty">{L["empty"]}</div>'
+    newest = live[0]["id"] if live else None
+    grid = "".join(card_html(a, lang, root, newest) for a in arts) or f'<div class="empty">{L["empty"]}</div>'
     tps = "".join(f'<a href="#{t["id"]}"><b>{esc(topic_name(t, lang))}</b><span>{esc(topic_desc(t, lang))}</span><em>{L["n"](cnt(t["id"]))}</em></a>'
                   for t in TOPICS if lang == "uk" or cnt(t["id"]))
     site_ld = [{"@context": "https://schema.org", "@type": "WebSite", "name": "CODE38",
