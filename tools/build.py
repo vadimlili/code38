@@ -200,7 +200,15 @@ def build_article_seo():
         s = re.sub(r'<title>.*?</title>', f'<title>{esc(a["title"])} — CODE38</title>', s, count=1, flags=re.S)
         s = re.sub(r'\n?[ \t]*<link rel="canonical"[^>]*>', "", s)
         s = s.replace("</head>", blk + "\n</head>", 1)
-        open(a["file"], "w", encoding="utf-8").write(s)
+        open(a["file"], "w", encoding="utf-8").write(bust(s))
+
+# ── версії файлів у assets/: оновлюють кеш браузера після кожної зміни ──
+import hashlib
+def asset_ver(name):
+    return hashlib.md5(open(os.path.join("assets", name), "rb").read()).hexdigest()[:8]
+def bust(s):
+    return re.sub(r'(assets/(site\.css|site\.js|site-nav\.js|articles\.js))(\?v=\w+)?',
+                  lambda m: f"{m.group(1)}?v={asset_ver(m.group(2))}", s)
 
 # ── головні та «Про автора» ───────────────────────────────────────────────
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
@@ -242,7 +250,7 @@ def home_alts():
 
 def write(path, text):
     os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
-    open(path, "w", encoding="utf-8").write(text)
+    open(path, "w", encoding="utf-8").write(bust(text))
 
 def build_home(lang):
     L = I18N[lang]
