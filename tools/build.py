@@ -53,6 +53,7 @@ I18N = {
                     "Кожен текст спирається на першоджерела: звіти урядів, розсекречені документи, дані центробанків і розслідування, на які можна перейти й перевірити.</p>\n"
                     "    <p>Окремо працюю з консалтинговими задачами: ринкові стратегії, презентації, аналітичні записки.</p>"),
         empty="Нічого не знайдено.",
+        rss_title="RSS — CODE38", rss_h="Нові статті CODE38 у вашій RSS-читалці", rss_p="Скопіюйте адресу стрічки у будь-яку RSS-читалку — Feedly, Inoreader, NetNewsWire чи іншу. Нові статті з\u2019являтимуться там автоматично, без реєстрації на сайті.", rss_addr="// Адреса стрічки", rss_copy="Скопіювати адресу", rss_done="Скопійовано ✓",
         sub_t="// Нові статті", sub_p="Підпишіться, щоб не пропустити нові матеріали: RSS-стрічка працює в будь-якій читалці — Feedly, Inoreader, NetNewsWire.",
     ),
     "en": dict(
@@ -73,6 +74,7 @@ I18N = {
                     "Every piece is built on primary sources: government reports, declassified documents, central-bank data and investigations you can open and check yourself.</p>\n"
                     "    <p>I also take on consulting work: market strategy, presentations and analytical memos.</p>"),
         empty="English translations are on the way.",
+        rss_title="RSS — CODE38", rss_h="New CODE38 articles in your RSS reader", rss_p="Copy the feed address into any RSS reader — Feedly, Inoreader, NetNewsWire or another. New articles will appear there automatically, no sign-up on the site.", rss_addr="// Feed address", rss_copy="Copy address", rss_done="Copied ✓",
         sub_t="// New articles", sub_p="Subscribe so you don’t miss new pieces: the RSS feed works in any reader — Feedly, Inoreader, NetNewsWire.",
     ),
 }
@@ -355,7 +357,6 @@ def build_feed(lang):
     rfc = lambda d: format_datetime(datetime.fromisoformat(d).replace(hour=9, tzinfo=timezone.utc))
     home = SITE + ("en/" if lang == "en" else "")
     xml = ['<?xml version="1.0" encoding="UTF-8"?>',
-           f'<?xml-stylesheet type="text/xsl" href="{SITE}assets/feed.xsl"?>',
            '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">', "<channel>",
            f"  <title>CODE38{' (English)' if lang == 'en' else ''}</title>",
            f"  <link>{home}</link>",
@@ -377,12 +378,51 @@ def build_feed(lang):
     xml += ["</channel>", "</rss>"]
     write(("en/" if lang == "en" else "") + "feed.xml", "\n".join(xml) + "\n")
 
+def build_rss_page(lang):
+    L = I18N[lang]
+    root = "" if lang == "uk" else "../"
+    from urllib.parse import quote
+    fu = feed_url(lang)
+    url = SITE + ("en/" if lang == "en" else "") + "rss.html"
+    seo = seo_block(title=L["rss_title"], desc=L["sub_p"], url=url, img=og_of(f"home-{lang}"),
+                    otype="website", locale=L["locale"])
+    readers = [("Feedly", "https://feedly.com/i/subscription/feed/" + quote(fu, safe="")),
+               ("Inoreader", "https://www.inoreader.com/?add_feed=" + quote(fu, safe=""))]
+    btns = "".join(f'<a href="{h}" target="_blank" rel="noopener">{n}</a>' for n, h in readers)
+    body = f"""
+<body>
+{header(lang, root, "")}
+<main class="wrap">
+  <section class="hero">
+    <div class="k">// RSS</div>
+    <h1>{L["rss_h"]}</h1>
+    <p>{L["rss_p"]}</p>
+  </section>
+  <div class="subscribe">
+    <div class="sub-t">{L["rss_addr"]}</div>
+    <p><code id="feed-url" style="word-break:break-all">{fu}</code></p>
+    <div class="sub-b"><a href="#" id="copy-feed">{L["rss_copy"]}</a>{btns}</div>
+  </div>
+  <p style="margin-top:28px"><a href="{root or './'}" style="color:var(--amber)">← CODE38</a></p>
+</main>
+{partial(f"footer.{lang}.html")}
+<script>
+document.getElementById("copy-feed").addEventListener("click", function (e) {{
+  e.preventDefault(); var b = this;
+  try {{ navigator.clipboard.writeText("{fu}").then(function () {{ b.textContent = "{L["rss_done"]}"; }}); }} catch (_) {{}}
+}});
+</script>
+</body>
+</html>
+"""
+    write(("en/" if lang == "en" else "") + "rss.html", page_head(lang, L["rss_title"], L["sub_p"], seo, root) + body)
+
 def subscribe_html(lang, root):
     L = I18N[lang]
     from urllib.parse import quote
     feedly = "https://feedly.com/i/subscription/feed/" + quote(feed_url(lang), safe="")
     return (f'<div class="subscribe"><div class="sub-t">{L["sub_t"]}</div><p>{L["sub_p"]}</p>'
-            f'<div class="sub-b"><a href="{feed_url(lang)}">RSS</a><a href="{feedly}" target="_blank" rel="noopener">Feedly</a></div></div>')
+            f'<div class="sub-b"><a href="{root}{"en/" if lang == "en" else ""}rss.html">RSS</a><a href="{feedly}" target="_blank" rel="noopener">Feedly</a></div></div>')
 
 # ── sitemap / robots ──────────────────────────────────────────────────────
 def build_sitemap():
@@ -410,6 +450,6 @@ if __name__ == "__main__":
     for lang in ("uk", "en"):
         build_home(lang)
         build_about(lang)
-        if lang in LANGS: build_feed(lang)
+        if lang in LANGS: build_feed(lang); build_rss_page(lang)
     build_sitemap()
     print("SITE:", SITE, "| мови:", LANGS, "| статей:", sum(1 for a in ARTS if not a.get("draft")))

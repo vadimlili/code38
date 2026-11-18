@@ -62,10 +62,11 @@
     var feed = (window.SITE_URL || "/").replace(/\/?$/, "/") + (lang === "en" ? "en/" : "") + "feed.xml";
     var sub = document.createElement("div");
     sub.id = "vl-sub";
+    var rssPage = (window.SITE_URL || "/").replace(/\/?$/, "/") + (lang === "en" ? "en/" : "") + "rss.html";
     sub.innerHTML = '<div class="in"><div class="h">// ' + (lang === "en" ? "New articles" : "Нові статті") + '</div><p>' +
       (lang === "en" ? "Subscribe so you don’t miss new pieces: the RSS feed works in any reader — Feedly, Inoreader, NetNewsWire."
                      : "Підпишіться, щоб не пропустити нові матеріали: RSS-стрічка працює в будь-якій читалці — Feedly, Inoreader, NetNewsWire.") +
-      '</p><div class="b"><a href="' + feed + '">RSS</a><a href="https://feedly.com/i/subscription/feed/' + encodeURIComponent(feed) +
+      '</p><div class="b"><a href="' + rssPage + '">RSS</a><a href="https://feedly.com/i/subscription/feed/' + encodeURIComponent(feed) +
       '" target="_blank" rel="noopener">Feedly</a></div></div>';
     var f0 = document.querySelector("footer");
     if (f0) f0.parentNode.insertBefore(sub, f0); else document.body.appendChild(sub);

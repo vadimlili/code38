@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RSS — CODE38</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=e554ab2e">
+<!-- seo -->
+<meta name="description" content="Підпишіться, щоб не пропустити нові матеріали: RSS-стрічка працює в будь-якій читалці — Feedly, Inoreader, NetNewsWire.">
+<link rel="canonical" href="https://code38.com.ua/rss.html">
+<meta property="og:site_name" content="CODE38">
+<meta property="og:type" content="website">
+<meta property="og:title" content="RSS — CODE38">
+<meta property="og:description" content="Підпишіться, щоб не пропустити нові матеріали: RSS-стрічка працює в будь-якій читалці — Feedly, Inoreader, NetNewsWire.">
+<meta property="og:url" content="https://code38.com.ua/rss.html">
+<meta property="og:image" content="https://code38.com.ua/assets/og/home-uk.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="uk_UA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="RSS — CODE38">
+<meta name="twitter:description" content="Підпишіться, щоб не пропустити нові матеріали: RSS-стрічка працює в будь-якій читалці — Feedly, Inoreader, NetNewsWire.">
+<meta name="twitter:image" content="https://code38.com.ua/assets/og/home-uk.jpg">
+<link rel="icon" href="https://code38.com.ua/assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="CODE38" href="https://code38.com.ua/feed.xml">
+<script data-goatcounter="https://vadim.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<!-- /seo -->
+</head>
+<body>
+<header class="site-head"><div class="wrap">
+  <a class="logo" href="./">CODE<span>38</span><small>аналітика</small></a>
+  <nav><a href="./">Статті</a><a href="./#rubryky">Теми</a><a href="about.html">Про автора</a><a id="lang-switch" class="lang" href="en/" hreflang="en">EN</a></nav>
+</div></header>
+<main class="wrap">
+  <section class="hero">
+    <div class="k">// RSS</div>
+    <h1>Нові статті CODE38 у вашій RSS-читалці</h1>
+    <p>Скопіюйте адресу стрічки у будь-яку RSS-читалку — Feedly, Inoreader, NetNewsWire чи іншу. Нові статті з’являтимуться там автоматично, без реєстрації на сайті.</p>
+  </section>
+  <div class="subscribe">
+    <div class="sub-t">// Адреса стрічки</div>
+    <p><code id="feed-url" style="word-break:break-all">https://code38.com.ua/feed.xml</code></p>
+    <div class="sub-b"><a href="#" id="copy-feed">Скопіювати адресу</a><a href="https://feedly.com/i/subscription/feed/https%3A%2F%2Fcode38.com.ua%2Ffeed.xml" target="_blank" rel="noopener">Feedly</a><a href="https://www.inoreader.com/?add_feed=https%3A%2F%2Fcode38.com.ua%2Ffeed.xml" target="_blank" rel="noopener">Inoreader</a></div>
+  </div>
+  <p style="margin-top:28px"><a href="./" style="color:var(--amber)">← CODE38</a></p>
+</main>
+<footer class="site-foot"><div class="wrap">
+  <div><b>vadim.li</b> — аналітичні статті</div>
+  <div>Передрук — за погодженням: <b>vadim.li@gmail.com</b></div>
+</div></footer>
+<script>
+document.getElementById("copy-feed").addEventListener("click", function (e) {
+  e.preventDefault(); var b = this;
+  try { navigator.clipboard.writeText("https://code38.com.ua/feed.xml").then(function () { b.textContent = "Скопійовано ✓"; }); } catch (_) {}
+});
+</script>
+</body>
+</html>
