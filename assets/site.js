@@ -49,7 +49,7 @@
     var t = byId[a.topic] || { name: a.topic };
     var cls = "card" + (a.featured && !a.draft ? " featured" : "") + (a.draft ? " draft" : "");
     var inner =
-      '<div class="top"><span class="t">' + esc(t.name) + "</span><span>" + (a.lang || "").toUpperCase() + "</span></div>" +
+      '<div class="top"><span class="t">' + esc(t.name) + "</span><span>" + (a.lang === "uk" ? "UA" : (a.lang || "").toUpperCase()) + "</span></div>" +
       '<div class="body"><h2>' + esc(a.title) + "</h2>" + (a.excerpt ? "<p>" + esc(a.excerpt) + "</p>" : "") +
       (a.tags && a.tags.length ? '<div class="tags">' + a.tags.map(function (x) { return "<span>#" + esc(x) + "</span>"; }).join("") + "</div>" : "") +
       "</div>" +
