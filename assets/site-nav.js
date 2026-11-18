@@ -15,14 +15,14 @@
   css.textContent =
     "#vl-bar{position:relative;z-index:90;background:rgba(13,15,18,.96);backdrop-filter:blur(8px);border-bottom:1px solid #1f2329;font:12px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.08em}" +
     "#vl-bar .in{max-width:1180px;margin:0 auto;padding:0 24px;height:44px;display:flex;align-items:center;justify-content:space-between;gap:16px}" +
-    "#vl-bar a{color:#8a909b;text-decoration:none;border:0}#vl-bar a:hover{color:#c8a96e}" +
-    "#vl-bar .home{color:#d4d8e0;font-weight:700;letter-spacing:.06em;font-size:14px}#vl-bar .home span{color:#c8a96e}" +
-    "#vl-bar .crumb{text-transform:uppercase;color:#6b7280}#vl-bar .crumb a{margin-left:8px}" +
+    "#vl-bar a{color:#b8bec8;text-decoration:none;border:0}#vl-bar a:hover{color:#c8a96e}" +
+    "#vl-bar .home{color:#dfe3ea;font-weight:700;letter-spacing:.06em;font-size:14px}#vl-bar .home span{color:#c8a96e}" +
+    "#vl-bar .crumb{text-transform:uppercase;color:#a3a9b4}#vl-bar .crumb a{margin-left:8px}" +
     "#vl-next{max-width:720px;margin:56px auto 0;padding:0 24px;font:13px/1.6 'JetBrains Mono',ui-monospace,monospace}" +
-    "#vl-next .h{color:#6b7280;letter-spacing:.2em;text-transform:uppercase;font-size:11px;margin-bottom:10px}" +
-    "#vl-next a{display:block;font-family:Inter,system-ui,sans-serif;font-size:15px;border:1px solid #1f2329;padding:14px 16px;margin-bottom:8px;color:#d4d8e0;text-decoration:none}" +
+    "#vl-next .h{color:#a3a9b4;letter-spacing:.2em;text-transform:uppercase;font-size:11px;margin-bottom:10px}" +
+    "#vl-next a{display:block;font-family:Inter,system-ui,sans-serif;font-size:15px;border:1px solid #1f2329;padding:14px 16px;margin-bottom:8px;color:#dfe3ea;text-decoration:none}" +
     "#vl-next a:hover{border-color:#c8a96e}" +
-    "#vl-bar .lang{margin-left:14px;border:1px solid #2a2f38;padding:3px 8px;color:#d4d8e0}#vl-bar .lang:hover{border-color:#c8a96e}#vl-bar .views{margin-left:14px;color:#8a909b;letter-spacing:.06em}#vl-next a small{display:block;color:#8a909b;margin-top:4px}";
+    "#vl-bar .lang{margin-left:14px;border:1px solid #2a2f38;padding:3px 8px;color:#dfe3ea}#vl-bar .lang:hover{border-color:#c8a96e}#vl-bar .views{margin-left:14px;color:#b8bec8;letter-spacing:.06em}#vl-next a small{display:block;color:#b8bec8;margin-top:4px}";
   document.head.appendChild(css);
 
   var lang = art ? (art.lang || "uk") : ((document.documentElement.lang || "uk").slice(0, 2) === "en" ? "en" : "uk");

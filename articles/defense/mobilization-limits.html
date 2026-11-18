@@ -14,8 +14,8 @@
     --line: #1f2329;
     --line-soft: #181b20;
     --ink: #f0f2f5;
-    --ink-dim: #d4d8e0;
-    --ink-mute: #8a909b;
+    --ink-dim: #dfe3ea;
+    --ink-mute: #b8bec8;
     --brass: #c8a96e;
     --brass-dim: #7a6640;
     --alert: #e05c5c;
@@ -69,7 +69,7 @@
   }
   .tag{
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--brass);
@@ -172,7 +172,7 @@
 
   ul, ol{ margin: 0 0 20px; padding-left: 22px; color: var(--ink-dim); }
   li{ margin-bottom: 10px; font-size: 16px; }
-  li::marker{ color: var(--brass-dim); }
+  li::marker{ color: #a99266; }
 
   /* ---------- Ledger / budget visual ---------- */
   .ledger{
@@ -187,10 +187,10 @@
     padding: 16px 20px;
     border-bottom: 1px dashed var(--line);
   }
-  .ledger-head .t{ font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-mute); }
+  .ledger-head .t{ font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-mute); }
   .ledger-head .v{ font-family: var(--serif); font-size: 24px; color: var(--brass); font-weight: 600; }
   .ledger-bar{ display:flex; height: 34px; }
-  .ledger-bar span{ display:flex; align-items:center; justify-content:center; font-family: var(--mono); font-size: 11px; color: var(--bg); font-weight:600; }
+  .ledger-bar span{ display:flex; align-items:center; justify-content:center; font-family: var(--mono); font-size: 12px; color: var(--bg); font-weight:600; }
   .seg-a{ background: var(--ink-mute); flex: 0 0 4%; }
   .seg-b{ background: var(--ok); flex: 0 0 3%; }
   .seg-c{ background: var(--brass); flex: 1; }
@@ -230,7 +230,7 @@
   .callout.alert{ border-left-color: var(--alert); }
   .callout .cal-title{
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--brass);
@@ -252,7 +252,7 @@
   /* ---------- Tables ---------- */
   table{ width:100%; border-collapse: collapse; margin: 24px 0; font-size: 14.5px; }
   th, td{ padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); }
-  th{ font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-mute); font-weight:500; }
+  th{ font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-mute); font-weight:500; }
   td{ color: var(--ink-dim); }
   td.yes{ color: var(--ok); }
   td.no{ color: var(--alert); }
@@ -294,7 +294,7 @@
   .src .n{ font-family: var(--mono); color: var(--ink-mute); flex: 0 0 22px; }
   .src a{ color: var(--ink-dim); text-decoration: none; }
   .src a:hover{ color: var(--brass); }
-  .src .domain{ font-family: var(--mono); font-size: 11px; color: var(--brass-dim); margin-left: auto; white-space: nowrap; padding-left: 10px; }
+  .src .domain{ font-family: var(--mono); font-size: 12px; color: #a99266; margin-left: auto; white-space: nowrap; padding-left: 10px; }
 
   /* ---------- Footer ---------- */
   footer{

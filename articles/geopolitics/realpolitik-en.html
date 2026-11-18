@@ -15,9 +15,9 @@
   --panel:#13161b;
   --line:#1f2329;
   --line2:#2a2f38;
-  --text:#d4d8e0;
-  --muted:#8a909b;
-  --dim:#6b7280;
+  --text:#dfe3ea;
+  --muted:#b8bec8;
+  --dim:#a3a9b4;
   --amber:#c8a96e;
   --amber-dim:#7a6640;
   --red:#e05c5c;
@@ -36,22 +36,22 @@ a:hover{color:#e8c98e;border-bottom-color:#e8c98e}
 
 #progress{position:fixed;top:0;left:0;height:2px;background:var(--amber);width:0;z-index:100}
 
-.topbar{font-family:var(--mono);border-bottom:1px solid var(--line);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.topbar{font-family:var(--mono);border-bottom:1px solid var(--line);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .topbar .in{max-width:1080px;margin:0 auto;padding:12px 24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .topbar b{color:var(--amber);font-weight:600}
 
 header.hero{max-width:1080px;margin:0 auto;padding:72px 24px 48px;border-bottom:1px solid var(--line)}
-.stamp{font-family:var(--mono);display:inline-block;border:1.5px solid var(--red);color:var(--red);padding:4px 12px;font-size:11.5px;font-weight:700;letter-spacing:.22em;transform:rotate(-2deg);margin-bottom:28px}
+.stamp{font-family:var(--mono);display:inline-block;border:1.5px solid var(--red);color:var(--red);padding:4px 12px;font-size:12.5px;font-weight:700;letter-spacing:.22em;transform:rotate(-2deg);margin-bottom:28px}
 .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:18px}
 h1{font-family:var(--display);color:var(--heading);font-size:clamp(32px,5.4vw,56px);line-height:1.13;font-weight:900;max-width:920px}
 h1 span{color:var(--amber);font-style:italic}
 .lede{font-size:clamp(17px,2vw,19px);font-weight:300;line-height:1.6;color:var(--muted);max-width:760px;margin-top:28px}
 .meta{font-family:var(--mono);display:flex;gap:28px;flex-wrap:wrap;margin-top:36px;font-size:12px;color:var(--muted);letter-spacing:.06em}
-.meta div span{display:block;color:var(--dim);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:2px}
+.meta div span{display:block;color:var(--dim);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:2px}
 
 .layout{max-width:1080px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:56px}
 nav.toc{font-family:var(--mono);position:sticky;top:24px;align-self:start;padding-top:56px;font-size:12px}
-nav.toc .h{color:var(--dim);letter-spacing:.2em;text-transform:uppercase;font-size:10.5px;margin-bottom:14px}
+nav.toc .h{color:var(--dim);letter-spacing:.2em;text-transform:uppercase;font-size:11.5px;margin-bottom:14px}
 nav.toc ol{list-style:none;border-left:1px solid var(--line)}
 nav.toc li a{display:block;border:0;color:var(--muted);padding:5px 0 5px 14px;margin-left:-1px;border-left:1px solid transparent;line-height:1.4}
 nav.toc li a:hover,nav.toc li a.on{color:var(--amber);border-left-color:var(--amber)}
@@ -63,7 +63,7 @@ main p.serif{font-size:18px;font-weight:300;line-height:1.7}
 .quote{border-left:2px solid var(--amber);padding:6px 0 6px 20px;margin:28px 0;font-family:var(--display);font-style:italic;font-size:22px;line-height:1.45;color:var(--heading)}
 
 section.file{padding-top:56px;margin-top:40px;border-top:1px dashed var(--line2)}
-.fhead{font-family:var(--mono);display:flex;align-items:baseline;gap:14px;margin-bottom:8px;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.fhead{font-family:var(--mono);display:flex;align-items:baseline;gap:14px;margin-bottom:8px;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
 .fhead .no{color:var(--amber);font-weight:700}
 .fhead .tag{border:1px solid var(--line2);padding:1px 8px;color:var(--muted)}
 h2{font-family:var(--display);color:var(--heading);font-size:clamp(24px,3vw,32px);line-height:1.22;font-weight:700;margin-bottom:22px}
@@ -78,10 +78,10 @@ ul.blind li::before{content:"✕";position:absolute;left:0;top:0;color:var(--red
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:26px 0}
 .facts div{background:var(--panel);padding:14px 16px}
 .facts b{display:block;font-family:var(--display);font-size:24px;color:var(--amber);font-weight:700;line-height:1.2}
-.facts span{font-family:var(--mono);font-size:11.5px;color:var(--muted);line-height:1.45;display:block;margin-top:4px}
+.facts span{font-family:var(--mono);font-size:12.5px;color:var(--muted);line-height:1.45;display:block;margin-top:4px}
 
 .src{margin:32px 0 8px;border:1px solid var(--line2);background:var(--bg2)}
-.src .sh{font-family:var(--mono);display:flex;justify-content:space-between;padding:8px 14px;border-bottom:1px solid var(--line2);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--green)}
+.src .sh{font-family:var(--mono);display:flex;justify-content:space-between;padding:8px 14px;border-bottom:1px solid var(--line2);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--green)}
 .src .sh em{font-style:normal;color:var(--dim)}
 .src ul{list-style:none;padding:12px 14px}
 .src li{padding:7px 0 7px 22px;position:relative;font-size:13.5px;line-height:1.55;border-bottom:1px dotted var(--line)}
@@ -91,12 +91,12 @@ ul.blind li::before{content:"✕";position:absolute;left:0;top:0;color:var(--red
 
 .bonus{border:1px solid var(--line2);padding:20px 22px;margin:20px 0;background:var(--panel)}
 .bonus h4{margin-top:0;color:var(--amber)}
-.bonus .years{font-family:var(--mono);font-size:11.5px;color:var(--dim);letter-spacing:.12em}
+.bonus .years{font-family:var(--mono);font-size:12.5px;color:var(--dim);letter-spacing:.12em}
 .bonus .ref{font-size:13px;margin-top:10px;color:var(--muted)}
 
 .split{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin:28px 0}
 .split div{background:var(--panel);padding:22px}
-.split .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+.split .lab{font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
 .split p{font-size:14px;margin:0}
 
 .final{margin:40px 0 0;padding:28px;border:1px solid var(--amber-dim);background:linear-gradient(180deg,rgba(200,169,110,.06),transparent)}
