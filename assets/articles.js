@@ -121,6 +121,18 @@ window.ARTICLES = [
     excerpt: "Що було б, якби людство відмовилося від експлуатації тварин у XIV столітті: два сценарії — оптимістичний і критичний."
   },
 
+  {
+    id: "payments-access",
+    title: "Країна продавців без каси: чому Україна 15 років відрізана від PayPal і Stripe",
+    file: "articles/finance/payments-access.html",
+    topic: "finance",
+    tags: ["PayPal", "Stripe", "Etsy", "НБУ", "Молдова"],
+    date: "2026-11-18",
+    lang: "uk",
+    read: 14,
+    excerpt: "Українці продають на Etsy більше за Іспанію, а прийняти оплату через PayPal не можуть. Молдова може. Ретроспектива з 2011 року: регулятор, компанії, санкційна географія."
+  },
+
   // ── English translations ──
   {
     id: "realpolitik-en",

@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Країна продавців без каси: чому Україна 15 років відрізана від PayPal і Stripe — CODE38</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  :root{
+    --bg: #0d0f12;
+    --bg-raised: #13161b;
+    --bg-card: #13161b;
+    --line: #1f2329;
+    --line-soft: #181b20;
+    --ink: #f0f2f5;
+    --ink-dim: #dfe3ea;
+    --ink-mute: #b8bec8;
+    --brass: #c8a96e;
+    --brass-dim: #7a6640;
+    --alert: #e05c5c;
+    --alert-dim: #8a3a3a;
+    --ok: #5cb87a;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before{
+    content:"";
+    position: fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px);
+    background-size: 100% 44px;
+    opacity: 0;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{
+    position: relative; z-index:1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ---------- Header ---------- */
+  header.hero{
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow-row{
+    display:flex; align-items:center; gap:10px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .tag{
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brass);
+    border: 1px solid var(--brass-dim);
+    padding: 5px 10px;
+    border-radius: 3px;
+    background: rgba(200,169,110,0.06);
+  }
+  .tag.alert{ color: var(--alert); border-color: var(--alert-dim); background: rgba(224,92,92,0.08); }
+  .kicker{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+
+  h1{
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    line-height: 1.15;
+    margin: 0 0 18px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  h1 em{
+    font-style: italic;
+    color: var(--brass);
+  }
+
+  .subtitle{
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--ink-dim);
+    max-width: 60ch;
+    margin: 0 0 28px;
+  }
+
+  .meta-line{
+    display:flex; flex-wrap: wrap; gap: 6px 14px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink-mute);
+  }
+  .meta-line .dot::before{ content:"·"; margin-right: 14px; color: var(--ink-mute); }
+  .meta-line a{ color: var(--brass); text-decoration: none; border-bottom: 1px solid var(--brass-dim); }
+  .meta-line a:hover{ color: var(--ink); }
+
+  .license-note{
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--ink-mute);
+    font-family: var(--mono);
+    padding: 10px 14px;
+    border-left: 2px solid var(--brass-dim);
+    background: var(--bg-raised);
+  }
+  .license-note a{ color: var(--brass); }
+
+  /* ---------- Body typography ---------- */
+  .lede{
+    font-size: 18px;
+    color: var(--ink-dim);
+    margin: 36px 0;
+  }
+  p{ margin: 0 0 20px; font-size: 17px; line-height: 1.75; color: var(--ink-dim); }
+  strong{ color: var(--ink); font-weight: 600; }
+
+  section.part{ margin-top: 64px; }
+
+  .part-label{
+    display:flex; align-items: baseline; gap: 14px;
+    margin-bottom: 18px;
+  }
+  .part-num{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--brass);
+    letter-spacing: 0.08em;
+  }
+  .part-num::before{ content:""; display:inline-block; width:22px; height:1px; background: var(--brass-dim); margin-right:10px; vertical-align: middle; }
+
+  h2{
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    color: var(--ink);
+    margin: 4px 0 0;
+    line-height: 1.3;
+  }
+  h3{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--ink);
+    margin: 32px 0 14px;
+  }
+
+  ul, ol{ margin: 0 0 20px; padding-left: 22px; color: var(--ink-dim); }
+  li{ margin-bottom: 10px; font-size: 16px; }
+  li::marker{ color: var(--brass-dim); }
+
+  /* ---------- Ledger / budget visual ---------- */
+  .ledger{
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    margin: 28px 0 32px;
+    overflow: hidden;
+  }
+  .ledger-head{
+    display:flex; justify-content: space-between; align-items:baseline;
+    padding: 16px 20px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .ledger-head .t{ font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-mute); }
+  .ledger-head .v{ font-family: var(--serif); font-size: 24px; color: var(--brass); font-weight: 600; }
+  .ledger-bar{ display:flex; height: 34px; }
+  .ledger-bar span{ display:flex; align-items:center; justify-content:center; font-family: var(--mono); font-size: 12px; color: var(--bg); font-weight:600; }
+  .seg-a{ background: var(--ink-mute); flex: 0 0 4%; }
+  .seg-b{ background: var(--ok); flex: 0 0 3%; }
+  .seg-c{ background: var(--brass); flex: 1; }
+  .ledger-rows{ padding: 14px 20px 18px; display:grid; gap: 10px; }
+  .ledger-row{ display:flex; justify-content: space-between; gap: 16px; font-size: 14.5px; }
+  .ledger-row .label{ color: var(--ink-dim); }
+  .ledger-row .val{ font-family: var(--mono); color: var(--ink); white-space:nowrap; }
+  .swatch{ display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:8px; vertical-align:1px; }
+
+  /* ---------- Stat strip ---------- */
+  .stat-strip{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin: 28px 0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .stat{
+    background: var(--bg-card);
+    padding: 18px 16px;
+  }
+  .stat .num{ font-family: var(--serif); font-size: 28px; color: var(--brass); font-weight: 600; line-height:1; }
+  .stat .num.alert{ color: var(--alert); }
+  .stat .lbl{ font-size: 13px; color: var(--ink-mute); margin-top: 8px; line-height:1.4; }
+
+  /* ---------- Callout / example box ---------- */
+  .callout{
+    margin: 28px 0;
+    padding: 20px 22px;
+    background: var(--bg-raised);
+    border-left: 3px solid var(--brass);
+    border-radius: 0 4px 4px 0;
+  }
+  .callout.alert{ border-left-color: var(--alert); }
+  .callout .cal-title{
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--brass);
+    margin-bottom: 10px;
+  }
+  .callout.alert .cal-title{ color: var(--alert); }
+  .callout p:last-child{ margin-bottom:0; }
+
+  blockquote{
+    margin: 28px 0;
+    padding: 4px 0 4px 22px;
+    border-left: 2px solid var(--brass-dim);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-dim);
+  }
+
+  /* ---------- Tables ---------- */
+  table{ width:100%; border-collapse: collapse; margin: 24px 0; font-size: 14.5px; }
+  th, td{ padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); }
+  th{ font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-mute); font-weight:500; }
+  td{ color: var(--ink-dim); }
+  td.yes{ color: var(--ok); }
+  td.no{ color: var(--alert); }
+
+  /* ---------- Country cards ---------- */
+  .cases{ display:grid; gap: 14px; margin: 28px 0; }
+  .case{
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 20px 22px;
+  }
+  .case-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 10px; gap: 10px; flex-wrap:wrap; }
+  .case-head .name{ font-family: var(--serif); font-weight:600; font-size: 18px; color: var(--ink); }
+  .case-head .years{ font-family: var(--mono); font-size: 12px; color: var(--brass); }
+  .case p{ font-size: 15px; margin-bottom: 0; color: var(--ink-dim); }
+
+  /* ---------- Conclusion ---------- */
+  .conclusion{
+    margin-top: 64px;
+    padding: 30px 26px;
+    background: var(--bg-card);
+    border: 1px solid var(--brass-dim);
+    border-radius: 6px;
+  }
+  .conclusion h2{ margin-top:0; }
+
+  /* ---------- Sources ---------- */
+  .sources{ margin-top: 64px; }
+  .src-list{ display:grid; gap: 8px; margin-top: 20px; }
+  .src{
+    display:flex; gap: 12px; align-items:baseline;
+    padding: 10px 14px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line-soft);
+    border-radius: 3px;
+    font-size: 13px;
+  }
+  .src .n{ font-family: var(--mono); color: var(--ink-mute); flex: 0 0 22px; }
+  .src a{ color: var(--ink-dim); text-decoration: none; }
+  .src a:hover{ color: var(--brass); }
+  .src .domain{ font-family: var(--mono); font-size: 12px; color: #a99266; margin-left: auto; white-space: nowrap; padding-left: 10px; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    margin-top: 72px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-mute);
+    text-align:center;
+    line-height: 1.9;
+  }
+  footer a{ color: var(--brass); text-decoration:none; border-bottom: 1px solid var(--brass-dim); }
+  footer a:hover{ color: var(--ink); }
+
+  @media (max-width: 560px){
+    .wrap{ padding: 0 16px 60px; }
+    header.hero{ padding: 40px 0 32px; }
+    .ledger-head{ flex-direction:column; align-items:flex-start; gap:6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+  }
+
+  a.cite{ font-family: var(--mono); font-size: .72em; color: var(--brass); text-decoration: none; vertical-align: super; line-height: 0; margin-left: 1px; }
+  a.cite:hover{ text-decoration: underline; }
+  .src{ scroll-margin-top: 80px; transition: background .3s; }
+  .src:target{ background: rgba(200,169,110,.12); outline: 1px solid var(--brass-dim); }
+  td.mid{ color: var(--brass); }
+  .table-wrap{ overflow-x:auto; }
+  .table-wrap table{ min-width: 640px; }
+
+  /* світліші другорядні кольори для верхньої панелі й «Читати далі» */
+  html #vl-bar a, html #vl-bar .views, html #vl-next a small{ color:#b8bec8; }
+  html #vl-bar .crumb, html #vl-next .h{ color:#a3a9b4; }
+  html #vl-bar a:hover{ color:#c8a96e; }
+</style>
+<!-- seo -->
+<meta name="description" content="Українці продають на Etsy більше за Іспанію, а прийняти оплату через PayPal не можуть. Молдова може. Ретроспектива з 2011 року: регулятор, компанії, санкційна географія.">
+<link rel="canonical" href="https://code38.com.ua/articles/finance/payments-access.html">
+<meta property="og:site_name" content="CODE38">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Країна продавців без каси: чому Україна 15 років відрізана від PayPal і Stripe">
+<meta property="og:description" content="Українці продають на Etsy більше за Іспанію, а прийняти оплату через PayPal не можуть. Молдова може. Ретроспектива з 2011 року: регулятор, компанії, санкційна географія.">
+<meta property="og:url" content="https://code38.com.ua/articles/finance/payments-access.html">
+<meta property="og:image" content="https://code38.com.ua/assets/og/payments-access.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="uk_UA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Країна продавців без каси: чому Україна 15 років відрізана від PayPal і Stripe">
+<meta name="twitter:description" content="Українці продають на Etsy більше за Іспанію, а прийняти оплату через PayPal не можуть. Молдова може. Ретроспектива з 2011 року: регулятор, компанії, санкційна географія.">
+<meta name="twitter:image" content="https://code38.com.ua/assets/og/payments-access.jpg">
+<link rel="icon" href="https://code38.com.ua/assets/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Країна продавців без каси: чому Україна 15 років відрізана від PayPal і Stripe", "description": "Українці продають на Etsy більше за Іспанію, а прийняти оплату через PayPal не можуть. Молдова може. Ретроспектива з 2011 року: регулятор, компанії, санкційна географія.", "datePublished": "2026-11-18", "dateModified": "2026-11-18", "inLanguage": "uk", "keywords": "PayPal, Stripe, Etsy, НБУ, Молдова", "author": {"@type": "Person", "name": "vadim.li", "url": "https://code38.com.ua/about.html"}, "publisher": {"@type": "Organization", "name": "CODE38", "url": "https://code38.com.ua/", "logo": {"@type": "ImageObject", "url": "https://code38.com.ua/assets/logo.png"}}, "image": "https://code38.com.ua/assets/og/payments-access.jpg", "mainEntityOfPage": "https://code38.com.ua/articles/finance/payments-access.html"}</script>
+<script data-goatcounter="https://vadim.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<!-- /seo -->
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow-row">
+      <span class="tag">Гроші і фінанси</span>
+      <span class="tag alert">Платежі</span>
+      <span class="kicker">2011–2026</span>
+    </div>
+
+    <h1>Країна продавців без каси: чому Україна <em>15 років відрізана</em> від PayPal і Stripe</h1>
+
+    <p class="subtitle">Українські майстри продають на Etsy більше, ніж Іспанія чи Італія, а отримати оплату через PayPal не можуть. Молдова з 2,4 млн населення — може. Я розбираю, хто і як зачиняв двері — з 2011 року до сьогодні.</p>
+
+    <div class="meta-line">
+      <span>≈ 14 хвилин читання</span>
+      <span class="dot">Аналітичний матеріал</span>
+      <span class="dot">Фінанси · Регулювання · Ретроспектива</span>
+      <span class="dot">Автор: vadim.li · <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a></span>
+    </div>
+
+    <div class="license-note">
+      Використання тексту — лише з дозволу автора. Для передруку, посилань або співпраці пишіть на <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a>.
+    </div>
+  </header>
+
+  <p class="lede">Майстриня зі Львова шиє ляльки, які купують у Каліфорнії й Баварії. Її магазин на Etsy має тисячі відгуків. Але коли покупець пише «а можна оплатити через PayPal?», вона відповідає «ні» — і втрачає замовлення. Її колега з Кишинева відповідає «так». Різниця між ними — не талант, не якість і не розмір країни. Різниця — в п'ятнадцяти роках рішень, частину з яких ухвалили в Києві, частину — в Сан-Хосе, а частину — у Москві.</p>
+
+  <!-- ЧАСТИНА 01 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 01</span></div>
+    <h2>Парадокс: ринок є, каси немає</h2>
+
+    <p>Аргумент «Україна — малий і нецікавий ринок» не витримує зіткнення з цифрами самих платформ.</p>
+
+    <div class="stat-strip">
+      <div class="stat"><div class="num">×2</div><div class="lbl">майже вдвічі більше товарів на Etsy, ніж в Іспанії чи Італії, — попри менше населення <a class="cite" href="#src-1">[1]</a></div></div>
+      <div class="stat"><div class="num">40 000+</div><div class="lbl">продавців з України на Etsy <a class="cite" href="#src-2">[2]</a>; 8-ме місце у світі за кількістю продажів <a class="cite" href="#src-3">[3]</a></div></div>
+      <div class="stat"><div class="num">ТОП-10</div><div class="lbl">країн за кількістю продавців на Amazon у США — більше, ніж з Німеччини, Японії чи Мексики <a class="cite" href="#src-4">[4]</a></div></div>
+    </div>
+
+    <p>Більше того: восени 2022-го, вже під час повномасштабної війни, Україна мала найвищий у світі середній обсяг продажів на один магазин серед країн, де працює щонайменше 10 тисяч магазинів <a class="cite" href="#src-1">[1]</a>. Українці вміють продавати світові. Проблема в іншому — як отримати за це гроші.</p>
+
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Сервіс</th><th>Статус для резидента України</th><th>Що це означає на практиці</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Stripe</strong></td><td class="no" style="white-space:nowrap">✕ Немає</td><td>Працює в 46 країнах, зокрема в більшості країн ЄС, — але не в Україні <a class="cite" href="#src-5">[5]</a>. Не працював тут навіть частково <a class="cite" href="#src-6">[6]</a></td></tr>
+        <tr><td><strong>PayPal</strong></td><td class="mid" style="white-space:nowrap">◑ Частково</td><td>Можна платити й отримувати перекази, але не можна повноцінно приймати оплату за товари й послуги <a class="cite" href="#src-7">[7]</a></td></tr>
+        <tr><td><strong>Gumroad</strong></td><td class="no" style="white-space:nowrap">✕ Фактично ні</td><td>Платежі й виплати йдуть через Stripe <a class="cite" href="#src-8">[8]</a>; українські автори збирають петиції <a class="cite" href="#src-9">[9]</a></td></tr>
+        <tr><td><strong>Revolut</strong></td><td class="no" style="white-space:nowrap">✕ Закрито</td><td>Рахунки резидентів України закрито з 22 лютого 2026 року <a class="cite" href="#src-10">[10]</a></td></tr>
+        <tr><td><strong>Wise</strong></td><td class="no" style="white-space:nowrap">✕ Згорнуто</td><td>З 8 грудня 2024-го — без виплат на Visa українських банків, нові акаунти не відкриваються <a class="cite" href="#src-6">[6]</a></td></tr>
+        <tr><td><strong>Etsy Payments</strong></td><td class="yes" style="white-space:nowrap">✓ Працює</td><td>З жовтня 2023 року — через Payoneer <a class="cite" href="#src-11">[11]</a>, але з вищою комісією, ніж у продавців зі США <a class="cite" href="#src-12">[12]</a></td></tr>
+        <tr><td><strong>Interactive Brokers</strong></td><td class="yes" style="white-space:nowrap">✓ Працює</td><td>Резиденти України можуть відкрити рахунок <a class="cite" href="#src-13">[13]</a>; поповнення — в межах валютних лімітів НБУ <a class="cite" href="#src-14">[14]</a></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- ЧАСТИНА 02 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 02</span></div>
+    <h2>Втрачене десятиліття: 2011–2019</h2>
+
+    <p>У 2010-х онлайн-платежі у світі росли шаленими темпами. Наприкінці цього періоду PayPal працював у 190 країнах із 193, а жителі 116 з них могли отримувати гроші за продані товари й послуги — включно з Малаві, де ВВП на душу населення становив 253 долари <a class="cite" href="#src-15">[15]</a>. Україна в цей список не потрапила. І тут відповідальність значною мірою лежить на українському регуляторі.</p>
+
+    <div class="cases">
+      <div class="case">
+        <div class="case-head"><span class="name">Листи замість діалогу</span><span class="years">з 2011</span></div>
+        <p>З 2011 року керівництво НБУ надсилало PayPal листи з вимогою пройти процедури реєстрації платіжних систем і подати описаний Нацбанком пакет документів — це стало відомо з переписки за 2015 рік <a class="cite" href="#src-15">[15]</a>. PayPal відповідав, що його робота з українцями відповідає міжнародній практиці: фактично компанія лише приймала до оплати картки українських банків, як будь-який іноземний сайт на кшталт Amazon <a class="cite" href="#src-16">[16]</a>.</p>
+      </div>
+      <div class="case">
+        <div class="case-head"><span class="name">Власний рахунок за кордоном — порушення</span><span class="years">до 2019</span></div>
+        <p>До 2019 року українець не міг законно тримати гроші на своєму ж рахунку за кордоном без індивідуальної ліцензії НБУ — відповідальність за це діяла ще з 1993 року <a class="cite" href="#src-17">[17]</a>. Для PayPal це означало: навіть якщо компанія відкриє прийом платежів, вивести валюту на українську картку без ліцензії НБУ не можна <a class="cite" href="#src-18">[18]</a>. Як наслідок, близько 20 тисяч українців відкрили бізнес-акаунти PayPal через банки сусідніх країн — і більша частина цих грошей в Україну не потрапляла <a class="cite" href="#src-19">[19]</a>.</p>
+      </div>
+      <div class="case">
+        <div class="case-head"><span class="name">Пів кроку</span><span class="years">2016</span></div>
+        <p>10 лютого 2016 року НБУ постановою № 65 дозволив фізособам отримувати від нерезидентів електронні гроші — за умови виведення на рахунок в українському банку <a class="cite" href="#src-20">[20]</a>. Водночас регулятор наполягав, що випускати електронні гроші може виключно банк <a class="cite" href="#src-21">[21]</a>. Уже в листопаді 2016-го НБУ повідомив: PayPal не прийде в Україну в найближчі 12 місяців. За словами учасника переговорів, представники компанії пояснили, що мають обмежені людські й часові ресурси і власний дворічний план виходу на ринки — «є країни, в які ми можемо зайти, і в які не можемо» <a class="cite" href="#src-22">[22]</a>.</p>
+      </div>
+      <div class="case">
+        <div class="case-head"><span class="name">Вікно відчиняється</span><span class="years">2019</span></div>
+        <p>7 лютого 2019 року набув чинності новий закон про валюту: індивідуальні ліцензії на переказ коштів на власний рахунок за кордоном скасували, а фізособи отримали право переказувати до 50 тисяч євро на рік <a class="cite" href="#src-23">[23]</a>. Через вісім років після перших листів НБУ головний правовий бар'єр нарешті прибрали.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="cal-title">«Залізна завіса, яку ми встановили собі самі»</div>
+      <p>Так описував ситуацію Ілля Кенігштейн, засновник мережі коворкінгів Creative States і ініціатор руху за прихід PayPal в Україну. За його словами, приходу PayPal заважали обмеження Нацбанку й олігархи <a class="cite" href="#src-24">[24]</a>. Це оцінка активіста, а не встановлений факт, — але вона показує, як ситуацію бачили самі підприємці.</p>
+    </div>
+  </section>
+
+  <!-- ЧАСТИНА 03 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 03</span></div>
+    <h2>Вікно 2019–2022: правила змінили, компанії не прийшли</h2>
+
+    <p>Після 2019 року держава зробила те, чого роками вимагали підприємці. У 2020-му Мінцифри почало переговори з PayPal і Stripe <a class="cite" href="#src-25">[25]</a>, Михайло Федоров публічно обіцяв, що «Stripe точно буде в Україні» <a class="cite" href="#src-26">[26]</a>. У червні 2021-го Рада ухвалила закон про платіжні послуги за європейськими правилами PSD2 <a class="cite" href="#src-27">[27]</a>, який набрав чинності 1 серпня 2022-го <a class="cite" href="#src-28">[28]</a>.</p>
+
+    <p>Але тут виявилося те, що змінює всю картину: за даними НБУ, ні Stripe, ні PayPal жодного разу не звернулися до регулятора по ліцензію чи інший дозвіл <a class="cite" href="#src-29">[29]</a>. Мінцифри після двох років переговорів навіть попросило Stripe дорожню карту з датами — і чекало на відповідь <a class="cite" href="#src-30">[30]</a>. Тобто після того, як Україна прибрала власні бар'єри, з'ясувалося, що для компаній український ринок так і не став пріоритетом.</p>
+
+    <p>Пояснення частково дали самі компанії ще у 2016-му: в них обмежені ресурси і є країни, куди вони «можуть зайти, і куди не можуть» <a class="cite" href="#src-22">[22]</a>. Україна з її історією валютних обмежень, кризами 2014–2015 років і — з 2014-го — окупованими територіями опинилася в другому списку.</p>
+  </section>
+
+  <!-- ЧАСТИНА 04 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 04</span></div>
+    <h2>Чинник, про який мовчать офіційні заяви: санкційна географія</h2>
+
+    <p>Є причина, яку рідко згадують і наш уряд, і самі компанії, але яка напряму впливає на рішення американських фінтехів. Частина території України — під санкціями США, бо її окупувала Росія.</p>
+
+    <p>Ще в січні 2015 року PayPal припинив роботу в Криму, щоб виконати західні санкції <a class="cite" href="#src-31">[31]</a>. Stripe прямо зараховує Крим до регіонів, з якими заборонено працювати через санкції OFAC — поряд із Кубою, Іраном і Північною Кореєю <a class="cite" href="#src-32">[32]</a>. Після 2022-го список розширився. Платіжна компанія Checkout.com пояснює своїм клієнтам: обробляти платежі з України зазвичай можна, якщо вони не пов'язані з Кримом, Донецьком, Луганськом, Херсонщиною чи Запоріжжям, — а для цього потрібні геолокація, перевірка поштових індексів і ручна перевірка українських платежів <a class="cite" href="#src-33">[33]</a>.</p>
+
+    <div class="callout alert">
+      <div class="cal-title">Що це означає для бізнесу</div>
+      <p>Для американської компанії кожен клієнт з України — це додаткова процедура перевірки: чи не з окупованої він території. Помилка загрожує штрафами регулятора США. Для Литви чи Молдови такої проблеми немає. Тож коли компанія порівнює «40 мільйонів українців» і «2,4 мільйона молдован», вона рахує не тільки кількість клієнтів, а й вартість і ризик перевірки кожного з них. Це мій висновок з наведених фактів, а не офіційна позиція компаній, — але саме тому він важливий.</p>
+    </div>
+  </section>
+
+  <!-- ЧАСТИНА 05 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 05</span></div>
+    <h2>Чому Балтії й Молдові можна, а нам — ні</h2>
+
+    <h3>Балтія: членство в ЄС</h3>
+    <p>Естонія, Латвія й Литва мають Stripe і повний PayPal не тому, що їхній ринок вигідніший. Вони — частина єдиного ринку ЄС, де фінансова ліцензія, отримана в одній країні, діє в усіх інших. Stripe працює у більшості країн ЄС <a class="cite" href="#src-5">[5]</a> — компанії не потрібно окремо входити в кожну.</p>
+
+    <h3>Молдова: держава, яка розчищала дорогу</h3>
+    <p>Молдова отримала PayPal одночасно з Білоруссю, Чорногорією, Нігерією та іншими ринками <a class="cite" href="#src-34">[34]</a> і стала першою країною СНД, де користувачі змогли отримувати перекази через PayPal. Гроші, виведені на молдовські рахунки, просто бачила й оподатковувала податкова служба <a class="cite" href="#src-35">[35]</a>. А 29 квітня 2025 року уряд Молдови ухвалив правила, які спрощують бізнесу доступ до Stripe, PayPal і Revolut для отримання платежів з-за кордону та пом'якшують правила повернення валюти до 100 тисяч леїв <a class="cite" href="#src-36">[36]</a>. Тобто там держава не чекала, поки компанії прийдуть, — вона прибирала власні бар'єри на їхньому шляху.</p>
+
+    <h3>Україна: один підхід для всіх — і для всіх однаково важкий</h3>
+    <p>Український регулятор займає послідовну позицію: правила однакові для всіх, і будь-яка компанія, що надає фінансові послуги резидентам України, має пройти авторизацію за українським законодавством <a class="cite" href="#src-37">[37]</a>. Саме на цьому зупинився Revolut, який працював з українцями за литовською ліцензією <a class="cite" href="#src-38">[38]</a>. Позиція юридично бездоганна — але в результаті для глобальної компанії Україна — це окремий ринок з окремою процедурою, валютними обмеженнями воєнного часу й санкційними регіонами. Разом це переважує 40 мільйонів потенційних клієнтів.</p>
+  </section>
+
+  <!-- ЧАСТИНА 06 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 06</span></div>
+    <h2>Війна закрила те, що встигло відчинитися</h2>
+
+    <p>Повномасштабне вторгнення 2022 року і відкрило, і закрило двері. З одного боку, PayPal на прохання українського уряду вперше дозволив українцям отримувати перекази — до цього вони могли лише надсилати гроші <a class="cite" href="#src-39">[39]</a>. Etsy, який з 2021 року не давав українцям відкривати нові магазини <a class="cite" href="#src-40">[40]</a>, у жовтні 2023-го запустив для них Etsy Payments <a class="cite" href="#src-41">[41]</a>.</p>
+
+    <p>З іншого боку — валютні обмеження воєнного часу, які, за оцінкою економістів KSE, обмежують рух капіталу й виведення прибутку і відлякують іноземні компанії <a class="cite" href="#src-6">[6]</a>. Wise поступово згорнув послуги, пояснивши, що війна ускладнює гарантування безпечного сервісу <a class="cite" href="#src-6">[6]</a>. Revolut за перший тиждень зібрав близько 40 тисяч українських клієнтів і 260 тисяч у черзі — і пішов, бо не мав української ліцензії <a class="cite" href="#src-6">[6]</a>.</p>
+
+    <p>Окремий шар — інтереси місцевого ринку. Співзасновник monobank Олег Гороховський назвав вихід Revolut «банальним порушенням українських законів» <a class="cite" href="#src-42">[42]</a>, хоча й наголошував, що був би радий бачити Revolut в Україні з повагою до законів <a class="cite" href="#src-43">[43]</a>. За даними DOU, великі банки схильні бачити в іноземних гравцях конкурентів, а менші — партнерів <a class="cite" href="#src-6">[6]</a>.</p>
+  </section>
+
+  <!-- ЧАСТИНА 07 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 07</span></div>
+    <h2>Хто відповідальний — по-чесному</h2>
+
+    <p><strong>Регулятор 2010-х.</strong> Вісім років — від перших листів у 2011-му до валютного закону 2019-го — Україна жила з правилами, за яких тримати власні гроші на рахунку за кордоном без ліцензії було порушенням. Саме тоді, коли світові онлайн-платежі росли найшвидше.</p>
+    <p><strong>Самі компанії.</strong> Коли Україна прибрала бар'єри, ні PayPal, ні Stripe так і не подали заявку на ліцензію <a class="cite" href="#src-29">[29]</a>. Для них Україна — не пріоритет, і це бізнес-рішення, а не змова.</p>
+    <p><strong>Уряд 2020-х.</strong> Обіцянки «Stripe точно буде» без публічної дорожньої карти і без звіту, що саме не влаштовує компанії. Молдова в цей час ухвалювала конкретні правила під Stripe і PayPal <a class="cite" href="#src-36">[36]</a>.</p>
+    <p><strong>Росія.</strong> Окупація Криму з 2014-го і нових територій з 2022-го зробила Україну країною з санкційними регіонами — а отже, дорожчою й ризикованішою для будь-якого американського фінтеху <a class="cite" href="#src-33">[33]</a>.</p>
+  </section>
+
+  <!-- ЧАСТИНА 08 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Частина 08</span></div>
+    <h2>Що реально може змінити ситуацію</h2>
+
+    <p><strong>1. Членство в ЄС.</strong> Закон про платіжні послуги вже побудований за PSD2. Коли європейська ліцензія діятиме і в Україні, вихід на наш ринок для Stripe чи Revolut стане не окремим проєктом, а технічною опцією — як у Балтії.</p>
+    <p><strong>2. Робити як Молдова.</strong> Не чекати компанії, а прибирати бар'єри на їхньому шляху: спрощені правила для отримання платежів з-за кордону і повернення валюти, зрозуміле оподаткування.</p>
+    <p><strong>3. Продовжувати валютну лібералізацію.</strong> З 11 серпня 2026 року ліміт на оплату товарів і послуг за кордоном з валютних рахунків — 200 тисяч гривень на місяць <a class="cite" href="#src-14">[14]</a>. Що передбачуваніші правила виведення грошей, то менший ризик для компаній.</p>
+    <p><strong>4. Публічна дорожня карта.</strong> Відкритий перелік вимог кожної компанії і того, що з них держава вже виконала, — замість обіцянок «точно буде».</p>
+
+    <div class="callout">
+      <div class="cal-title">Що працює вже зараз</div>
+      <p><strong>Etsy</strong> — через Etsy Payments і Payoneer <a class="cite" href="#src-11">[11]</a>. <strong>Payoneer</strong> — ним, за оцінками експертів, користувалися близько 30% українських фрилансерів ще у 2021 році <a class="cite" href="#src-24">[24]</a>. <strong>Interactive Brokers</strong> — рахунки для резидентів України <a class="cite" href="#src-13">[13]</a>. <strong>PayPal</strong> — для приватних переказів <a class="cite" href="#src-7">[7]</a>. Для цифрових товарів з'являються українські аналоги Gumroad з оплатою в гривні <a class="cite" href="#src-44">[44]</a>.</p>
+    </div>
+  </section>
+
+  <table style="margin-top:40px;">
+    <thead>
+      <tr><th>Популярна теза</th><th>Що показують факти</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>«Україна — малий ринок, тому їм невигідно»</td><td class="no">✕ За кількістю товарів на Etsy ми випереджаємо Іспанію та Італію, на Amazon — у топ-10. Справа не в розмірі, а в ризиках і правилах</td></tr>
+      <tr><td>«PayPal не пускає держава»</td><td class="mid">◑ До 2019 року — значною мірою так. Після 2019-го компанія сама не подала заявку</td></tr>
+      <tr><td>«Revolut вигнали»</td><td class="mid">◑ Revolut працював без української ліцензії; НБУ вимагав її, і компанія сама вирішила піти</td></tr>
+      <tr><td>«Etsy для українців закритий»</td><td class="no">✕ З жовтня 2023 року працює через Payoneer</td></tr>
+      <tr><td>Окуповані території роблять Україну дорожчою для американських фінтехів</td><td class="yes">✓ Санкційні регіони вимагають окремої перевірки кожного платежу</td></tr>
+    </tbody>
+  </table>
+
+  <section class="sources">
+    <h3 style="margin-top:0;">Джерела</h3>
+    <div class="src-list">
+      <div class="src" id="src-1"><span class="n">01</span><a href="https://thehustle.co/why-etsy-is-a-financial-lifeline-for-artisans-in-ukraine" target="_blank" rel="noopener">Why Etsy is a financial lifeline for artisans in Ukraine</a><span class="domain">thehustle.co</span></div>
+      <div class="src" id="src-2"><span class="n">02</span><a href="https://www.kyivpost.com/videos/42243" target="_blank" rel="noopener">‘Artistry, Passion, Creativity of Ukrainian Sellers’ – Etsy CEO’s message to Ukraine</a><span class="domain">kyivpost.com</span></div>
+      <div class="src" id="src-3"><span class="n">03</span><a href="https://mind.ua/en/publications/20252005-war-did-not-thwart-ukrainian-craftsmen-rank-eighth-in-the-world-in-terms-of-sales-on-etsy" target="_blank" rel="noopener">Ukrainian craftsmen rank eighth in the world in terms of sales on Etsy</a><span class="domain">mind.ua</span></div>
+      <div class="src" id="src-4"><span class="n">04</span><a href="https://marketplacepulse.com/articles/amazon-is-not-sanctioning-russian-sellers" target="_blank" rel="noopener">Ukraine is a hub of e-commerce sellers — top 10 on Amazon US</a><span class="domain">marketplacepulse.com</span></div>
+      <div class="src" id="src-5"><span class="n">05</span><a href="https://westernbid.com/en/?p=23497" target="_blank" rel="noopener">Stripe in Ukraine 2026: available in 46 countries, not in Ukraine</a><span class="domain">westernbid.com</span></div>
+      <div class="src" id="src-6"><span class="n">06</span><a href="https://dou.ua/lenta/articles/stripe-wise-revolut-dont-work-in-ukraine/" target="_blank" rel="noopener">Чому в Україні не працюють PayPal, Wise, Stripe і Revolut (28.11.2025)</a><span class="domain">dou.ua</span></div>
+      <div class="src" id="src-7"><span class="n">07</span><a href="https://westernbid.com/en/?p=23509" target="_blank" rel="noopener">PayPal in Ukraine 2026: how to get paid for goods</a><span class="domain">westernbid.com</span></div>
+      <div class="src" id="src-8"><span class="n">08</span><a href="https://www.dreamgrow.com/payment-processing-payouts-and-paypal-a-chance-for-creators-to-thrivecart-at-the-end-of-the-gumroad/" target="_blank" rel="noopener">Gumroad uses Stripe for payment transactions and payouts</a><span class="domain">dreamgrow.com</span></div>
+      <div class="src" id="src-9"><span class="n">09</span><a href="https://www.change.org/p/demand-gumroad-com-to-enable-bank-payouts-for-ukraine-creators" target="_blank" rel="noopener">Demand Gumroad.com to enable bank payouts for Ukraine creators</a><span class="domain">change.org</span></div>
+      <div class="src" id="src-10"><span class="n">10</span><a href="https://scroll.media/en/?p=32271" target="_blank" rel="noopener">Revolut to close Ukrainian accounts within 60 days</a><span class="domain">scroll.media</span></div>
+      <div class="src" id="src-11"><span class="n">11</span><a href="https://www.digitalcommerce360.com/2023/10/24/etsy-payments-expands-to-seven-more-countries/amp/" target="_blank" rel="noopener">Etsy Payments expands to seven more countries, with Payoneer</a><span class="domain">digitalcommerce360.com</span></div>
+      <div class="src" id="src-12"><span class="n">12</span><a href="https://westernbid.com/en/?p=23351" target="_blank" rel="noopener">How to open an Etsy shop from Ukraine 2026: commissions</a><span class="domain">westernbid.com</span></div>
+      <div class="src" id="src-13"><span class="n">13</span><a href="https://tradersunion.com/brokers/forex/view/interactive_brokers/is-regulated-in-ukraine/" target="_blank" rel="noopener">Interactive Brokers services in Ukraine</a><span class="domain">tradersunion.com</span></div>
+      <div class="src" id="src-14"><span class="n">14</span><a href="https://ap-bank.com/en/news/post/valyutni-obmezhennya" target="_blank" rel="noopener">НБУ пом'якшив валютні обмеження з 11.08.2026</a><span class="domain">ap-bank.com</span></div>
+      <div class="src" id="src-15"><span class="n">15</span><a href="https://epravda.com.ua/rus/publications/2016/02/4/579755/" target="_blank" rel="noopener">Почему Нацбанк не пускает PayPal в Украину (04.02.2016)</a><span class="domain">epravda.com.ua</span></div>
+      <div class="src" id="src-16"><span class="n">16</span><a href="https://epravda.com.ua/rus/columns/2016/01/15/576795/" target="_blank" rel="noopener">Колонка ініціативної групи щодо PayPal: листування НБУ і PayPal (15.01.2016)</a><span class="domain">epravda.com.ua</span></div>
+      <div class="src" id="src-17"><span class="n">17</span><a href="https://www.fides.com.ua/our-publications/vidkryttya-rahunku-za-kordonom-fizychnoyu-osoboyu-rezydentom-ukrayiny" target="_blank" rel="noopener">Відкриття рахунку за кордоном фізичною особою — резидентом України</a><span class="domain">fides.com.ua</span></div>
+      <div class="src" id="src-18"><span class="n">18</span><a href="https://medium.com/@vladislav.zaporozhchenko1/why-we-are-we-not-yet-ready-for-paypal-in-ukraine-37c0b83a10af" target="_blank" rel="noopener">Why we aren’t ready for PayPal in Ukraine (2020)</a><span class="domain">medium.com</span></div>
+      <div class="src" id="src-19"><span class="n">19</span><a href="https://epravda.com.ua/rus/publications/2016/02/19/582272/" target="_blank" rel="noopener">Всіх впускати і нікого не випускати: чому PayPal в Україні з'явиться нескоро (19.02.2016)</a><span class="domain">epravda.com.ua</span></div>
+      <div class="src" id="src-20"><span class="n">20</span><a href="https://dengi.ua/amp-page/finance/1786424-poka-bez-paypal" target="_blank" rel="noopener">Пока без PayPal: постановление НБУ № 65 от 10.02.2016</a><span class="domain">dengi.ua</span></div>
+      <div class="src" id="src-21"><span class="n">21</span><a href="https://buh.ligazakon.net/news/152434_vypuskat-elektronnye-dengi-mozhet-isklyuchitelno-bank" target="_blank" rel="noopener">Выпускать электронные деньги может исключительно банк (04.11.2016)</a><span class="domain">ligazakon.net</span></div>
+      <div class="src" id="src-22"><span class="n">22</span><a href="https://epravda.com.ua/rus/news/2016/11/1/609798/" target="_blank" rel="noopener">PayPal не придёт в Украину в ближайшие 12 месяцев — НБУ (01.11.2016)</a><span class="domain">epravda.com.ua</span></div>
+      <div class="src" id="src-23"><span class="n">23</span><a href="https://www.asterslaw.com/ua/press_center/publications/changes_in_foreign_exchange_regulation_in_ukraine/" target="_blank" rel="noopener">Валютна реформа 2019: що змінилося — Asters</a><span class="domain">asterslaw.com</span></div>
+      <div class="src" id="src-24"><span class="n">24</span><a href="https://www.kyivpost.com/post/7022" target="_blank" rel="noopener">Lacking PayPal, freelancers turn to Payoneer (02.06.2021)</a><span class="domain">kyivpost.com</span></div>
+      <div class="src" id="src-25"><span class="n">25</span><a href="https://www.unian.info/economics/doing-business-in-ukraine-gov-t-in-talks-with-paypal-netflix-amp-11308286.html" target="_blank" rel="noopener">Digital transformation ministry in talks with PayPal, Netflix, Stripe</a><span class="domain">unian.info</span></div>
+      <div class="src" id="src-26"><span class="n">26</span><a href="https://www.ukrinform.net/rubric-economy/3201084-fedorov-says-stripe-payment-system-will-be-available-in-ukraine.html" target="_blank" rel="noopener">Fedorov says Stripe payment system will be available in Ukraine</a><span class="domain">ukrinform.net</span></div>
+      <div class="src" id="src-27"><span class="n">27</span><a href="https://eba.com.ua/en/wp-json/wp/v2/posts/350120" target="_blank" rel="noopener">EBA: Verkhovna Rada adopted a new payment services law (30.06.2021)</a><span class="domain">eba.com.ua</span></div>
+      <div class="src" id="src-28"><span class="n">28</span><a href="https://kinstellar.com/upload/Payment%20Services%20Law%20Overview_March%202023.pdf" target="_blank" rel="noopener">Kinstellar — Payment Services Law Overview (PDF)</a><span class="domain">kinstellar.com</span></div>
+      <div class="src" id="src-29"><span class="n">29</span><a href="https://news.finance.ua/ua/nacbank-poyasnyv-chomu-stripe-i-paypal-dosi-oficiyno-ne-pracyuyut-v-ukraini" target="_blank" rel="noopener">Нацбанк пояснив, чому Stripe і PayPal досі офіційно не працюють в Україні</a><span class="domain">finance.ua</span></div>
+      <div class="src" id="src-30"><span class="n">30</span><a href="https://westernbid.com/en/?p=23283" target="_blank" rel="noopener">Stripe: prospects for Ukrainian online sellers — Mintsyfra asked for a roadmap</a><span class="domain">westernbid.com</span></div>
+      <div class="src" id="src-31"><span class="n">31</span><a href="https://themoscowtimes.com/2015/01/23/paypal-cuts-service-to-crimea-over-us-sanctions-a43176" target="_blank" rel="noopener">PayPal cuts service to Crimea over U.S. sanctions (2015)</a><span class="domain">themoscowtimes.com</span></div>
+      <div class="src" id="src-32"><span class="n">32</span><a href="https://support.tithe.ly/hc/en-us/articles/37145410640791" target="_blank" rel="noopener">Stripe restricted countries policy: Crimea among OFAC-restricted regions</a><span class="domain">tithe.ly</span></div>
+      <div class="src" id="src-33"><span class="n">33</span><a href="https://www.checkout.com/merchant-communications/sanctions-compliance-when-processing-transactions-in-ukraine" target="_blank" rel="noopener">Checkout.com — Sanctions compliance when processing transactions in Ukraine (29.05.2025)</a><span class="domain">checkout.com</span></div>
+      <div class="src" id="src-34"><span class="n">34</span><a href="https://ipn.md/en/paypal-becomes-available-in-moldova-7966_1013432.html" target="_blank" rel="noopener">PayPal becomes available in Moldova</a><span class="domain">ipn.md</span></div>
+      <div class="src" id="src-35"><span class="n">35</span><a href="https://logos-pres.md/en/articles/authorities-have-opened-the-digital-floodgates/" target="_blank" rel="noopener">Moldova — the first CIS country where users could receive money via PayPal</a><span class="domain">logos-pres.md</span></div>
+      <div class="src" id="src-36"><span class="n">36</span><a href="https://consecon.gov.md/en/?p=33197" target="_blank" rel="noopener">Moldovan businesses to gain easier access to Stripe, PayPal and Revolut (29.04.2025)</a><span class="domain">consecon.gov.md</span></div>
+      <div class="src" id="src-37"><span class="n">37</span><a href="https://dev.ua/en/news/nbu-pro-vykhid-revolut-1766564307" target="_blank" rel="noopener">NBU: “the rules are the same for everyone”</a><span class="domain">dev.ua</span></div>
+      <div class="src" id="src-38"><span class="n">38</span><a href="https://dev.ua/en/news/natsbank-nahadav-revolut-pro-litsenziiu-1740649947" target="_blank" rel="noopener">NBU reminds Revolut about the need for a licence (27.02.2025)</a><span class="domain">dev.ua</span></div>
+      <div class="src" id="src-39"><span class="n">39</span><a href="https://techcrunch.com/?p=2286352" target="_blank" rel="noopener">PayPal expands services to allow users to send money to Ukrainians (17.03.2022)</a><span class="domain">techcrunch.com</span></div>
+      <div class="src" id="src-40"><span class="n">40</span><a href="https://en.ain.ua/2021/05/12/etsy-stops-registration-of-new-shops-from-ukraine-russia-belarus-and-other-countries" target="_blank" rel="noopener">Etsy stops registration of new shops from Ukraine (2021)</a><span class="domain">ain.ua</span></div>
+      <div class="src" id="src-41"><span class="n">41</span><a href="https://kyivindependent.com/etsy-launches-payment-system-in-ukraine-sellers-now-able-to-open-official-stores" target="_blank" rel="noopener">Ukrainians can now officially open stores on Etsy (18.10.2023)</a><span class="domain">kyivindependent.com</span></div>
+      <div class="src" id="src-42"><span class="n">42</span><a href="https://dev.ua/news/natsbank-nahadav-revolut-pro-litsenziiu-1740649947" target="_blank" rel="noopener">Нацбанк нагадав Revolut про ліцензію; коментар Олега Гороховського</a><span class="domain">dev.ua</span></div>
+      <div class="src" id="src-43"><span class="n">43</span><a href="https://scroll.media/en/?p=10506" target="_blank" rel="noopener">NBU: Revolut must obtain a license in Ukraine</a><span class="domain">scroll.media</span></div>
+      <div class="src" id="src-44"><span class="n">44</span><a href="https://www.producthunt.com/products/blacksea/alternatives" target="_blank" rel="noopener">BlackSea — Ukrainian localized alternative to Gumroad</a><span class="domain">producthunt.com</span></div>
+    </div>
+  </section>
+
+  <footer>
+    Аналітичний матеріал підготовлено на основі відкритих джерел та офіційних даних.<br>
+    © 2026 vadim.li · Некомерційне поширення з посиланням на автора — вітається.<br>
+    Питання, співпраця, передрук: <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a>
+  </footer>
+
+</div>
+<script src="../../assets/articles.js"></script>
+<script src="../../assets/site-nav.js"></script>
+</body>
+</html>
