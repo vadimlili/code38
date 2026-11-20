@@ -7,7 +7,16 @@
   <language>uk</language>
   <atom:link href="https://code38.com.ua/feed.xml" rel="self" type="application/rss+xml"/>
   <image><url>https://code38.com.ua/assets/logo.png</url><title>CODE38</title><link>https://code38.com.ua/</link></image>
-  <lastBuildDate>Wed, 18 Nov 2026 09:00:00 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 20 Nov 2026 09:00:00 +0000</lastBuildDate>
+  <item>
+    <title>Місто як полігон: безпечне водіння за британськими правилами — крок за кроком</title>
+    <link>https://code38.com.ua/articles/practice/urban-driving.html</link>
+    <guid isPermaLink="true">https://code38.com.ua/articles/practice/urban-driving.html</guid>
+    <pubDate>Fri, 20 Nov 2026 09:00:00 +0000</pubDate>
+    <description>15 кроків безпечного міського водіння за методиками британської поліції, Smith System і Highway Code — з прикладами «як буває» і «як треба».</description>
+    <category>Практика</category>
+    <enclosure url="https://code38.com.ua/assets/og/urban-driving.jpg" length="53982" type="image/jpeg"/>
+  </item>
   <item>
     <title>Країна продавців без каси: чому Україна 15 років відрізана від PayPal і Stripe</title>
     <link>https://code38.com.ua/articles/finance/payments-access.html</link>

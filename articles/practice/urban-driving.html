@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Місто як полігон: безпечне водіння за британськими правилами — крок за кроком — CODE38</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  :root{
+    --bg: #0d0f12;
+    --bg-raised: #13161b;
+    --bg-card: #13161b;
+    --line: #1f2329;
+    --line-soft: #181b20;
+    --ink: #f0f2f5;
+    --ink-dim: #dfe3ea;
+    --ink-mute: #b8bec8;
+    --brass: #c8a96e;
+    --brass-dim: #7a6640;
+    --alert: #e05c5c;
+    --alert-dim: #8a3a3a;
+    --ok: #5cb87a;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before{
+    content:"";
+    position: fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px);
+    background-size: 100% 44px;
+    opacity: 0;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{
+    position: relative; z-index:1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ---------- Header ---------- */
+  header.hero{
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow-row{
+    display:flex; align-items:center; gap:10px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .tag{
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brass);
+    border: 1px solid var(--brass-dim);
+    padding: 5px 10px;
+    border-radius: 3px;
+    background: rgba(200,169,110,0.06);
+  }
+  .tag.alert{ color: var(--alert); border-color: var(--alert-dim); background: rgba(224,92,92,0.08); }
+  .kicker{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+
+  h1{
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    line-height: 1.15;
+    margin: 0 0 18px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  h1 em{
+    font-style: italic;
+    color: var(--brass);
+  }
+
+  .subtitle{
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--ink-dim);
+    max-width: 60ch;
+    margin: 0 0 28px;
+  }
+
+  .meta-line{
+    display:flex; flex-wrap: wrap; gap: 6px 14px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink-mute);
+  }
+  .meta-line .dot::before{ content:"·"; margin-right: 14px; color: var(--ink-mute); }
+  .meta-line a{ color: var(--brass); text-decoration: none; border-bottom: 1px solid var(--brass-dim); }
+  .meta-line a:hover{ color: var(--ink); }
+
+  .license-note{
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--ink-mute);
+    font-family: var(--mono);
+    padding: 10px 14px;
+    border-left: 2px solid var(--brass-dim);
+    background: var(--bg-raised);
+  }
+  .license-note a{ color: var(--brass); }
+
+  /* ---------- Body typography ---------- */
+  .lede{
+    font-size: 18px;
+    color: var(--ink-dim);
+    margin: 36px 0;
+  }
+  p{ margin: 0 0 20px; font-size: 17px; line-height: 1.75; color: var(--ink-dim); }
+  strong{ color: var(--ink); font-weight: 600; }
+
+  section.part{ margin-top: 64px; }
+
+  .part-label{
+    display:flex; align-items: baseline; gap: 14px;
+    margin-bottom: 18px;
+  }
+  .part-num{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--brass);
+    letter-spacing: 0.08em;
+  }
+  .part-num::before{ content:""; display:inline-block; width:22px; height:1px; background: var(--brass-dim); margin-right:10px; vertical-align: middle; }
+
+  h2{
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    color: var(--ink);
+    margin: 4px 0 0;
+    line-height: 1.3;
+  }
+  h3{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--ink);
+    margin: 32px 0 14px;
+  }
+
+  ul, ol{ margin: 0 0 20px; padding-left: 22px; color: var(--ink-dim); }
+  li{ margin-bottom: 10px; font-size: 16px; }
+  li::marker{ color: var(--brass-dim); }
+
+  /* ---------- Ledger / budget visual ---------- */
+  .ledger{
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    margin: 28px 0 32px;
+    overflow: hidden;
+  }
+  .ledger-head{
+    display:flex; justify-content: space-between; align-items:baseline;
+    padding: 16px 20px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .ledger-head .t{ font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-mute); }
+  .ledger-head .v{ font-family: var(--serif); font-size: 24px; color: var(--brass); font-weight: 600; }
+  .ledger-bar{ display:flex; height: 34px; }
+  .ledger-bar span{ display:flex; align-items:center; justify-content:center; font-family: var(--mono); font-size: 12px; color: var(--bg); font-weight:600; }
+  .seg-a{ background: var(--ink-mute); flex: 0 0 4%; }
+  .seg-b{ background: var(--ok); flex: 0 0 3%; }
+  .seg-c{ background: var(--brass); flex: 1; }
+  .ledger-rows{ padding: 14px 20px 18px; display:grid; gap: 10px; }
+  .ledger-row{ display:flex; justify-content: space-between; gap: 16px; font-size: 14.5px; }
+  .ledger-row .label{ color: var(--ink-dim); }
+  .ledger-row .val{ font-family: var(--mono); color: var(--ink); white-space:nowrap; }
+  .swatch{ display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:8px; vertical-align:1px; }
+
+  /* ---------- Stat strip ---------- */
+  .stat-strip{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin: 28px 0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .stat{
+    background: var(--bg-card);
+    padding: 18px 16px;
+  }
+  .stat .num{ font-family: var(--serif); font-size: 28px; color: var(--brass); font-weight: 600; line-height:1; }
+  .stat .num.alert{ color: var(--alert); }
+  .stat .lbl{ font-size: 13px; color: var(--ink-mute); margin-top: 8px; line-height:1.4; }
+
+  /* ---------- Callout / example box ---------- */
+  .callout{
+    margin: 28px 0;
+    padding: 20px 22px;
+    background: var(--bg-raised);
+    border-left: 3px solid var(--brass);
+    border-radius: 0 4px 4px 0;
+  }
+  .callout.alert{ border-left-color: var(--alert); }
+  .callout .cal-title{
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--brass);
+    margin-bottom: 10px;
+  }
+  .callout.alert .cal-title{ color: var(--alert); }
+  .callout p:last-child{ margin-bottom:0; }
+
+  blockquote{
+    margin: 28px 0;
+    padding: 4px 0 4px 22px;
+    border-left: 2px solid var(--brass-dim);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-dim);
+  }
+
+  /* ---------- Tables ---------- */
+  table{ width:100%; border-collapse: collapse; margin: 24px 0; font-size: 14.5px; }
+  th, td{ padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); }
+  th{ font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-mute); font-weight:500; }
+  td{ color: var(--ink-dim); }
+  td.yes{ color: var(--ok); }
+  td.no{ color: var(--alert); }
+
+  /* ---------- Country cards ---------- */
+  .cases{ display:grid; gap: 14px; margin: 28px 0; }
+  .case{
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 20px 22px;
+  }
+  .case-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 10px; gap: 10px; flex-wrap:wrap; }
+  .case-head .name{ font-family: var(--serif); font-weight:600; font-size: 18px; color: var(--ink); }
+  .case-head .years{ font-family: var(--mono); font-size: 12px; color: var(--brass); }
+  .case p{ font-size: 15px; margin-bottom: 0; color: var(--ink-dim); }
+
+  /* ---------- Conclusion ---------- */
+  .conclusion{
+    margin-top: 64px;
+    padding: 30px 26px;
+    background: var(--bg-card);
+    border: 1px solid var(--brass-dim);
+    border-radius: 6px;
+  }
+  .conclusion h2{ margin-top:0; }
+
+  /* ---------- Sources ---------- */
+  .sources{ margin-top: 64px; }
+  .src-list{ display:grid; gap: 8px; margin-top: 20px; }
+  .src{
+    display:flex; gap: 12px; align-items:baseline;
+    padding: 10px 14px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line-soft);
+    border-radius: 3px;
+    font-size: 13px;
+  }
+  .src .n{ font-family: var(--mono); color: var(--ink-mute); flex: 0 0 22px; }
+  .src a{ color: var(--ink-dim); text-decoration: none; }
+  .src a:hover{ color: var(--brass); }
+  .src .domain{ font-family: var(--mono); font-size: 12px; color: #a99266; margin-left: auto; white-space: nowrap; padding-left: 10px; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    margin-top: 72px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-mute);
+    text-align:center;
+    line-height: 1.9;
+  }
+  footer a{ color: var(--brass); text-decoration:none; border-bottom: 1px solid var(--brass-dim); }
+  footer a:hover{ color: var(--ink); }
+
+  @media (max-width: 560px){
+    .wrap{ padding: 0 16px 60px; }
+    header.hero{ padding: 40px 0 32px; }
+    .ledger-head{ flex-direction:column; align-items:flex-start; gap:6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+  }
+
+  a.cite{ font-family: var(--mono); font-size: .72em; color: var(--brass); text-decoration: none; vertical-align: super; line-height: 0; margin-left: 1px; }
+  a.cite:hover{ text-decoration: underline; }
+  .src{ scroll-margin-top: 80px; transition: background .3s; }
+  .src:target{ background: rgba(200,169,110,.12); outline: 1px solid var(--brass-dim); }
+  td.mid{ color: var(--brass); }
+  .table-wrap{ overflow-x:auto; }
+  .table-wrap table{ min-width: 640px; }
+
+
+  /* ---------- практичний гід ---------- */
+  .pair{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:22px 0; }
+  .pair > div{ border:1px solid var(--line); background:var(--bg-raised); padding:14px 16px; font-size:15px; line-height:1.6; color:var(--ink-dim); }
+  .pair .ph{ font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; margin-bottom:8px; }
+  .pair .bad{ border-left:3px solid var(--alert); } .pair .bad .ph{ color:#f08a8a; }
+  .pair .good{ border-left:3px solid var(--ok); } .pair .good .ph{ color:#8fd6a5; }
+  .howto{ margin:20px 0 4px; padding:12px 16px; border:1px dashed var(--brass-dim); font-size:15px; line-height:1.6; color:var(--ink-dim); }
+  .howto b{ color:var(--brass); font-weight:600; }
+  ol.steps-list, ol.checklist{ padding-left:22px; margin:18px 0; }
+  ol.steps-list li, ol.checklist li{ margin:0 0 10px; line-height:1.65; color:var(--ink-dim); }
+  ol.steps-list li b{ color:var(--ink); }
+  p.note{ font-size:14px; color:var(--ink-mute); }
+  @media (max-width:640px){ .pair{ grid-template-columns:1fr; } }
+</style>
+<!-- seo -->
+<meta name="description" content="15 кроків безпечного міського водіння за методиками британської поліції, Smith System і Highway Code — з прикладами «як буває» і «як треба».">
+<link rel="canonical" href="https://code38.com.ua/articles/practice/urban-driving.html">
+<meta property="og:site_name" content="CODE38">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Місто як полігон: безпечне водіння за британськими правилами — крок за кроком">
+<meta property="og:description" content="15 кроків безпечного міського водіння за методиками британської поліції, Smith System і Highway Code — з прикладами «як буває» і «як треба».">
+<meta property="og:url" content="https://code38.com.ua/articles/practice/urban-driving.html">
+<meta property="og:image" content="https://code38.com.ua/assets/og/urban-driving.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="uk_UA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Місто як полігон: безпечне водіння за британськими правилами — крок за кроком">
+<meta name="twitter:description" content="15 кроків безпечного міського водіння за методиками британської поліції, Smith System і Highway Code — з прикладами «як буває» і «як треба».">
+<meta name="twitter:image" content="https://code38.com.ua/assets/og/urban-driving.jpg">
+<link rel="icon" href="https://code38.com.ua/assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="CODE38" href="https://code38.com.ua/feed.xml">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Місто як полігон: безпечне водіння за британськими правилами — крок за кроком", "description": "15 кроків безпечного міського водіння за методиками британської поліції, Smith System і Highway Code — з прикладами «як буває» і «як треба».", "datePublished": "2026-11-20", "dateModified": "2026-11-20", "inLanguage": "uk", "keywords": "водіння, безпека, Roadcraft, Highway Code", "author": {"@type": "Person", "name": "vadim.li", "url": "https://code38.com.ua/about.html"}, "publisher": {"@type": "Organization", "name": "CODE38", "url": "https://code38.com.ua/", "logo": {"@type": "ImageObject", "url": "https://code38.com.ua/assets/logo.png"}}, "image": "https://code38.com.ua/assets/og/urban-driving.jpg", "mainEntityOfPage": "https://code38.com.ua/articles/practice/urban-driving.html"}</script>
+<script data-goatcounter="https://vadim.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<!-- /seo -->
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow-row">
+      <span class="tag">Практика</span>
+      <span class="tag alert">Безпека</span>
+      <span class="kicker">Roadcraft · Smith System · Highway Code</span>
+    </div>
+
+    <h1>Місто як полігон: <em>безпечне водіння</em> за британськими правилами — крок за кроком</h1>
+
+    <p class="subtitle">Британська поліція вчить водіїв за посібником Roadcraft майже 90 років, а корпоративні автопарки — за п’ятьма правилами Smith System. Я розібрав обидві методики й офіційний Highway Code на 15 кроків — у тому порядку, в якому вони трапляються в реальній міській поїздці.</p>
+
+    <div class="meta-line">
+      <span>≈ 17 хвилин читання</span>
+      <span class="dot">Практичний гід</span>
+      <span class="dot">Водіння · Безпека · 15 кроків</span>
+      <span class="dot">Автор: vadim.li · <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a></span>
+    </div>
+
+    <div class="license-note">
+      Використання тексту — лише з дозволу автора. Для передруку, посилань або співпраці пишіть на <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a>.
+    </div>
+  </header>
+
+  <p class="lede">Місто — найважче середовище для водіння не через кількість машин, а через кількість рішень за хвилину. Пішохід за маршруткою, двері таксі, «застояне» зелене, велосипедист у мертвій зоні — кожну з цих ситуацій можна передбачити, якщо знати, куди дивитися і що робити заздалегідь. Саме цього вчать британські методики. Я пройшов їх від сідання в машину до паркування й переклав на українські реалії: у Британії лівосторонній рух, тож усі «ліворуч» і «праворуч» нижче вже віддзеркалені під наші дороги.</p>
+
+  <div class="stat-strip">
+    <div class="stat"><div class="num alert">3 249</div><div class="lbl">людей загинули в ДТП в Україні за 2025 рік; ще 31 898 травмовані <a class="cite" href="#src-1">[1]</a></div></div>
+    <div class="stat"><div class="num">42%</div><div class="lbl">ДТП із постраждалими у 2025-му сталися через перевищення швидкості — і на них припало 55% загиблих <a class="cite" href="#src-2">[2]</a></div></div>
+    <div class="stat"><div class="num">23 м</div><div class="lbl">типовий шлях зупинки на швидкості ≈48 км/год — майже наш міський ліміт у 50 км/год <a class="cite" href="#src-3">[3]</a> <a class="cite" href="#src-4">[4]</a></div></div>
+  </div>
+
+  <!-- ДЖЕРЕЛА МЕТОДИК -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Перед стартом</span></div>
+    <h2>Три джерела, на яких тримається цей гід</h2>
+
+    <div class="cases">
+      <div class="case">
+        <div class="case-head"><span class="name">Roadcraft</span><span class="years">з 1937</span></div>
+        <p>Посібник британської поліції. Його витоки — заняття лорда Коттенгема в поліцейській школі водіння Гендон у 1937 році: він навчив водіїв проходити кожну небезпеку в чіткій послідовності — правильна позиція, швидкість, передача, прискорення <a class="cite" href="#src-5">[5]</a>. За даними видавця, це знизило аварійність транспорту Метрополітен-поліції більш ніж на дві третини <a class="cite" href="#src-6">[6]</a>. Сьогодні на тій самій системі будуються курси британської благодійної організації IAM RoadSmart <a class="cite" href="#src-7">[7]</a>.</p>
+      </div>
+      <div class="case">
+        <div class="case-head"><span class="name">Smith System</span><span class="years">з 1952</span></div>
+        <p>П’ять ключів захисного водіння, які Гарольд Сміт запропонував у 1952 році <a class="cite" href="#src-8">[8]</a>. Це база багатьох корпоративних курсів безпечного водіння: коротко, легко запам’ятати й перевірити.</p>
+      </div>
+      <div class="case">
+        <div class="case-head"><span class="name">The Highway Code</span><span class="years">редакція 2022</span></div>
+        <p>Офіційні британські правила дорожнього руху. У 2022 році в них з’явилася «ієрархія учасників руху»: найбільшу відповідальність несуть ті, хто керує транспортом, здатним заподіяти найбільшу шкоду, а найвразливіші — пішоходи, велосипедисти, вершники й мотоциклісти, особливо діти, літні люди та люди з інвалідністю <a class="cite" href="#src-9">[9]</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- КРОК 01 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Крок 01</span></div>
+    <h2>Ще до ключа: стан і запас часу</h2>
+
+    <p>Перший ризик у місті з’являється не на дорозі, а в розкладі. Водій, який запізнюється на 12 хвилин, «наздоганяє» графік ще у дворі: перестроювання стають різкішими, дистанції — коротшими, хоча дорога не змінилася. Я закладаю 10–15 хвилин запасу в кожну поїздку — це прибирає саму причину поспіху.</p>
+
+    <p>Друге — втома. Highway Code прямо радить робити перерву щонайменше на 15 хвилин після кожних двох годин за кермом, уникати довгих поїздок між північчю та 6-ю ранку і зупинитися в безпечному місці, щойно відчув сонливість <a class="cite" href="#src-10">[10]</a>.</p>
+
+    <div class="pair">
+      <div class="bad"><div class="ph">Як буває</div>«Я в нормі, просто трохи не виспався» — і ще одна поїздка через силу.</div>
+      <div class="good"><div class="ph">Як треба</div>Якщо очі «злипаються» на світлофорі, це сигнал зупинитися. Втома знижує увагу й реакцію незалежно від стажу — і Highway Code прямо каже, що вона значно підвищує ризик аварії.</div>
+    </div>
+
+    <div class="howto"><b>Як тренувати:</b> перед виїздом відповідаю собі на два питання — скільки в мене запасу часу і чи я справді в стані вести машину. Якщо на будь-яке відповідь «ні» — переношу поїздку або беру таксі.</div>
+  </section>
+
+  <!-- КРОК 02 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Крок 02</span></div>
+    <h2>Погляд: дивитися на 15 секунд уперед</h2>
+
+    <p>Основа Roadcraft — не кермо, а увага. Система побудована на тому, що водій постійно <strong>збирає</strong> інформацію, <strong>використовує</strong> її для рішень і <strong>передає</strong> іншим — сигналом, позицією, швидкістю <a class="cite" href="#src-7">[7]</a>. Проблема більшості з нас у тому, що ми збираємо інформацію із зони 10–15 метрів перед капотом.</p>
+
+    <p>Smith System дає конкретну цифру: пересічний водій дивиться вперед на 3–6 секунд, а треба — щонайменше на 15 <a class="cite" href="#src-11">[11]</a>. У місті це приблизно квартал або два світлофори.</p>
+
+    <div class="pair">
+      <div class="bad"><div class="ph">Як буває</div>Погляд зафіксований на бампері машини попереду. Пішохода на тротуарі помічаєш, лише коли він уже ступив на дорогу.</div>
+      <div class="good"><div class="ph">Як треба</div>Три шари огляду: своя смуга; наступні 3–4 машини й бордюри; далекий план — світлофор, зупинка, люди біля автобуса за 100 метрів.</div>
+    </div>
+
+    <div class="callout">
+      <div class="cal-title">Приклад</div>
+      <p>Ранковий затор на в’їзді в центр. Маршрутка за 80 метрів до зупинки вмикає правий поворот і починає пригальмовувати, хоча ще горить зелене. Водій, який дивиться лише на її стоп-сигнали, реагує, коли вона майже стала. Водій, який тримав її в середньому шарі огляду, скидає газ на 3 секунди раніше.</p>
+    </div>
+
+    <div class="howto"><b>Як тренувати:</b> коментоване водіння. Проговорюю вголос або подумки, що бачу і що з цього випливає: «автобус на зупинці, двері відчинені — з-за нього може вийти людина». Це змушує мозок класифікувати загрозу, а не просто її «побачити».</div>
+  </section>
+
+  <!-- КРОК 03 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Крок 03</span></div>
+    <h2>Увага — обмежений ресурс: телефон і навігатор</h2>
+
+    <p>Будь-яка дія за кермом проходить один цикл: побачив → оцінив → вирішив → зробив. Увага, яка йде на розмову чи пошук адреси, віднімається від цього циклу.</p>
+
+    <p>У Британії тримати телефон у руці за кермом заборонено для будь-якої мети — виняток лише для дзвінка на 999 чи 112 в екстреній ситуації, коли зупинитися небезпечно <a class="cite" href="#src-12">[12]</a>. Але й гарнітура не робить розмову безпечною: Highway Code окремо попереджає, що навіть hands-free ймовірно відволікає від дороги <a class="cite" href="#src-13">[13]</a>.</p>
+
+    <div class="pair">
+      <div class="bad"><div class="ph">Як буває</div>Вузька вулиця, розмова з клієнтом по гучному зв’язку і пошук номера будинку в навігаторі одночасно.</div>
+      <div class="good"><div class="ph">Як треба</div>Складна розмова й налаштування маршруту — до старту або на зупинці. «Бюджет уваги» йде туди, де він критичний.</div>
+    </div>
+
+    <div class="howto"><b>Як тренувати:</b> маршрут вбиваю до того, як рушити. На дзвінок, що вимагає думати, відповідаю «передзвоню за 5 хвилин» і роблю це, коли стану.</div>
+  </section>
+
+  <!-- КРОК 04 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Крок 04</span></div>
+    <h2>Дзеркала й мертві зони: погляд через плече</h2>
+
+    <p>Smith System вимагає перевіряти хоча б одне дзеркало кожні 5–8 секунд — постійно, а не лише перед маневром <a class="cite" href="#src-14">[14]</a>. Highway Code додає важливе: дзеркала не показують усього, є мертві зони, тому треба озирнутися <a class="cite" href="#src-15">[15]</a>.</p>
+
+    <div class="pair">
+      <div class="bad"><div class="ph">Як буває</div>Перед поворотом праворуч чи перестроюванням — лише погляд у бокове дзеркало.</div>
+      <div class="good"><div class="ph">Як треба</div>Короткий погляд через плече в мертву зону безпосередньо перед маневром. Дзеркало фізично не показує те, що їде впритул до борту.</div>
+    </div>
+
+    <div class="callout alert">
+      <div class="cal-title">«Правий гачок»</div>
+      <p>Я вмикаю правий поворот і з’їжджаю до бордюру. У дзеркалі порожньо, але велосипедист щойно порівнявся з моїми дверима — у мертвій зоні його не видно. Погляд через плече за секунду до маневру — і я притримую машину замість того, щоб «підрізати» його.</p>
+    </div>
+  </section>
+
+  <!-- КРОК 05 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Крок 05</span></div>
+    <h2>Дистанція: правило двох секунд і «шини та асфальт»</h2>
+
+    <p>Highway Code вимагає щонайменше дві секунди до машини попереду, а на мокрій дорозі — вдвічі більше <a class="cite" href="#src-16">[16]</a>. На ожеледі може знадобитися до десяти разів більший проміжок <a class="cite" href="#src-3">[3]</a>. Рахувати просто: обираєш нерухомий орієнтир — стовп, знак — і рахуєш секунди від моменту, коли його минула машина попереду, до моменту, коли його мине твій бампер.</p>
+
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Швидкість</th><th>Шлях реакції</th><th>Гальмівний шлях</th><th>Разом до зупинки</th></tr></thead>
+      <tbody>
+        <tr><td>≈32 км/год (20 mph)</td><td>6 м</td><td>6 м</td><td><strong>12 м</strong></td></tr>
+        <tr><td>≈48 км/год (30 mph)</td><td>9 м</td><td>14 м</td><td><strong>23 м</strong></td></tr>
+        <tr><td>≈64 км/год (40 mph)</td><td>12 м</td><td>24 м</td><td><strong>36 м</strong></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">Типові дистанції зупинки за Highway Code для сухої дороги <a class="cite" href="#src-3">[3]</a>. Зверніть увагу: між 48 і 64 км/год шлях зупинки зростає з 23 до 36 метрів — на 13 метрів, хоча швидкість додала лише 16 км/год.</p>
+
+    <p>У заторі й на світлофорі працює британське правило <strong>tyres and tarmac</strong>: зупиняюся так, щоб бачити, де задні колеса машини попереду торкаються асфальту. Якщо машина попереду заглохне — я об’їду її; якщо в мене в’їдуть ззаду — мене не заштовхне в неї <a class="cite" href="#src-17">[17]</a>.</p>
+
+    <div class="callout">
+      <div class="cal-title">Приклад</div>
+      <p>Мокрий асфальт восени. Водій позаду не встигає загальмувати й легенько б’є в мій бампер. Якщо я стояв упритул, удар іде далі — і замість однієї аварії маємо три машини. Якщо я лишив «шини та асфальт», мене просто штовхне вперед у вільний простір.</p>
+    </div>
+  </section>
+
+  <!-- КРОК 06 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Крок 06</span></div>
+    <h2>Простір навколо: завжди лишати «вихід»</h2>
+
+    <p>Четвертий ключ Smith System — <strong>Leave Yourself an Out</strong>: тримати вільний простір хоча б з одного боку, куди можна змістити машину, якщо щось піде не так <a class="cite" href="#src-11">[11]</a>. Це продовження дистанції, тільки вбік.</p>
+
+    <div class="pair">
+      <div class="bad"><div class="ph">Як буває</div>Затор, стоїш упритул до бампера попереду і притиснутий до сусіднього ряду — маневрувати нікуди.</div>
+      <div class="good"><div class="ph">Як треба</div>Лишаю пів корпусу збоку й «шини та асфальт» спереду. Якщо ззаду летить машина, що не гальмує, я маю куди піти.</div>
+    </div>
+  </section>
+
+  <!-- КРОК 07 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Крок 07</span></div>
+    <h2>Позиція в смузі: двері, кільце, сигнал наміру</h2>
+
+    <p>Roadcraft вчить, що смуга — не рейка: зміщення в її межах дає кращий огляд і більший запас від конкретної небезпеки, а позиція сама повідомляє іншим про твій намір <a class="cite" href="#src-18">[18]</a>.</p>
+
+    <div class="pair">
+      <div class="bad"><div class="ph">Як буває</div>Їдеш упритул до ряду припаркованих машин, щоб «не заважати» зустрічній смузі.</div>
+      <div class="good"><div class="ph">Як треба</div>Тримаю близько метра від дверей припаркованих авто: людина, яка виходить, не встигне подивитися в дзеркало.</div>
+    </div>
+
+    <p>Британські правила вирішують проблему дверей і з іншого боку. Highway Code вимагає не вдарити нікого, коли відчиняєш двері <a class="cite" href="#src-19">[19]</a>, і радить так званий Dutch Reach: відчиняти двері рукою, дальньою від них. Тоді тіло саме розвертається, і ти бачиш мертву зону й дзеркала <a class="cite" href="#src-20">[20]</a>. В українській машині це означає: водій відчиняє свої двері <strong>правою</strong> рукою, пасажир праворуч — <strong>лівою</strong>.</p>
+
+    <div class="howto"><b>Як тренувати:</b> тиждень свідомо відчиняю двері дальньою рукою. Після цього рух стає автоматичним — і погляд у дзеркало з ним.</div>
+  </section>
+
+  <!-- КРОК 08 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Крок 08</span></div>
+    <h2>Гальмо й кермо: зчеплення одне на двох</h2>
+
+    <p>Це фізика, яка пояснює все інше. Шина має обмежений запас зчеплення з дорогою, і він ділиться між гальмуванням чи розгоном та поворотом. Якщо вимагати від шини і того, й іншого на межі — вона зривається в занос.</p>
+
+    <div class="pair">
+      <div class="bad"><div class="ph">Як буває</div>Одночасно гальмуєш і різко повертаєш, об’їжджаючи вибоїну на мокрих трамвайних коліях.</div>
+      <div class="good"><div class="ph">Як треба</div>Розділяю дії в часі: спершу гальмую на прямих колесах, потім відпускаю гальмо й плавно повертаю.</div>
+    </div>
+
+    <p>Кермування — плавне, методом «тягни-штовхай» (pull-push), без перехрещування рук. Так руки завжди готові до корекції, якщо ситуація зміниться посеред повороту.</p>
+  </section>
+
+  <!-- КРОК 09 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Крок 09</span></div>
+    <h2>Поворот: IPSGA і точка сходу</h2>
+
+    <p>Серце Roadcraft — система IPSGA: <strong>I</strong>nformation (інформація), <strong>P</strong>osition (позиція), <strong>S</strong>peed (швидкість), <strong>G</strong>ear (передача), <strong>A</strong>cceleration (прискорення) <a class="cite" href="#src-7">[7]</a>. Це послідовність, а не список: спершу дивлюся, займаю позицію, скидаю швидкість, обираю передачу — і лише тоді плавно додаю газ.</p>
+
+    <p>Швидкість у сліпому повороті обирається за <strong>точкою сходу</strong> (limit point) — найдальшою точкою, до якої бачиш поверхню дороги, перш ніж вона зникає за поворотом <a class="cite" href="#src-21">[21]</a>. Якщо точка «наближається» — треба гальмувати; якщо тримається на сталій відстані — швидкість правильна; якщо віддаляється — поворот розкривається, можна прискорюватися <a class="cite" href="#src-22">[22]</a>.</p>
+
+    <div class="pair">
+      <div class="bad"><div class="ph">Як буває</div>Входиш у поворот на сталій швидкості й догальмовуєш посеред дуги.</div>
+      <div class="good"><div class="ph">Як треба</div>Гальмую до повороту, поки колеса прямі; на вході відпускаю гальмо; дугу проходжу на рівному газі.</div>
+    </div>
+
+    <div class="callout">
+      <div class="cal-title">Приклад</div>
+      <p>Сліпий поворот у дворах із високими парканами. Я бачу, як точка сходу «наїжджає» на мене, — і скидаю газ ще до того, як з’являється зустрічна машина, що стоїть одразу за поворотом.</p>
+    </div>
+  </section>
+
+  <!-- КРОК 10 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Крок 10</span></div>
+    <h2>Перехрестя: право — не гарантія</h2>
+
+    <p>Перед в’їздом на перехрестя — навіть на своє зелене — я проводжу скан: ліворуч → прямо → праворуч → ще раз ліворуч. Перевага — це право, а не гарантія, що інший водій зупиниться. П’ятий ключ Smith System — <strong>Make Sure They See You</strong>: шукати зоровий контакт і вчасно подавати сигнали <a class="cite" href="#src-11">[11]</a>.</p>
+
+    <div class="pair">
+      <div class="bad"><div class="ph">Як буває</div>Будь-яке зелене — однакове: їду, не дивлячись по сторонах.</div>
+      <div class="good"><div class="ph">Як треба</div>Розрізняю «свіже» зелене, що щойно загорілося, і «застояне», що горить давно. На «застояному» готуюся, що зараз перемкнеться і хтось проскочить упоперек на жовте.</div>
+    </div>
+
+    <div class="callout">
+      <div class="cal-title">Приклад</div>
+      <p>Перехрестя біля ринку, моє зелене горить уже секунд 15. З бічної вулиці на жовте влітає таксі. Я заздалегідь зчитав фазу, тримав ногу над гальмом — і зупинився без різкого маневру.</p>
+    </div>
+  </section>
+
+  <!-- КРОК 11 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Крок 11</span></div>
+    <h2>Об’їзд і обгін: вирішити до маневру</h2>
+
+    <p>У місті обгін — найчастіше об’їзд маршрутки чи машини в другому ряду з «аварійкою». Roadcraft розбирає обгін поетапно <a class="cite" href="#src-18">[18]</a>, а Highway Code перед ним вимагає переконатися, що дорога попереду достатньо вільна, ніхто не почав обганяти тебе і є місце, куди повернутися <a class="cite" href="#src-15">[15]</a>.</p>
+
+    <ol class="steps-list">
+      <li><b>Очікування.</b> Тримаюся за перешкодою на безпечній дистанції — звідти видно більше.</li>
+      <li><b>Позиція огляду.</b> Трохи зміщуюся, щоб бачити зустрічну смугу.</li>
+      <li><b>Рішення й точка відмови.</b> Ще до виїзду вирішую, до якого місця маю завершити маневр. Якщо не встигаю — значить, за такої видимості не варто було й починати.</li>
+      <li><b>Маневр і повернення.</b> Виїжджаю рішуче, повертаюся плавно, з поворотником.</li>
+    </ol>
+
+    <p>Окремо — велосипедисти. Highway Code радить лишати щонайменше 1,5 метра при обгоні велосипедиста на швидкості до 30 mph (≈48 км/год), більше — на вищій швидкості й у погану погоду <a class="cite" href="#src-23">[23]</a>. Простіше уявити так: між дзеркалом і велосипедистом мають поміститися відчинені дверцята машини.</p>
+  </section>
+
+  <!-- КРОК 12 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Крок 12</span></div>
+    <h2>Найвразливіші: пішоходи, діти, зупинки</h2>
+
+    <p>Британська ієрархія учасників руху ставить на вершину тих, хто найбільше постраждає в аварії, — пішоходів, а серед них дітей, літніх людей і людей з інвалідністю <a class="cite" href="#src-9">[9]</a>. Для мене це означає просте правило: що вразливіша людина поруч — то більший запас я лишаю.</p>
+
+    <div class="pair">
+      <div class="bad"><div class="ph">Як буває</div>Зупинку з автобусом проїжджаєш на тій самій швидкості, що й решту вулиці.</div>
+      <div class="good"><div class="ph">Як треба</div>Скидаю швидкість заздалегідь: людина, що вибігає з-за автобуса, з’являється в полі зору за частку секунди до конфлікту.</div>
+    </div>
+
+    <div class="callout alert">
+      <div class="cal-title">Читати мікрорухи</div>
+      <p>Велосипедист їде вздовж припаркованих машин і плавно повертає голову через ліве плече. Це майже напевно означає, що зараз він об’їжджатиме перешкоду і зміститься в мою смугу — ще до того, як покаже рукою.</p>
+    </div>
+  </section>
+
+  <!-- КРОК 13 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Крок 13</span></div>
+    <h2>Погода й ніч: перерахувати, а не «трохи обережніше»</h2>
+
+    <p>Дощ, сніг і ожеледь змінюють не тільки видимість, а й зчеплення. Тому я не їду «як завжди, тільки обережніше», а свідомо перераховую дистанцію: мінімум удвічі більше на мокрому <a class="cite" href="#src-16">[16]</a> і до десяти разів на ожеледі <a class="cite" href="#src-3">[3]</a>.</p>
+
+    <div class="pair">
+      <div class="bad"><div class="ph">Як буває</div>Перший сніг, дорога виглядає звично — і гальмівний шлях до перехрестя виявляється довшим, ніж очікував.</div>
+      <div class="good"><div class="ph">Як треба</div>З першими опадами одразу збільшую дистанцію і раніше починаю гальмувати перед поворотами й переходами.</div>
+    </div>
+
+    <p>Уночі — керування світлом: перемикаюся на ближнє, щойно бачу зустрічну машину, і дивлюся трохи правіше від її фар, на край своєї смуги, щоб не засліпитися.</p>
+  </section>
+
+  <!-- КРОК 14 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Крок 14</span></div>
+    <h2>Аварійна ситуація: гальмо і кермо разом</h2>
+
+    <p>Коли небезпека виникає раптово — м’яч на дорозі, машина виїжджає з двору не дивлячись, — інстинкт підказує або різко загальмувати, або різко викрутити кермо. На сучасній машині з ABS правильна відповідь — гальмувати максимально сильно й водночас об’їжджати перешкоду: ABS не дає колесам заблокуватися, тож кермо працює й під час гальмування.</p>
+
+    <div class="pair">
+      <div class="bad"><div class="ph">Як буває</div>Різкий поворот керма без гальма — швидкість лишається, машину заносить.</div>
+      <div class="good"><div class="ph">Як треба</div>Гальмо «в підлогу» й контрольований об’їзд. Якщо вибір між зустрічною смугою й узбіччям — узбіччя майже завжди менше зло.</div>
+    </div>
+
+    <div class="callout">
+      <div class="cal-title">Приклад</div>
+      <p>З-за припаркованого фургона викочується м’яч — за ним, найімовірніше, дитина. Я гальмую до упору ще до того, як дитина з’явилася. Коли вона вибігає, швидкість уже погашена.</p>
+    </div>
+  </section>
+
+  <!-- КРОК 15 -->
+  <section class="part">
+    <div class="part-label"><span class="part-num">Крок 15</span></div>
+    <h2>Емоції: «червоний туман»</h2>
+
+    <p>Інструктори британської поліції називають це red mist — «червоний туман»: роздратування від чужої помилки, яке, якщо не помітити його вчасно, звужує поле зору до тунелю й «вимикає» слух <a class="cite" href="#src-24">[24]</a>. Увага йде на кривдника, а не на дорогу.</p>
+
+    <div class="pair">
+      <div class="bad"><div class="ph">Як буває</div>Хтось підрізав — доганяєш, щоб «показати», і вже стежиш не за дорогою, а за однією машиною.</div>
+      <div class="good"><div class="ph">Як треба</div>Називаю стан подумки: «це роздратування, а не небезпека», і свідомо <strong>збільшую</strong> дистанцію до цієї машини.</div>
+    </div>
+  </section>
+
+  <section class="part">
+    <div class="part-label"><span class="part-num">Підсумок</span></div>
+    <h2>Що забрати у звичку</h2>
+
+    <ol class="checklist">
+      <li>Закладати 10–15 хвилин запасу: половина ризикованих рішень у місті — від графіка, а не від дороги.</li>
+      <li>Не сідати за кермо втомленим; на довгій поїздці — перерва щонайменше 15 хвилин кожні дві години.</li>
+      <li>Дивитися на 15 секунд уперед, а не на бампер попереду.</li>
+      <li>Дзеркало — кожні 5–8 секунд; погляд через плече — перед кожним маневром.</li>
+      <li>Телефон — тільки до старту або після зупинки.</li>
+      <li>Дві секунди дистанції, чотири на мокрому; на світлофорі — «шини та асфальт».</li>
+      <li>Метр до дверей припаркованих машин; власні двері — дальньою рукою.</li>
+      <li>Не гальмувати й не повертати різко одночасно — зчеплення одне на двох.</li>
+      <li>Гальмувати до повороту, а не в ньому; стежити за точкою сходу.</li>
+      <li>На перехресті сканувати навіть на своє зелене.</li>
+      <li>Обгін — вирішити до маневру, де точка відмови.</li>
+      <li>1,5 метра до велосипедиста; біля зупинок і шкіл — швидкість нижче.</li>
+      <li>У критичний момент — гальмо й маневр разом.</li>
+      <li>Роздратування — це сигнал збільшити дистанцію, а не скоротити.</li>
+    </ol>
+
+    <p class="note">Свідомо поза цим гідом — розділ Roadcraft про автомагістралі: влиття в потік, дистанція на високій швидкості, дорожній гіпноз. Це тема для окремого матеріалу про заміські траси.</p>
+  </section>
+
+  <section class="sources">
+    <h3 style="margin-top:0;">Джерела</h3>
+    <div class="src-list">
+      <div class="src" id="src-1"><span class="n">01</span><a href="https://unn.ua/news/ponad-25-tysiach-dtp-z-postrazhdalymy-ta-ponad-3000-zahyblykh-u-patrulnii-politsii-opryliudnyly-statystyku-avariinosti-za-2025-rik" target="_blank" rel="noopener">Патрульна поліція: статистика аварійності за 2025 рік</a><span class="domain">unn.ua</span></div>
+      <div class="src" id="src-2"><span class="n">02</span><a href="https://www.kyivpost.com/uk/amp/post/84984" target="_blank" rel="noopener">42% ДТП з постраждалими сталися через перевищення швидкості</a><span class="domain">kyivpost.com</span></div>
+      <div class="src" id="src-3"><span class="n">03</span><a href="https://www.drivingtheory4all.co.uk/learning-to-drive/stopping-distances" target="_blank" rel="noopener">Typical stopping distances (The Highway Code)</a><span class="domain">drivingtheory4all.co.uk</span></div>
+      <div class="src" id="src-4"><span class="n">04</span><a href="https://green-way.com.ua/ru/dovidniki/pdr/rozdil-12" target="_blank" rel="noopener">ПДР України, розділ 12 «Швидкість руху», п. 12.4</a><span class="domain">green-way.com.ua</span></div>
+      <div class="src" id="src-5"><span class="n">05</span><a href="https://www.police-foundation.org.uk/project/roadcraft/" target="_blank" rel="noopener">Roadcraft: The Police Driver’s Handbook — The Police Foundation</a><span class="domain">police-foundation.org.uk</span></div>
+      <div class="src" id="src-6"><span class="n">06</span><a href="https://roadcraft.co.uk/about/history" target="_blank" rel="noopener">Roadcraft’s heritage: the system of car control</a><span class="domain">roadcraft.co.uk</span></div>
+      <div class="src" id="src-7"><span class="n">07</span><a href="https://iamroadsmart.com/IPSGA" target="_blank" rel="noopener">IAM RoadSmart: IPSGA — the system at the core of Advanced Driving</a><span class="domain">iamroadsmart.com</span></div>
+      <div class="src" id="src-8"><span class="n">08</span><a href="https://rerev.com/articles/smith-system-5-keys/" target="_blank" rel="noopener">Smith System 5 Keys: історія методики (1952)</a><span class="domain">rerev.com</span></div>
+      <div class="src" id="src-9"><span class="n">09</span><a href="https://gov.uk/guidance/the-highway-code/introduction" target="_blank" rel="noopener">The Highway Code: Introduction, Hierarchy of Road Users (H1–H3)</a><span class="domain">gov.uk</span></div>
+      <div class="src" id="src-10"><span class="n">10</span><a href="https://theorytest.org.uk/hwc/highway-code/rule-91.html" target="_blank" rel="noopener">The Highway Code, Rule 91: driving when tired</a><span class="domain">theorytest.org.uk</span></div>
+      <div class="src" id="src-11"><span class="n">11</span><a href="https://www.montgomerycountymd.gov/mcfrs-psta/Resources/Files/Driver/20150325/UnitKBEngines/Engine_Lecture/Session_3_2_Smith_System.pdf" target="_blank" rel="noopener">Smith System: 5 Keys — навчальна презентація (Montgomery County)</a><span class="domain">montgomerycountymd.gov</span></div>
+      <div class="src" id="src-12"><span class="n">12</span><a href="https://theorytest.org.uk/hwc/highway-code/rule-149.html" target="_blank" rel="noopener">The Highway Code, Rule 149: mobile phones</a><span class="domain">theorytest.org.uk</span></div>
+      <div class="src" id="src-13"><span class="n">13</span><a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1054169/the-highway-code-alterations-to-the-highway-code-rule-149-proposed-to-be-made-by-the-secretary-of-state-for-transport-and-laid-before-both-houses-of-parliament-on-1-february-2022-pursuant-to-section-3.pdf#page=2" target="_blank" rel="noopener">Alterations to The Highway Code Rule 149 (DfT, 2022)</a><span class="domain">gov.uk</span></div>
+      <div class="src" id="src-14"><span class="n">14</span><a href="https://smith-system.com/about/smith-5keys" target="_blank" rel="noopener">Smith System: The 5 Keys</a><span class="domain">smith-system.com</span></div>
+      <div class="src" id="src-15"><span class="n">15</span><a href="https://www.gov.uk/using-the-road-159-to-203" target="_blank" rel="noopener">The Highway Code: Using the road (rules 159–203)</a><span class="domain">gov.uk</span></div>
+      <div class="src" id="src-16"><span class="n">16</span><a href="https://theorytest.org.uk/sections/techniques-and-advice-for-all-drivers-and-riders-rules-103-to-158/page/2" target="_blank" rel="noopener">The Highway Code, Rule 126: two-second gap</a><span class="domain">theorytest.org.uk</span></div>
+      <div class="src" id="src-17"><span class="n">17</span><a href="https://iamroadsmart.com/groups/lincolnshire/news/2022/04/10/six-reasons-to-leave-'tyres-and-tarmac'" target="_blank" rel="noopener">IAM RoadSmart: six reasons to leave «tyres and tarmac»</a><span class="domain">iamroadsmart.com</span></div>
+      <div class="src" id="src-18"><span class="n">18</span><a href="https://www.skoobe.de/books/police-foundation-police-foundation/roadcraft-the-police-drivers-handbook-the-police-drivers-handbook" target="_blank" rel="noopener">Roadcraft: The Police Driver’s Handbook — опис видання</a><span class="domain">skoobe.de</span></div>
+      <div class="src" id="src-19"><span class="n">19</span><a href="https://www.gbnews.com/lifestyle/cars/highway-code-fines-road-collisions-dutch-reach" target="_blank" rel="noopener">Rule 239 of the Highway Code: «You MUST ensure you do not hit anyone when you open your door»</a><span class="domain">gbnews.com</span></div>
+      <div class="src" id="src-20"><span class="n">20</span><a href="https://www.theaa.com/driving-advice/safety/dutch-reach" target="_blank" rel="noopener">AA: Dutch Reach — how to open a car door safely</a><span class="domain">theaa.com</span></div>
+      <div class="src" id="src-21"><span class="n">21</span><a href="https://iamroadsmart.com/media-policy/you-never-know-what's-next" target="_blank" rel="noopener">IAM RoadSmart: You never know what’s next (limit point)</a><span class="domain">iamroadsmart.com</span></div>
+      <div class="src" id="src-22"><span class="n">22</span><a href="https://theorytest.org.uk/?p=40147" target="_blank" rel="noopener">Limit point: how to read a bend</a><span class="domain">theorytest.org.uk</span></div>
+      <div class="src" id="src-23"><span class="n">23</span><a href="https://theorytest.org.uk/?p=40475" target="_blank" rel="noopener">The Highway Code, Rule 163: overtaking</a><span class="domain">theorytest.org.uk</span></div>
+      <div class="src" id="src-24"><span class="n">24</span><a href="https://happiful.com/tips-for-parking-your-road-rage-for-good" target="_blank" rel="noopener">Police driving trainer on «red mist»</a><span class="domain">happiful.com</span></div>
+    </div>
+  </section>
+
+  <footer>
+    Аналітичний матеріал підготовлено на основі відкритих джерел та офіційних даних.<br>
+    © 2026 vadim.li · Некомерційне поширення з посиланням на автора — вітається.<br>
+    Питання, співпраця, передрук: <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a>
+  </footer>
+
+</div>
+<script src="../../assets/articles.js?v=97b782fc"></script>
+<script src="../../assets/site-nav.js?v=1e1226d2"></script>
+</body>
+</html>

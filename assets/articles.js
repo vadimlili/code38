@@ -27,10 +27,23 @@ window.TOPICS = [
   { id: "finance",     name: "Гроші та фінанси",  desc: "Валюти, CBDC, інвестиції, особисті фінанси",
     name_en: "Money & Finance", desc_en: "Currencies, CBDC, investing, personal finance" },
   { id: "ideas",       name: "Історія та ідеї",   desc: "Макроісторія, філософія, альтернативні сценарії",
-    name_en: "History & Ideas", desc_en: "Macrohistory, philosophy, alternative scenarios" }
+    name_en: "History & Ideas", desc_en: "Macrohistory, philosophy, alternative scenarios" },
+  { id: "practice",    name: "Практика",          desc: "Практичні навички й інструкції: водіння, безпека, побут",
+    name_en: "Practice", desc_en: "Practical skills and how-tos: driving, safety, everyday life" }
 ];
 
 window.ARTICLES = [
+  {
+    id: "urban-driving",
+    title: "Місто як полігон: безпечне водіння за британськими правилами — крок за кроком",
+    file: "articles/practice/urban-driving.html",
+    topic: "practice",
+    tags: ["водіння", "безпека", "Roadcraft", "Highway Code"],
+    date: "2026-11-20",
+    lang: "uk",
+    read: 17,
+    excerpt: "15 кроків безпечного міського водіння за методиками британської поліції, Smith System і Highway Code — з прикладами «як буває» і «як треба»."
+  },
   {
     id: "realpolitik",
     title: "Геополітика без рожевих окулярів: чому зброю дають не за «хорошу поведінку»",
