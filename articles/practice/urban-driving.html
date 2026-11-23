@@ -355,6 +355,18 @@
   .toc a:hover{ color:var(--brass); border-color:var(--brass-dim); }
   section.part{ scroll-margin-top:70px; }
   @media (max-width:640px){ .toc ol{ columns:1; } }
+  table.gloss td:first-child{ white-space:nowrap; font-family:var(--mono); font-size:13.5px; color:var(--brass); }
+  table.gloss td:last-child{ white-space:nowrap; }
+  a.toc-link{ color:var(--ink-mute); font-family:var(--mono); font-size:12.5px; text-decoration:none; border-bottom:1px solid var(--line); }
+  .toc-x{ margin-top:12px; } .toc-x a{ color:var(--brass); font-family:var(--mono); font-size:13px; text-decoration:none; }
+  table.gloss td:first-child strong{ color:var(--brass); font-weight:600; }
+  @media (max-width:640px){
+    table.gloss, table.gloss tbody, table.gloss tr, table.gloss td{ display:block; width:100%; }
+    table.gloss{ min-width:0 !important; }
+    table.gloss thead{ display:none; }
+    table.gloss tr{ border-bottom:1px solid var(--line); padding:12px 0; }
+    table.gloss td{ border:0; padding:2px 0; white-space:normal !important; }
+  }
 </style>
 <!-- seo -->
 <meta name="description" content="Посібник із 15 кроків: типові проблеми на міських дорогах, чому вони виникають і як їх уникати за правилами британської поліції та британських ПДР — з прикладами з життя.">
@@ -431,6 +443,7 @@
       <li><a href="#k14">Раптова небезпека</a></li>
       <li><a href="#k15">Злість за кермом</a></li>
     </ol>
+    <div class="toc-x"><a href="#slovnyk">Словничок англійських термінів →</a></div>
   </nav>
 
   <!-- ДЖЕРЕЛА -->
@@ -854,6 +867,44 @@
     </ol>
 
     <p class="note">Я свідомо не торкався заміських трас і автомагістралей: виїзд на швидкісну дорогу, дистанція на 90–130 км/год, «засинання» від монотонної дороги. Це тема окремого матеріалу.</p>
+  </section>
+
+
+  <section class="part" id="slovnyk">
+    <div class="part-label"><span class="part-num">Словничок</span></div>
+    <h2>Англійські терміни з цього посібника</h2>
+    <p>Якщо захочете почитати першоджерела англійською — ось як там називаються речі, про які я писав, і що вони означають.</p>
+    <div class="table-wrap">
+    <table class="gloss">
+      <thead><tr><th>Англійською</th><th>Що означає</th><th>Де в тексті</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Roadcraft</strong></td><td>Посібник британської поліції з водіння, з 1937 року</td><td><a href="#k01" class="toc-link">крок 1</a></td></tr>
+        <tr><td><strong>Smith System</strong></td><td>П’ять правил захисного водіння Гарольда Сміта (1952)</td><td><a href="#k02" class="toc-link">крок 2</a></td></tr>
+        <tr><td><strong>Highway Code</strong></td><td>Британські правила дорожнього руху (ПДР)</td><td><a href="#k01" class="toc-link">крок 1</a></td></tr>
+        <tr><td><strong>Hierarchy of road users</strong></td><td>Ієрархія учасників руху: хто керує важчим транспортом, той відповідає більше</td><td><a href="#k12" class="toc-link">крок 12</a></td></tr>
+        <tr><td><strong>Metropolitan Police</strong></td><td>Поліція Лондона</td><td><a href="#k01" class="toc-link">крок 1</a></td></tr>
+        <tr><td><strong>IAM RoadSmart</strong></td><td>Британська благодійна організація, що навчає водіїв за поліцейською системою</td><td><a href="#k02" class="toc-link">крок 2</a></td></tr>
+        <tr><td><strong>IPSGA</strong></td><td>П’ять дій перед поворотом чи маневром: подивитися, стати на правильне місце в смузі, скинути швидкість, вибрати передачу, плавно додати газ</td><td><a href="#k09" class="toc-link">крок 9</a></td></tr>
+        <tr><td><strong>Limit point</strong></td><td>Найдальша точка, до якої видно дорогу в повороті; за нею обирають швидкість</td><td><a href="#k09" class="toc-link">крок 9</a></td></tr>
+        <tr><td><strong>Commentary driving</strong></td><td>Водіння з коментарями: проговорювати, що бачиш і що з цього випливає</td><td><a href="#k02" class="toc-link">крок 2</a></td></tr>
+        <tr><td><strong>Aim high in steering</strong></td><td>Дивитися далеко вперед — щонайменше на 15 секунд дороги</td><td><a href="#k02" class="toc-link">крок 2</a></td></tr>
+        <tr><td><strong>Blind spot</strong></td><td>«Сліпа» зона: ділянка збоку й ззаду, якої не видно в дзеркалах</td><td><a href="#k04" class="toc-link">крок 4</a></td></tr>
+        <tr><td><strong>Two-second rule</strong></td><td>Правило двох секунд до машини попереду</td><td><a href="#k05" class="toc-link">крок 5</a></td></tr>
+        <tr><td><strong>Tyres and tarmac</strong></td><td>«Шини й асфальт»: зупинятися так, щоб бачити задні колеса машини попереду</td><td><a href="#k06" class="toc-link">крок 6</a></td></tr>
+        <tr><td><strong>Leave yourself an out</strong></td><td>Завжди лишати вільне місце, куди можна зміститися</td><td><a href="#k06" class="toc-link">крок 6</a></td></tr>
+        <tr><td><strong>Dutch Reach</strong></td><td>«Голландський прийом»: відчиняти двері дальньою рукою, щоб мимоволі озирнутися</td><td><a href="#k07" class="toc-link">крок 7</a></td></tr>
+        <tr><td><strong>Pull-push steering</strong></td><td>Кермування з почерговим перехопленням керма, без перехрещування рук</td><td><a href="#k08" class="toc-link">крок 8</a></td></tr>
+        <tr><td><strong>Grip / traction</strong></td><td>Зчеплення шин із дорогою — обмежений «бюджет» на гальмування й поворот</td><td><a href="#k08" class="toc-link">крок 8</a></td></tr>
+        <tr><td><strong>Stale green</strong></td><td>Зелене світло світлофора, яке горить довго і скоро перемкнеться</td><td><a href="#k10" class="toc-link">крок 10</a></td></tr>
+        <tr><td><strong>Make sure they see you</strong></td><td>Переконайся, що тебе бачать: зоровий контакт і вчасні сигнали</td><td><a href="#k10" class="toc-link">крок 10</a></td></tr>
+        <tr><td><strong>Point of no return</strong></td><td>Точка відмови при обгоні: місце, до якого маневр має завершитися</td><td><a href="#k11" class="toc-link">крок 11</a></td></tr>
+        <tr><td><strong>ABS</strong></td><td>Система, яка не дає колесам заблокуватися під час гальмування; машина слухається керма</td><td><a href="#k14" class="toc-link">крок 14</a></td></tr>
+        <tr><td><strong>Red mist</strong></td><td>«Червоний туман» — злість за кермом, яка звужує увагу</td><td><a href="#k15" class="toc-link">крок 15</a></td></tr>
+        <tr><td><strong>Hands-free</strong></td><td>Розмова телефоном без рук — теж відволікає</td><td><a href="#k03" class="toc-link">крок 3</a></td></tr>
+        <tr><td><strong>Highway hypnosis</strong></td><td>«Засинання» від монотонної дороги на трасі</td><td><a href="#k15" class="toc-link">крок 15</a></td></tr>
+      </tbody>
+    </table>
+    </div>
   </section>
 
   <section class="sources">
