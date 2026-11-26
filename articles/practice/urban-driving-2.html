@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Місто як полігон, частина 2: потік, кільця, повороти, вузькі вулиці й паркування — CODE38</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  :root{
+    --bg: #0d0f12;
+    --bg-raised: #13161b;
+    --bg-card: #13161b;
+    --line: #1f2329;
+    --line-soft: #181b20;
+    --ink: #f0f2f5;
+    --ink-dim: #dfe3ea;
+    --ink-mute: #b8bec8;
+    --brass: #c8a96e;
+    --brass-dim: #7a6640;
+    --alert: #e05c5c;
+    --alert-dim: #8a3a3a;
+    --ok: #5cb87a;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before{
+    content:"";
+    position: fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px);
+    background-size: 100% 44px;
+    opacity: 0;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{
+    position: relative; z-index:1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ---------- Header ---------- */
+  header.hero{
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow-row{
+    display:flex; align-items:center; gap:10px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .tag{
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brass);
+    border: 1px solid var(--brass-dim);
+    padding: 5px 10px;
+    border-radius: 3px;
+    background: rgba(200,169,110,0.06);
+  }
+  .tag.alert{ color: var(--alert); border-color: var(--alert-dim); background: rgba(224,92,92,0.08); }
+  .kicker{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+
+  h1{
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    line-height: 1.15;
+    margin: 0 0 18px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  h1 em{
+    font-style: italic;
+    color: var(--brass);
+  }
+
+  .subtitle{
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--ink-dim);
+    max-width: 60ch;
+    margin: 0 0 28px;
+  }
+
+  .meta-line{
+    display:flex; flex-wrap: wrap; gap: 6px 14px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink-mute);
+  }
+  .meta-line .dot::before{ content:"·"; margin-right: 14px; color: var(--ink-mute); }
+  .meta-line a{ color: var(--brass); text-decoration: none; border-bottom: 1px solid var(--brass-dim); }
+  .meta-line a:hover{ color: var(--ink); }
+
+  .license-note{
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--ink-mute);
+    font-family: var(--mono);
+    padding: 10px 14px;
+    border-left: 2px solid var(--brass-dim);
+    background: var(--bg-raised);
+  }
+  .license-note a{ color: var(--brass); }
+
+  /* ---------- Body typography ---------- */
+  .lede{
+    font-size: 18px;
+    color: var(--ink-dim);
+    margin: 36px 0;
+  }
+  p{ margin: 0 0 20px; font-size: 17px; line-height: 1.75; color: var(--ink-dim); }
+  strong{ color: var(--ink); font-weight: 600; }
+
+  section.part{ margin-top: 64px; }
+
+  .part-label{
+    display:flex; align-items: baseline; gap: 14px;
+    margin-bottom: 18px;
+  }
+  .part-num{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--brass);
+    letter-spacing: 0.08em;
+  }
+  .part-num::before{ content:""; display:inline-block; width:22px; height:1px; background: var(--brass-dim); margin-right:10px; vertical-align: middle; }
+
+  h2{
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    color: var(--ink);
+    margin: 4px 0 0;
+    line-height: 1.3;
+  }
+  h3{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--ink);
+    margin: 32px 0 14px;
+  }
+
+  ul, ol{ margin: 0 0 20px; padding-left: 22px; color: var(--ink-dim); }
+  li{ margin-bottom: 10px; font-size: 16px; }
+  li::marker{ color: var(--brass-dim); }
+
+  /* ---------- Ledger / budget visual ---------- */
+  .ledger{
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    margin: 28px 0 32px;
+    overflow: hidden;
+  }
+  .ledger-head{
+    display:flex; justify-content: space-between; align-items:baseline;
+    padding: 16px 20px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .ledger-head .t{ font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-mute); }
+  .ledger-head .v{ font-family: var(--serif); font-size: 24px; color: var(--brass); font-weight: 600; }
+  .ledger-bar{ display:flex; height: 34px; }
+  .ledger-bar span{ display:flex; align-items:center; justify-content:center; font-family: var(--mono); font-size: 12px; color: var(--bg); font-weight:600; }
+  .seg-a{ background: var(--ink-mute); flex: 0 0 4%; }
+  .seg-b{ background: var(--ok); flex: 0 0 3%; }
+  .seg-c{ background: var(--brass); flex: 1; }
+  .ledger-rows{ padding: 14px 20px 18px; display:grid; gap: 10px; }
+  .ledger-row{ display:flex; justify-content: space-between; gap: 16px; font-size: 14.5px; }
+  .ledger-row .label{ color: var(--ink-dim); }
+  .ledger-row .val{ font-family: var(--mono); color: var(--ink); white-space:nowrap; }
+  .swatch{ display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:8px; vertical-align:1px; }
+
+  /* ---------- Stat strip ---------- */
+  .stat-strip{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin: 28px 0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .stat{
+    background: var(--bg-card);
+    padding: 18px 16px;
+  }
+  .stat .num{ font-family: var(--serif); font-size: 28px; color: var(--brass); font-weight: 600; line-height:1; }
+  .stat .num.alert{ color: var(--alert); }
+  .stat .lbl{ font-size: 13px; color: var(--ink-mute); margin-top: 8px; line-height:1.4; }
+
+  /* ---------- Callout / example box ---------- */
+  .callout{
+    margin: 28px 0;
+    padding: 20px 22px;
+    background: var(--bg-raised);
+    border-left: 3px solid var(--brass);
+    border-radius: 0 4px 4px 0;
+  }
+  .callout.alert{ border-left-color: var(--alert); }
+  .callout .cal-title{
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--brass);
+    margin-bottom: 10px;
+  }
+  .callout.alert .cal-title{ color: var(--alert); }
+  .callout p:last-child{ margin-bottom:0; }
+
+  blockquote{
+    margin: 28px 0;
+    padding: 4px 0 4px 22px;
+    border-left: 2px solid var(--brass-dim);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-dim);
+  }
+
+  /* ---------- Tables ---------- */
+  table{ width:100%; border-collapse: collapse; margin: 24px 0; font-size: 14.5px; }
+  th, td{ padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); }
+  th{ font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-mute); font-weight:500; }
+  td{ color: var(--ink-dim); }
+  td.yes{ color: var(--ok); }
+  td.no{ color: var(--alert); }
+
+  /* ---------- Country cards ---------- */
+  .cases{ display:grid; gap: 14px; margin: 28px 0; }
+  .case{
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 20px 22px;
+  }
+  .case-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 10px; gap: 10px; flex-wrap:wrap; }
+  .case-head .name{ font-family: var(--serif); font-weight:600; font-size: 18px; color: var(--ink); }
+  .case-head .years{ font-family: var(--mono); font-size: 12px; color: var(--brass); }
+  .case p{ font-size: 15px; margin-bottom: 0; color: var(--ink-dim); }
+
+  /* ---------- Conclusion ---------- */
+  .conclusion{
+    margin-top: 64px;
+    padding: 30px 26px;
+    background: var(--bg-card);
+    border: 1px solid var(--brass-dim);
+    border-radius: 6px;
+  }
+  .conclusion h2{ margin-top:0; }
+
+  /* ---------- Sources ---------- */
+  .sources{ margin-top: 64px; }
+  .src-list{ display:grid; gap: 8px; margin-top: 20px; }
+  .src{
+    display:flex; gap: 12px; align-items:baseline;
+    padding: 10px 14px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line-soft);
+    border-radius: 3px;
+    font-size: 13px;
+  }
+  .src .n{ font-family: var(--mono); color: var(--ink-mute); flex: 0 0 22px; }
+  .src a{ color: var(--ink-dim); text-decoration: none; }
+  .src a:hover{ color: var(--brass); }
+  .src .domain{ font-family: var(--mono); font-size: 12px; color: #a99266; margin-left: auto; white-space: nowrap; padding-left: 10px; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    margin-top: 72px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-mute);
+    text-align:center;
+    line-height: 1.9;
+  }
+  footer a{ color: var(--brass); text-decoration:none; border-bottom: 1px solid var(--brass-dim); }
+  footer a:hover{ color: var(--ink); }
+
+  @media (max-width: 560px){
+    .wrap{ padding: 0 16px 60px; }
+    header.hero{ padding: 40px 0 32px; }
+    .ledger-head{ flex-direction:column; align-items:flex-start; gap:6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+  }
+
+  a.cite{ font-family: var(--mono); font-size: .72em; color: var(--brass); text-decoration: none; vertical-align: super; line-height: 0; margin-left: 1px; }
+  a.cite:hover{ text-decoration: underline; }
+  .src{ scroll-margin-top: 80px; transition: background .3s; }
+  .src:target{ background: rgba(200,169,110,.12); outline: 1px solid var(--brass-dim); }
+  td.mid{ color: var(--brass); }
+  .table-wrap{ overflow-x:auto; }
+  .table-wrap table{ min-width: 640px; }
+
+
+  /* ---------- практичний гід ---------- */
+  .pair{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:22px 0; }
+  .pair > div{ border:1px solid var(--line); background:var(--bg-raised); padding:14px 16px; font-size:15px; line-height:1.6; color:var(--ink-dim); }
+  .pair .ph{ font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; margin-bottom:8px; }
+  .pair .bad{ border-left:3px solid var(--alert); } .pair .bad .ph{ color:#f08a8a; }
+  .pair .good{ border-left:3px solid var(--ok); } .pair .good .ph{ color:#8fd6a5; }
+  .howto{ margin:20px 0 4px; padding:12px 16px; border:1px dashed var(--brass-dim); font-size:15px; line-height:1.6; color:var(--ink-dim); }
+  .howto b{ color:var(--brass); font-weight:600; }
+  ol.steps-list, ol.checklist{ padding-left:22px; margin:18px 0; }
+  ol.steps-list li, ol.checklist li{ margin:0 0 10px; line-height:1.65; color:var(--ink-dim); }
+  ol.steps-list li b{ color:var(--ink); }
+  p.note{ font-size:14px; color:var(--ink-mute); }
+  @media (max-width:640px){ .pair{ grid-template-columns:1fr; } }
+
+  .prob{ margin:18px 0 20px; padding:14px 18px; background:rgba(224,92,92,.07); border:1px solid rgba(224,92,92,.35); border-left:3px solid var(--alert); font-size:16px; line-height:1.65; color:var(--ink); }
+  .prob .ph{ font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#f08a8a; margin-bottom:6px; }
+  section.part h3{ font-family:var(--mono); font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:var(--brass); margin:28px 0 10px; font-weight:500; }
+  ul.list{ padding-left:20px; margin:12px 0; } ul.list li{ margin:0 0 8px; line-height:1.65; color:var(--ink-dim); } ul.list b{ color:var(--ink); }
+  .toc{ border:1px solid var(--line); background:var(--bg-raised); padding:18px 22px; margin:36px 0 8px; }
+  .toc-h{ font-family:var(--mono); font-size:12.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--brass); margin-bottom:10px; }
+  .toc ol{ margin:0; padding-left:22px; columns:2; column-gap:28px; }
+  .toc li{ margin:0 0 6px; break-inside:avoid; color:var(--ink-mute); }
+  .toc a{ color:var(--ink-dim); text-decoration:none; border-bottom:1px solid var(--line); }
+  .toc a:hover{ color:var(--brass); border-color:var(--brass-dim); }
+  section.part{ scroll-margin-top:70px; }
+  @media (max-width:640px){ .toc ol{ columns:1; } }
+  table.gloss td:first-child{ white-space:nowrap; font-family:var(--mono); font-size:13.5px; color:var(--brass); }
+  table.gloss td:last-child{ white-space:nowrap; }
+  a.toc-link{ color:var(--ink-mute); font-family:var(--mono); font-size:12.5px; text-decoration:none; border-bottom:1px solid var(--line); }
+  .toc-x{ margin-top:12px; } .toc-x a{ color:var(--brass); font-family:var(--mono); font-size:13px; text-decoration:none; }
+  table.gloss td:first-child strong{ color:var(--brass); font-weight:600; }
+  @media (max-width:640px){
+    table.gloss, table.gloss tbody, table.gloss tr, table.gloss td{ display:block; width:100%; }
+    table.gloss{ min-width:0 !important; }
+    table.gloss thead{ display:none; }
+    table.gloss tr{ border-bottom:1px solid var(--line); padding:12px 0; }
+    table.gloss td{ border:0; padding:2px 0; white-space:normal !important; }
+  }
+  .lede a, p.note a, ol.steps-list a{ color:var(--brass); text-decoration:none; border-bottom:1px solid var(--brass-dim); }
+  .series{ border:1px solid var(--brass-dim); padding:14px 18px; margin:28px 0 0; font-size:15px; color:var(--ink-dim); }
+  .series a{ color:var(--brass); text-decoration:none; border-bottom:1px solid var(--brass-dim); }
+</style>
+<!-- seo -->
+<meta name="description" content="Друга частина посібника: як їхати в щільному й хаотичному потоці, проходити кругові перехрестя, скидати швидкість перед поворотом, роз’їжджатися у вузьких місцях і паркуватися — за британськими правилами з поправкою на українські ПДР.">
+<link rel="canonical" href="https://code38.com.ua/articles/practice/urban-driving-2.html">
+<meta property="og:site_name" content="CODE38">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Місто як полігон, частина 2: потік, кільця, повороти, вузькі вулиці й паркування">
+<meta property="og:description" content="Друга частина посібника: як їхати в щільному й хаотичному потоці, проходити кругові перехрестя, скидати швидкість перед поворотом, роз’їжджатися у вузьких місцях і паркуватися — за британськими правилами з поправкою на українські ПДР.">
+<meta property="og:url" content="https://code38.com.ua/articles/practice/urban-driving-2.html">
+<meta property="og:image" content="https://code38.com.ua/assets/og/urban-driving-2.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="uk_UA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Місто як полігон, частина 2: потік, кільця, повороти, вузькі вулиці й паркування">
+<meta name="twitter:description" content="Друга частина посібника: як їхати в щільному й хаотичному потоці, проходити кругові перехрестя, скидати швидкість перед поворотом, роз’їжджатися у вузьких місцях і паркуватися — за британськими правилами з поправкою на українські ПДР.">
+<meta name="twitter:image" content="https://code38.com.ua/assets/og/urban-driving-2.jpg">
+<link rel="icon" href="https://code38.com.ua/assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="CODE38" href="https://code38.com.ua/feed.xml">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Місто як полігон, частина 2: потік, кільця, повороти, вузькі вулиці й паркування", "description": "Друга частина посібника: як їхати в щільному й хаотичному потоці, проходити кругові перехрестя, скидати швидкість перед поворотом, роз’їжджатися у вузьких місцях і паркуватися — за британськими правилами з поправкою на українські ПДР.", "datePublished": "2026-11-26", "dateModified": "2026-11-26", "inLanguage": "uk", "keywords": "водіння, кругове перехрестя, паркування, ПДР", "author": {"@type": "Person", "name": "vadim.li", "url": "https://code38.com.ua/about.html"}, "publisher": {"@type": "Organization", "name": "CODE38", "url": "https://code38.com.ua/", "logo": {"@type": "ImageObject", "url": "https://code38.com.ua/assets/logo.png"}}, "image": "https://code38.com.ua/assets/og/urban-driving-2.jpg", "mainEntityOfPage": "https://code38.com.ua/articles/practice/urban-driving-2.html"}</script>
+<script data-goatcounter="https://vadim.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<!-- /seo -->
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow-row">
+      <span class="tag">Практика</span>
+      <span class="tag alert">Безпека</span>
+      <span class="kicker">Посібник · частина 2</span>
+    </div>
+
+    <h1>Місто як полігон, частина 2: <em>потік, кільця, повороти, вузькі вулиці й паркування</em></h1>
+
+    <p class="subtitle">У першій частині я розібрав базові звички безпечного водіння. Тут — конкретні міські ситуації, у яких найчастіше виникають конфлікти: як їхати в потоці, проходити кругові перехрестя, скидати швидкість перед поворотом, роз’їжджатися у вузьких місцях і паркуватися. На основі тих самих британських правил — і з поправкою на українські ПДР.</p>
+
+    <div class="meta-line">
+      <span>≈ 20 хвилин читання</span>
+      <span class="dot">Практичний посібник</span>
+      <span class="dot">Водіння · Безпека · 15 кроків</span>
+      <span class="dot">Автор: vadim.li · <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a></span>
+    </div>
+
+    <div class="license-note">
+      Використання тексту — лише з дозволу автора. Для передруку, посилань або співпраці пишіть на <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a>.
+    </div>
+  </header>
+
+  <p class="lede">Британські методики добрі тим, що розкладають будь-яку ситуацію на прості дії в правильному порядку. Але вони написані для лівостороннього руху і для британських правил пріоритету. Тому в кожному розділі я окремо позначаю, що каже британський Highway Code (їхні ПДР), а що — наші ПДР, якщо вони відрізняються. Коли правила розходяться, на українській дорозі діють українські. Базові речі — куди дивитися, дистанція, «сліпі» зони, п’ять дій перед маневром — я розібрав у <a href="urban-driving.html">першій частині</a> <a class="cite" href="#src-1">[1]</a> і тут на них лише посилаюся.</p>
+
+  <nav class="toc">
+    <div class="toc-h">Зміст</div>
+    <ol>
+      <li><a href="#s1">Їзда в потоці</a></li>
+      <li><a href="#s2">Коли всі навколо порушують</a></li>
+      <li><a href="#s3">Скинути швидкість і повернути</a></li>
+      <li><a href="#s4">Кругове перехрестя</a></li>
+      <li><a href="#s5">Вузьке місце</a></li>
+      <li><a href="#s6">Роз’їзд із зустрічним</a></li>
+      <li><a href="#s7">Паркування</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1. ПОТІК -->
+  <section class="part" id="s1">
+    <div class="part-label"><span class="part-num">Ситуація 01</span></div>
+    <h2>Їзда в потоці: смуга, швидкість, злиття</h2>
+
+    <div class="prob"><div class="ph">Проблема</div>Проспект на три смуги, щільний рух. Хтось постійно «перескакує» з ряду в ряд, хтось різко гальмує, бо в останній момент згадав, що треба повертати. Ти теж нервово шукаєш, який ряд їде швидше.</div>
+
+    <p><strong>Чому так стається.</strong> Більшість конфліктів у потоці — це не швидкість, а несподівані перестроювання: водій вирішує, куди йому треба, надто пізно, або міняє смугу, бо сусідня «пішла».</p>
+
+    <h3>Що кажуть правила</h3>
+    <p>Британські ПДР кажуть просто: дотримуйся розмітки й знаків і займай потрібну смугу заздалегідь, а в заторах не перестроюйся без потреби <a class="cite" href="#src-2">[2]</a>. Наші ПДР вимагають того самого з іншого боку: перед перестроюванням переконатися, що це безпечно, і дати дорогу тим, хто вже їде в смузі, куди ти хочеш перейти. А якщо двоє перестроюються одночасно, той, хто ліворуч, пропускає того, хто праворуч <a class="cite" href="#src-3">[3]</a>.</p>
+
+    <h3>Як робити</h3>
+    <ol class="steps-list">
+      <li><b>Знати маршрут наперед.</b> Якщо через два квартали поворот ліворуч — займаю ліву смугу зараз, а не за 30 метрів до перехрестя.</li>
+      <li><b>Обрати смугу й лишатися в ній.</b> Постійні перестроювання майже нічого не дають у часі, але щоразу створюють ризик.</li>
+      <li><b>Їхати зі швидкістю потоку, але не швидше за дозволену.</b> Найнебезпечніший водій у потоці — той, чия швидкість сильно відрізняється від швидкості решти, в будь-який бік.</li>
+      <li><b>Дивитися через дві-три машини вперед</b>, щоб бачити, де потік гальмує, раніше за стоп-сигнали машини перед собою.</li>
+    </ol>
+
+    <h3>Повільний потік і затор</h3>
+    <p>Тут британські правила дають пораду, яка здається несподіваною після «двох секунд»: у повільному потоці дистанцію можна скоротити, щоб потік не розривався <a class="cite" href="#src-4">[4]</a>. Але при цьому не перекривати виїзди з бічних вулиць і пропускати пішоходів і велосипедистів, які перетинають дорогу перед тобою <a class="cite" href="#src-5">[5]</a>. А коли потік зупинився — знову правило «бачу задні колеса машини попереду» з першої частини.</p>
+
+    <h3>Коли смуга закінчується: «застібка»</h3>
+    <p>Ремонт, звуження, з двох смуг стає одна. Британські правила рекомендують зливатися по черзі, як зубці застібки-блискавки, — але лише на дуже низькій швидкості і коли це безпечно <a class="cite" href="#src-6">[6]</a>. Британська поліція пояснює логіку: обидві смуги використовуються до місця звуження, і затор коротшає; проблеми починаються, коли водії не пропускають тих, хто зливається, або перестроюються агресивно <a class="cite" href="#src-7">[7]</a>.</p>
+    <p>В українських ПДР такого правила немає: той, хто перестроюється, має дати дорогу тим, хто їде в смузі <a class="cite" href="#src-3">[3]</a>. Тому на практиці я роблю так: якщо я в смузі, що закінчується, — вмикаю поворотник заздалегідь і чекаю, поки мене пропустять, не «втискаючись». Якщо я в смузі, яка продовжується, — пропускаю одну машину перед собою. Це не обов’язок, а спосіб зберегти потік.</p>
+
+    <div class="callout">
+      <div class="cal-title">Приклад. Ремонт на мосту</div>
+      <p>За 300 метрів до мосту — знак звуження. Ліва смуга стоїть, права вільна. Водії з правої смуги доїжджають до конусів і по черзі заходять у ліву. Якщо кожен у лівій пропускає одного — обидві смуги рухаються. Якщо всі тримають дистанцію «впритул, щоб ніхто не вліз», — хтось усе одно втиснеться, але вже з ризиком зачепити дзеркало.</p>
+    </div>
+
+    <div class="howto"><b>Звичка:</b> вирішувати, в якій смузі мені бути, за квартал до маневру. Якщо пропустив поворот — їду далі й розвертаюся, а не перетинаю три ряди.</div>
+  </section>
+
+  <!-- 2. ХАОС -->
+  <section class="part" id="s2">
+    <div class="part-label"><span class="part-num">Ситуація 02</span></div>
+    <h2>Коли всі навколо порушують: перевищують, підрізають, «сидять на хвості»</h2>
+
+    <div class="prob"><div class="ph">Проблема</div>Обмеження 50, а потік іде 70–80. Ззаду хтось блимає фарами і притискається впритул. Збоку підрізають. Здається, що якщо їхати за правилами, ти заважаєш усім — і це небезпечніше.</div>
+
+    <p><strong>Чому так стається.</strong> У хаотичному русі виникає тиск «їхати як усі». Але чужа швидкість не збільшує твій запас на зупинку: шлях зупинки залежить від твоєї швидкості, а не від того, як їдуть інші.</p>
+
+    <h3>Що кажуть правила</h3>
+    <p>Головне британське правило швидкості: їхати так, щоб зупинитися в межах відстані, яку бачиш вільною <a class="cite" href="#src-8">[8]</a>. Не «як потік», а «як дозволяє видимість і дорога».</p>
+    <p>Якщо хтось «сидить на хвості», британське агентство автомобільних доріг радить: не прискорюватися, бо це лише заохочує його їхати ще швидше; тримати рівну швидкість, щоб він міг обігнати; і заздалегідь показувати свої наміри поворотником <a class="cite" href="#src-9">[9]</a>. А коли тебе обганяють — тримати рівну траєкторію й швидкість, за потреби пригальмувати, щоб пропустити, і ніколи не заважати <a class="cite" href="#src-10">[10]</a>. Якщо хтось обігнав і став у твою дистанцію — відстати, щоб знову було дві секунди <a class="cite" href="#src-11">[11]</a>.</p>
+
+    <h3>Як робити</h3>
+    <ol class="steps-list">
+      <li><b>Обрати свою швидкість</b> — дозволену й таку, щоб встигнути зупинитися. Не змагатися.</li>
+      <li><b>Триматися правіше</b>, якщо смуг кілька. Ліва смуга для швидших — хай їдуть там.</li>
+      <li><b>«Хвіст» ззаду — збільшити дистанцію спереду.</b> Якщо мені доведеться гальмувати, я робитиму це плавніше, і той, хто ззаду, встигне.</li>
+      <li><b>Підрізали — відстати</b>, а не доганяти. Про «червоний туман» — у <a href="urban-driving.html#k15">першій частині</a>.</li>
+      <li><b>Найнебезпечніші ділянки — перехрестя й переходи.</b> Саме там хтось на 80 не встигне зупинитися. Перед ними я скидаю швидкість і дивлюся на всі боки, навіть на зелене.</li>
+    </ol>
+
+    <div class="callout alert">
+      <div class="cal-title">Приклад. Проспект увечері</div>
+      <p>Їду 50 у правому ряду. Ліворуч мене обходять 80–90. Попереду перехід без світлофора, біля нього стоїть людина. Я пригальмовую — і бачу в дзеркалі, що машина ззаду теж починає гальмувати, бо я зробив це заздалегідь і плавно. Машина в лівому ряду пролітає перехід, і пішохід, який уже збирався ступити, відскакує назад. Я ще стою — і він переходить переді мною.</p>
+    </div>
+
+    <div class="howto"><b>Звичка:</b> коли відчуваю, що «підтягуюся» під швидкий потік, ставлю собі одне питання: чи встигну я зупинитися, якщо зараз з-за машини вийде людина? Якщо відповідь «ні» — швидкість не моя.</div>
+  </section>
+
+  <!-- 3. ПОВОРОТ -->
+  <section class="part" id="s3">
+    <div class="part-label"><span class="part-num">Ситуація 03</span></div>
+    <h2>Як скинути швидкість перед поворотом і повернути</h2>
+
+    <div class="prob"><div class="ph">Проблема</div>Під’їжджаєш до повороту, гальмуєш пізно і різко, повертаєш уже на ходу — і посеред повороту бачиш пішохода на переході, на який ти в’їжджаєш. Доводиться гальмувати вдруге, вже з повернутими колесами.</div>
+
+    <p><strong>Чому так стається.</strong> Водій думає про сам поворот, а не про те, що за ним. А за поворотом майже завжди є перехід — і пішохід на ньому має перевагу.</p>
+
+    <h3>Що кажуть правила</h3>
+    <p>Британські ПДР радять гальмувати рано й легко, потім сильніше, а перед самою зупинкою трохи відпустити педаль, щоб машина не «клюнула» <a class="cite" href="#src-12">[12]</a>. Перед поворотом через зустрічну смугу — заздалегідь подивитися в дзеркала, увімкнути поворотник, стати біля середини дороги і чекати безпечного проміжку в зустрічному потоці, стежачи за велосипедистами, мотоциклістами й пішоходами <a class="cite" href="#src-13">[13]</a>.</p>
+    <p>Пішоходам, які переходять дорогу, на яку ти повертаєш, треба дати дорогу. Британські правила з 2022 року йдуть далі: дати дорогу й тим, хто тільки чекає, щоб перейти, і не повертати, поки велосипедист, що їде прямо, не проїде перехрестя <a class="cite" href="#src-14">[14]</a>.</p>
+    <p>У нас перед поворотом треба заздалегідь зайняти крайнє положення: праворуч — з правої смуги, ліворуч — з лівої <a class="cite" href="#src-3">[3]</a>.</p>
+
+    <h3>Як робити: п’ять дій</h3>
+    <ol class="steps-list">
+      <li><b>Подивитися</b> — за 100–150 метрів: що в повороті, чи є перехід, хто на ньому, чи стоїть щось за рогом. Дзеркала — хто ззаду й збоку.</li>
+      <li><b>Стати на місце</b> — поворотник і перестроювання в крайню смугу заздалегідь.</li>
+      <li><b>Скинути швидкість</b> — плавно, на прямій, поки колеса ще не повернуті. Гальмування закінчую до повороту. Для звичайного міського повороту це орієнтовно 15–20 км/год.</li>
+      <li><b>Передача</b> — під цю швидкість (на автоматі — просто не додаю газ).</li>
+      <li><b>Повернути й додати газ</b> — лише коли бачу, що вихід із повороту й перехід вільні.</li>
+    </ol>
+    <p>Це та сама поліцейська система «п’ять дій перед маневром», що й у першій частині <a class="cite" href="#src-15">[15]</a>. У місті вона рятує насамперед пішоходів.</p>
+
+    <div class="pair">
+      <div class="bad"><div class="ph">Як буває</div>Гальмую в останній момент, повертаю на 30 км/год і вже в повороті бачу пішохода на «зебрі».</div>
+      <div class="good"><div class="ph">Як треба</div>Скидаю швидкість ще на прямій, а в поворот входжу так повільно, що можу зупинитися перед переходом, навіть якщо людина ступить на нього в останню мить.</div>
+    </div>
+
+    <div class="callout">
+      <div class="cal-title">Приклад. Поворот ліворуч на зелене</div>
+      <p>Стою в центрі перехрестя, пропускаю зустрічні. З’являється проміжок — але за поворотом на переході йдуть люди на свій зелений. Я не рушаю «на проміжок», бо все одно мушу зупинитися на переході й застрягну посеред зустрічної смуги. Чекаю, поки перехід звільниться, і повертаю одним рухом.</p>
+    </div>
+
+    <div class="howto"><b>Звичка:</b> підходячи до повороту, шукаю очима перехід за ним. Якщо він є — швидкість входу така, щоб зупинитися перед ним.</div>
+  </section>
+
+  <!-- 4. КОЛО -->
+  <section class="part" id="s4">
+    <div class="part-label"><span class="part-num">Ситуація 04</span></div>
+    <h2>Кругове перехрестя: хто кого пропускає і з якої смуги з’їжджати</h2>
+
+    <div class="prob"><div class="ph">Проблема</div>Двосмугове коло. Ти їдеш по зовнішній смузі, а водій із внутрішньої раптом з’їжджає прямо перед тобою. Або ти заїжджаєш на коло і не розумієш, чи маєш пропустити того, хто вже на ньому.</div>
+
+    <p><strong>Чому так стається.</strong> Наші кільця часто облаштовані по-різному, а водії погано пам’ятають правила. Найчастіший конфлікт — з’їзд із внутрішньої смуги через зовнішню.</p>
+
+    <h3>Що кажуть українські ПДР</h3>
+    <ul class="list">
+      <li><b>Хто має перевагу.</b> На нерегульованому круговому перехресті зі знаком 4.10 «Круговий рух» перевага в тих, хто вже рухається по колу <a class="cite" href="#src-16">[16]</a>. Якщо на в’їзді стоять інші знаки пріоритету чи світлофор — діють вони.</li>
+      <li><b>З якої смуги заїжджати.</b> На коло можна заїжджати з будь-якої смуги — займати крайнє праве положення для цього не обов’язково <a class="cite" href="#src-17">[17]</a>.</li>
+      <li><b>З якої смуги з’їжджати.</b> З’їзд — це поворот праворуч, і його треба робити ближче до правого краю <a class="cite" href="#src-17">[17]</a>. Тобто перед з’їздом треба перестроїтися в праву смугу, пропустивши тих, хто вже в ній.</li>
+    </ul>
+
+    <h3>Що додають британські правила</h3>
+    <p>У Британії рух на колі йде за годинниковою стрілкою, а пріоритет — у машин праворуч <a class="cite" href="#src-18">[18]</a>. У нас усе дзеркально. Але сам порядок дій універсальний <a class="cite" href="#src-18">[18]</a>:</p>
+    <ol class="steps-list">
+      <li><b>Вирішити, на який з’їзд тобі треба</b>, ще до кола.</li>
+      <li><b>Обрати смугу</b>: на перший з’їзд — праву, на дальні з’їзди — можна ліву, але заздалегідь перестроїтися праворуч перед своїм з’їздом.</li>
+      <li><b>Скинути швидкість на підході</b> й підлаштуватися під рух на колі.</li>
+      <li><b>Перед в’їздом подивитися вперед</b> — чи справді рушила машина, що стояла перед тобою. Інакше легко вдарити її ззаду, дивлячись тільки на коло <a class="cite" href="#src-19">[19]</a>.</li>
+      <li><b>Не вірити чужим поворотникам.</b> Британські правила прямо попереджають: водії на колі можуть подавати сигнали неправильно або не подавати їх зовсім <a class="cite" href="#src-19">[19]</a>.</li>
+      <li><b>Правий поворотник — перед своїм з’їздом</b>, і вимкнути його після виїзду <a class="cite" href="#src-20">[20]</a>.</li>
+    </ol>
+
+    <div class="callout alert">
+      <div class="cal-title">Приклад. Двосмугове коло</div>
+      <p>Я на зовнішній смузі, мені на третій з’їзд. Машина на внутрішній смузі ліворуч від мене без поворотника починає зміщуватися праворуч — це майже напевно з’їзд на найближчий виїзд просто через мою смугу. Я не стаю поруч з нею «плече до плеча», а відстаю на пів корпусу, щоб вона могла з’їхати переді мною. Формально вона неправа, але аварія від цього не стає меншою.</p>
+    </div>
+
+    <div class="howto"><b>Звичка:</b> на колі не їхати поруч з іншою машиною в сусідній смузі — або трохи попереду, або трохи позаду. Так у кожного є куди з’їхати.</div>
+  </section>
+
+  <!-- 5. ВУЗЬКЕ МІСЦЕ -->
+  <section class="part" id="s5">
+    <div class="part-label"><span class="part-num">Ситуація 05</span></div>
+    <h2>Вузьке місце: як проїхати й нічого не зачепити</h2>
+
+    <div class="prob"><div class="ph">Проблема</div>Двір чи вулиця з машинами на обох узбіччях, проїзд — трохи ширший за твою машину. Їдеш «на око» і чіпляєш дзеркало або чуєш, як диск торкається бордюру.</div>
+
+    <p><strong>Чому так стається.</strong> Більшість водіїв погано відчувають габарити машини, особливо праву сторону. Плюс у вузькому місці увага ділиться між двома боками — і жоден не контролюється повністю.</p>
+
+    <h3>Що радять правила</h3>
+    <p>І британські, і наші правила вимагають тримати безпечний інтервал, об’їжджаючи перешкоду <a class="cite" href="#src-21">[21]</a>. Безпечного інтервалу немає, якщо ти не бачиш, скільки залишилося місця. Тому у вузькому місці головне — швидкість, яка дозволяє зупинитися миттєво, і дивитися на той бік, де місця найменше.</p>
+
+    <h3>Як робити</h3>
+    <ol class="steps-list">
+      <li><b>Оцінити ще здалеку.</b> Чи пролізу? Якщо сумнів — краще шукати об’їзд, ніж застрягти посередині.</li>
+      <li><b>Скинути швидкість до пішохідної</b> — 5–10 км/год.</li>
+      <li><b>Дивитися на найвужче місце</b>, а не прямо вперед. Якщо праворуч — пильнувати праве дзеркало.</li>
+      <li><b>Скласти дзеркала</b>, якщо проїзд справді на межі.</li>
+      <li><b>Зупинитися й вийти подивитися</b>, якщо не впевнений. Це 30 секунд — а ремонт дзеркала чи бампера коштує тижні.</li>
+      <li><b>Стежити за дверима й людьми</b> між машинами — у вузьких дворах там часто граються діти.</li>
+    </ol>
+
+    <div class="howto"><b>Звичка:</b> один раз на порожній парковці перевірити, де насправді закінчується права сторона машини: поставити пляшку з водою і під’їхати до неї правим колесом, а потім подивитися, як вона виглядає з водійського місця.</div>
+  </section>
+
+  <!-- 6. РОЗ'ЇЗД -->
+  <section class="part" id="s6">
+    <div class="part-label"><span class="part-num">Ситуація 06</span></div>
+    <h2>Роз’їзд із зустрічним у вузькому місці: хто пропускає</h2>
+
+    <div class="prob"><div class="ph">Проблема</div>Вулиця з машинами на твоєму боці, а назустріч їде інша машина. Обидва рухаєтеся «до середини», зупиняєтеся ніс у ніс — і хтось має здавати назад.</div>
+
+    <p><strong>Чому так стається.</strong> Кожен вважає, що «я ж уже заїхав». А вирішується це правилами — і рішення треба ухвалювати до того, як ти опинився в пастці.</p>
+
+    <h3>Що кажуть українські ПДР</h3>
+    <p>Пункт 13.4: якщо роз’їзд утруднений, дорогу дає той, на чиїй смузі перешкода, або той, чия машина своїми габаритами заважає зустрічним. На крутому підйомі чи спуску (знаки 1.6 і 1.7) дорогу дає той, хто їде вниз. Це правило діє, якщо немає знаків 2.5 «Перевага зустрічного руху» і 2.6 «Перевага перед зустрічним рухом» <a class="cite" href="#src-21">[21]</a>. Коротко: <strong>у кого перешкода, той і пропускає</strong> <a class="cite" href="#src-22">[22]</a>.</p>
+
+    <h3>Як робити</h3>
+    <ol class="steps-list">
+      <li><b>Подивитися далеко вперед</b> — чи хтось їде назустріч, ще до того, як заїхав у вузьку ділянку.</li>
+      <li><b>Визначити, у кого перешкода.</b> Якщо машини стоять на моєму боці — пропускаю я.</li>
+      <li><b>Зупинитися заздалегідь</b> у широкому місці — у «кишені» між припаркованими машинами або перед вузькою ділянкою, а не посередині неї.</li>
+      <li><b>Притиснутися праворуч</b>, лишити зустрічному якомога більше місця.</li>
+      <li><b>Показати, що пропускаєш</b>: повна зупинка — найзрозуміліший сигнал. Блимання фарами різні люди розуміють по-різному: хтось — як «проїжджай», хтось — як «я їду».</li>
+    </ol>
+
+    <div class="callout">
+      <div class="cal-title">Приклад 1. Вулиця в приватному секторі</div>
+      <p>Вузька вулиця, з мого боку — ряд машин біля парканів. Назустріч їде автобус. Перешкода на моїй смузі — пропускаю я. Зупиняюся в проміжку між машинами, ще до того, як автобус підійшов, і він проходить, не гальмуючи.</p>
+    </div>
+    <div class="callout">
+      <div class="cal-title">Приклад 2. Ніхто не пропускає</div>
+      <p>Зустрічний водій теж має перешкоду, але йде «на принцип». Ми зупинилися ніс у ніс. Якщо позаду мене вільно, а позаду нього черга — здаю назад я, навіть якщо формально він мав пропустити. Безпека тут важливіша за правоту, а відстань у 15 метрів назад — це хвилина.</p>
+    </div>
+
+    <div class="howto"><b>Звичка:</b> перед вузькою ділянкою подумки ставлю собі питання «хто тут пропускає?» — і відповідаю ще до того, як побачив зустрічного.</div>
+  </section>
+
+  <!-- 7. ПАРКУВАННЯ -->
+  <section class="part" id="s7">
+    <div class="part-label"><span class="part-num">Ситуація 07</span></div>
+    <h2>Паркування: заїжджати заднім ходом, виїжджати передом</h2>
+
+    <div class="prob"><div class="ph">Проблема</div>На парковці супермаркету заїхав передом. Виїжджаючи, здаєш назад наосліп: між високими машинами не видно ні візка, ні дитини, ні машини, що проїжджає позаду.</div>
+
+    <p><strong>Чому так стається.</strong> Заїхати передом простіше й швидше, тому так роблять майже всі. Але вся складність переноситься на виїзд — і саме тоді, коли огляд найгірший.</p>
+
+    <h3>Що радять британці</h3>
+    <ul class="list">
+      <li>Майже завжди краще <strong>заїжджати на місце заднім ходом</strong>: виїжджаючи, бачиш набагато більше, особливо коли є пасажири ззаду або вночі <a class="cite" href="#src-23">[23]</a>.</li>
+      <li>Заїжджаючи заднім ходом, <strong>озирайся навколо</strong>: перед машини заносить убік, у бік тих, хто проїжджає повз <a class="cite" href="#src-24">[24]</a>.</li>
+      <li>Якщо можна — <strong>проїхати місце наскрізь</strong> у вільне навпроти, щоб одразу стояти передом до виїзду. Але переконатися, що туди не збирається заїхати хтось інший <a class="cite" href="#src-25">[25]</a>.</li>
+      <li><strong>Не виїжджати заднім ходом</strong> із бічної вулиці на головну; у двір — заїжджати заднім ходом, виїжджати передом <a class="cite" href="#src-26">[26]</a>.</li>
+      <li>Якщо погано видно — <strong>попросити когось підказати</strong> <a class="cite" href="#src-27">[27]</a>.</li>
+      <li>Пасажирам, особливо дітям, безпечніше <strong>виходити з боку тротуару</strong> <a class="cite" href="#src-28">[28]</a>. Двері — дальньою рукою, як у першій частині.</li>
+    </ul>
+
+    <h3>Як робити: паркування заднім ходом між машинами</h3>
+    <ol class="steps-list">
+      <li><b>Проїхати повз вільне місце</b>, поки задній бампер не порівняється з другою від нього лінією розмітки чи машиною. Поворотник у бік місця.</li>
+      <li><b>Подивитися навколо</b> — пішоходи, візки, машини позаду.</li>
+      <li><b>Повільно здавати назад, крутячи кермо до упору</b> в бік місця. Стежити в дзеркалах за машинами з обох боків.</li>
+      <li><b>Коли машина стала паралельно місцю — вирівняти колеса</b> й доїхати назад, поки задні колеса не торкнуться обмежувача або поки не лишиться пів метра до перешкоди.</li>
+      <li><b>Перевірити, що стоїш рівно в межах розмітки</b>, — інакше сусіду не буде як відчинити двері.</li>
+    </ol>
+
+    <h3>Паралельне паркування вздовж тротуару</h3>
+    <ol class="steps-list">
+      <li><b>Стати паралельно машині</b>, за якою хочеш припаркуватися, на відстані приблизно пів метра — метр збоку, задні бампери на одному рівні.</li>
+      <li><b>Здавати назад повільно</b>, коли задні колеса порівнялися з її бампером, — повернути кермо до упору в бік тротуару.</li>
+      <li><b>Коли машина стала під кутом приблизно 45°</b> — вирівняти кермо і здавати далі.</li>
+      <li><b>Коли передній бампер минув задній бампер сусідньої машини</b> — кермо до упору в протилежний бік, щоб «завести» перед.</li>
+      <li><b>Вирівнятися</b>, лишити місце спереду й ззаду, щоб усі могли виїхати.</li>
+    </ol>
+
+    <div class="callout">
+      <div class="cal-title">Приклад. Супермаркет у суботу</div>
+      <p>Заїжджаю на місце заднім ходом, поки парковка ще напівпорожня й поруч нікого немає. Через годину, коли виходжу, обабіч стоять два великі позашляховики, а між рядами ходять люди з візками. Я виїжджаю передом і бачу все. Якби заїхав передом, довелося б здавати назад наосліп між двома високими бортами.</p>
+    </div>
+
+    <div class="howto"><b>Звичка:</b> заднім ходом — на в’їзді, а не на виїзді. Заїжджати так, щоб виїжджати передом.</div>
+  </section>
+
+  <section class="part">
+    <div class="part-label"><span class="part-num">Підсумок</span></div>
+    <h2>Шпаргалка на кожну ситуацію</h2>
+    <ol class="checklist">
+      <li><b>Потік:</b> смугу обирати за квартал до маневру, без зайвих перестроювань; на звуженні — пропускати одного.</li>
+      <li><b>Хаос:</b> своя швидкість — та, з якою встигаєш зупинитися; «хвіст» ззаду — більша дистанція спереду; підрізали — відстати.</li>
+      <li><b>Поворот:</b> швидкість скинути на прямій; швидкість входу — така, щоб зупинитися перед переходом за рогом.</li>
+      <li><b>Коло:</b> зі знаком 4.10 пропускаєш тих, хто на колі; з’їжджаєш із правої смуги; не їдеш поруч з іншою машиною.</li>
+      <li><b>Вузьке місце:</b> пішохідна швидкість, погляд на найвужчий бік, не впевнений — вийди й подивися.</li>
+      <li><b>Роз’їзд:</b> у кого перешкода — той пропускає; зупинятися заздалегідь у широкому місці.</li>
+      <li><b>Паркування:</b> заїжджати заднім ходом, виїжджати передом; пасажири — з боку тротуару.</li>
+    </ol>
+    <p class="note">Базові звички — огляд, дистанція, «сліпі» зони, п’ять дій перед маневром, погода, раптова небезпека — у <a href="urban-driving.html">першій частині посібника</a>.</p>
+  </section>
+
+  <section class="sources">
+    <h3 style="margin-top:0;">Джерела</h3>
+    <div class="src-list">
+      <div class="src" id="src-1"><span class="n">01</span><a href="https://code38.com.ua/articles/practice/urban-driving.html" target="_blank" rel="noopener">Місто як полігон: безпечне водіння за британськими правилами — частина 1</a><span class="domain">code38.com.ua</span></div>
+      <div class="src" id="src-2"><span class="n">02</span><a href="https://theorytest.org.uk/hwc/highway-code/rule-134.html" target="_blank" rel="noopener">The Highway Code, Rule 134: lanes in congested conditions</a><span class="domain">theorytest.org.uk</span></div>
+      <div class="src" id="src-3"><span class="n">03</span><a href="https://green-way.com.ua/en/dovidniki/pdr/rozdil-10" target="_blank" rel="noopener">ПДР України, розділ 10: початок руху та зміна його напрямку</a><span class="domain">green-way.com.ua</span></div>
+      <div class="src" id="src-4"><span class="n">04</span><a href="https://theorytest.org.uk/hwc/highway-code/rule-151.html" target="_blank" rel="noopener">The Highway Code, Rule 151: slow-moving traffic</a><span class="domain">theorytest.org.uk</span></div>
+      <div class="src" id="src-5"><span class="n">05</span><a href="https://www.gov.uk/guidance/the-highway-code/updates" target="_blank" rel="noopener">The Highway Code: updates (2022) — Rule 151</a><span class="domain">gov.uk</span></div>
+      <div class="src" id="src-6"><span class="n">06</span><a href="https://www.autoexpress.co.uk/car-news/105986/70-per-cent-of-drivers-don-t-know-how-to-merge-in-turn" target="_blank" rel="noopener">70% of drivers don’t know how to merge in turn (Rule 134)</a><span class="domain">autoexpress.co.uk</span></div>
+      <div class="src" id="src-7"><span class="n">07</span><a href="https://britbrief.co.uk/crime/traffic/police-clarify-correct-uk-lane-merging-rule.html" target="_blank" rel="noopener">Police clarify correct UK lane merging rule</a><span class="domain">britbrief.co.uk</span></div>
+      <div class="src" id="src-8"><span class="n">08</span><a href="https://theorytest.org.uk/hwc/highway-code/rule-126.html" target="_blank" rel="noopener">The Highway Code, Rule 126: stopping distances</a><span class="domain">theorytest.org.uk</span></div>
+      <div class="src" id="src-9"><span class="n">09</span><a href="https://nationalhighways.co.uk/road-safety/tailgating/" target="_blank" rel="noopener">National Highways: tailgating and how to avoid it</a><span class="domain">nationalhighways.co.uk</span></div>
+      <div class="src" id="src-10"><span class="n">10</span><a href="https://theorytest.org.uk/hwc/highway-code/rule-168.html" target="_blank" rel="noopener">The Highway Code, Rule 168: being overtaken</a><span class="domain">theorytest.org.uk</span></div>
+      <div class="src" id="src-11"><span class="n">11</span><a href="https://www.gov.uk/using-the-road-159-to-203" target="_blank" rel="noopener">The Highway Code: Using the road (rules 159–203)</a><span class="domain">gov.uk</span></div>
+      <div class="src" id="src-12"><span class="n">12</span><a href="https://www.gov.uk/highway-code/general-rules-techniques-and-advice-for-all-drivers-and-riders-103-to-158" target="_blank" rel="noopener">The Highway Code: General rules and techniques (rules 103–158), Rule 117 braking</a><span class="domain">gov.uk</span></div>
+      <div class="src" id="src-13"><span class="n">13</span><a href="https://theorytest.org.uk/sections/using-the-road-rules-159-to-203/page/2" target="_blank" rel="noopener">The Highway Code, Rules 179–181: turning</a><span class="domain">theorytest.org.uk</span></div>
+      <div class="src" id="src-14"><span class="n">14</span><a href="https://gov.uk/guidance/the-highway-code/introduction" target="_blank" rel="noopener">The Highway Code: Rules H2 and H3 — pedestrians and cyclists at junctions</a><span class="domain">gov.uk</span></div>
+      <div class="src" id="src-15"><span class="n">15</span><a href="https://iamroadsmart.com/IPSGA" target="_blank" rel="noopener">IAM RoadSmart: IPSGA — the system of car control</a><span class="domain">iamroadsmart.com</span></div>
+      <div class="src" id="src-16"><span class="n">16</span><a href="https://www.obozrevatel.com/ukr/avto-oboz/hto-povinen-dati-dorogu-na-krugovomu-perehresti-zavdannya-z-pdr.htm" target="_blank" rel="noopener">ПДР 16.12: перевага на круговому перехресті зі знаком 4.10</a><span class="domain">obozrevatel.com</span></div>
+      <div class="src" id="src-17"><span class="n">17</span><a href="https://www.obozrevatel.com/ukr/avto-oboz/hto-porushit-pravila-test-na-znannya-pdr.htm" target="_blank" rel="noopener">Хто порушить правила на круговому перехресті: п. 10.4 ПДР</a><span class="domain">obozrevatel.com</span></div>
+      <div class="src" id="src-18"><span class="n">18</span><a href="https://www.highwaycodeuk.co.uk/changes-and-answers/-highway-code-for-roundabouts" target="_blank" rel="noopener">The Highway Code, Rules 184–185: roundabouts</a><span class="domain">highwaycodeuk.co.uk</span></div>
+      <div class="src" id="src-19"><span class="n">19</span><a href="https://sites.google.com/view/chris-deller-driver-training/roundabouts" target="_blank" rel="noopener">The Highway Code, Rule 185: follow the correct procedure at roundabouts</a><span class="domain">sites.google.com</span></div>
+      <div class="src" id="src-20"><span class="n">20</span><a href="https://www.nidirect.gov.uk/articles/appendix-roundabouts" target="_blank" rel="noopener">NI Direct: the rules for using roundabouts</a><span class="domain">nidirect.gov.uk</span></div>
+      <div class="src" id="src-21"><span class="n">21</span><a href="https://green-way.com.ua/en/dovidniki/pdr/rozdil-13" target="_blank" rel="noopener">ПДР України, п. 13.4: зустрічний роз’їзд</a><span class="domain">green-way.com.ua</span></div>
+      <div class="src" id="src-22"><span class="n">22</span><a href="https://green-way.com.ua/en/obuchenie/course/898/68" target="_blank" rel="noopener">Green Way: розбір п. 13.4 — «у кого перешкода, той і дає дорогу»</a><span class="domain">green-way.com.ua</span></div>
+      <div class="src" id="src-23"><span class="n">23</span><a href="https://theorytest.org.uk/?p=40168" target="_blank" rel="noopener">Reverse parking: why reversing in is usually best</a><span class="domain">theorytest.org.uk</span></div>
+      <div class="src" id="src-24"><span class="n">24</span><a href="https://theorytest.org.uk/topic/parking/" target="_blank" rel="noopener">Parking: look round as you reverse in</a><span class="domain">theorytest.org.uk</span></div>
+      <div class="src" id="src-25"><span class="n">25</span><a href="https://safedrivingforlife.info/advice/car-driving/how-drive-car/stopping-parking-reversing-car" target="_blank" rel="noopener">DVSA Safe Driving for Life: stopping, parking and reversing</a><span class="domain">safedrivingforlife.info</span></div>
+      <div class="src" id="src-26"><span class="n">26</span><a href="https://theorytest.org.uk/rule-201-test/" target="_blank" rel="noopener">The Highway Code, Rule 201: reversing</a><span class="domain">theorytest.org.uk</span></div>
+      <div class="src" id="src-27"><span class="n">27</span><a href="https://www.safedrivingforlife.info/blog/cars/how-parallel-park-side-road/" target="_blank" rel="noopener">DVSA Safe Driving for Life: how to parallel park</a><span class="domain">safedrivingforlife.info</span></div>
+      <div class="src" id="src-28"><span class="n">28</span><a href="https://nidirect.gov.uk/node/5168" target="_blank" rel="noopener">Highway Code rule 239: check before opening your door</a><span class="domain">nidirect.gov.uk</span></div>
+    </div>
+  </section>
+
+  <footer>
+    Аналітичний матеріал підготовлено на основі відкритих джерел та офіційних даних.<br>
+    © 2026 vadim.li · Некомерційне поширення з посиланням на автора — вітається.<br>
+    Питання, співпраця, передрук: <a href="mailto:vadim.li@gmail.com">vadim.li@gmail.com</a>
+  </footer>
+
+</div>
+<script src="../../assets/articles.js?v=bfb0a52b"></script>
+<script src="../../assets/site-nav.js?v=1e1226d2"></script>
+</body>
+</html>
